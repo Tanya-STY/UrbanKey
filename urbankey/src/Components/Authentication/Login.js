@@ -3,6 +3,7 @@
 import React from 'react';
 import './Login.css';
 import condoimage from '../Images/Condo.jpg';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
@@ -22,7 +23,7 @@ const Login = () => {
         </div>
         <button className="login-btn">LOGIN</button>
         <div className="signup-link">
-          Still not a member? <a href="#">Sign Up Now!</a>
+          Still not a member? <Link to="/SignUp">Sign Up Now!</Link>
         </div>
       </div>
     </div>
