@@ -34,7 +34,7 @@ body {
     border-bottom-left-radius: 8px;
 }
 
-.form-container {
+.login-section-container {
     flex: 1;
     padding: 20px;
     border-top-right-radius: 8px;
@@ -46,17 +46,31 @@ h2 {
     color: #333;
 }
 
-.form-group {
+.form-group-inputs {
     margin-bottom: 20px;
 }
 
-label {
+.label-email {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
 }
 
-input {
+.label-password {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.input-email {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-password {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;

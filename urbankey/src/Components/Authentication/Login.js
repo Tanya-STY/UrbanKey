@@ -11,15 +11,15 @@ const Login = () => {
       <div className="image-container">
         <img src= {condoimage} alt= "Condo Image"/>
       </div>
-      <div className="form-container">
+      <div className="login-section-container">
         <h2>Login</h2>
-        <div className="form-group">
-          <label>Email:</label>
-          <input type="email" placeholder="Enter your email" />
+        <div className="form-group-inputs">
+          <label className="label-email">Email:</label>
+          <input className="input-email" type="email" placeholder="Enter your email" />
         </div>
-        <div className="form-group">
-          <label>Password:</label>
-          <input type="password" placeholder="Enter your password" />
+        <div className="form-group-inputs">
+          <label className="label-password">Password:</label>
+          <input className="input-password" type="password" placeholder="Enter your password" />
         </div>
         <button className="login-btn">LOGIN</button>
         <div className="signup-link">
