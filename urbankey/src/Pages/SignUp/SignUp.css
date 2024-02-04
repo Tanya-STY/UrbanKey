@@ -1,0 +1,116 @@
+body{
+  background-color: rgb(237, 236, 236);
+}
+
+.outer-container {
+  margin: 50px;
+}
+
+.container{
+  display: flex;
+}
+
+.left-div{
+  flex: 1;
+  background-color: aqua;
+  outline: 5px lightgrey;
+}
+
+.right-div{
+  flex: 1;
+  background-color: white;
+  outline: 5px lightgrey;
+  padding: 50px;
+
+  width: 100%; /* Make right-div take the whole page width */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Align items horizontally in the center */
+}
+
+.right-div input[type="email"], input[type="password"], input[type="text"]{
+  width: 50%;
+  height: 25px;
+  border-radius: 5px;
+}
+
+.membership-buttons{
+  font-family: 'Roboto', sans-serif;
+}
+
+.google-button{
+  margin-top: 25px;
+}
+
+.line-container {
+  display: flex;
+  align-items: center;
+  padding: 25px;
+}
+
+.line {
+  flex-grow: 1;
+  height: 2px;
+  background-color: black;
+}
+
+.or {
+  margin: 0 10px;
+  font-style: italic;
+}
+
+.membership-buttons button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.underline-wrapper{
+  display: flex;
+  width: 50%;
+}
+
+.membership-buttons-underline{
+  flex-grow: 1;
+  height: 5px;
+  background-color: white;
+  margin: 2px 0;
+}
+
+.form-group{
+  margin-bottom: 15px;
+  width: 100%;
+}
+.form-group label{
+  display: block;
+}
+
+.SignUp-button {
+  width: 50%;
+  height: 30px;
+  border-radius: 5px;
+  background-color: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.SignUp-button:hover {
+  background-color: darkblue; /* Darken the background color on hover */
+}
+
+/* .checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-left: 25px;
+} */
+
