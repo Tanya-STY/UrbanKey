@@ -1,62 +1,116 @@
-body {
-    background: #F4ECE1;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .page-content {
-   
-  }
-  
-  
-  .user-details {
-    background: #F4ECE1;
-    width: 100%;
-    display: flex;
-  }
+body{
+  background-color: rgb(237, 236, 236);
+}
 
-  
-  
-  .user-details div {
-    margin-left: 30px;
-    padding: 10px;
-  }
-  
-  .user-details label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .user-details input {
-    width: 400px;
-    height: 25px;
-    padding: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .user-details button {
-    background: #266894;
-    color: #fff;
-    padding: 10px 185px;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-    margin-left: 40px;
-    border-radius: 25px;
-  }
-  
-  .user-details button:hover {
-    background: #2699E5;
-  }
-  
-  /* Additional styling for error messages */
-  .user-details .error {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-    display: block;
-  }
-  
+.outer-container {
+  margin: 50px;
+}
+
+.container{
+  display: flex;
+}
+
+.left-div{
+  flex: 1;
+  background-color: aqua;
+  outline: 5px lightgrey;
+}
+
+.right-div{
+  flex: 1;
+  background-color: white;
+  outline: 5px lightgrey;
+  padding: 50px;
+
+  width: 100%; /* Make right-div take the whole page width */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Align items horizontally in the center */
+}
+
+.right-div input[type="email"], input[type="password"], input[type="text"]{
+  width: 50%;
+  height: 25px;
+  border-radius: 5px;
+}
+
+.membership-buttons{
+  font-family: 'Roboto', sans-serif;
+}
+
+.google-button{
+  margin-top: 25px;
+}
+
+.line-container {
+  display: flex;
+  align-items: center;
+  padding: 25px;
+}
+
+.line {
+  flex-grow: 1;
+  height: 2px;
+  background-color: black;
+}
+
+.or {
+  margin: 0 10px;
+  font-style: italic;
+}
+
+.membership-buttons button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.underline-wrapper{
+  display: flex;
+  width: 50%;
+}
+
+.membership-buttons-underline{
+  flex-grow: 1;
+  height: 5px;
+  background-color: white;
+  margin: 2px 0;
+}
+
+.form-group{
+  margin-bottom: 15px;
+  width: 100%;
+}
+.form-group label{
+  display: block;
+}
+
+.SignUp-button {
+  width: 50%;
+  height: 30px;
+  border-radius: 5px;
+  background-color: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.SignUp-button:hover {
+  background-color: darkblue; /* Darken the background color on hover */
+}
+
+/* .checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-left: 25px;
+} */
+

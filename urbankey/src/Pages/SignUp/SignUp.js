@@ -2,138 +2,235 @@ import React, { useState } from 'react';
 import './SignUp.css';
 
 const SignUp = () => {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-    retypePassword: ''
-  });
+    const [activeButton, setActiveButton] = useState('Individual');
+    const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [agreeTerms, setAgreeTerms] = useState(false);
+    const [allowContact, setAllowContact] = useState(false);
 
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [retypePasswordError, setRetypePasswordError] = useState('');
+    const handleButtonClick = (membershipType) => {
+        setActiveButton(membershipType);
+    };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setEmailError('');
+        setPasswordError('');
 
-    if (name === 'email') {
-      validateEmail(value);
-    }
+        if (!validateEmail(email)) {
+            setEmailError('Please enter a valid email address.');
+            return;
+        }
 
-    if (name === 'password') {
-      validatePassword(value);
-    }
+        if (password !== passwordConfirm) {
+            setPasswordError('Passwords do not match.');
+            return;
+        }
 
-    if (name === 'retypePassword') {
-      validateRetypePassword(value);
-    }
-  };
+        if (!agreeTerms) {
+            alert('Please agree to the Membership Terms.');
+            return;
+        }
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setEmailError('Please enter a valid email address.');
-    } else {
-      setEmailError('');
-    }
-  };
+        // Handle form submission, e.g., send data to server
+        console.log('Form submitted:', { fullName, email, password, passwordConfirm });
+    };
 
-  const validatePassword = (password) => {
-    if (password.length < 6) {
-      setPasswordError('Password must be at least 6 characters long.');
-    } else {
-      setPasswordError('');
-    }
-  };
+    const validateEmail = (email) => {
+        // Simple email validation using a regular expression
+        // You can implement more complex validation if needed
+        const re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    };
 
-  const validateRetypePassword = (retypePassword) => {
-    if (retypePassword !== formData.password) {
-      setRetypePasswordError('Passwords do not match.');
-    } else {
-      setRetypePasswordError('');
-    }
-  };
+    return (
+        <div className="outer-container">
+            <div className="container">
+                <div className="left-div">
+                    Left Div Content
+                </div>
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+                <div className="right-div">
+                    <div className="membership-buttons">
+                        <button className={activeButton === 'Individual' ? 'active' : ''} onClick={() => handleButtonClick('Individual')}>Individual Membership</button>
+                        <button className={activeButton === 'Corporate' ? 'active' : ''} onClick={() => handleButtonClick('Corporate')}>Corporate Membership</button>
+                    </div>
 
-    if (emailError || passwordError || retypePasswordError) {
-      alert('Please fix the form errors before submitting.');
-      return;
-    }
+                    <div className="underline-wrapper">
+                        <div className="membership-buttons-underline" style={{ backgroundColor: activeButton === 'Individual' ? 'blue' : 'white' }}></div>
+                        <div className="membership-buttons-underline" style={{ backgroundColor: activeButton === 'Corporate' ? 'blue' : 'white' }}></div>
+                    </div>
 
-    // Continue with form submission logic
-    console.log('Form data submitted:', formData);
-  };
 
-  return (
-    <div className='page-content'>
-      <div>
+                    <button className="google-button">GOOGLE</button>
 
-        <div className='user-details'>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor='fullName'></label>
-              <input
-                type='text'
-                id='fullName'
-                name='fullName'
-                value={formData.fullName}
-                onChange={handleChange}
-                placeholder='Full Name'
-                required
-              />
+                    <div className="line-container">
+                        <div className="line"></div>
+                        <div className="or">or</div>
+                        <div className="line"></div>
+                    </div>
+                    {activeButton === 'Individual' && (
+                        <form onSubmit={handleSubmit} className="membership-form">
+                            <div className="form-group">
+                                <label htmlFor="fullName"></label>
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    value={fullName}
+                                    onChange={(e) => setFullName(e.target.value)}
+                                    placeholder='Full name'
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="email"></label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder='Email'
+                                    required
+                                />
+                                {emailError && <div className="error">{emailError}</div>}
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password"></label>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder='Password'
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="passwordConfirm"></label>
+                                <input
+                                    type="password"
+                                    id="passwordConfirm"
+                                    value={passwordConfirm}
+                                    onChange={(e) => setPasswordConfirm(e.target.value)}
+                                    placeholder='Retype password'
+                                    required
+                                />
+                                {passwordError && <div className="error">{passwordError}</div>}
+                            </div>
+                            <div className="form-group">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={agreeTerms}
+                                        onChange={(e) => setAgreeTerms(e.target.checked)}
+                                    />
+                                    <span style={{ color: 'blue', cursor: 'pointer' }} onClick={() => setAgreeTerms(!agreeTerms)}>
+                                        I agree to the Membership Terms
+                                    </span>
+                                </label>
+                            </div>
+                            <div className="form-group">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={allowContact}
+                                        onChange={(e) => setAllowContact(e.target.checked)}
+                                    />
+                                    <span onClick={() => setAllowContact(!allowContact)}>
+                                        I allow UrbanKey to contact me via e-mail, SMS, etc for marketing and promotional purposes.
+                                    </span>
+                                </label>
+                            </div>
+                            <button type="submit" className='SignUp-button'>Sign Up</button>
+                        </form>
+                    )}
+
+                    {activeButton === 'Corporate' && (
+                        <form onSubmit={handleSubmit} className="membership-form">
+                            <div className="form-group">
+                                <label htmlFor="fullName"></label>
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    value={fullName}
+                                    onChange={(e) => setFullName(e.target.value)}
+                                    placeholder='Full name'
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="email"></label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder='Email'
+                                    required
+                                />
+                                {emailError && <div className="error">{emailError}</div>}
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password"></label>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder='Password'
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="passwordConfirm"></label>
+                                <input
+                                    type="password"
+                                    id="passwordConfirm"
+                                    value={passwordConfirm}
+                                    onChange={(e) => setPasswordConfirm(e.target.value)}
+                                    placeholder='Retype password'
+                                    required
+                                />
+                                {passwordError && <div className="error">{passwordError}</div>}
+                            </div>
+                            <div className="form-group">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={agreeTerms}
+                                        onChange={(e) => setAgreeTerms(e.target.checked)}
+                                    />
+                                    <span style={{ color: 'blue', cursor: 'pointer' }} onClick={() => setAgreeTerms(!agreeTerms)}>
+                                        I agree to the Membership Terms
+                                    </span>
+                                </label>
+                            </div>
+                            <div className="form-group">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={allowContact}
+                                        onChange={(e) => setAllowContact(e.target.checked)}
+                                    />
+                                    <span onClick={() => setAllowContact(!allowContact)}>
+                                        I allow UrbanKey to contact me via e-mail, SMS, etc for marketing and promotional purposes.
+                                    </span>
+                                </label>
+                            </div>
+                            <button type="submit" className='SignUp-button'>Sign Up</button>
+                        </form>
+                    )}
+                    <div className="login-link">
+                        Already a member? <a href="#">Login</a>  now!
+                    </div>
+                </div>
             </div>
-
-            <div>
-              <label htmlFor='email'> {emailError && <span className='error'>{emailError}</span>}</label>
-              <input
-                type='email'
-                id='email'
-                name='email'
-                value={formData.email}
-                onChange={handleChange}
-                placeholder='Email'
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor='password'> {passwordError && <span className='error'>{passwordError}</span>}</label>
-              <input
-                type='password'
-                id='password'
-                name='password'
-                value={formData.password}
-                onChange={handleChange}
-                placeholder='Password'
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor='retypePassword'>{retypePasswordError && <span className='error'>{retypePasswordError}</span>}</label>
-              <input
-                type='password'
-                id='retypePassword'
-                name='retypePassword'
-                value={formData.retypePassword}
-                onChange={handleChange}
-                placeholder='Retype Password'
-                required
-              />
-            </div>
-
-            <button type='submit'>Submit</button>
-          </form>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default SignUp;
