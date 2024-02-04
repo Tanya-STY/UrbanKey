@@ -1,0 +1,178 @@
+.profilePage{
+    display: flex;
+    background-color: #F8F8F8;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    flex-direction: column;
+    padding: 10px;
+
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    align-items: flex-start;
+    text-align: left;
+    justify-content: center;
+    padding: 10px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+h1{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    position: relative;
+    left: 10px ;
+    top:-5px;
+}
+
+label{
+    position: absolute;
+    top: 1px;
+    left: 20px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.field-holder{
+    position:relative;
+    width: 100%;
+    padding: 10px;
+
+}
+
+div{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+}
+input{
+    border: 0.5px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    width: 25%;
+}
+
+select{
+    border: 0.5px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    color: rgba(0, 0, 0, 0.3);
+    width:100%;
+    height:180%;
+
+}
+
+.addressInput{
+    height: 30vh;
+    width: 100%;
+}
+
+.box{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 52%;
+}
+
+.box2{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 52%;
+    padding-top: 10px;
+
+}
+
+
+.field-holder2{
+
+    width: 100%;
+    padding: 10px;
+
+
+}
+
+.city{
+    position:absolute;
+
+}
+
+.province{
+    position: absolute;
+    left:54%;
+
+}
+
+.horizontalInput{
+    width:100%;
+
+}
+
+.num2{
+    position: absolute;
+    left:54%;
+    top: 13px;
+
+}
+
+.num{
+    position: absolute;
+    top: 13px;
+
+
+}
+
+.notification{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 70%;
+    align-items: flex-start;
+    text-align: left;
+    justify-content: left;
+    margin: 5px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+
+}
+
+text{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+
+    color: rgba(0, 0, 0, 0.5);}
+
+.save{
+    margin-top: 10px;
+    width: 8%;
+    height: 5vh;
+}
+
+button{
+    width: 100%;
+    height: 100%;
+    background: #E02828;
+    border-radius: 5px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    color: #FFFFFF;
+    border: none;
+
+}
