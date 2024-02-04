@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
+    <div className="body-attributes">
     <div className="login-container">
       <div className="image-container">
         <img src= {condoimage} alt= "Condo Image"/>
@@ -26,6 +27,7 @@ const Login = () => {
           Still not a member? <Link to="/SignUp">Sign Up Now!</Link>
         </div>
       </div>
+    </div>
     </div>
   );
 };
