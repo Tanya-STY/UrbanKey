@@ -19,22 +19,22 @@ const Profile = () => {
 
     return (
         <div className="profilePage" >
-            <form>
-                <h1>Membership Information</h1>
+            <form className="profileForm">
+                <h1 className="membershipInfo">Membership Information</h1>
 
                 <div className="field-holder">
-                    <label htmlFor={name}> Name/Surname</label>
-                    <input id={name} type="text" />
+                    <label className="profileLabels" htmlFor={name}> Name/Surname</label>
+                    <input className="profileInput" id={name} type="text" />
                 </div>
 
                 <div className="field-holder">
-                    <label htmlFor={email}> E-mail</label>
-                    <input id={email} type="text" />
+                    <label className="profileLabels" htmlFor={email}> E-mail</label>
+                    <input className="profileInput" id={email} type="text" />
                 </div>
                 <div className="box">
                     <div className="field-holder2">
                         <label className="province" htmlFor={province}>Province</label>
-                        <select id={province}>
+                        <select className="profileSelect" id={province}>
                             <option></option>
                             <option>Alberta</option>
                             <option>British Columbia</option>
@@ -51,7 +51,7 @@ const Profile = () => {
 
                     <div className="field-holder2">
                         <label className="city" htmlFor={city}>City</label>
-                        <select id={city}>
+                        <select className="profileSelect" id={city}>
                             <option></option>
                             <option>Montreal</option>
 
@@ -73,23 +73,23 @@ const Profile = () => {
 
 
                 <div className="field-holder">
-                    <label htmlFor={key}>Registration Key</label>
-                    <input id={key} type="text" />
+                    <label className="profileLabels" htmlFor={key}>Registration Key</label>
+                    <input className="profileInput" id={key} type="text" />
                 </div>
 
                 <div className="field-holder">
-                    <label htmlFor={address}>Address</label>
+                    <label className="profileLabels" htmlFor={address}>Address</label>
                     <input id={address} className="addressInput" type="text" />
                 </div>
 
             </form>
 
             <div className="notification">
-                <text>I want to be informed about all announcements and campaigns via commercial electronic mail</text>
+                <text className="notifText" >I want to be informed about all announcements and campaigns via commercial electronic mail</text>
 
             </div>
             <div className="save">
-                <button>Save</button>
+                <button className="profileBtn">Save</button>
             </div>
 
         </div>
