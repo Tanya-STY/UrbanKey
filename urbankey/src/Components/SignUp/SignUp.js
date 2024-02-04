@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SignUp.css';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
     const [activeButton, setActiveButton] = useState('Individual');
@@ -225,7 +226,7 @@ const SignUp = () => {
                         </form>
                     )}
                     <div className="login-link">
-                        Already a member? <a href="#">Login</a>  now!
+                        Already a member? <Link to="/Login">Login Now!</Link>
                     </div>
                 </div>
             </div>
