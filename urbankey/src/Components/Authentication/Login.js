@@ -12,7 +12,7 @@ const Login = () => {
         <img src= {condoimage} alt= "Condo Image"/>
       </div>
       <div className="login-section-container">
-        <h2>Login</h2>
+        <h2 className="h2-Login" >Login</h2>
         <div className="form-group-inputs">
           <label className="label-email">Email:</label>
           <input className="input-email" type="email" placeholder="Enter your email" />
