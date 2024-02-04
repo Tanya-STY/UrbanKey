@@ -28,11 +28,11 @@ body{
   align-items: center; /* Align items horizontally in the center */
 }
 
-.right-div input[type="email"], input[type="password"], input[type="text"]{
-  width: 50%;
-  height: 25px;
-  border-radius: 5px;
-}
+/*.right-div input[type="email"], input[type="password"], input[type="text"]{*/
+/*  width: 50%;*/
+/*  height: 25px;*/
+/*  border-radius: 5px;*/
+/*}*/
 
 .membership-buttons{
   font-family: 'Roboto', sans-serif;
