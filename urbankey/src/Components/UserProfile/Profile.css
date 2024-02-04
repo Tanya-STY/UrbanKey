@@ -1,0 +1,212 @@
+.profilePage{
+    display: flex;
+    background-color: #F8F8F8;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    flex-direction: column;
+    padding: 10px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+
+}
+
+.profileForm{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    align-items: flex-start;
+    text-align: left;
+    justify-content: center;
+    padding: 10px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.membershipInfo{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    position: relative;
+    left: 10px ;
+    top:-5px;
+}
+
+.profileLabels{
+    position: absolute;
+    top: 1px;
+    left: 20px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.field-holder{
+    position:relative;
+    width: 100%;
+    padding: 10px;
+
+}
+
+.profileInput{
+    border: 0.5px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    width: 25%;
+}
+
+.profileSelect{
+    border: 0.5px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    color: rgba(0, 0, 0, 0.3);
+    width:100%;
+    height:180%;
+
+}
+
+.addressInput{
+    height: 30vh;
+    width: 100%;
+    border: 0.5px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+
+}
+
+.box{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 52%;
+
+}
+
+.box2{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 52%;
+    padding-top: 10px;
+}
+
+
+.field-holder2{
+
+    width: 100%;
+    padding: 10px;
+
+}
+
+.city{
+    position:absolute;
+    padding-left:17px;
+    position: absolute;
+    top: 1px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    background-color: red;
+    color: rgba(0, 0, 0, 0.5);
+
+
+}
+
+.province{
+    position: absolute;
+    top: 1px;
+    left: 20px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.5);
+
+
+}
+
+.horizontalInput{
+    width:100%;
+    border: 0.5px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+
+
+}
+
+.num2{
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.5);
+
+
+}
+
+.num{
+    position: absolute;
+    top: 1px;
+    left: 20px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.5);
+
+
+}
+
+.notification{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 70%;
+    align-items: flex-start;
+    text-align: left;
+    justify-content: left;
+    margin: 5px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+
+}
+
+.notifText{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+
+    color: rgba(0, 0, 0, 0.5);}
+
+.save{
+    margin-top: 10px;
+    width: 8%;
+    height: 5vh;
+}
+
+.profileBtn{
+    width: 100%;
+    height: 100%;
+    background: #E02828;
+    border-radius: 5px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    color: #FFFFFF;
+    border: none;
+}
