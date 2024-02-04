@@ -61,8 +61,8 @@ const SignUp = () => {
                     </div>
 
                     <div className="underline-wrapper">
-                        <div className="membership-buttons-underline" style={{ backgroundColor: activeButton === 'Individual' ? 'blue' : 'white' }}></div>
-                        <div className="membership-buttons-underline" style={{ backgroundColor: activeButton === 'Corporate' ? 'blue' : 'white' }}></div>
+                        <div className="membership-buttons-underline" style={{ backgroundColor: activeButton === 'Individual' ? 'blue' : 'lightgrey' }}></div>
+                        <div className="membership-buttons-underline" style={{ backgroundColor: activeButton === 'Corporate' ? 'blue' : 'lightgrey' }}></div>
                     </div>
 
 
