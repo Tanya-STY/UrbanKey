@@ -4,6 +4,9 @@ import React from 'react';
 import { useId } from 'react';
 import './Profile.css';
 import { Link } from 'react-router-dom';
+import {CFormSwitch} from "@coreui/react";
+import '@coreui/coreui/dist/css/coreui.min.css'
+
 
 const Profile = () => {
 
@@ -23,17 +26,17 @@ const Profile = () => {
             <form className="profileForm">
                 <h1 className="membershipInfo">Membership Information</h1>
 
-                <div className="field-holder">
-                    <label className="profileLabels" htmlFor={name}> Name/Surname</label>
+                <div className="field-holder-profile">
+                    <label className="profileLabels" htmlFor={name}> Name / Surname</label>
                     <input className="profileInput" id={name} type="text" />
                 </div>
 
-                <div className="field-holder">
+                <div className="field-holder-profile">
                     <label className="profileLabels" htmlFor={email}> E-mail</label>
                     <input className="profileInput" id={email} type="text" />
                 </div>
-                <div className="box">
-                    <div className="field-holder2">
+                <div className="box-profile-page">
+                    <div className="field-holder2-profile">
                         <label className="province" htmlFor={province}>Province</label>
                         <select className="profileSelect" id={province}>
                             <option></option>
@@ -50,7 +53,7 @@ const Profile = () => {
                         </select>
                     </div>
 
-                    <div className="field-holder2">
+                    <div className="field-holder2-profile">
                         <label className="city" htmlFor={city}>City</label>
                         <select className="profileSelect" id={city}>
                             <option></option>
@@ -60,25 +63,25 @@ const Profile = () => {
                     </div>
                 </div>
 
-                <div className="box2">
-                    <div className="field-holder2">
+                <div className="box-profile-page">
+                    <div className="field-holder2-profile">
                         <label className="num" htmlFor={num}>Mobile Number</label>
                         <input className="horizontalInput" id={num} type="text" />
                     </div>
 
-                    <div className="field-holder2">
+                    <div className="field-holder2-profile">
                         <label className="num2" htmlFor={num2}>Mobile Number 2</label>
                         <input className="horizontalInput" id={num2} type="text" />
                     </div>
                 </div>
 
 
-                <div className="field-holder">
+                <div className="field-holder-profile">
                     <label className="profileLabels" htmlFor={key}>Registration Key</label>
                     <input className="profileInput" id={key} type="text" />
                 </div>
 
-                <div className="field-holder">
+                <div className="field-holder-profile">
                     <label className="profileLabels" htmlFor={address}>Address</label>
                     <input id={address} className="addressInput" type="text" />
                 </div>
@@ -87,7 +90,10 @@ const Profile = () => {
 
             <div className="notification">
                 <text className="notifText" >I want to be informed about all announcements and campaigns via commercial electronic mail</text>
-
+                <div className="profileSwitch">
+                    <CFormSwitch label="E-mail" className="formSwitchCheckDefault"/>
+                    <CFormSwitch label="SMS" className="formSwitchCheckDefault"/>
+                </div>
             </div>
             <div className="save">
                 <button className="profileBtn">Save</button>
