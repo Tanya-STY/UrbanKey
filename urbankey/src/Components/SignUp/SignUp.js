@@ -41,31 +41,33 @@ const SignUp = () => {
       return;
     }
 
-    // Handle form submission, e.g., send data to server
+    try {
+        const response = await axios.post('http://localhost:5000/SignUp', {
+            fullName: fullName,
+            email: email,
+            password: password
+        });
+
+        console.log(response);
+        navigate("/");
+
+    } catch (error) {
+        console.log(error, 'error');
+        if (error.response && error.response.status === 401) {
+            alert("Invalid credentials");
+        }
+        if (error.response && error.response.status === 400) {
+            alert("Email already exists.");
+        }
+    }
+
+     // Handle form submission, e.g., send data to server
     console.log("Form submitted:", {
       fullName,
       email,
       password,
       passwordConfirm,
     });
-
-    const registerUser = () => {
-        axios.post('http://localhost:3000/SignUp', {
-            full_name: fullName,
-            email: email,
-            password: password
-        })
-        .then(function (response) {
-             console.log(response);
-            navigate("/");
-        })
-        .catch(function (error) {
-            console.log(error, 'error');
-            if (error.response.status === 401) {
-                alert("Invalid credentials");
-            }
-        });
-    };
 
   };
 
