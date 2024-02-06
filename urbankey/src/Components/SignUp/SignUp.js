@@ -61,22 +61,22 @@ const SignUp = () => {
                         <div className="row-signup" style={{ textAlign: 'center', width: '500px', color: 'darkgray' }}>To have the experience of "property", "information" and "trust" in the condo management world all together...</div>
                         <div className="row-signup">
                             <div className="column-signup" style={{ textAlign: 'center' }}>
-                                <div className="column-signup-icons" style={{backgroundColor: '#ffd166'}}><FaLocationDot style={{height: '100px'}}/></div>
+                                <div className="column-signup-icons" style={{backgroundColor: '#ffd166'}}><FaLocationDot style={{height: '50px'}}/></div>
                                 <div className="column-signup-icon">Learn about location.</div>
                             </div>
                             <div className="column-signup" style={{ textAlign: 'center' }}>
-                                <div className="column-signup-icons" style={{backgroundColor: '#e85d04'}}><FaHouseCircleCheck style={{height: '100px'}}/></div>
+                                <div className="column-signup-icons" style={{backgroundColor: '#e85d04'}}><FaHouseCircleCheck style={{height: '50px'}}/></div>
                                 <div className="column-signup-icon">Find out the value of your house free of charge.</div>
                             </div>
                         </div>
                         <div className="row-signup">
                             <div className="column-signup" style={{ textAlign: 'center', justifyContent: 'center', alignContent: 'center' }}>
-                                <div className="column-signup-icons" style={{backgroundColor: '#7161ef'}}><FaMedal style={{height: '100px'}}/></div>
+                                <div className="column-signup-icons" style={{backgroundColor: '#7161ef'}}><FaMedal style={{height: '50px'}}/></div>
                                 <div className="column-signup-icon">Discover houses that will improve your life quality.</div>
                             </div>
                             
                             <div className="column-signup" style={{ textAlign: 'center' }}>
-                                <div className="column-signup-icons" style={{backgroundColor: '#00a6fb'}}><FaPenRuler style={{height: '100px'}}/></div>
+                                <div className="column-signup-icons" style={{backgroundColor: '#00a6fb'}}><FaPenRuler style={{height: '50px'}}/></div>
                                 <div className="column-signup-icon">Be aware of new projects.</div>
                             </div>
                         </div>
