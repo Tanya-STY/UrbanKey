@@ -70,10 +70,11 @@ const SignUp = () => {
                             </div>
                         </div>
                         <div className="row-signup">
-                            <div className="column-signup" style={{ textAlign: 'center' }}>
+                            <div className="column-signup" style={{ textAlign: 'center', justifyContent: 'center', alignContent: 'center' }}>
                                 <div className="column-signup-icons" style={{backgroundColor: '#7161ef'}}><FaMedal style={{height: '100px'}}/></div>
                                 <div className="column-signup-icon">Discover houses that will improve your life quality.</div>
                             </div>
+                            
                             <div className="column-signup" style={{ textAlign: 'center' }}>
                                 <div className="column-signup-icons" style={{backgroundColor: '#00a6fb'}}><FaPenRuler style={{height: '100px'}}/></div>
                                 <div className="column-signup-icon">Be aware of new projects.</div>
