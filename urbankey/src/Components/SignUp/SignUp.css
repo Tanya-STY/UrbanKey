@@ -37,9 +37,10 @@ body{
     flex: 1;
     /* border: 1px solid black; */
     padding: 10px;
-    /* display: flex; */
+    display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
 
   .column-signup-icon{
@@ -62,7 +63,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 40%;
+    /* margin-left: 40%; */
   }
 
 .right-div{
