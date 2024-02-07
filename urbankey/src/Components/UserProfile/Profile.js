@@ -5,7 +5,9 @@ import { useId } from 'react';
 import './Profile.css';
 import { Link } from 'react-router-dom';
 import {CFormSwitch} from "@coreui/react";
-import '@coreui/coreui/dist/css/coreui.min.css'
+import '@coreui/coreui/dist/css/coreui.min.css';
+import { useState } from "react";
+
 
 
 const Profile = () => {
@@ -19,12 +21,30 @@ const Profile = () => {
     const key = useId();
     const address = useId();
 
+    const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg'); // State to hold the profile picture
+    // Function to handle profile picture upload
+    const handleProfilePictureUpload = (e) => {
+        const file = e.target.files[0]; // Get the uploaded file
+        const reader = new FileReader(); // Create a file reader
+        reader.onloadend = () => {
+            // Once the file is read, set the profile picture state to the uploaded image
+            setProfilePicture(reader.result);
+        };
+        reader.readAsDataURL(file); // Read the file as a data URL
+    };
+
+
 
 
     return (
         <div className="profilePage" >
             <form className="profileForm">
                 <h1 className="membershipInfo">Membership Information</h1>
+                <div className="profile-picture">
+                    <img src={profilePicture} alt="Profile Picture" />
+                    <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} />
+                    <label htmlFor="upload">Upload Profile Picture</label>
+                </div>
 
                 <div className="field-holder-profile">
                     <label className="profileLabels" htmlFor={name}> Name / Surname</label>
