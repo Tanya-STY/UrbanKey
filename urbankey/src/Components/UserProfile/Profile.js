@@ -179,6 +179,9 @@ const handlesubmit = async (e) => {
                     <label className="profileLabels" htmlFor="address">Address</label>
                     <input id="address" className="addressInput" type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
                 </div>
+                <div>
+                <input type='file' onChange={(e) => setSelectedFile(e.target.files[0])}/>
+                </div>
 
             </form>
 

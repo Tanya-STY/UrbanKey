@@ -9,6 +9,7 @@ import { useAuth } from "../../Provider/AuthProvider.js";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
+
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -17,7 +18,34 @@ const Login = () => {
   const [password, setPassword] = useState("");
 //  const [loginStatus, setLoginStatus] = useState("");
 
-  const login = async (e) => {
+//  useEffect(() => {
+//    function checkLocalStorage() {
+//      const storedData = localStorage.getItem("email");
+//      if (storedData) {
+//        try {
+//          const response = await axios.post("http://localhost:5000/user/verification", { "email": storedData })
+//
+//              if (data.verification === "true") {
+//                setLoginStatus("success");
+//                navigate('/Profile');
+//              } else {
+//                console.log("Email not found in local storage, need to log in again.");
+//              }
+//            })
+//            .catch(error => {
+//              console.log("Error while sending data to the backend:", error);
+//            });
+//        } catch(error) {
+//          console.log(error, "Did not send data to backend successfully");
+//        }
+//      } else {
+//        // Data does not exist
+//      }
+//    }
+//    checkLocalStorage();
+//  }, [navigate]);
+
+  const handleLogin = async (e) => {
   try {
 
   e.preventDefault();

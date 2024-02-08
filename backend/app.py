@@ -15,6 +15,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '0622d0d552f33f6309180901'
 CORS(app, origins='http://localhost:3000', methods=['GET', 'POST', 'OPTIONS'])
 bcrypt = Bcrypt(app)
+#to encrypt certain informations (
 
 uri = "mongodb+srv://admin:urbankey1234@urbankey.nfdot4b.mongodb.net/?retryWrites=true&w=majority"
 
@@ -24,7 +25,6 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 db = client.get_database('UrbanKey')
 
 users = db.get_collection('Users')
-
 
 
 @app.route("/", methods = ['post', 'get'])
@@ -71,8 +71,6 @@ def signin():
         password = data.get("password")
 
         user = users.find_one({"email": email})
-
-        # return jsonify({'message': 'testing', 'email': email, 'password': password})
 
         if user:
             if bcrypt.check_password_hash(user.get('password'), password):
