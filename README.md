@@ -18,7 +18,7 @@ The project involves developing a Condo Management website with core functionali
 * Reservation System: Facilitate booking of common facilities with availability display.
 * Request Management: Allow users to submit requests and track activities.
 
-## Team Members and Roles
+## Team Members
 * **Asmae Loulidi**
   * GitHub Username:
 * **Mehdi Fouzail**
