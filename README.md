@@ -20,25 +20,25 @@ The project involves developing a Condo Management website with core functionali
 
 ## Team Members
 * **Asmae Loulidi**
-  * GitHub Username:
+  * GitHub Username: aloulidi
 * **Mehdi Fouzail**
-  * GitHub Username:
+  * GitHub Username: 
 * **Robayth Shahrin Dhrubo**
-  * GitHub Username:
+  * GitHub Username: 
 * **Sonali Patel**
-  * GitHub Username:
+  * GitHub Username: 
 * **Valeria Dolgaliova**
-  * GitHub Username:
+  * GitHub Username: 
 * **Ihana Fahmy**
-  * GitHub Username:ihanaaa
+  * GitHub Username: ihanaaa
 * **Muiz Madadi**
-  * GitHub Username:mzmddi
+  * GitHub Username: mzmddi
 * **Shamma Markis**
-  * GitHub Username:shamma13
+  * GitHub Username: shamma13
 * **Tanya So Tin Yan**
-  * GitHub Username:Tanya-STY
+  * GitHub Username: Tanya-STY
 * **Fadoua Doghmane**
-  * GitHub Username:dogmen6
+  * GitHub Username: dogmen6
 
 ## Project Approach
 * Frontend Framework: React.js will serve as the frontend framework of choice due to its component-based architecture and ease of development. It allows for efficient UI/UX design and modular code organization. 
