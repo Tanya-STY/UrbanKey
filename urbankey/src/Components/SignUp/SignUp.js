@@ -3,8 +3,10 @@ import "./SignUp.css";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
+import { useAuth } from "../../Provider/AuthProvider.js";
 
 const SignUp = () => {
+  const { login } = useAuth();
   const [activeButton, setActiveButton] = useState("Individual");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -47,9 +49,10 @@ const SignUp = () => {
             email: email,
             password: password
         });
-
+        const { token } = response.data;
+        login(token);
         console.log(response);
-        navigate("/");
+        navigate("/Login");
 
     } catch (error) {
         console.log(error, 'error');

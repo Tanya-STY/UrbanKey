@@ -4,28 +4,50 @@ import React from 'react';
 import './Login.css';
 import condoimage from '../Images/Condo.jpg';
 import { Link } from 'react-router-dom';
-import { useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useAuth } from "../../Provider/AuthProvider.js";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const Login = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginStatus, setLoginStatus] = useState("");
+//  const [loginStatus, setLoginStatus] = useState("");
 
   const login = async (e) => {
   try {
+
   e.preventDefault();
+
   const response = await axios.post("http://localhost:5000/Login", {
     email: email,
     password: password,
   });
+    const { token } = response.data;
+    login(token);
     console.log(response);
-    navigate('/');
+
+//    const { token, email: userEmail } = response.data;
+
+    // Store the token and email in local storage
+
+//    localStorage.setItem('token', token);
+//    localStorage.setItem('email', email);
+
+     // Set the Authorization header for future requests
+//    axios.defaults.headers.common['Authorization'] = `${email}`;
+
+
+//    setLoginStatus("success");
+
+    navigate('/Profile');
   }
   catch(error) {
     console.log(error, 'error');
+//    setLoginStatus("error");
     if (error.response && error.response.status === 401) {
         alert("Invalid credentials");
     }
@@ -35,6 +57,16 @@ const Login = () => {
   }
 
   }
+
+  // Timeout function to automatically trigger login after 3 seconds
+//  useEffect(() => {
+//    const timeoutId = setTimeout(() => {
+//      login();
+//    }, 3000);
+//
+//    return () => clearTimeout(timeoutId);
+//  }, []);
+
   return (
     <div className="body-attributes">
     <div className="login-container">
@@ -51,7 +83,7 @@ const Login = () => {
           <label className="label-password">Password:</label>
           <input className="input-password" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Enter your password" required/>
         </div>
-        <button className="login-btn" onClick={login}>LOGIN</button>
+        <button className="login-btn" onClick={handleLogin}>LOGIN</button>
         <div className="signup-link">
         Still not a member? <Link to="/SignUp">Sign Up Now!</Link>
         </div>
