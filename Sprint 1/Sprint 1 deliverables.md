@@ -9,4 +9,4 @@
 - Release Plan (Sprint #2 planning) (1 point) 
 - UI prototypes for Sprint #2 user stories (2 points)
 - Testing Plan for Sprint #2 (1 point) 
- + Figmae
+ + Figma
