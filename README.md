@@ -28,7 +28,7 @@ The project involves developing a Condo Management website with core functionali
 * **Sonali Patel**
   * GitHub Username: 
 * **Valeria Dolgaliova**
-  * GitHub Username: 
+  * GitHub Username: valeriad0l
 * **Ihana Fahmy**
   * GitHub Username: ihanaaa
 * **Muiz Madadi**
