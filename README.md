@@ -22,7 +22,7 @@ The project involves developing a Condo Management website with core functionali
 * **Asmae Loulidi**
   * GitHub Username: aloulidi
 * **Mehdi Fouzail**
-  * GitHub Username: 
+  * GitHub Username: Kahiso
 * **Robayth Shahrin Dhrubo**
   * GitHub Username: Robayth-Dhrubo
 * **Sonali Patel**
