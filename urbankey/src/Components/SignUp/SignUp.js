@@ -3,9 +3,13 @@ import './SignUp.css';
 import { Link } from 'react-router-dom';
 import urbankeyLogo from '../Images/urbankey_logo.png';
 import { FaLocationDot, FaHouseCircleCheck, FaMedal, FaPenRuler } from "react-icons/fa6";
+import axios from 'axios';
+import {useNavigate} from "react-router-dom";
+import { useAuth } from "../../Provider/AuthProvider.js";
 
 
 const SignUp = () => {
+    const { login } = useAuth();
     const [activeButton, setActiveButton] = useState('Individual');
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
@@ -16,11 +20,13 @@ const SignUp = () => {
     const [agreeTerms, setAgreeTerms] = useState(false);
     const [allowContact, setAllowContact] = useState(false);
 
+    const navigate = useNavigate();
+
     const handleButtonClick = (membershipType) => {
         setActiveButton(membershipType);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         setEmailError('');
         setPasswordError('');
@@ -39,10 +45,31 @@ const SignUp = () => {
             alert('Please agree to the Membership Terms.');
             return;
         }
+        try {
+          const response = await axios.post('http://localhost:5000/SignUp', {
+              fullName: fullName,
+              email: email,
+              password: password
+          });
+          const { token } = response.data;
+          login(token);
+          console.log(response);
+          navigate("/Login");
+  
+      } catch (error) {
+          console.log(error, 'error');
+          if (error.response && error.response.status === 401) {
+              alert("Invalid credentials");
+          }
+          if (error.response && error.response.status === 400) {
+              alert("Email already exists.");
+          }
+      }
 
         // Handle form submission, e.g., send data to server
         console.log('Form submitted:', { fullName, email, password, passwordConfirm });
     };
+
 
     const validateEmail = (email) => {
         // Simple email validation using a regular expression
