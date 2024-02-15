@@ -10,6 +10,8 @@ import datetime
 from bson.objectid import ObjectId
 # from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, jwt_required
 
+#commit test for the main branch just to see if it is locked
+
 # app = Flask(__name__, template_folder='public')
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '0622d0d552f33f6309180901'
