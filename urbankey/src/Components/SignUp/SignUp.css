@@ -12,9 +12,59 @@ body{
 
 .left-div{
     flex: 1;
-    background-color: aqua;
+    background-color: white;
     outline: 5px lightgrey;
 }
+
+.container-images-signup {
+    display: grid;
+    grid-template-rows: repeat(5, auto);
+    gap: 10px;
+    /* border: 1px solid lightgray; */
+    padding: 10px;
+    border-right: 2px solid lightgrey;
+  }
+  
+  .row-signup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid black; */
+    padding: 10px;
+  }
+  
+  .column-signup {
+    flex: 1;
+    /* border: 1px solid black; */
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .column-signup-icon{
+    flex: 1;
+    /* border: 1px solid black; */
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    padding-top: 5px;
+    
+  }
+
+  .column-signup-icons{
+    flex: 1;
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+    border-radius: 100% ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-left: 40%; */
+  }
 
 .right-div{
     flex: 1;
@@ -26,12 +76,22 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center; /* Align items horizontally in the center */
+    justify-content: center;
 }
 
-.right-div input[type="email"], input[type="password"], input[type="text"]{
-    width: 50%;
-    height: 25px;
+
+.user-input{
+    width: 60%;
+    height: 30px;
     border-radius: 5px;
+    margin: 10px;
+    padding-left: 10px;
+}
+
+.user-form-input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
  
 .membership-buttons{
@@ -45,13 +105,17 @@ body{
 .line-container {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 25px;
+    height: 20px;
   }
   
 .line {
     flex-grow: 1;
     height: 2px;
     background-color: black;
+    margin: 0 5px;
+    width: 150px;
 }
   
 .or {
@@ -89,15 +153,16 @@ body{
 }
 
 .SignUp-button {
-    width: 50%;
+    width: 60%;
     height: 30px;
     border-radius: 5px;
-    background-color: blue;
+    background-color: #0075FF;
     color: white;
     border: none;
     cursor: pointer;
     margin-top: 20px;
     margin-bottom: 10px;
+
 }
 
 .SignUp-button:hover {
@@ -113,5 +178,3 @@ body{
 .checkbox-container input[type="checkbox"] {
     margin-left: 25px;
 } */
-
-
