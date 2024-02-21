@@ -6,6 +6,7 @@ import Login from "./Components/Authentication/Login.js";
 import SignUp from "./Components/SignUp/SignUp.js";
 import Profile from "./Components/UserProfile/Profile.js";
 import { AuthProvider } from "./Provider/AuthProvider.js";
+import Reservation from "./Components/Reservation/Reservation";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Profile" element={<Profile />} />
+        <Route path="/Reservation" element={<Reservation />} />
       </Routes>
       </AuthProvider>
      </div>
