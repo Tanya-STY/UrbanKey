@@ -5,6 +5,7 @@ from pymongo.server_api import ServerApi
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
+from UserClass import UserC
 
 import datetime
 from bson.objectid import ObjectId
@@ -21,16 +22,27 @@ bcrypt = Bcrypt(app)
 
 uri = "mongodb+srv://admin:urbankey1234@urbankey.nfdot4b.mongodb.net/?retryWrites=true&w=majority"
 
+
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
 
 db = client.get_database('UrbanKey')
 
 users = db.get_collection('Users')
+userObj = UserC(users)
 
 @app.route("/", methods = ['post', 'get'])
 def index():
     return "hello, this is the home page!"
+
+@app.route("/testing", methods=['POST'])
+def testing():
+    data = request.get_json()
+    email = data.get("email")
+    user = userObj.findUser(email)
+    
+    if user:
+        return jsonify({'name': user['full_name']}), 390
 
 @app.route("/SignUp", methods =['POST'])
 def signup():
