@@ -1,0 +1,132 @@
+.notifications-page {
+    font-family: 'Arial', sans-serif;
+    max-width: 600px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    color: black;
+  }
+
+  .navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  .navbar-left, .navbar-right{
+    display: flex;
+    justify-content: flex; 
+    align-items:center;
+  }
+
+  .nav-item1,.nav-item{
+    margin-right: 15px;
+    display:flex;
+    align-items: center;
+  }
+
+  .nav-link {
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .nav-notification-count {
+    background-color: red;
+    color: white;
+    padding: 2px 6px; 
+    border-radius: 30%;
+    font-size: 12px;
+    margin-left: 5px;
+    display:block;
+  }
+
+  .icon1{
+    width: 20px;
+    height: 20px;
+    display: flex;
+  }
+
+  .icon2{
+    width: 20px;
+    height: 20px;
+  }
+
+  .icon3{
+    width: 22px;
+    height: 22px;
+  }
+
+  .inbox-header {
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+    border-bottom: 1px solid #d3d3d3;
+  }
+  
+  .avatar-image{
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    margin-right: 10px; 
+  }
+    
+  .notification-content{
+    display: flex;
+    align-items: center; 
+    flex-direction: column;
+  }
+
+  .notification-item {
+    background-color: white;
+    margin-top:30px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    position: relative; 
+  }
+
+  .notification-dot{
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    left: 35px; 
+    top: 10px; 
+    border: 2px solid white; 
+  }
+  
+  .notification-name {
+    font-weight: bold;
+  }
+  
+  .notification-action {
+    margin-left: 8px;
+  }
+
+  .notification-time-type{
+    align-self: flex-start;
+    display: flex;
+    color: #777;
+    font-size: 0.9em;
+    gap: 10px;
+  }
+
+  .mark-read,
+  .archive-read {
+    margin-top:20px;
+    width: 240px;
+    display: inline;
+    border: 1px solid #d3d3d3;
+    background-color: #fff;
+    padding: 10px 50px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 30px;
+  }
+
