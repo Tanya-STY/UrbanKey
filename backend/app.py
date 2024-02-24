@@ -161,7 +161,7 @@ def verification():
         data = request.get_json()
         email = data.get("email")
 
-        user = users.find_one({"email": email})
+        user = userObj.findUser(email)
         if user:
             return jsonify({'verification': 'true'}), 901
         else:
