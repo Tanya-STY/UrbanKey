@@ -1,0 +1,69 @@
+.payment-history-container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    max-width: 800px;
+    color:black;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .payment-history-container h1{
+     font-size: 30px;
+     text-align: left;
+     margin-left: 35px;
+     margin-top: 20px;
+  }
+
+  .payment-history-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  
+  .payment-history-table th,
+  .payment-history-table td {
+    padding: 10px;
+    border: 1px solid white;
+  }
+
+  .payment-history-table td:nth-child(3) { 
+    color: blue;
+  }
+  
+  .payment-history-table .paid {
+    color: green;
+  }
+  
+  .payment-history-table .pending {
+    color: orange;
+  }
+  
+  .payment-history-table .rejected {
+    color: red;
+  }
+  
+  .button-container {
+    margin-top: 20px;
+  }
+  
+  .go-back-button,
+  .see-invoices-button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .go-back-button {
+    background-color: #f44;
+    color: white;
+  }
+  
+  .see-invoices-button {
+    background-color: #555;
+    color: white;
+  }
+  
