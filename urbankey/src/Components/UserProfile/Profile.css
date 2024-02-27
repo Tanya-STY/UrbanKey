@@ -32,7 +32,7 @@
     position: absolute;
     top: 1px;
     left: 20px;
-    bottom: 40px;
+    /* bottom: 40px; */
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
