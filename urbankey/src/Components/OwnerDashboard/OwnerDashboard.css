@@ -1,0 +1,20 @@
+.condo-dash-top {
+  margin-top: 10px;
+  color: black;
+  font-family: "Roboto-Regular", Helvetica;
+}
+
+.condo-dash-icon {
+  width: 12px;
+  margin-right: 8px;
+  margin-bottom: 3px;
+}
+
+.condo-dash-location-name {
+  display: inline-block;
+  font-size: 14px;
+}
+
+.condo-dash-container {
+  margin-left: 100px;
+}

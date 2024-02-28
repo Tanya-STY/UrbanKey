@@ -1,0 +1,52 @@
+.gallery-big-image{
+    transition: transform 0.4s ease-in-out;
+}
+
+.gallery-big-image.zoomed{
+    transform: scale(1.4);
+    transform-origin: 5%;
+}
+
+.gallery-big-image img {
+  width: 900px;
+  height: 500px;
+  object-fit: cover;
+}
+
+.gallery-small-images img {
+  width: 225px;
+  height: 140px;
+  object-fit: cover;
+}
+
+.gallery-left-arrow {
+  margin-left: -51px;
+  margin-right: 15px;
+  background-color: transparent;
+  font-size: 30px;
+  border-color: transparent;
+  font-weight: 600;
+}
+
+.gallery-right-arrow {
+  background-color: transparent;
+  font-size: 30px;
+  border-color: transparent;
+  font-weight: 600;
+}
+
+.gallery-big-image img:hover {
+  cursor: pointer;
+}
+
+.gallery-small-images img:hover {
+  cursor: pointer;
+}
+
+.gallery-left-arrow :hover {
+  cursor: pointer;
+}
+
+.gallery-right-arrow:hover {
+  cursor: pointer;
+}
