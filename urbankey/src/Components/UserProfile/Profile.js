@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import {CFormSwitch} from "@coreui/react";
 import '@coreui/coreui/dist/css/coreui.min.css';
 import { useState } from "react";
+import "@fontsource/roboto/400.css"; // Specify weight
+
 
 
 
