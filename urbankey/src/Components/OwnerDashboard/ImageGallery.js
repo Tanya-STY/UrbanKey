@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "./ImageGallery.css";
 import bathroom from "../Images/bathroom-ex.jpg";
 import bedroom from "../Images/bedroom-ex.jpg";
@@ -40,23 +40,34 @@ const ImageGallery = () => {
   };
 
   return (
-    <div className='gallery'>
-      <div className={`gallery-big-image ${isZoomed ? 'zoomed' : ''}`} onClick={toggleZoom}>
-        {bigImage && <img src={bigImage} alt="Main" />}
+      <div className="gallery">
+        <div
+          className={`gallery-big-image ${isZoomed ? "zoomed" : ""}`}
+          onClick={toggleZoom}
+        >
+          {bigImage && <img src={bigImage} alt="Main" />}
+        </div>
+        <div className="gallery-small-images">
+          {startIndex > 0 && (
+            <button className="gallery-left-arrow" onClick={handlePrev}>
+              &lt;
+            </button>
+          )}
+          {smallImages.slice(startIndex, startIndex + 4).map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`Small ${index + startIndex + 1}`}
+              onClick={() => handleClick(image)}
+            />
+          ))}
+          {startIndex + 4 < smallImages.length && (
+            <button className="gallery-right-arrow" onClick={handleNext}>
+              &gt;
+            </button>
+          )}
+        </div>
       </div>
-      <div className="gallery-small-images">
-        {startIndex > 0 && <button className='gallery-left-arrow' onClick={handlePrev}>&lt;</button>}
-        {smallImages.slice(startIndex, startIndex + 4).map((image, index) => (
-          <img
-            key={index}
-            src={image}
-            alt={`Small ${index + startIndex + 1}`}
-            onClick={() => handleClick(image)}
-          />
-        ))}
-        {startIndex + 4 < smallImages.length && <button className='gallery-right-arrow' onClick={handleNext}>&gt;</button>}
-      </div>
-    </div>
   );
 };
 
