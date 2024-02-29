@@ -40,7 +40,7 @@ const ImageGallery = () => {
   };
 
   return (
-    <div className='gallery'>
+    <div>
       <div className={`gallery-big-image ${isZoomed ? 'zoomed' : ''}`} onClick={toggleZoom}>
         {bigImage && <img src={bigImage} alt="Main" />}
       </div>

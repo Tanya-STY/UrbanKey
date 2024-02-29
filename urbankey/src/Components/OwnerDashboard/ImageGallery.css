@@ -26,9 +26,9 @@
   width: 25%;
 }
 
-/* .gallery-left-arrow {
-  margin-left: -51px;
-  margin-right: 15px;
+.gallery-left-arrow {
+  margin-left: -47px;
+  margin-right: 10.9px;
   background-color: transparent;
   font-size: 30px;
   border-color: transparent;
@@ -36,11 +36,13 @@
 }
 
 .gallery-right-arrow {
+  margin-right: -50px;
+  margin-left: 10px;
   background-color: transparent;
   font-size: 30px;
   border-color: transparent;
   font-weight: 600;
-} */
+}
 
 .gallery-big-image img:hover {
   cursor: pointer;
