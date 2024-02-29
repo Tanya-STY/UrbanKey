@@ -1,16 +1,41 @@
-import React, { useState } from 'react';
-import './Home.css';
+//import from react
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
+//imports from css
+import './Home.css';
+
+//imports from documents or components
 import urbanKeyLogo from '../Images/urbankey_logo.png';
+import useLocalStorageTokenCheckHook from '../../CustomHooks/useLocalStorageTokenCheckHook';
 
-const Home = () => {
 
+
+const Home = ({token, isLogged, setLogged}) => {
+
+    //DECLARE NAVIGATE FOR LATER
+    const navigate = useNavigate();
+
+    //declare the variables
     const [search, setSearch] = useState('');
+    console.log(isLogged);
+    
+    useEffect(()=>{
+        if(isLogged === false){
+            navigate('/');
+        }
 
+    }, [isLogged])
+
+    const logoutNew = () => {
+        localStorage.removeItem("token");
+        setLogged(false)
+    }
     return (
         <div>
             <div className='header'></div>
-    
+            <div><button onClick={logoutNew}>Log Out</button></div>
             <div className='houseSlogan'>
                 Your dream house is here.
             </div>

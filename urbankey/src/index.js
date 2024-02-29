@@ -9,11 +9,9 @@ import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-   <AuthProvider authUrl={process.env.REACT_APP_AUTH_URL}>
   <Router>
     <App />
   </Router>
-  </AuthProvider>
   </React.StrictMode>
 );
 //ReactDOM.render(

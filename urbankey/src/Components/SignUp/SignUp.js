@@ -5,11 +5,8 @@ import urbankeyLogo from '../Images/urbankey_logo.png';
 import { FaLocationDot, FaHouseCircleCheck, FaMedal, FaPenRuler } from "react-icons/fa6";
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
-import { useAuth } from "../../Provider/AuthProvider.js";
-
 
 const SignUp = () => {
-    const { login } = useAuth();
     const [activeButton, setActiveButton] = useState('Individual');
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
@@ -52,7 +49,7 @@ const SignUp = () => {
               password: password
           });
           const { token } = response.data;
-          login(token);
+
           console.log(response);
           navigate("/Login");
   
