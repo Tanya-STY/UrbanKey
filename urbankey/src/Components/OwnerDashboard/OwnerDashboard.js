@@ -2,6 +2,7 @@ import React from "react";
 import "./OwnerDashboard.css";
 import icon from "../Images/location-icon-yellow.png";
 import ImageGallery from "./ImageGallery";
+import face from "../Images/man-face-ex.png";
 
 const CondoDash = () => {
   return (
@@ -13,7 +14,11 @@ const CondoDash = () => {
       </div>
       <div className="condo-dash-second-row">
         <ImageGallery />
-        <div className="condo-dash-box-1"></div>
+        <div className="condo-dash-box-1">
+          <div className="condo-dash-face">
+            <img src={face} alt="Man Face" />
+          </div>
+        </div>
       </div>
     </div>
   );
