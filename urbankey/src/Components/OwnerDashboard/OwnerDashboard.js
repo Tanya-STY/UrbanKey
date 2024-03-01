@@ -80,7 +80,7 @@ const CondoDash = () => {
           </div>
         </div>
 
-        <div className="condo-dash-financial-status-box">
+        <div className="condo-dash-financial-and-status-box">
           <div className="condo-dash-financial-status">
             <img src={icon4} alt="Stock Icon" />
             <p>Financial Status</p>
@@ -105,7 +105,7 @@ const CondoDash = () => {
       </div>
 
       <div className="condo-dash-fourth-row">
-        <div className="condo-dash-info-box">
+        <div className="condo-dash-info-box" style={{ width: "100%" }}>
           <p className="condo-dash-headertwo">Explanation</p>
           <p className="condo-dash-explanation">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -115,6 +115,67 @@ const CondoDash = () => {
             egestas sed.
           </p>
         </div>
+      </div>
+      {/*✓*/}
+      <div className="condo-dash-fifth-row">
+        <div className="condo-dash-info-box">
+          <div className="condo-dash-feature">
+            <p
+              style={{
+                color: "black",
+                fontWeight: "600",
+                fontSize: "1.3vw",
+                marginBottom: " 2%",
+              }}
+            >
+              Interior Features
+            </p>
+            <p>✓ ASDL</p>
+            <p>✓ Alarm</p>
+            <p>✓ Balcony</p>
+            <p>✓ Barbecue</p>
+            <p>✓ Laundry Room</p>
+            <p>✓ Wallpaper</p>
+            <p>✓ Dressing room</p>
+            <p>✓ Video Intercom</p>
+            <p>✓ Shower</p>
+            <p>✓ Laminate</p>
+            <p>✓ Panel Door</p>
+            <p>✓ Blinds</p>
+            <p>✓ Sauna</p>
+            <p>✓ Satin Plaster</p>
+            <p>✓ Satin Color</p>
+            <p>✓ Ceramic Floor</p>
+          </div>
+          <div
+            className="condo-dash-feature"
+            style={{ position: "relative", bottom: "27.5%" }}
+          >
+            <p
+              style={{
+                color: "black",
+                fontWeight: "600",
+                fontSize: "1.3vw",
+                marginBottom: " 2%",
+              }}
+            >
+              Exterior Features
+            </p>
+            <p>✓ Elevator</p>
+            <p>✓ Garden</p>
+            <p>✓ Fitness</p>
+            <p>✓ Security</p>
+            <p>✓ Thermal Insulation</p>
+            <p>✓ Generator</p>
+            <p>✓ Tennis Court</p>
+            <p>✓ Car Park</p>
+            <p>✓ PVC</p>
+            <p>✓ Basketball Field</p>
+            <p>✓ Market</p>
+          </div>
+        </div>
+
+        <div className="condo-dash-financial-and-status-box"></div>
       </div>
       <br />
       <br />

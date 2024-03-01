@@ -29,7 +29,8 @@ body {
 
 .condo-dash-second-row,
 .condo-dash-third-row,
-.condo-dash-fourth-row {
+.condo-dash-fourth-row,
+.condo-dash-fifth-row {
   display: flex;
 }
 
@@ -170,7 +171,8 @@ body {
 
 .condo-dash-info-left1 p,
 .condo-dash-info-left2 p,
-.condo-dash-explanation {
+.condo-dash-explanation,
+.condo-dash-feature p {
   color: #00000080;
   font-size: 1vw;
 }
@@ -190,11 +192,10 @@ body {
   font-size: 1vw;
 }
 
-.condo-dash-financial-status-box {
+.condo-dash-financial-and-status-box {
   border: 1px solid #0000001a;
   background-color: white;
   border-radius: 5px;
-  margin-top: 5%;
   width: 30%;
   max-width: 280px;
   margin-left: 90px;
@@ -275,6 +276,15 @@ body {
   font-weight: 600;
   padding: 1% 15%;
   margin-top: -15px;
+}
+
+.condo-dash-feature {
+  display: inline-block;
+  width: 50%;
+}
+
+.condo-dash-feature p {
+  margin-bottom: 0;
 }
 
 @media (max-width: 1015px) {
