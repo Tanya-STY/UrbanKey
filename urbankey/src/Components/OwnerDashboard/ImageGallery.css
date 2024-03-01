@@ -2,6 +2,7 @@
 .gallery-big-image.zoomed {
   transform: scale(1.4);
   transform-origin: 20%;
+  z-index: 7;
 }
 
 .gallery-big-image {

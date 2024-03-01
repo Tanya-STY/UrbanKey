@@ -46,26 +46,39 @@ const CondoDash = () => {
             <p>Purchase Date</p>
             <p>Housing Shape</p>
             <p>Room + Living Number</p>
-            <p>Gross / Net M<sup>2</sup></p>
+            <p>
+              Gross / Net M<sup>2</sup>
+            </p>
             <p>Warming Type</p>
-            <p style={{marginBottom: "0"}}>Building Age</p>
+            <p style={{ marginBottom: "0" }}>Building Age</p>
           </div>
           <div className="condo-dash-info-right1">
-            <p style={{color:"red"}}>0-0002</p>
+            <p style={{ color: "red" }}>0-0002</p>
             <p>20 November 2020</p>
             <p>Apartment</p>
             <p>1 + 1</p>
-            <p>50 M<sup>2</sup> / 110 M<sup>2</sup></p>
+            <p>
+              50 M<sup>2</sup> / 110 M<sup>2</sup>
+            </p>
             <p>Natural Gas</p>
-            <p style={{marginBottom: "0"}}>6</p>
+            <p style={{ marginBottom: "0" }}>6</p>
           </div>
           <div className="condo-dash-info-left2">
             <p>Floor Location</p>
             <p>Furnished</p>
-            <p style={{marginBottom: "0"}}>Front</p>
+            <p style={{ marginBottom: "0" }}>Front</p>
+          </div>
+          <div className="condo-dash-info-right2">
+            <p>2</p>
+            <p>Yes</p>
+            <p style={{ marginBottom: "0" }}>Northwest</p>
           </div>
         </div>
-      </div><br/><br/>
+
+        <div className="condo-dash-financial-status">hello</div>
+      </div>
+      <br />
+      <br />
     </div>
   );
 };
