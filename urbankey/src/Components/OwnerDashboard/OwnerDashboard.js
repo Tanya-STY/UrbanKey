@@ -45,7 +45,7 @@ const CondoDash = () => {
 
       <div className="condo-dash-third-row">
         <div className="condo-dash-info-box">
-          <p className="condo-dash-general-info">General Information</p>
+          <p className="condo-dash-headertwo">General Information</p>
           <div className="condo-dash-info-left1">
             <p>Condo No.</p>
             <p>Purchase Date</p>
@@ -91,14 +91,29 @@ const CondoDash = () => {
             <img src={icon7} alt="Money Icon" style={{ width: "10.5%" }} />
           </div>
           <div className="condo-dash-condo-fees" style={{ border: "none" }}>
-            <img src={icon6} alt="Radio Button 2"/>
+            <img src={icon6} alt="Radio Button 2" />
             <p>Outstanding Balances: $0</p>
             <img src={icon8} alt="Card Icon" style={{ width: "10.5%" }} />
           </div>
           <div className="condo-dash-payment-history">
             <p>Payment History</p>
-            <Link to="" className="condo-dash-view-link">View</Link>
+            <Link to="" className="condo-dash-view-link">
+              View
+            </Link>
           </div>
+        </div>
+      </div>
+
+      <div className="condo-dash-fourth-row">
+        <div className="condo-dash-info-box">
+          <p className="condo-dash-headertwo">Explanation</p>
+          <p className="condo-dash-explanation">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Id
+            aliquet lectus proin nibh nisl condimentum id. Nisl pretium fusce id
+            velit ut tortor pretium viverra. Turpis massa sed elementum tempus
+            egestas sed.
+          </p>
         </div>
       </div>
       <br />

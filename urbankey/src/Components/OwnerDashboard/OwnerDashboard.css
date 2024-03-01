@@ -27,7 +27,9 @@ body {
   font-size: 14px;
 }
 
-.condo-dash-second-row {
+.condo-dash-second-row,
+.condo-dash-third-row,
+.condo-dash-fourth-row {
   display: flex;
 }
 
@@ -137,10 +139,6 @@ body {
   width: 9%;
 }
 
-.condo-dash-third-row {
-  display: flex;
-}
-
 .condo-dash-info-box {
   margin-top: 5%;
   background-color: white;
@@ -151,7 +149,7 @@ body {
   border-radius: 5px;
 }
 
-.condo-dash-general-info {
+.condo-dash-headertwo {
   color: black;
   font-weight: 600;
   font-size: 1.3vw;
@@ -163,20 +161,6 @@ body {
   margin-right: 5%;
 }
 
-.condo-dash-info-left1 p {
-  color: #00000080;
-  font-size: 1vw;
-}
-.condo-dash-info-right1 {
-  display: inline-block;
-  margin-right: 25%;
-}
-
-.condo-dash-info-right1 p {
-  color: black;
-  font-size: 1vw;
-}
-
 .condo-dash-info-left2 {
   display: inline-block;
   position: relative;
@@ -184,17 +168,23 @@ body {
   margin-right: 5%;
 }
 
-.condo-dash-info-left2 p {
+.condo-dash-info-left1 p,
+.condo-dash-info-left2 p,
+.condo-dash-explanation {
   color: #00000080;
   font-size: 1vw;
 }
 
+.condo-dash-info-right1 {
+  display: inline-block;
+  margin-right: 25%;
+}
 .condo-dash-info-right2 {
   display: inline-block;
   position: relative;
   bottom: 53.5%;
 }
-
+.condo-dash-info-right1 p,
 .condo-dash-info-right2 p {
   color: black;
   font-size: 1vw;
@@ -210,6 +200,9 @@ body {
   margin-left: 90px;
   position: relative;
   margin-right: -10px;
+
+  margin-top: 8%;
+  margin-bottom: 4%;
 }
 
 .condo-dash-financial-status {
@@ -273,10 +266,6 @@ body {
   margin-top: 10px;
   font-size: 1vw;
 }
-/* 
-.condo-dash-payment-history p {
-  margin-bottom: 0;
-} */
 
 .condo-dash-view-link {
   background-color: red;
