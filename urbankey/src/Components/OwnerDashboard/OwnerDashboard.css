@@ -227,7 +227,7 @@ body {
   background-color: black;
   color: white;
   border-radius: 40px;
-  padding: 1px 15px;
+  padding: 1% 5.4%;
   margin-top: 10px;
 
   margin-right: 15%;
@@ -253,7 +253,7 @@ body {
 
 .condo-dash-condo-fees p {
   display: inline-block;
-  font-size: 1.02vw;
+  font-size: 1vw;
   margin-top: 15px;
 }
 
@@ -262,6 +262,30 @@ body {
   width: 7%;
   margin-left: 3%;
   margin-right: 3%;
+}
+
+.condo-dash-payment-history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 10px;
+  font-size: 1vw;
+}
+/* 
+.condo-dash-payment-history p {
+  margin-bottom: 0;
+} */
+
+.condo-dash-view-link {
+  background-color: red;
+  color: white;
+  text-decoration: none;
+  border-radius: 40px;
+  font-weight: 600;
+  padding: 1% 15%;
+  margin-top: -15px;
 }
 
 @media (max-width: 1015px) {

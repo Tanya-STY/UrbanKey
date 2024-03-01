@@ -91,9 +91,13 @@ const CondoDash = () => {
             <img src={icon7} alt="Money Icon" style={{ width: "10.5%" }} />
           </div>
           <div className="condo-dash-condo-fees" style={{ border: "none" }}>
-            <img src={icon6} alt="Radio Button 2" />
-            <p>Monthly Condo Fees: $4568</p>
+            <img src={icon6} alt="Radio Button 2"/>
+            <p>Outstanding Balances: $0</p>
             <img src={icon8} alt="Card Icon" style={{ width: "10.5%" }} />
+          </div>
+          <div className="condo-dash-payment-history">
+            <p>Payment History</p>
+            <Link to="" className="condo-dash-view-link">View</Link>
           </div>
         </div>
       </div>
