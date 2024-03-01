@@ -200,7 +200,7 @@ body {
   font-size: 1vw;
 }
 
-.condo-dash-financial-status {
+.condo-dash-financial-status-box {
   border: 1px solid #0000001a;
   background-color: white;
   border-radius: 5px;
@@ -210,13 +210,58 @@ body {
   margin-left: 90px;
   position: relative;
   margin-right: -10px;
+}
 
-  /* width: 40%;
-    margin-left: 90px;
-    margin-top: 12%;
-    margin-bottom: 10.7%;
-    max-width: 280px;
-    max-height: 420px; */
+.condo-dash-financial-status {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 5px;
+}
+
+.condo-dash-financial-status p {
+  display: inline-block;
+  font-size: 1.2vw;
+  background-color: black;
+  color: white;
+  border-radius: 40px;
+  padding: 1px 15px;
+  margin-top: 10px;
+
+  margin-right: 15%;
+  margin-left: 5%;
+}
+
+.condo-dash-financial-status img {
+  width: 12%;
+  margin-left: 10%;
+}
+
+.condo-dash-condo-fees {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 5px;
+
+  padding-bottom: 5px;
+  border-bottom: 1px solid #0000001a;
+}
+
+.condo-dash-condo-fees p {
+  display: inline-block;
+  font-size: 1.02vw;
+  margin-top: 15px;
+}
+
+.condo-dash-condo-fees img {
+  display: inline-block;
+  width: 7%;
+  margin-left: 3%;
+  margin-right: 3%;
 }
 
 @media (max-width: 1015px) {

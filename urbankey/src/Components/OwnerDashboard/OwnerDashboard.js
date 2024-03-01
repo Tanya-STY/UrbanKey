@@ -6,6 +6,11 @@ import icon1 from "../Images/location-icon-yellow.png";
 import face from "../Images/man-face-ex.png";
 import icon2 from "../Images/phone-icon.png";
 import icon3 from "../Images/email-icon.png";
+import icon4 from "../Images/stock-icon.png";
+import icon5 from "../Images/radio-button-1.png";
+import icon6 from "../Images/radio-button-2.png";
+import icon7 from "../Images/money-icon.png";
+import icon8 from "../Images/card-icon.png";
 
 const CondoDash = () => {
   return (
@@ -75,7 +80,22 @@ const CondoDash = () => {
           </div>
         </div>
 
-        <div className="condo-dash-financial-status">hello</div>
+        <div className="condo-dash-financial-status-box">
+          <div className="condo-dash-financial-status">
+            <img src={icon4} alt="Stock Icon" />
+            <p>Financial Status</p>
+          </div>
+          <div className="condo-dash-condo-fees">
+            <img src={icon5} alt="Radio Button 1" />
+            <p>Monthly Condo Fees: $4568</p>
+            <img src={icon7} alt="Money Icon" style={{ width: "10.5%" }} />
+          </div>
+          <div className="condo-dash-condo-fees" style={{ border: "none" }}>
+            <img src={icon6} alt="Radio Button 2" />
+            <p>Monthly Condo Fees: $4568</p>
+            <img src={icon8} alt="Card Icon" style={{ width: "10.5%" }} />
+          </div>
+        </div>
       </div>
       <br />
       <br />
