@@ -24,6 +24,16 @@ tokenObject = Token()
 #if problem is good, the routes will send back tokenValidResponse : 0 always as a good entry
 def token_required(f):
     @wraps(f)
+    #this is for the user
+    #we have to implement next somethign that checks if this is a user in our database
+    #using the name of user inside the token
+    #we should also implement another one that handles
+    #employ functionalities only
+    #so there should be two @wraps, one for normal users, and another for employees
+    #for now, this is general valid token without checking the user in the database
+    #needs to be changed. 
+    #once changed, remove this comment section
+    #02-03-2024 16:16
     def decorator(*args, **kwargs):
 
         #the token should be in the headers
