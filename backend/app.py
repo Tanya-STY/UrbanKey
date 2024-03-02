@@ -5,6 +5,8 @@ from pymongo.server_api import ServerApi
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
+from UserClass import UserC
+from RegistrationKey import RegKey
 
 import datetime
 from bson.objectid import ObjectId
@@ -23,14 +25,25 @@ uri = "mongodb+srv://admin:urbankey1234@urbankey.nfdot4b.mongodb.net/?retryWrite
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
-
 db = client.get_database('UrbanKey')
-
 users = db.get_collection('Users')
+userObj = UserC(users)
+RegistrationKeyCollection = db.get_collection('RegistrationKey')
+regKeyObj = RegKey(RegistrationKeyCollection)
+
 
 @app.route("/", methods = ['post', 'get'])
 def index():
     return "hello, this is the home page!"
+
+@app.route("/testing", methods=['POST'])
+def testing():
+    data = request.get_json()
+    email = data.get("email")
+    user = userObj.findUser(email)
+    
+    if user:
+        return jsonify({'name': user['full_name']}), 390
 
 @app.route("/SignUp", methods =['POST'])
 def signup():
@@ -148,7 +161,7 @@ def verification():
         data = request.get_json()
         email = data.get("email")
 
-        user = users.find_one({"email": email})
+        user = userObj.findUser(email)
         if user:
             return jsonify({'verification': 'true'}), 901
         else:
