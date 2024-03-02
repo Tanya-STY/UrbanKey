@@ -1,7 +1,9 @@
 #import dependencies
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-
+from Token import Token
+import jwt
+from functools import wraps
 
 
 #create flask project
@@ -9,8 +11,57 @@ app = Flask(__name__)
 
 #set up the CORS
 CORS(app, origins='http://localhost:3000', methods=['GET', 'POST', 'OPTIONS'])
+# secret Key 
+app.config['SECRET_KEY'] = '0622d0d552f33f6309180901'
 
+#creating our functional objects
+tokenObject = Token()
 
+#@wraps decorater for required token implementation here
+#this wrapper will validate the token and return exceptions if needed
+#exceptions handled are { token expired, token algo wrong, token invalid, decoding error, general expection as e for unexpecfed error}
+#if problem with token, will send back tokenValidResponse : 1
+#if problem is good, the routes will send back tokenValidResponse : 0 always as a good entry
+def token_required(f):
+    @wraps(f)
+    def decorator(*args, **kwargs):
+
+        #the token should be in the headers
+        token = request.headers['token']
+        
+        if not token:
+            return jsonify({'tokenValidResponse': '1', 'message' : 'token not provided with request'}), 401
+        
+        try:
+            givenToken = jwt.decode(token, app.config['SECRET_KEY'] , algorithms=['HS256'] )
+            print("token validated in @wraps token_required")
+            return f(*args, **kwargs)
+
+        except jwt.ExpiredSignatureError as e:
+            print("exception thrown inside wraps")
+            print("token expired")
+            return jsonify({'tokenValidResponse' : '1',
+                            'message': 'Token has expired'}), 401
+        
+        except jwt.InvalidAlgorithmError as e:
+            print("exception thrown inside wraps")
+            print("algorithm is invalid")
+            return jsonify({'tokenValidResponse': '1',
+                            'message': 'token is has invalid algorithm'}), 401
+        
+        except jwt.InvalidTokenError as e:
+            print("exception thrown inside wraps")
+            print("token structure is invalid")
+            return jsonify({'tokenValidResponse': '1',
+                            'message': 'token structure is wrong'}), 401
+        
+        
+        except Exception as e:
+            print('enexpected error occured inside @wraps')
+            return jsonify({'tokenValidResponse': '1',
+                            'message': 'unexpected error inside @wraps'}), 401
+    
+    return decorator
 
 @app.route("/TestinguseVerifTokenHook", methods=['POST'])
 def test1():
@@ -45,6 +96,7 @@ def check_token():
 @app.route("/Login", methods=['POST'])
 def login():
     #test for login
+    #create a token
     try:
         data = request.get_json()
         print(data);
@@ -64,10 +116,57 @@ def login():
         print(e)
         return jsonify(e, {'error': 'Internal server error'}), 500
     
+@app.route('/testToken', methods=['POST'])
+def testToken():
+    ##for documentation of how to create
+    #coded works, tested it out
+    try:
+        data = request.get_json()
+        email = data['email']
+        password = data['password']
+        name = "Jon Doe"
+        ##example name, but in real we have to check if the user exist with the email provided,
+        #and if the user exists then we can get the nam,e from the mongo doc
+        print("this is the email and password : " + email + " " + password)
+        newToken = tokenObject.create_token(email, password, name)
+        print("this is the created token received in testToken route: ")
+        decoded_token = jwt.decode(newToken, '0622d0d552f33f6309180901', algorithms=['HS256'])
+        return jsonify({
+            'message': 'worke',
+            'newToken': newToken,
+            'decoded_token': decoded_token
+        }), 200
+    except Exception as e:
+        print(e)
+        print("Exception caught inside testToken")
+        return jsonify("Exception caught inside testToken" ), 500
+    
+
+@app.route('/testWraps', methods=['POST'])
+@token_required
+def test_required_token():
+    try:
+        data = request.get_json()
+        email = data['email']
+        password = data['password']
+
+        return jsonify({
+            'message': 'wraps decorator worked, inside route method',
+            'email': 'returned email: '+ email,
+            'pasword': 'returned password: ' + password
+        })
+    except Exception as e:
+        print("exception catches inside testWraps route")
+        return jsonify({'message': 'exception catched inside testWraps route'}), 500
+
 
 
         
 
+#structure
+    #need a token cl ass that deals with the token problems
+    #need class cause sign up route and login route will use the createToken method
+    #need class cause all protected routes will need a verif token method
 
 
 
