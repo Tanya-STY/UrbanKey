@@ -15,7 +15,7 @@ class Token:
 
         # probably should add info of the user to see permission
         # permission info like type of user etc
-        
+
         token = jwt.encode({
             'user':name,
             'expiration': str(datetime.utcnow() + timedelta(minutes=30))
@@ -25,7 +25,4 @@ class Token:
         print('token from inside create_token: ' + token)
         return token
 
-        pass
-
-    def verif_token(self):
         pass
