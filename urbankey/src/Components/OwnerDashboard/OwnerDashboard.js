@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { Map, GoogleApiWrapper } from "google-maps-react";
 import "./OwnerDashboard.css";
 import ImageGallery from "./ImageGallery";
 import icon1 from "../Images/location-icon-yellow.png";
@@ -118,7 +118,7 @@ const CondoDash = () => {
           </p>
         </div>
       </div>
-      {/*✓*/}
+
       <div className="condo-dash-fifth-row">
         <div className="condo-dash-info-box">
           <div className="condo-dash-feature">
@@ -233,6 +233,23 @@ const CondoDash = () => {
               Submit a New Request
             </Link>
           </div>
+        </div>
+      </div>
+
+      <div className="condo-dash-sixth-row">
+        <div className="condo-dash-info-box" style={{ width: "100%" }}>
+          <div className="condo-dash-headertwo">Location Information</div>
+          <iframe
+            title="map"
+            width="100%"
+            height="400"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=Montreal,%20Canada+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+          >
+            <a href="https://www.gps.ie/">gps tracker sport</a>
+          </iframe>
         </div>
       </div>
       <br />

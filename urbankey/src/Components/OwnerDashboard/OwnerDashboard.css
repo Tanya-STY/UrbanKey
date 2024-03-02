@@ -30,7 +30,8 @@ body {
 .condo-dash-second-row,
 .condo-dash-third-row,
 .condo-dash-fourth-row,
-.condo-dash-fifth-row {
+.condo-dash-fifth-row,
+.condo-dash-sixth-row {
   display: flex;
 }
 
@@ -198,9 +199,8 @@ body {
   border-radius: 5px;
   width: 30%;
   max-width: 280px;
-  margin-left: 8%;
+  margin-left: 6%;
   position: relative;
-  margin-right: -10px;
 
   margin-top: 8%;
   margin-bottom: 2.5%;
