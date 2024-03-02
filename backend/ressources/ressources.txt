@@ -1,3 +1,7 @@
 Implementing a login session authentication using React js, Context API and Python Flask API and JWT
 youtube
 https://www.youtube.com/watch?v=8-W2O_R95Pk
+
+
+token create + @wraps implementation for required_token - authentication Context
+https://www.youtube.com/watch?v=_3NKBHYcpyg&t=372s
