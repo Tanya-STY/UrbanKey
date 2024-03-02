@@ -4,7 +4,7 @@ body {
 
 .condo-dash-container {
   margin-left: 100px;
-  margin-right: 100px;
+  margin-right: 75px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,7 +39,7 @@ body {
   background-color: white;
 
   width: 40%;
-  margin-left: 90px;
+  margin-left: 8%;
   margin-top: 12%;
   margin-bottom: 10.7%;
   max-width: 280px;
@@ -141,7 +141,7 @@ body {
 }
 
 .condo-dash-info-box {
-  margin-top: 5%;
+  margin-top: 2%;
   background-color: white;
   border: 1px solid #0000001a;
   width: 70%;
@@ -192,21 +192,22 @@ body {
   font-size: 1vw;
 }
 
-.condo-dash-financial-and-status-box {
+.condo-dash-financial-and-request-box {
   border: 1px solid #0000001a;
   background-color: white;
   border-radius: 5px;
   width: 30%;
   max-width: 280px;
-  margin-left: 90px;
+  margin-left: 8%;
   position: relative;
   margin-right: -10px;
 
   margin-top: 8%;
-  margin-bottom: 4%;
+  margin-bottom: 2.5%;
 }
 
-.condo-dash-financial-status {
+.condo-dash-financial-status,
+.condo-dash-maintenance {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -233,15 +234,13 @@ body {
   margin-left: 10%;
 }
 
-.condo-dash-condo-fees {
+.condo-dash-condo-fees,
+.condo-dash-requests {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 
-  margin-top: 5px;
-
-  padding-bottom: 5px;
   border-bottom: 1px solid #0000001a;
 }
 
@@ -285,6 +284,57 @@ body {
 
 .condo-dash-feature p {
   margin-bottom: 0;
+}
+
+.condo-dash-maintenance p {
+  display: inline-block;
+  font-size: 1.1vw;
+  background-color: black;
+  color: white;
+  border-radius: 40px;
+  padding: 1% 5.5%;
+  margin-top: 10px;
+
+  margin-right: 7%;
+  margin-left: 2%;
+}
+
+.condo-dash-maintenance img {
+  width: 12%;
+  margin-left: 5%;
+}
+
+.condo-dash-nb-request {
+  font-size: 0.85vw;
+  color: #3dacf0;
+  width: 50%;
+  margin: 2.5%;
+}
+
+.condo-dash-progress {
+  font-size: 0.55vw;
+  border-radius: 40px;
+  margin: 2.5%;
+  color: black;
+}
+
+.condo-dash-submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 7%;
+}
+
+.condo-dash-request-link {
+  background-color: red;
+  color: white;
+  text-decoration: none;
+  border-radius: 40px;
+  font-weight: 600;
+  padding: 1.5% 15%;
+  font-size: 0.91vw;
 }
 
 @media (max-width: 1015px) {

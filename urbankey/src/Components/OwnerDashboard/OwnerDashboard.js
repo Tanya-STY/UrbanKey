@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Map, GoogleApiWrapper } from 'google-maps-react';
 import "./OwnerDashboard.css";
 import ImageGallery from "./ImageGallery";
 import icon1 from "../Images/location-icon-yellow.png";
@@ -11,6 +12,7 @@ import icon5 from "../Images/radio-button-1.png";
 import icon6 from "../Images/radio-button-2.png";
 import icon7 from "../Images/money-icon.png";
 import icon8 from "../Images/card-icon.png";
+import icon9 from "../Images/stock-up-icon.png";
 
 const CondoDash = () => {
   return (
@@ -80,7 +82,7 @@ const CondoDash = () => {
           </div>
         </div>
 
-        <div className="condo-dash-financial-and-status-box">
+        <div className="condo-dash-financial-and-request-box">
           <div className="condo-dash-financial-status">
             <img src={icon4} alt="Stock Icon" />
             <p>Financial Status</p>
@@ -175,7 +177,63 @@ const CondoDash = () => {
           </div>
         </div>
 
-        <div className="condo-dash-financial-and-status-box"></div>
+        <div
+          className="condo-dash-financial-and-request-box"
+          style={{ marginBottom: "11%", marginTop: "8%" }}
+        >
+          <div className="condo-dash-maintenance">
+            <img src={icon9} alt="Stock Up Icon" />
+            <p>Maintenance Requests</p>
+          </div>
+
+          <div className="condo-dash-requests">
+            <p className="condo-dash-nb-request">Request #001</p>
+            <p
+              className="condo-dash-progress"
+              style={{
+                padding: "1% 7.5%",
+                backgroundColor: "#FFBAFF",
+                border: "1px solid #E100E1",
+              }}
+            >
+              In Progress
+            </p>
+          </div>
+
+          <div className="condo-dash-requests">
+            <p className="condo-dash-nb-request">Request #002</p>
+            <p
+              className="condo-dash-progress"
+              style={{
+                padding: "1% 7.5%",
+                backgroundColor: "#BAEB9C",
+                border: "1px solid #56E100",
+              }}
+            >
+              Completed
+            </p>
+          </div>
+
+          <div className="condo-dash-requests" style={{ borderBottom: "none" }}>
+            <p className="condo-dash-nb-request"> Request #003</p>
+            <p
+              className="condo-dash-progress"
+              style={{
+                padding: "1% 9%",
+                backgroundColor: "#838FFF",
+                border: "1px solid #0017E1",
+              }}
+            >
+              Pending
+            </p>
+          </div>
+
+          <div className="condo-dash-submit">
+            <Link to="" className="condo-dash-request-link">
+              Submit a New Request
+            </Link>
+          </div>
+        </div>
       </div>
       <br />
       <br />
