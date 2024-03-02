@@ -343,10 +343,15 @@ body {
   }
 }
 
-@media (max-width: 467px) {
-
+@media (max-width: 600px) {
   .condo-dash-phone p,
   .condo-dash-email p {
     font-size: 0.78vw;
   }
+
+  .condo-dash-financial-status p,
+  .condo-dash-maintenance p {
+    font-size: 1.04vw;
+  }
 }
+
