@@ -1,0 +1,15 @@
+pymongo
+mongoengine
+bcrypt
+Flask
+cffi
+click
+colorama
+dnspython
+importlib-metadata
+itsdangerous
+Jinja2
+MarkupSafe
+pycparser
+Werkzeug
+zipp
