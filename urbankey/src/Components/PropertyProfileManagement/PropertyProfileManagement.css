@@ -1,0 +1,353 @@
+.property-management-container {
+  font-family: Arial, sans-serif;
+  width: 100%;
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.title {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  
+}
+
+
+.category-section {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+ 
+  font-family: Arial, sans-serif;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.dropdown {
+  flex: 1;
+}
+
+.label-required {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.label-required::after {
+  content: '*';
+  color: red;
+}
+
+.input-field,
+.select-field {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.input-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 0px;
+}
+
+.input-container {
+  flex: 1;
+}
+
+.input-container.full-width {
+  flex: 0 0 100%;
+}
+
+@media (max-width: 768px) {
+  .category-section,
+  .input-row {
+    flex-direction: column;
+  }
+
+  .dropdown,
+  .input-container {
+    width: 100%;
+  }
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+
+.property-details-section {
+  flex: 1;
+  margin-right: 5px;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+
+.location-information-section {
+  width: calc(50% - 20px);
+  margin-top: 1500px;
+ 
+  margin-right: 5px;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+
+.input-container.half-width {
+  width: calc(50% - 24px);
+  display: inline-block;
+}
+.input-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.input-field,
+.select-field {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .property-details-section,
+  .location-information-section {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .input-container.half-width {
+    width: 100%;
+  }
+}
+
+.input-field {
+  box-sizing: border-box;
+  width: 100%; /* This ensures the input takes up 100% of its parent's width */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px; /* Adjust the margin to ensure it doesn't push outside of its container */
+}
+
+textarea.input-field {
+  height: 150px; /* Or any other fixed height */
+  resize: vertical; /* Allows the textarea to be resized only vertically */
+}
+
+.styled-container {
+  background-color: #fff; /* Set the background color */
+  border: 1px solid #ddd; /* Set the border color and width */
+  border-radius: 4px; /* Optional: Rounds the corners of the border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+  padding: 20px; /* Creates space between the container's border and its content */
+  margin-bottom: 30px; /* Adds space below the container */
+}
+
+.map-container {
+  width: 100%;
+  height: 400px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: #e0e0e0;
+}
+
+.file-upload-container {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.file-upload-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.file-upload-instructions {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.file-input {
+  margin-bottom: 10px;
+}
+
+.posting-photos-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* This centers the children horizontally in the container */
+  justify-content: center; 
+  background-color: #fff; /* Set the background color */
+  border: 1px solid #ddd; /* Set the border color and width */
+  border-radius: 4px; /* Rounds the corners of the border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  padding: 20px; /* Creates space between the container's border and its content */
+  margin: 20px 0; /* Adds space above and below the container */
+}
+
+
+.photo-upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #cc0000;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  width: 40%;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #ffffff;
+  padding: 10px;
+  position: relative;
+  width: 900px;
+  margin-top: 10px;
+  background-color: #f3f3f3;
+}
+
+.photo-placeholder .plus-icon {
+  font-size: 50px;
+  color: #cc0000;
+  align-self: center;
+  order: -1;
+  margin-bottom: 5px;
+}
+
+.photo-placeholder p {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+.advertise-features {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.advertise-features h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.feature-section h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.feature-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.feature-checkbox input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.submit-button {
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #cc0000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.submit-button:hover {
+  background-color: #a00000;
+}
+
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .submit-button:hover {
+    background-color: #a00000;
+  }
+}
+
+@media (max-width: 600px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+

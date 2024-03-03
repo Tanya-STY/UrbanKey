@@ -13,7 +13,7 @@ root.render(
   </Router>
   </React.StrictMode>
 );
-//ReactDOM.render(
+//ReactDOM.render
 //  <React.StrictMode>
 //    <Router>
 //      <App />
