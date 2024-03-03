@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./Components/Authentication/Login.js";
 import SignUp from "./Components/SignUp/SignUp.js";
 import Profile from "./Components/UserProfile/Profile.js";
+import CondoDash from "./Components/OwnerDashboard/OwnerDashboard.js";
 
 import Finance from "./Components/Finance/Finance.js";
 
@@ -23,12 +24,13 @@ import { AuthProvider } from "./Provider/AuthProvider.js";
 function App() {
   return (
     <div>
-    <AuthProvider>
-      <Routes>
-        <Route path="/Login" element={<Login />} />
-        <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/Profile" element={<Profile />} />
-
+      <AuthProvider>
+        <Routes>
+          <Route path="/Login" element={<Login />} />
+          <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/Profile" element={<Profile />} />
+          <Route path="/CondoOwnerDashboard" element={<CondoDash />} />
+  
         <Route path="/Finance" element={<Finance />} />
 
         <Route path="/Notifications" element={<Notifications />} />
@@ -40,7 +42,7 @@ function App() {
 
       </Routes>
       </AuthProvider>
-     </div>
+    </div>
     // <Router>
     //   <Routes>
     //     <Route path="/Login" element={<Login />} />
