@@ -28,7 +28,7 @@ import Test1 from "./TestComponents/Test1.js";
 
 
 function App(){
-    const [token, setToken] = useState("")
+    const [token, setToken] = useState("");
     const [isLogged, setLogged] = useState(false);
 
     return(

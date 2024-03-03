@@ -50,6 +50,6 @@ const useLoginOrSignUpHook = (page, userInfo) => {
         setResponseValue(1); 
     })
 
-    return { message, responseValue, token}
+    return { message, responseValue, token }
 }
 export default useLoginOrSignUpHook
