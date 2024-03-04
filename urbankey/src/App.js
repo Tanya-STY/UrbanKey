@@ -37,23 +37,15 @@ function App() {
               <Route path="/SignUp" element={<SignUp />} />
               <Route path="/Profile" element={<Profile />} />
               <Route path="/Finance" element={<Finance />} />
-
-
-
-          <Route path="/CondoOwnerDashboard" element={<CondoDash />} />
-  
-
-        <Route path="/Finance" element={<Finance />} />
-
-        <Route path="/Notifications" element={<Notifications />} />
-        <Route path="/Maintenance" element={<Maintenance />} />
-        <Route path="/ReservationSuccess" element={<ReservationSuccess />} />
-        <Route path="/PaymentHistory" element={<PaymentHistory />} />
-        <Route path="/RegistrationKey" element={<RegistrationKey />} />
-        <Route path="/Home" element={<Home />} /> 
-
-      </Routes>
-
+              <Route path="/CondoOwnerDashboard" element={<CondoDash />} />
+              <Route path="/Finance" element={<Finance />} />
+              <Route path="/Notifications" element={<Notifications />} />
+              <Route path="/Maintenance" element={<Maintenance />} />
+              <Route path="/ReservationSuccess" element={<ReservationSuccess />} />
+              <Route path="/PaymentHistory" element={<PaymentHistory />} />
+              <Route path="/RegistrationKey" element={<RegistrationKey />} />
+              <Route path="/Home" element={<Home />} /> 
+            </Routes>
       </AuthProvider>
     </div>)
 }
