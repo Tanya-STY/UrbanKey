@@ -42,15 +42,7 @@ function App() {
 
       </Routes>
       </AuthProvider>
-    </div>
-    // <Router>
-    //   <Routes>
-    //     <Route path="/Login" element={<Login />} />
-    //     <Route path="/SignUp" element={<SignUp />} />
-    //     <Route path="/Profile" element={<Profile />} />
-    //   </Routes>
-    // </Router>
-//   );
-// }
+    </div>)
+}
 
 export default App;
