@@ -91,19 +91,6 @@ def token_required(f):
     
     return decorator
 
-@app.route("/TestinguseVerifTokenHook", methods=['POST'])
-def test1():
-    try: 
-        data = request.get_json()
-        print(data)
-        return jsonify({
-            "message": "test1 inside try"
-        }), 200
-    except Exception as e:
-        print(e)
-        return jsonify(e, {'error': 'Internal server error'}), 500
-    
-
 
 @app.route("/Login", methods=['POST'])
 def login():
@@ -114,27 +101,80 @@ def login():
         password = data['password']
         print(email)
         print(password)
-        #replace with database finding of user
+        
+        checkValue = userObject.validateUser(email, password)
+        print(checkValue)
+        print('checkValue above')
+        if(checkValue == 1):
+            
+            newToken = tokenObject.create_token(email)
 
-
-
-
-
-
-
-
-
-        if (email == 'example@gmail.com'):
-            if (password == 'password123'):
-                return jsonify({'receivedToken':'123123'}), 200
-            else:
-                return jsonify({'wrong': 'wrong'}), 200
+            print('newToken: ' + newToken)
+            return jsonify({
+                'receivedToken':newToken
+            }), 200
+        elif (checkValue == 2):
+            return jsonify({
+                'wrong':'wrong'
+            }), 403
         else:
-            return jsonify({'wrong': 'wrong'}), 200
+            return jsonify({
+                'wrong':'wrong'
+            }), 403
     
     except Exception as e: 
         print(e)
         return jsonify({'error': 'Internal server error'}), 500
+    
+
+@app.route('/SignUp', methods=['POST'])
+def signup():
+    try: 
+        data = request.get_json()
+        print(data)
+        email = data['email']
+        password = data['password']
+        name = data['fullName']
+        print(email)
+        print(password)
+
+        checkUserExistence = userObject.userExistence(email)
+
+        if (checkUserExistence == 2 ):
+            print('email already exists in signup')
+            return jsonify({
+                'istaken':'taken'
+            }), 401
+        else:
+            confirmation = userObject.addUser(name, email, password)
+            if( confirmation == 1 ):
+                newToken = tokenObject.create_token(email)
+                return jsonify({
+                    'token': newToken
+                }), 200
+            elif (confirmation == 2 ):
+                return jsonify({
+                    'error':'error'
+                }), 403
+            
+    except Exception as e:
+         return jsonify({
+                    'error':'error'
+                }), 403
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 @app.route('/testToken', methods=['POST'])
 def testToken():
@@ -179,20 +219,14 @@ def test_required_token():
         print("exception catches inside testWraps route")
         return jsonify({'message': 'exception catched inside testWraps route'}), 500
 
-@app.route('/checkToken', methods=['POST'])
-def checkToken():
-    try: 
-        data = request.get_json()
-        print(data)
-        token = data['token']
-        print(token)
-        if(token == '123123'):
-            return jsonify({'message' : 'passed'}), 200
-        else:
-            return jsonify({'message' : 'failed'}), 401
 
-    except Exception as e:
-        return jsonify('failed'), 500
+@app.route('/checkToken', methods=['POST'])
+@token_required
+def checkToken():
+    return jsonify({
+        'message' : 'passed'
+    })
+    
         
 
 #structure

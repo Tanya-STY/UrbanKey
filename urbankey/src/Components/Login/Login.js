@@ -76,7 +76,7 @@ const Login = () => {
       }
   })
   .catch(err => {
-      console.log(err.name);
+      console.log(err);
       console.log('catched error from backend');
       alert("backend is not setup to receive, please contact the dev team")
   })   

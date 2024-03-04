@@ -15,7 +15,10 @@ const useVerifTokenHook = (url, token) => {
         //should be backend data
         fetch(url, {
             method: 'POST',
-            headers: { "content-Type" : "application/json" },
+            headers: { 
+                "content-Type" : "application/json",
+                'token':token
+             },
             body: JSON.stringify({token: token})
         })
         .then(res => {

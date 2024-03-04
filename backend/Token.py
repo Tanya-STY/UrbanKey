@@ -9,15 +9,16 @@ secretKey= '0622d0d552f33f6309180901'
 
 class Token:
     def __init__(self):
+        
         pass
 
-    def create_token(self, email, password, name):
+    def create_token(self, email):
 
         # probably should add info of the user to see permission
         # permission info like type of user etc
 
         token = jwt.encode({
-            'user':name,
+            'user':email,
             'expiration': str(datetime.utcnow() + timedelta(minutes=30))
         },
         secretKey)
