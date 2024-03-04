@@ -9,6 +9,11 @@ import CondoDash from "./Components/OwnerDashboard/OwnerDashboard.js";
 
 import Finance from "./Components/Finance/Finance.js";
 
+import NavBar_HomePage from "./Components/NavBar/NavBar_HomePage";
+import NavBar_Company from "./Components/NavBar/NavBar_Company.js";
+import NavBar_User from "./Components/NavBar/NavBar_User.js";
+
+
 
 import Notifications from "./Components/Popups/Notifications.js";
 import Maintenance from "./Components/Popups/MaintenanceRequest.js";
@@ -19,18 +24,26 @@ import PaymentHistory from "./Components/Popups/PaymentHistory.js";
 import RegistrationKey from "./Components/RegistrationKey/RegistrationKey.js";
 import Home from "./Components/Home/Home.js";
 
+
 import { AuthProvider } from "./Provider/AuthProvider.js";
 
 function App() {
   return (
     <div>
       <AuthProvider>
-        <Routes>
-          <Route path="/Login" element={<Login />} />
-          <Route path="/SignUp" element={<SignUp />} />
-          <Route path="/Profile" element={<Profile />} />
+        
+          <NavBar_HomePage />
+            <Routes>
+              <Route path="/Login" element={<Login />} />
+              <Route path="/SignUp" element={<SignUp />} />
+              <Route path="/Profile" element={<Profile />} />
+              <Route path="/Finance" element={<Finance />} />
+
+
+
           <Route path="/CondoOwnerDashboard" element={<CondoDash />} />
   
+
         <Route path="/Finance" element={<Finance />} />
 
         <Route path="/Notifications" element={<Notifications />} />
@@ -41,6 +54,7 @@ function App() {
         <Route path="/Home" element={<Home />} /> 
 
       </Routes>
+
       </AuthProvider>
     </div>
     // <Router>
