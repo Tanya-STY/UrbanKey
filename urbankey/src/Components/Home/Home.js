@@ -19,23 +19,10 @@ const Home = ({token, isLogged, setLogged}) => {
 
     //declare the variables
     const [search, setSearch] = useState('');
-    console.log(isLogged);
-    
-    useEffect(()=>{
-        if(isLogged === false){
-            navigate('/');
-        }
-
-    }, [isLogged])
-
-    const logoutNew = () => {
-        localStorage.removeItem("token");
-        setLogged(false)
-    }
+   
     return (
         <div>
             <div className='header'></div>
-            <div><button onClick={logoutNew}>Log Out</button></div>
             <div className='houseSlogan'>
                 Your dream house is here.
             </div>

@@ -24,16 +24,18 @@ import PaymentHistory from "./Components/Popups/PaymentHistory.js";
 import RegistrationKey from "./Components/RegistrationKey/RegistrationKey.js";
 import Home from "./Components/Home/Home.js";
 
-import { AuthProvider } from "./Provider/AuthProvider.js";
+import { AuthProvider, useAuth } from "./Provider/AuthProvider.js";
 
 function App() {
+//bring the variables using the context
+
   return (
     <div>
       <AuthProvider>
         
           <NavBar_HomePage />
             <Routes>
-              <Route path="/Login" element={<Login />} />
+              <Route path="/Login" element={<Login/>}/>
               <Route path="/SignUp" element={<SignUp />} />
               <Route path="/Profile" element={<Profile />} />
               <Route path="/Finance" element={<Finance />} />

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
-import { AuthProvider } from '../../Provider/AuthProvider';
+import { AuthProvider, useAuth } from '../../Provider/AuthProvider';
 import App from '../../App';
 
 //importing css
@@ -14,102 +14,76 @@ import './Login.css';
 
 //importing needed documents
 import condoimage from '../Images/Condo.jpg';
-
-//importing hooks necessary
-import useLocalStorageTokenCheckHook from '../../CustomHooks/useLocalStorageTokenCheckHook';
+import useVerifTokenHook from '../../CustomHooks/useVerifTokenHook';
 
 
-const Login = ({setToken, setLogged}) => {
+const Login = () => {
   const navigate = useNavigate();
-  const {passed, token} = useLocalStorageTokenCheckHook("http://127.0.0.1:5000/LocalStorageCheck"); 
-  if(passed){
-    console.log("passed with token" + token);
-    setToken(token);
-    setLogged(true);
+  const { token, setToken, setTokenInStorage, removeTokenFromStorage} = useAuth();
+
+  
+  const tokenCheck = useVerifTokenHook('http://127.0.0.1:5000/checkToken', token);
+  console.log(tokenCheck + ' inside login');
+  if (tokenCheck == 'passed'){
+    console.log('succesfuly passed the login with stored token');
     navigate('/Home');
   }
-  //setting the naviguate hook
-  
-
-  
+  else{
+    console.log('skip login failed need to login to obtain a new token');
+  }
   //setting up the dynamic variables
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [pending, setPending] = useState(false);
-  const [connected, setConnected] = useState(true);
 
   //setting up the function handleLogin
   const handleLogin = () => {
-  
-    
 
-    //rendering the loggin you in ...
-    setPending(true);
-    
-    //creating sending body
-    const sendBody = {
-      email: email,
-      password: password
-  };
+  //create one object for the data
+  const userInfo = {
+    email: email,
+    password: password
+  }
 
-  fetch('http://127.0.0.1:5000/Login', {
-      method: 'POST', 
-      headers: { "Content-Type" : 'application/json'},
-      body: JSON.stringify(sendBody)
+  //set url for the sending
+  //this will allow us to use the same hook for sign up or login
+  const url = 'http://127.0.0.1:5000/Login';
+
+  fetch(url, {
+      method: 'POST',
+      headers: {'content-Type' : 'application/json' },
+      body: JSON.stringify(userInfo)
   })
   .then(res => {
-      if (!res.ok){
-          throw Error('could not fetch data from url')
+      if(!res.ok){
+          throw Error('could not fetch data from url'); 
       }
       return res.json();
   })
   .then(data => {
-      if (data.message === 'wrong'){
-          console.log("wrong credentials, try again");
-          setPending(false);
-          console.log(data); 
-          alert("Wrong credentials, try again")
-          setPending(false);
+    console.log(data);
+      if ('error' in data){
+          console.log('error in the backend, return to initial page');
+          alert('Error inside the backend please try again later');
       }
-      else if (data.message === 'good'){
-          console.log('good credentials');
-          console.log(data);
-          setToken(data.token); 
-          setPending(false);
-          console.log("correct credentials, loggin in");
-          console.log("component received: " + data.token);
-          localStorage.setItem('token', data.token);
+      else if ('wrong' in data){
+        alert("wrong credentials login unsucessful, please try again");
+      }
+      else{
+          console.log(data.receivedToken);
+          setToken(data.receivedToken);
+          setTokenInStorage(data.receivedToken);
           navigate('/Home');
       }
   })
   .catch(err => {
-    //catches errors from switching pages too fast and the component unmounting from the DOM
-    //but the custom hook useVerifTokenHook still is waiting for the fetch
-    //which creates a massive error
-    if (err.name === 'AbortError') {
-        console.log('fetch aborted explicitely');
-    }
-    else {
-        //catches errors sent from the backend
-        console.log(err); 
-        console.log("Catched error from backend with useVerifTokenHook");  
-        setConnected(false); 
-    }
-})
-
-
-    //setting a timer just to show off
-  }
-  
-
+      console.log(err.name);
+      console.log('catched error from backend');
+      alert("backend is not setup to receive, please contact the dev team")
+  })   
+}
   return (
     <div className="body-attributes">
       <div className="login-container">
-        {connected && (
-        <>
-        {pending && <div>Verifying credentials...</div>}
-        {!pending && (
-        <> 
         <div className="image-container">
             <img src= {condoimage} alt= "Condo Image"/>
           </div>
@@ -127,16 +101,7 @@ const Login = ({setToken, setLogged}) => {
             <div className="signup-link">
             Still not a member? <Link to="/SignUp">Sign Up Now!</Link>
             </div>
-          </div>
-        </>
-        )}
-        </>
-        )}
-        {!connected && <div>FATAL ERROR: BACKEND NOT WORKING PROPERLY</div>}
-        
-        
-         
-          
+          </div>  
       </div>
     </div>
   );

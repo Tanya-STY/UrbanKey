@@ -24,5 +24,3 @@ class Token:
 
         print('token from inside create_token: ' + token)
         return token
-
-        pass

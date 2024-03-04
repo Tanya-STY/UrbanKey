@@ -1,21 +1,39 @@
 #import dependencies
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from Token import Token
 import jwt
 from functools import wraps
+from flask_bcrypt import Bcrypt
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
 
+#import functionality classes
+from UserClass import UserC
+from Token import Token
 
 #create flask project
 app = Flask(__name__)
 
 #set up the CORS
 CORS(app, origins='http://localhost:3000', methods=['GET', 'POST', 'OPTIONS'])
+
+#setting up the bcrypt
+bcrypt = Bcrypt(app)
+
+#setting up the database
+uri = "mongodb+srv://admin:urbankey1234@urbankey.nfdot4b.mongodb.net/?retryWrites=true&w=majority&appName=UrbanKey"
+client = MongoClient(uri, server_api=ServerApi('1'))
+
+db = client.get_database('UrbanKey')
+users = db.get_collection('Users')
+
+
 # secret Key 
 app.config['SECRET_KEY'] = '0622d0d552f33f6309180901'
 
 #creating our functional objects
 tokenObject = Token()
+userObject = UserC(users, bcrypt)
 
 #@wraps decorater for required token implementation here
 #this wrapper will validate the token and return exceptions if needed
@@ -86,27 +104,9 @@ def test1():
         return jsonify(e, {'error': 'Internal server error'}), 500
     
 
-@app.route("/LocalStorageCheck", methods=['POST'])
-def check_token():
-    #test for token 123123
-    try:
-        data = request.get_json()
-        print(data); 
-        #to put a jwt verification in the futur
-        if data == "123123":
-            return jsonify({'message': 'good'}), 200
-        else:
-            return jsonify({'message': 'bad'}), 200
-    
-    except Exception as e:
-        print(e)
-        return jsonify(e, {'error': 'Internal server error'}), 500
-    
 
 @app.route("/Login", methods=['POST'])
 def login():
-    #test for login
-    #create a token
     try:
         data = request.get_json()
         print(data);
@@ -114,17 +114,27 @@ def login():
         password = data['password']
         print(email)
         print(password)
+        #replace with database finding of user
+
+
+
+
+
+
+
+
+
         if (email == 'example@gmail.com'):
             if (password == 'password123'):
-                return jsonify({'message':'good', 'token':'123123'}), 200
+                return jsonify({'receivedToken':'123123'}), 200
             else:
-                return jsonify({'message': 'wrong'}), 200
+                return jsonify({'wrong': 'wrong'}), 200
         else:
-            return jsonify({'message': 'wrong'}), 200
+            return jsonify({'wrong': 'wrong'}), 200
     
     except Exception as e: 
         print(e)
-        return jsonify(e, {'error': 'Internal server error'}), 500
+        return jsonify({'error': 'Internal server error'}), 500
     
 @app.route('/testToken', methods=['POST'])
 def testToken():
@@ -169,8 +179,20 @@ def test_required_token():
         print("exception catches inside testWraps route")
         return jsonify({'message': 'exception catched inside testWraps route'}), 500
 
+@app.route('/checkToken', methods=['POST'])
+def checkToken():
+    try: 
+        data = request.get_json()
+        print(data)
+        token = data['token']
+        print(token)
+        if(token == '123123'):
+            return jsonify({'message' : 'passed'}), 200
+        else:
+            return jsonify({'message' : 'failed'}), 401
 
-
+    except Exception as e:
+        return jsonify('failed'), 500
         
 
 #structure
@@ -184,6 +206,11 @@ def test_required_token():
 if __name__ == "__main__":
     app.run(debug=True)
 
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
 
 
 
