@@ -1,37 +1,41 @@
-// import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 
-// const AuthContext = createContext({});
+const AuthContext = createContext({});
 
-// export const AuthProvider = ({ children }) => {
-//   const [token, setToken] = useState('');
-//   const [isLoggedIn, setisLoggedIn] = useState(null);
-//   const [storedToken, setStoredToken] = useState(null);
+export const AuthProvider = ({ children }) => {
+  const [token, setToken] = useState('');
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('Current token:', token);
+  }, [token]); // This useEffect will run only when token changes
+
+  const setTokenInStorage = (token) => {
+    localStorage.setItem('token', token);
+    setToken(token);
+    console.log('Token set:', token);
+  };
+
+  const removeTokenFromStorage = () => {
+    setToken(null);
+    localStorage.removeItem('token');
+  };
 
 
+  return (
+    <AuthContext.Provider value={{ token, setTokenInStorage, removeTokenFromStorage}}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
-//   useEffect(() => {
-//     if (storedToken) {
-//       setToken(storedToken);
-//     }
-//   }, []);
-
-//   useEffect(() => {
-//     console.log('Current token:', token);
-//   }, [token]); // This useEffect will run only when token changes
-
-//   const login = (token) => {
-//     localStorage.setItem('token', token);
-//     setToken(token);
-//     console.log('Token set:', token);
-//   };
-
-
-//   return (
-//     <AuthContext.Provider value={{ token, isLoggedIn}}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
+export const useAuth = () => useContext(AuthContext);
 
 
