@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
+const AuthContext = createContext({});
 
+export const AuthProvider = ({ children }) => {
+  const [token, setToken] = useState('');
+ const storedToken = localStorage.getItem('token');
   useEffect(() => {
-    const storedToken = localStorage.getItem('token');
     if (storedToken) {
       setToken(storedToken);
     }
@@ -16,26 +16,25 @@ const AuthProvider = ({ children }) => {
     console.log('Current token:', token);
   }, [token]); // This useEffect will run only when token changes
 
-  const login = (token) => {
+  const setTokenInStorage = (token) => {
     localStorage.setItem('token', token);
     setToken(token);
     console.log('Token set:', token);
   };
 
-  const logout = () => {
-    localStorage.removeItem('token');
+  const removeTokenFromStorage = () => {
     setToken(null);
+    localStorage.removeItem('token');
   };
 
 
-
   return (
-    <AuthContext.Provider value={{ token, login, logout }}>
+    <AuthContext.Provider value={{ token, setToken, setTokenInStorage, removeTokenFromStorage}}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-const useAuth = () => useContext(AuthContext);
+export const useAuth = () => useContext(AuthContext);
 
-export { AuthProvider, useAuth, AuthContext };
+

@@ -5,11 +5,10 @@ import urbankeyLogo from '../Images/urbankey_logo.png';
 import { FaLocationDot, FaHouseCircleCheck, FaMedal, FaPenRuler } from "react-icons/fa6";
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
-import { useAuth } from "../../Provider/AuthProvider.js";
-
+import { useAuth } from '../../Provider/AuthProvider';
 
 const SignUp = () => {
-    const { login } = useAuth();
+    const { setToken, setTokenInStorage} = useAuth();
     const [activeButton, setActiveButton] = useState('Individual');
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
@@ -27,6 +26,11 @@ const SignUp = () => {
     };
 
     const handleSubmit = async(e) => {
+        const userInfo = {
+            fullName: fullName,
+            email: email,
+            password: password,
+        }
         e.preventDefault();
         setEmailError('');
         setPasswordError('');
@@ -45,26 +49,43 @@ const SignUp = () => {
             alert('Please agree to the Membership Terms.');
             return;
         }
-        try {
-          const response = await axios.post('http://localhost:5000/SignUp', {
-              fullName: fullName,
-              email: email,
-              password: password
-          });
-          const { token } = response.data;
-          login(token);
-          console.log(response);
-          navigate("/Login");
-  
-      } catch (error) {
-          console.log(error, 'error');
-          if (error.response && error.response.status === 401) {
-              alert("Invalid credentials");
-          }
-          if (error.response && error.response.status === 400) {
-              alert("Email already exists.");
-          }
-      }
+        
+        fetch('http://127.0.0.1:5000/SignUp', {
+            method: 'POST',
+            headers: { 
+                "content-Type" : "application/json",
+             },
+            body: JSON.stringify(userInfo)
+        })
+        .then(res => {
+            if(!res.ok){
+                throw Error('could not fetch data from url'); 
+            }
+            return res.json();
+        })
+        .then(response => {
+            if ('taken' in response){
+                console.log("email already taken"); 
+                alert("email already taken, please try new email");
+              }
+              else if ('error' in response){
+                console.log("email already taken"); 
+                alert("error from backend. plase contact dev team");
+              }
+              else{
+                const { recToken } = response.token;
+                console.log(response + 'this is the response');
+                console.log(recToken + 'this is the recToken');
+                setToken(recToken);
+                setTokenInStorage(recToken);
+                navigate("/Login");
+              }
+            
+        })
+        .catch(err => {
+            console.log(err);
+            
+        })
 
         // Handle form submission, e.g., send data to server
         console.log('Form submitted:', { fullName, email, password, passwordConfirm });
