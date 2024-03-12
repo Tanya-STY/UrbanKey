@@ -1,0 +1,192 @@
+.title-rectangular {
+    width: 100%;
+    height: 100px;
+    /* background-color: rgb(174, 220, 174); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+  }
+  
+  .reservation-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 50px;
+  }
+  
+
+  
+/* ----LEFT DIV RESERVATION SECLECTION --------------- */
+.reservation-selection{
+  flex: 1;
+  padding: 20px;
+  height: 600px;
+  background-color: rgb(127, 187, 207);
+  border-radius: 15px;
+  margin-right: 25px;
+
+  /* background-color: rgb(199, 174, 220); */
+}
+
+.title-selection{
+    margin: 30px;
+}
+
+.selection-row1 {
+    text-align: center;
+}
+
+.selection-row2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.dropdown {
+    position: relative;
+    text-align: center;
+  }
+  
+  .dropdown-header {
+    padding: 12px 180px;
+    border: 1px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: larger;
+    text-align: center;
+    background-color: white;
+
+  }
+  
+  .dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 4px;
+    padding: 0;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: larger;
+    text-align: center;
+
+  }
+  
+  .dropdown-list li {
+    padding: 8px 16px;
+    border-radius: 15px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .dropdown-list li:hover {
+    background-color: rgb(30, 153, 194);  
+}
+  
+  .selection-row3{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px; /* Adjust the gap between grid items */
+
+  }
+  
+  .time-slot {
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px;
+    background-color: rgb(189, 228, 241);
+    border: solid black;
+    border-radius: 15px;
+  }
+  
+  .time-slot.selected {
+    background-color: rgb(116, 221, 116);
+  }
+  
+
+
+/* ----RIGHT DIV CALENDAR/DATE SECLECTION --------------- */
+.reservation-calendar {
+  flex: 1;
+  padding: 20px;
+  height: 600px;
+  background-color: rgb(127, 187, 207);
+  border-radius: 15px;
+  margin-left: 25px;
+}
+
+.title-calendar {
+    margin: 30px;
+}
+
+.calendar-row1 {
+    text-align: center;
+}
+  
+.calendar-row2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* background-color: rgb(114, 193, 220); */
+}
+
+.calendarPick{
+    background-color: rgb(127, 187, 207);
+    border-radius: 15px;
+    padding: 10px;
+}
+  
+
+/* ----SUBMIT BUTTON --------------- */
+
+
+.submit-rectangular {
+    width: 100%;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+.error-message {
+    color: red;
+  }
+  
+  .submit-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  
+  

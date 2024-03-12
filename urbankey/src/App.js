@@ -9,7 +9,13 @@ import ReservationSuccess from "./Components/Popups/ReservationSuccess";
 import PropertyProfileManagement from "./Components/PropertyProfileManagement/PropertyProfileManagement"; 
 import Employee from "./Components/Employees/Employee.js";
 import FinanceDashboard from "./Components/FinanceDashboard/Finance";
-
+import CondoOwnerDashboard from "./Components/CondoOwnerDashboard/OwnerDashboard";
+import SignUp from "./Components/SignUp/SignUp";
+import Login from "./Components/LogIn/Login";
+import HomePage from "./Components/HomePage/Home";
+import RegistrationKey from "./Components/RegistrationKey/RegistrationKey";
+import Profile from "./Components/ProfilePage/Profile";
+import Reservation from "./Components/Reservation/Reservation";
 
 import { AuthProvider } from "./Provider/AuthProvider.js";
 
@@ -25,6 +31,16 @@ function App() {
         <Route path="/PropertyProfileManagement" element={<PropertyProfileManagement />} />
         <Route path="/Employee" element={<Employee />} />
         <Route path="/FinanceDashboard" element={<FinanceDashboard />} />
+        <Route path="/CondoOwnerDashboard" element={<CondoOwnerDashboard />} />
+        <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/HomePage" element={<HomePage />} />
+        <Route path="/RegistrationKey" element={<RegistrationKey />} />
+        <Route path="/Profile" element={<Profile />} />
+        <Route path="/Reservation" element={<Reservation />} />
+
+
+
 
 
       </Routes>
