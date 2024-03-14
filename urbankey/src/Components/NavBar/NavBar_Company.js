@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../Images/urbankey_logo.png';
 import './NavBar.css';
+import '@fortawesome/fontawesome-free/css/all.css';
+
 
 const NavBar_Company = () => {
   const [showOptions, setShowOptions] = useState(false);

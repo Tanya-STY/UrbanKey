@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import logo from '../Images/urbankey_logo.png';
 import './NavBar.css';
+import '@fortawesome/fontawesome-free/css/all.css';
 
 const NavBar_User = () => {
   const [showOptions, setShowOptions] = useState(false);
@@ -31,6 +32,9 @@ const NavBar_User = () => {
           </li>
           <li>
             <NavLink to="/Dashboard" activeClassName="active" className="nav-link">Dashboard</NavLink>
+          </li>
+          <li>
+            <NavLink to="/Reservation" activeClassName="active" className="nav-link">Reservation</NavLink>
           </li>
         </ul>
       </div>

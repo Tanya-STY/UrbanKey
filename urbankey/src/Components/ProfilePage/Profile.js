@@ -8,6 +8,7 @@ import {CFormSwitch} from "@coreui/react";
 import '@coreui/coreui/dist/css/coreui.min.css';
 import "@fontsource/roboto/400.css"; // Specify weight
 import axios from 'axios'; // Import axios here
+import { useAuth } from '../../Provider/AuthProvider';
 
 
 const Profile = () => {
