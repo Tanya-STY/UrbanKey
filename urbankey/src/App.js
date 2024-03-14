@@ -16,7 +16,9 @@ import HomePage from "./Components/HomePage/Home";
 import RegistrationKey from "./Components/RegistrationKey/RegistrationKey";
 import Profile from "./Components/ProfilePage/Profile";
 import Reservation from "./Components/Reservation/Reservation";
-
+import NavBar_HomePage from "./Components/NavBar/NavBar_HomePage.js"
+import NavBar_Company from "./Components/NavBar/NavBar_Company.js"
+import NavBar_User from "./Components/NavBar/NavBar_User.js"
 import { AuthProvider } from "./Provider/AuthProvider.js";
 
 function App() {
