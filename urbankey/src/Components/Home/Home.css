@@ -2,19 +2,32 @@ body{
     background-color: rgb(237, 236, 236);
 }
 
+.picture_search{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}
+
 .houseSlogan{
-    text-align: center;
     font-family: 'Roboto', sans-serif;
     font-size: 64px;
-    margin-top: 70px;
-    margin-bottom: 85px;
     color: rgba(255, 255, 255, 1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .searchArea {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 14px;
+    width: 200%; 
+    position: relative; 
+    transform: translateX(-50%); 
+    left: 50%;
 }
 
 .inputSearch {
@@ -60,7 +73,7 @@ body{
     margin: 10px; 
     background-color:rgba(255, 255, 255, 1); 
 }
-
+/*
 .wideBox {
     height: 320px;
     margin-top: 20px;
@@ -68,6 +81,27 @@ body{
     margin-right: 40px;
     background-color:rgba(255, 255, 255, 1); 
     border: 1px solid rgba(0, 0, 0, 0.1); 
+} */
+
+.wideBox {
+    display: flex;
+    align-items: center;
+    height: 320px;
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    background-color: rgba(255, 255, 255, 1); 
+    border: 1px solid rgba(0, 0, 0, 0.1); 
+}
+.homeContent {
+    flex: 1;
+    padding: 20px;
+}
+
+.home_image {
+    height: 100%; /* Cover entire height */
+    width: auto; /* Maintain aspect ratio */
+    margin-left: auto; /* Right-align */
 }
 
 .homeMapButton {
