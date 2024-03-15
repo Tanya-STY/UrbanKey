@@ -5,6 +5,7 @@ import urbanKeyLogo from '../Images/urbankey_logo.png';
 import home_search_background from '../Images/home_search_background.jpg';
 import home_phone from '../Images/home_phone.jpg';
 import home_building from '../Images/home_building.png';
+import home_building2 from '../Images/home_building2.png';
 import home_building3 from '../Images/home_building3.png';
 
 const Home = () => {
@@ -69,29 +70,31 @@ const Home = () => {
                     <div className='homeContent'>
                         <br/>
                         <p className='homeSubHeading'>ProManage Property</p>
-                        <p className='homeBody'>The privileged location in Centre-ville region in the south of Montreal city.<br/>The Property is close to many hotels, hospitals and commercial centers...</p>
+                        <p className='homeBody'>The privileged location in Centre-ville region in the south of Montreal city. <br/> The Property is close to many hotels, hospitals and commercial centers...</p>
                         <button type="button" className='homeViewPropertyButton'>View Property</button>
+                        <br/>
                     </div>
                     <img src={home_building} alt="building" className='home_image' />
                 </div>
-                
+                <br/>
                 <div className="container">
-                    <div className="box">
-                        <br/>
-                        <p className='homeSubHeading'>Prime Property Management</p>
-                        <p className='homeBody'>The privileged location in Centrle-ville region in the west of Montreal city.<br/>The project is close to many hotels, hospitals and commercial centers...</p>
-                        <button type="button" className='homeViewPropertyButton'>View Property</button>
-                    </div>
-                    <div className="box">
+                    <div className="mediumBox">
                         <div className='homeContent'>
-                        <p className='homeSubHeading'>MasterKey Property</p>
-                        <p className='homeBody'>The privileged location in Centrle-ville region in the west of Montreal city.<br/>The project is close to many hotels, hospitals and commercial centers...</p>
-                        <button type="button" className='homeViewPropertyButton'>View Property</button>
-                        <br/>
+                            <p className='homeSubHeading'>Prime Property Management</p>
+                            <p className='homeBody'>The privileged location in Centre-ville region in the west of Montreal city. The project is close to many hotels, hospitals and commercial centers...</p>
+                            <button type="button" className='homeViewPropertyButton'>View Property</button>
+                            <br/>
                         </div>
                         <img src={home_building3} alt="building3" className='home_image' />
-                        
-
+                    </div>
+                    <div className="mediumBox">
+                        <div className='homeContent'>
+                            <p className='homeSubHeading'>MasterKey Property</p>
+                            <p className='homeBody'>The privileged location in Centre-ville region in the west of Montreal city. The project is close to many hotels, hospitals and commercial centers...</p>
+                            <button type="button" className='homeViewPropertyButton'>View Property</button>
+                            <br/>
+                        </div>
+                        <img src={home_building2} alt="building2" className='home_image' />
                     </div>
                 </div>
             </div>

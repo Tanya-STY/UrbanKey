@@ -65,23 +65,26 @@ body{
 .container {
     display: flex;
 }
-  
+
 .box {
-    flex: 1; /* Distribute available space equally */
+    flex: 1; 
     height: 320px; 
     border: 1px solid rgba(0, 0, 0, 0.1); 
     margin: 10px; 
     background-color:rgba(255, 255, 255, 1); 
 }
-/*
-.wideBox {
-    height: 320px;
-    margin-top: 20px;
-    margin-left: 40px;
-    margin-right: 40px;
-    background-color:rgba(255, 255, 255, 1); 
-    border: 1px solid rgba(0, 0, 0, 0.1); 
-} */
+
+.mediumBox {
+    display: grid;
+    grid-template-columns: 1fr auto; /* One column for content, one for image */
+    gap: 20px; /* Adjust spacing */
+    height: 400px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 1);
+    overflow: hidden; /* Ensure content does not overflow */
+    position: relative;
+}
 
 .wideBox {
     display: flex;
@@ -93,16 +96,20 @@ body{
     background-color: rgba(255, 255, 255, 1); 
     border: 1px solid rgba(0, 0, 0, 0.1); 
 }
+
 .homeContent {
     flex: 1;
     padding: 20px;
+    position: relative;
 }
 
 .home_image {
-    height: 100%; /* Cover entire height */
-    width: auto; /* Maintain aspect ratio */
+    max-height: 100%; /* Ensure image doesn't exceed container height */
+    max-width: 100%; /* Set maximum width to make it smaller */
+    object-fit: contain; /* Maintain aspect ratio */
     margin-left: auto; /* Right-align */
 }
+
 
 .homeMapButton {
     width: 175px;
@@ -132,7 +139,7 @@ body{
     background-color: rgba(255, 255, 255, 1);
     color: rgba(224, 40, 40, 1);
     margin-left: 20px;
-    margin-top: 150px;
+    margin-top: 20px;
 }
 
 .homeViewPropertyButton:hover {
