@@ -5,11 +5,11 @@ import urbankeyLogo from '../Images/urbankey_logo.png';
 import { FaLocationDot, FaHouseCircleCheck, FaMedal, FaPenRuler } from "react-icons/fa6";
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
-import { useAuth } from "../../Provider/AuthProvider.js";
+import useAuth from '../../CustomeHooks/useAuth.js';
 
 
 const SignUp = () => {
-    const { login } = useAuth();
+    const { setAuth } = useAuth();
     const [activeButton, setActiveButton] = useState('Individual');
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
@@ -46,16 +46,19 @@ const SignUp = () => {
             return;
         }
         try {
-          const response = await axios.post('http://localhost:5000/SignUp', {
-              fullName: fullName,
-              email: email,
-              password: password
-          });
-          const { token } = response.data;
-          login(token);
-          console.log(response);
-          navigate("/Login");
-  
+            const response = await axios.post('http://localhost:5000/SignUp', {
+                fullName: fullName,
+                email: email,
+                password: password
+            }, {
+              headers: { 'Content-Type': 'application/json'},
+              withCredentials: true
+            });
+            const token = response?.data?.token;
+            const role = response?.data?.role;
+            setAuth({ role, email, password, token });
+            console.log(response.data);
+            navigate("/Profile");
       } catch (error) {
           console.log(error, 'error');
           if (error.response && error.response.status === 401) {

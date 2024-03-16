@@ -8,12 +8,12 @@ import {CFormSwitch} from "@coreui/react";
 import '@coreui/coreui/dist/css/coreui.min.css';
 import "@fontsource/roboto/400.css"; // Specify weight
 import axios from 'axios'; // Import axios here
-import { useAuth } from '../../Provider/AuthProvider';
+import useAuth from '../../CustomeHooks/useAuth';
 
 
 const Profile = () => {
 
-    const { token } = useAuth();
+    const { auth } = useAuth();
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -28,10 +28,13 @@ const Profile = () => {
 
     const fetchUserData = async () => {
         try {
+            const token = auth?.token; 
             const response = await axios.get("http://localhost:5000/Profile", {
-                headers: {
-                    Authorization: `${token}`
-                }
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                withCredentials: true
         });
         const userData = response.data;
         setName(userData.name);
@@ -50,45 +53,11 @@ const Profile = () => {
         navigate('/Login');
         }
     };
-    //console.log(token);
-    if (token) {
-        fetchUserData();
-
-    } else {
-        navigate('/Login');
-        console.log('im being run');
-    }
-//    }, [token, navigate]);
-
-//    if()
 
 
-
-//const fetchUserData = async () => {
-//    try {
-//        const response = await axios.get("http://localhost:5000/Profile", {
-//            headers: {
-//          Authorization: `${token}`
-//        }
-//        });
-//        const userData = response.data;
-//        setName(userData.name);
-//        setEmail(userData.email);
-//        setProvince(userData.province);
-//        setCity(userData.city);
-//        setNum(userData.num);
-//        setNum2(userData.num2);
-//        setKey(userData.key);
-//        setAddress(userData.address);
-//        setSelectedFile(userData.selectedFile);
-//    } catch (error) {
-//        console.log(error);
-//    }
-//}
-
-//useEffect(() => {
-//    fetchUserData();
-//}, []);
+useEffect(() => {
+   fetchUserData();
+}, []);
 
 const handlesubmit = async (e) => {
 e.preventDefault();
@@ -105,9 +74,11 @@ try {
         address,
         selectedFile
     }, {
-      headers: {
-      Authorization: `${token}`
-    }
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        withCredentials: true
     });
     console.log("Profile updated successfully");
 }
@@ -207,7 +178,7 @@ catch (error) {
             </form>
 
             <div className="notification">
-                <text className="notifText" >I want to be informed about all announcements and campaigns via commercial electronic mail</text>
+                <p className="notifText" >I want to be informed about all announcements and campaigns via commercial electronic mail</p>
                 <div className="profileSwitch">
                     <CFormSwitch label="E-mail" className="formSwitchCheckDefault"/>
                     <CFormSwitch label="SMS" className="formSwitchCheckDefault"/>

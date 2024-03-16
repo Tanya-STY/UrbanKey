@@ -2,12 +2,11 @@
 
 //importing dependencies
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useContext } from 'react';
-import { AuthProvider, useAuth } from '../../Provider/AuthProvider';
+import useAuth from '../../CustomeHooks/useAuth.js';
 import App from '../../App';
+import axios from 'axios';
 
 //importing css
 import './Login.css';
@@ -18,69 +17,59 @@ import useVerifTokenHook from '../../CustomeHooks/useVerifTokenHook.js';
 
 
 const Login = () => {
-  const navigate = useNavigate();
-  const { token, setToken, setTokenInStorage, removeTokenFromStorage} = useAuth();
+  const { setAuth, persist, setPersist } = useAuth();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/Profile"; // get where the user came from
+ 
   
-  const tokenCheck = useVerifTokenHook('http://127.0.0.1:5000/checkToken', token);
-  console.log(tokenCheck + ' inside login');
-  if (tokenCheck == 'passed'){
-    console.log('succesfuly passed the login with stored token');
-    navigate('/Home');
-  }
-  else{
-    console.log('skip login failed need to login to obtain a new token');
-  }
   //setting up the dynamic variables
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   //setting up the function handleLogin
-  const handleLogin = () => {
+  const handleLogin = async (e) => {
+    try{
+    const response = await axios.post("http://localhost:5000/Login", {
+        email: email,
+        password: password,
+      }, {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true
+      });
+      const token = response?.data?.token;
+      const role = response?.data?.role;
+      setAuth({ role, email, password, token });
+      setEmail('');
+      setPassword('');
+      // const { token } = response.data;
+      // login(token);
+      // navigate('/HomePage');
+      navigate(from, { replace: true });
+    }
+    catch (error) {
+      console.log(error, 'error');
+      //    setLoginStatus("error");
+      if (error.response && error.response.status === 401) {
+        alert("Invalid credentials");
+      }
+      if (error.response && error.response.status === 404) {
+        alert("User not found with this email");
+      }
+    }
 
-  //create one object for the data
-  const userInfo = {
-    email: email,
-    password: password
-  }
-
-  //set url for the sending
-  //this will allow us to use the same hook for sign up or login
-  const url = 'http://127.0.0.1:5000/Login';
-
-  fetch(url, {
-      method: 'POST',
-      headers: {'content-Type' : 'application/json' },
-      body: JSON.stringify(userInfo)
-  })
-  .then(res => {
-      if(!res.ok){
-          throw Error('could not fetch data from url'); 
-      }
-      return res.json();
-  })
-  .then(data => {
-    console.log(data);
-      if ('error' in data){
-          console.log('error in the backend, return to initial page');
-          alert('Error inside the backend please try again later');
-      }
-      else if ('wrong' in data){
-        alert("wrong credentials login unsucessful, please try again");
-      }
-      else{
-          console.log(data.receivedToken);
-          setToken(data.receivedToken);
-          setTokenInStorage(data.receivedToken);
-          navigate('/Home');
-      }
-  })
-  .catch(err => {
-      console.log(err);
-      console.log('catched error from backend');
-      alert("backend is not setup to receive, please contact the dev team")
-  })   
 }
+
+const togglePersist = () => {
+  setPersist(prev => !prev);
+}
+
+useEffect(() => {
+  localStorage.setItem("persist", persist);
+}, [persist])
+
+
   return (
     <div className="body-attributes">
       <div className="login-container">
@@ -98,6 +87,15 @@ const Login = () => {
               <input className="input-password" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Enter your password" />
             </div>
             <button className="login-btn" onClick={handleLogin}>LOGIN</button>
+            <div className="persistCheck">
+                    <input
+                        type="checkbox"
+                        id="persist"
+                        onChange={togglePersist}
+                        checked={persist}
+                    />
+                    <label htmlFor="persist">Trust This Device</label>
+                </div>
             <div className="signup-link">
             Still not a member? <Link to="/SignUp">Sign Up Now!</Link>
             </div>

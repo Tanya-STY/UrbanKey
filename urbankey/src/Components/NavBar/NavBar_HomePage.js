@@ -14,6 +14,8 @@ const NavBar_HomePage = () => {
     e.stopPropagation(); 
   };
 
+  // const { auth } = useAuth();
+
   return (
     <div className="navbar">
       <div className="logo">
