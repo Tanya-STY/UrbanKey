@@ -1,47 +1,68 @@
-from pymongo import MongoClient
+from flask import jsonify, make_response
+from config import users # Import the MongoDB collection and bcrypt instance
+from services.token_service import generate_access_token, generate_refresh_token
 
-# Connect to MongoDB
-client = MongoClient('mongodb://localhost:27017/')
-db = client['your_database_name']
+def getProfile(request):
+    try: 
 
-# Define user schema
-user_schema = {
-    'username': {'type': str, 'required': True},
-    'roles': {
-        'User': {'type': int, 'default': 2001},
-        'Editor': int,
-        'Admin': int
-    },
-    'password': {'type': str, 'required': True},
-    'refreshToken': str
-}
+        email = request.email
+        role = request.role
 
-# Create collection and insert schema
-user_collection = db['users']
-user_collection.insert_one(user_schema)
+        user = users.find_one({"email": email})
 
-# Define User class
-class User:
-    def __init__(self, username, roles, password, refreshToken=None):
-        self.username = username
-        self.roles = roles
-        self.password = password
-        self.refreshToken = refreshToken
+        if user:
+                return jsonify({
+                    'name': user['full_name'],
+                    'email': user['email'],
+                    'province': user.get('province', ''),
+                    'city': user.get('city', ''),
+                    'num': user.get('num', ''),
+                    'num2': user.get('num2', ''),
+                    'key': user.get('key', ''),
+                    'address': user.get('address', ''),
+                    'selectedFile': user.get('selectedFile', '')
+                }), 200
+        else:
+            return jsonify({'error': 'User not found'}), 404
 
-    def save(self):
-        user_collection.insert_one(self.__dict__)
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'Internal server error'}), 500
 
-# Usage
-if __name__ == "__main__":
-    user_data = {
-        'username': 'test_user',
-        'roles': {
-            'User': 2001,
-            'Editor': 3001,
-            'Admin': 4001
-        },
-        'password': 'password123',
-        'refreshToken': 'abc123'
-    }
-    user = User(**user_data)
-    user.save()
+def update_user_profile(request):
+    try:
+        data = request.get_json()
+        name = data.get('name')
+        email = request.email
+        province = data.get('province')
+        city = data.get('city')
+        num = data.get('num')
+        num2 = data.get('num2')
+        registration_key = data.get("key")
+        address = data.get('address')
+
+        if registration_key.startswith('R'):
+            role = 1984
+        elif registration_key.startswith('O'):
+            role = 3333
+
+        update = {
+           '$set': {
+                'role': role,  # Update existing field
+                'province': province,  # Add new field or update existing one
+                'city': city,  # Add new field or update existing one
+                'num': num,  # Add new field or update existing one
+                'num2': num2,  # Add new field or update existing one
+                'registration_key': registration_key,  # Add new field or update existing one
+                'address': address  # Add new field or update existing one
+            }
+        }
+
+        # Update user profile based on email
+        users.update_one({"email": email}, update, upsert=False)
+
+        return jsonify({'message': 'User updated successfully'}), 200
+
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'Internal server error'}), 500

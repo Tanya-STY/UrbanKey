@@ -63,7 +63,8 @@ const handlesubmit = async (e) => {
 e.preventDefault();
 
 try {
-    await axios.post("http://localhost:5000/user/profile/update", {
+    const token = auth?.token; 
+    const response=await axios.post("http://localhost:5000/user/profile/update", {
         name,
         email,
         province,
@@ -80,6 +81,7 @@ try {
         },
         withCredentials: true
     });
+    console.log(response.data);
     console.log("Profile updated successfully");
 }
 catch (error) {

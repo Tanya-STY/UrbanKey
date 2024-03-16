@@ -8,6 +8,7 @@ const useLogout = () => {
         setAuth({});
         try {
             const response = await axios('http://localhost:5000/Logout', {
+                headers: { 'Content-Type': 'application/json' },
                 withCredentials: true
             });
         } catch (err) {

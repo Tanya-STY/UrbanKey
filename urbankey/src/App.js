@@ -28,8 +28,8 @@ import Navbar from "./Components/NavBar/NavBar.js";
 
 const ROLE = {
   'User': 2001,
-  'Owner': 1984,
-  'Renter': 3333,
+  'Owner': 3333,
+  'Renter': 1984,
   'Admin': 5150
 }
 
@@ -48,7 +48,7 @@ function App() {
           <Route path="/HomePage" element={<HomePage />} />
           
           <Route element={<PersistLogin />} >
-          <Route element={<RequireAuth allowedRoles={[ROLE.User, ROLE.Admin]}/>} > 
+          <Route element={<RequireAuth allowedRoles={[ROLE.User, ROLE.Admin, ROLE.Renter]}/>} > 
             {/* <Route path="/HomePage" element={<HomePage />} /> */}
             <Route path="/Profile" element={<Profile />} />
             <Route path="/MaintenanceRequest" element={<MaintenanceRequest />} />

@@ -9,3 +9,4 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 db = client.get_database('UrbanKey')
 
 users = db.get_collection('Users')
+

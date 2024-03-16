@@ -43,14 +43,10 @@ const Login = () => {
       setAuth({ role, email, password, token });
       setEmail('');
       setPassword('');
-      // const { token } = response.data;
-      // login(token);
-      // navigate('/HomePage');
       navigate(from, { replace: true });
     }
     catch (error) {
       console.log(error, 'error');
-      //    setLoginStatus("error");
       if (error.response && error.response.status === 401) {
         alert("Invalid credentials");
       }

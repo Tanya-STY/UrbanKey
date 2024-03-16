@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SignUp.css';
 import { Link } from 'react-router-dom';
 import urbankeyLogo from '../Images/urbankey_logo.png';
@@ -9,7 +9,7 @@ import useAuth from '../../CustomeHooks/useAuth.js';
 
 
 const SignUp = () => {
-    const { setAuth } = useAuth();
+    const { setAuth, persist, setPersist } = useAuth();
     const [activeButton, setActiveButton] = useState('Individual');
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
@@ -57,7 +57,6 @@ const SignUp = () => {
             const token = response?.data?.token;
             const role = response?.data?.role;
             setAuth({ role, email, password, token });
-            console.log(response.data);
             navigate("/Profile");
       } catch (error) {
           console.log(error, 'error');
@@ -80,6 +79,14 @@ const SignUp = () => {
         const re = /\S+@\S+\.\S+/;
         return re.test(email);
     };
+
+    const togglePersist = () => {
+        setPersist(prev => !prev);
+      }
+      
+      useEffect(() => {
+        localStorage.setItem("persist", persist);
+      }, [persist])
 
     return (
         <div className="outer-container">
@@ -300,6 +307,15 @@ const SignUp = () => {
                         </div>
                     </form>
                     )}
+                    <div className="persistCheck">
+                    <input
+                        type="checkbox"
+                        id="persist"
+                        onChange={togglePersist}
+                        checked={persist}
+                    />
+                    <label htmlFor="persist">Trust This Device</label>
+                </div>
                     <div className="login-link">
                         Already a member? <Link to="/Login">Login Now!</Link>
                     </div>
