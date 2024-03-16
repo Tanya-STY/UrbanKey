@@ -4,6 +4,7 @@ import logo from '../Images/urbankey_logo.png';
 import './NavBar.css';
 import useAuth from '../../CustomeHooks/useAuth';
 import useLogout from '../../CustomeHooks/useLogout';
+import CondoDash from '../CondoOwnerDashboard/OwnerDashboard';
 
 const Navbar = () => {
     const { auth, persist } = useAuth();
@@ -65,30 +66,37 @@ const Navbar = () => {
     );
 };
 
-const AuthenticatedSections = () => {
+const AuthenticatedSections = ({auth}) => {
+    const renderDashboardLink = () => {
+        if (auth?.role === 3333) { // Assuming 3333 is the role for Owner
+          return <NavLink to="/CondoOwnerDashboard" activeClassName="active" className="nav-link">Dashboard</NavLink>;
+        } else {
+          return null; // Return null if the user is not an owner
+        }
+    };
     return (
         <ul>
             <li>
-                <NavLink to="/HomePage" activeClassName="active" className="nav-link">Home Page</NavLink>
+                <NavLink to="/HomePage" activeclassName="active" className="nav-link">Home Page</NavLink>
             </li>
             {/* Add additional sections based on user roles */}
             <li>
-                <NavLink to="/Profile" activeClassName="active" className="nav-link">Profile</NavLink>
+                <NavLink to="/Profile" activeclassName="active" className="nav-link">Profile</NavLink>
             </li>
             <li>
-                <NavLink to="/Dashboard" activeClassName="active" className="nav-link">Dashboard</NavLink>
+                <NavLink to="/Dashboard" activeclassName="active" className="nav-link">Dashboard</NavLink>
             </li>
             <li>
-                <NavLink to="/Reservation" activeClassName="active" className="nav-link">Reservation</NavLink>
+                <NavLink to="/Reservation" activeclassName="active" className="nav-link">Reservation</NavLink>
             </li>
             <li>
-                <NavLink to="/PropertyProfile" activeClassName="active" className="nav-link">Property Profile</NavLink>
+                <NavLink to="/PropertyProfile" activeclassName="active" className="nav-link">Property Profile</NavLink>
             </li>
             <li>
-                <NavLink to="/Finance" activeClassName="active" className="nav-link">Finance</NavLink>
+                <NavLink to="/Finance" activeclassName="active" className="nav-link">Finance</NavLink>
             </li>
             <li>
-                <NavLink to="/Employees" activeClassName="active" className="nav-link">Employees</NavLink>
+                <NavLink to="/Employees" activeclassName="active" className="nav-link">Employees</NavLink>
             </li>
         </ul>
     );
@@ -98,10 +106,10 @@ const UnauthenticatedSections = () => {
     return (
         <ul>
             <li>
-                <NavLink to="/Login" activeClassName="active" className="nav-link">Login</NavLink>
+                <NavLink to="/Login" activeclassName="active" className="nav-link">Login</NavLink>
             </li>
             <li>
-                <NavLink to="/SignUp" activeClassName="active" className="nav-link">Sign Up</NavLink>
+                <NavLink to="/SignUp" activeclassName="active" className="nav-link">Sign Up</NavLink>
             </li>
         </ul>
     );

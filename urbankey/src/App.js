@@ -25,6 +25,7 @@ import NavBar_User from "./Components/NavBar/NavBar_User.js"
 import PersistLogin from "./Components/PersistentLogin.js";
 import { AuthProvider } from "./Provider/AuthProvider.js";
 import Navbar from "./Components/NavBar/NavBar.js";
+import useAuth from "./CustomeHooks/useAuth.js";
 
 const ROLE = {
   'User': 2001,
@@ -32,6 +33,7 @@ const ROLE = {
   'Renter': 1984,
   'Admin': 5150
 }
+
 
 function App() {
   return (
@@ -48,17 +50,17 @@ function App() {
           <Route path="/HomePage" element={<HomePage />} />
           
           <Route element={<PersistLogin />} >
-          <Route element={<RequireAuth allowedRoles={[ROLE.User, ROLE.Admin, ROLE.Renter]}/>} > 
+          <Route element={<RequireAuth allowedRoles={[ROLE.User, ROLE.Admin, ROLE.Renter, ROLE.Owner]}/>} > 
             {/* <Route path="/HomePage" element={<HomePage />} /> */}
             <Route path="/Profile" element={<Profile />} />
             <Route path="/MaintenanceRequest" element={<MaintenanceRequest />} />
             <Route path="/Notification" element={<Notification />} />
             <Route path="/PaymentHistory" element={<PaymentHistory />} />
             <Route path="/ReservationSuccess" element={<ReservationSuccess />} />
-            <Route path="/PropertyProfileManagement" element={<PropertyProfileManagement />} />
+            <Route path="/PropertyProfile" element={<PropertyProfileManagement />} />
             <Route path="/Employee" element={<Employee />} />
             <Route path="/FinanceDashboard" element={<FinanceDashboard />} />
-            <Route path="/CondoOwnerDashboard" element={<CondoOwnerDashboard />} />
+            <Route path="/Dashboard" element={<DashboardBasedOnRole />} />
             <Route path="/RegistrationKey" element={<RegistrationKey />} />
             <Route path="/Reservation" element={<Reservation />} />
             </Route>
@@ -70,5 +72,20 @@ function App() {
    
   );
 }
+
+const DashboardBasedOnRole = () => {
+  const { auth } = useAuth(); // Assuming you have an auth context
+
+  if (auth.role === ROLE.Owner) {
+    return <CondoOwnerDashboard />;
+  } else {
+    return <DefaultDashboard />;
+  }
+};
+
+// Component for default dashboard
+const DefaultDashboard = () => {
+  return <div>This is the default dashboard</div>;
+};
 
 export default App;

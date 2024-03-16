@@ -13,7 +13,7 @@ import useAuth from '../../CustomeHooks/useAuth';
 
 const Profile = () => {
 
-    const { auth } = useAuth();
+    const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -27,6 +27,7 @@ const Profile = () => {
     const [loading, setLoading] = useState(true);
 
     const fetchUserData = async () => {
+        // const role = auth?.role
         try {
             const token = auth?.token; 
             const response = await axios.get("http://localhost:5000/Profile", {
@@ -47,6 +48,7 @@ const Profile = () => {
         setAddress(userData.address);
         setSelectedFile(userData.selectedFile);
         setLoading(false);
+        // role = response?.data?.role
 
     } catch(error) {
         console.log(error);
@@ -82,6 +84,7 @@ try {
         withCredentials: true
     });
     console.log(response.data);
+    // auth?.role = response?.data?.role;
     console.log("Profile updated successfully");
 }
 catch (error) {

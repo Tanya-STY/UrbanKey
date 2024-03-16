@@ -19,6 +19,7 @@ const NavBar_User = () => {
   const handleOptionsClick = (e) => {
     e.stopPropagation(); // Prevents the click event from bubbling up to the parent
   };
+  
 
   return (
     <div className="navbar">
@@ -28,13 +29,13 @@ const NavBar_User = () => {
       <div className="sections">
         <ul>
           <li>
-            <NavLink to="/Profile" activeClassName="active" className="nav-link">Profile</NavLink>
+            <NavLink to="/Profile" activeclassName="active" className="nav-link">Profile</NavLink>
           </li>
           <li>
-            <NavLink to="/Dashboard" activeClassName="active" className="nav-link">Dashboard</NavLink>
+            <NavLink to="/Dashboard" activeclassName="active" className="nav-link">Dashboard</NavLink>
           </li>
           <li>
-            <NavLink to="/Reservation" activeClassName="active" className="nav-link">Reservation</NavLink>
+            <NavLink to="/Reservation" activeclassName="active" className="nav-link">Reservation</NavLink>
           </li>
         </ul>
       </div>

@@ -8,7 +8,7 @@ const RequireAuth = ({ allowedRoles }) => {
     // const hasrole = auth && Object.values(auth.role).some(role => allowedRoles.includes(role));
      const hasrole = allowedRoles.includes(auth?.role);
     // const hasrole = Object.keys(auth?.role || {}).some(role => allowedRoles.includes(auth?.role[role]));
-    // console.log(auth?.role);
+    console.log(auth?.role);
     // console.log(hasrole);
     return (
         hasrole
