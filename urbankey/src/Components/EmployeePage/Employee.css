@@ -1,6 +1,5 @@
 
 .employee-container{
-    position: absolute;
     display: flex;
     width: 100%;
     height: 100%;
@@ -9,29 +8,189 @@
 }
 
 .employee-box{
-    position: absolute;
-    top: 30%;
+    position: relative;
 }
 
 .employee-data-grid{
     height:70%;
     width: 100%;
-
 }
 
 .employee-heading{
     position: relative;
     display: flex;
+    flex-direction: row;
+    width: 100%;
+    /*top: 12%;*/
+    /*left: 10%;*/
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.employee-top-btns{
+    position: relative;
     width: 80%;
-    top: 12%;
+    height:200px;
+    padding: 5px;
+}
+.employee-types{
+    position: relative;
+    border-bottom: 1px solid #EAECF0;
+}
+
+.employee-type-btn{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #667085;
+    padding: 0px 6px 10px;
+    border: none; /* Removes border */
+    background-color: transparent; /* Makes background color transparent */
+}
+
+.employee-type-btn:focus {
+    outline: none; /* Removes default focus outline */
+    border-bottom: 2px solid #0075FF;
+    color: #0075FF;
+}
+
+
+.employee-search{
+    position: relative;
+    margin-top: 10px;
+    width: 100%;
+    padding: 15px;
+    padding-left:35px;
+    border: 1px solid #EFF1F4;
+    border-radius: 7px;
+    background-color: transparent;
+}
+
+.employee-search::placeholder{
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 400;
+    color: #333333;
+
+}
+
+.search-icon{
+    position: absolute;
+    top: 73%;
+    left: 12px;
+    font-size: 20px; /* Adjust the size of the icon */
+}
+
+.employee-btn{
+    position: absolute;
+    right: 0%;
+}
+
+.new-employee-btn{
+    /*width: 149px;*/
+    /*height: 34px;*/
+    position: relative;
+    padding: 7px;
+    background: #0075FF;
+    border-radius: 8px;
+    border: 1px solid #E6E7EC;
+    font-family: 'Inter';
+    font-style: normal;
+    font-size: 13px;
+    color: #FFFFFF;
+}
+
+.search-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.search-btns{
+    position: absolute;
+    right: 0px;
+    top: 69%;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.list-icon{
+    font-size: 20px;
+}
+
+.grid-icon{
+    font-size: 20px;
+}
+
+.search-btn:focus{
+    background: #EFEFEF;
+    /* Foundation /Grey/G30 */
+    border: 1px solid #EFEFEF;
+
+}
+
+.search-btn{
+    display: flex;
+    margin-left: 10px;
+    padding: 6px;
+    border-radius: 8px;
+    background: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.filter-icon{
+    position: relative;
+    margin-right: 5px;
+}
+
+.help-icon{
+    position: relative;
+    color: #98A2B3;
+    font-size: 18px;
+    top: -2px;
+    left: 1px;
+}
+
+.add-icon{
+    position: relative;
+    font-size: 22px;
+    padding-right:3px ;
+    top: -1px;
+
+}
+
+.download-icon{
+    position: relative;
+    font-size: 20px;
+    padding-right:3px ;
+    top: -2px;
+}
+.export-btn{
+    position: relative;
+    top: 1px;
+    margin-right: 10px;
+    padding: 10px;
+    background: #FFFFFF;
+    border: 1px solid #E6E7EC;
+    border-radius: 8px;
+    font-family: 'Inter';
+    font-style: normal;
+    color: #0E2354;
+    font-size: 13px;
+    text-decoration: none;
+
 }
 
 .employee-header{
     font-family: 'Space Grotesk';
     font-style: normal;
     font-weight: 500;
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 25px;
     color: #101828;
 }
 
@@ -39,6 +198,33 @@
     background: #FAFBFB;
     border-bottom: 1px solid #EAECF0;
 }
+
+.MuiDataGrid-columnHeaderTitleContainer {
+    background-color: #FAFBFB;
+}
+
+/* If you need a more specific selector */
+.MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitleContainerContent {
+    background-color: #FAFBFB;
+}
+
+.number-of-rows{
+    position: relative;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    top: -3px;
+    left: 1px;
+    color: #0075FF;
+    background: #F9F5FF;
+    border-radius: 16px;
+    padding: 2px 8px;
+
+
+
+}
+
 
 
 
