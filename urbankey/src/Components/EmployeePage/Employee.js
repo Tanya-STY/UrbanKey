@@ -14,6 +14,7 @@ import { IoIosList } from "react-icons/io";
 import { CiGrid41 } from "react-icons/ci";
 import {CSVLink} from "react-csv";
 import { GoDotFill } from "react-icons/go";
+import {useState} from "react";
 
 
 
@@ -141,6 +142,21 @@ const rows = [
 ];
 
 export default function DataGridDemo() {
+    const [searchValue, setSearchValue] = useState('');
+    const [filteredRows, setFilteredRows] = useState(rows);
+
+    const handleSearch = (e) => {
+        const keyword = e.target.value.toLowerCase();
+        setSearchValue(keyword);
+        const filteredData = rows.filter(row =>
+                row.name.toLowerCase().includes(keyword) ||
+                row.id.toLowerCase().includes(keyword) ||
+                row.role.toLowerCase().includes(keyword) ||
+                row.companyName.toLowerCase().includes(keyword)
+        );
+        setFilteredRows(filteredData);
+    };
+
     const numberOfRows = rows.length;
     const csvData = [
         { name: 'Name', id: 'Employee ID', role: 'Role', status: 'Status', companyName: 'Company Name' },
@@ -176,21 +192,23 @@ export default function DataGridDemo() {
                     <input
                         className="employee-search"
                         placeholder="Search Employee by name, role, ID, or any related keywords"
+                        value={searchValue}
+                        onChange={handleSearch}
                     />
                     <div className="search-btns">
                         <button className="search-btn" > <IoFilter className="filter-icon" />
                             Filter</button>
-                        <button className="search-btn"> <IoIosList className="list-icon" />
-                        </button>
-                        <button className="search-btn"> <CiGrid41 className="grid-icon"/>
-                        </button>
+                        {/*<button className="search-btn"> <IoIosList className="list-icon" />*/}
+                        {/*</button>*/}
+                        {/*<button className="search-btn"> <CiGrid41 className="grid-icon"/>*/}
+                        {/*</button>*/}
                     </div>
                 </div>
             </div>
             <Box className="employee-box">
                 <DataGrid
                     className="employee-data-grid"
-                    rows={rows}
+                    rows={filteredRows}
                     columns={columns}
                     initialState={{
                         pagination: {
