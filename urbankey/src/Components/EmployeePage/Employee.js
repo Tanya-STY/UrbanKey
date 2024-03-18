@@ -26,6 +26,10 @@ const columns = [
         headerName: 'Name',
         width: 200,
         headerClassName: 'employee-data-grid-header-column',
+        // disableColumnFilter: true, // Disable filtering for this column
+        disableColumnMenu: true, // Disable column menu for this column
+        sortable: false, // Disable sorting for this column
+
     },
     {
         field: 'id',
@@ -45,7 +49,11 @@ const columns = [
             }}>
                 {params.value}
             </div>
-        )
+        ),
+        // disableColumnFilter: true // Disable filtering for this column
+        disableColumnMenu: true, // Disable column menu for this column
+        sortable: false, // Disable sorting for this column
+
 
     },
     {
@@ -63,7 +71,10 @@ const columns = [
             }}>
                 {params.value}
             </div>
-        )
+        ),
+        // disableColumnFilter: true // Disable filtering for this column
+        disableColumnMenu: true, // Disable column menu for this column
+        sortable: false, // Disable sorting for this column
 
     },
     {
@@ -85,7 +96,10 @@ const columns = [
                 <GoDotFill style={{ color: params.value === 'Active' ? '#12B76A' : params.value === 'Inactive' ? '#F15046' : 'transparent' }} />
                 {params.value}
             </div>
-        )
+        ),
+        // disableColumnFilter: true // Disable filtering for this column
+        disableColumnMenu: true, // Disable column menu for this column
+        sortable: false, // Disable sorting for this column
 
     },
     {
@@ -106,7 +120,11 @@ const columns = [
             }}>
                 {params.value}
             </div>
-        )
+        ),
+        // disableColumnFilter: true // Disable filtering for this column
+        disableColumnMenu: true, // Disable column menu for this column
+        sortable: false, // Disable sorting for this column
+
     },
 ];
 
