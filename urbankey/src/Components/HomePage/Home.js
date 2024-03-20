@@ -16,21 +16,25 @@ const Home = () => {
 
     return (
         <div>
-            <div className='header'></div>
+            <header className='header'> {/* Changed this div to header */}
+                {/* Any header content goes here */}
+            </header>
+            {/* Rest of your component */}
+
             <div className='picture_search'>
-                <img src={home_search_background} alt= "background image" />
+                <img src={home_search_background} alt="background image" />
                 <div className='houseSlogan'>
                     Your dream house is here.
-                <br/><br/>
+                    <br /><br />
                     <div className='searchArea'>
                         <input
-                            className="inputSearch"
-                            type="text"
-                            id="key"
-                            value={search} //search input into the variable
-                            //onChange={(e) => setSearch(e.target.value)}
-                            placeholder='Search...'
-                            required
+                             className="inputSearch"
+                             type="text"
+                             id="key"
+                             value={search} // Bind this value to your component's state
+                             onChange={(e) => setSearch(e.target.value)} // Add this line to handle changes
+                             placeholder='Search...'
+                             required
                         />
                     </div>
                 </div>
