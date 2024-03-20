@@ -11,11 +11,13 @@ describe('CondoDash Component', () => {
     return render(ui, { wrapper: BrowserRouter });
   };
 
-  test('renders the dashboard title', () => {
+  test('renders the dashboard title', async () => {
     renderWithRouter(<CondoDash />);
-    expect(screen.getByText('Single Person House')).toBeInTheDocument();
+    // Assuming 'Single Person House' is rendered after an async operation
+    const title = await screen.findByText('Single Person House');
+    expect(title).toBeInTheDocument();
   });
-
+  
   test('renders the location name', () => {
     renderWithRouter(<CondoDash />);
     expect(screen.getByText('Montreal, QC')).toBeInTheDocument();
@@ -40,12 +42,14 @@ describe('CondoDash Component', () => {
     expect(screen.getByText('Monthly Condo Fees: $4568')).toBeInTheDocument();
   });
 
-  test('renders maintenance request link', () => {
+  test('renders maintenance request link', async () => {
     renderWithRouter(<CondoDash />);
-    const submitRequestLink = screen.getByText('Submit a New Request');
+    // Use findByText to wait for the element to be available
+    const submitRequestLink = await screen.findByText('Submit a New Request');
     expect(submitRequestLink).toBeInTheDocument();
     expect(submitRequestLink).toHaveAttribute('href', '/Maintenance');
   });
+  
 
   // More tests can be added to cover all aspects of the component
 });
