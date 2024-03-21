@@ -20,7 +20,7 @@ describe('SignUp Component', () => {
       </Router>
     );
 
-    // Check if the SignUp form elements are rendered correctly
+    // Check if the SignUp form elements are rendered correctl
     expect(screen.getByLabelText('Full name')).toBeInTheDocument();
     expect(screen.getByLabelText('Email')).toBeInTheDocument();
     expect(screen.getByLabelText('Password')).toBeInTheDocument();

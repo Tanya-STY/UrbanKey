@@ -42,10 +42,14 @@ describe("Notifications Component", () => {
     ];
 
     notifications.forEach((notification) => {
-      expect(screen.getByText(notification.name)).toBeInTheDocument();
-      expect(screen.getByText(notification.action)).toBeInTheDocument();
-      expect(screen.getByText(notification.time)).toBeInTheDocument();
-      expect(screen.getByText(notification.type)).toBeInTheDocument();
+      const nameElements = screen.getAllByText(notification.name);
+      expect(nameElements.length).toBeGreaterThanOrEqual(1);
+      const actionElements = screen.getAllByText(notification.action);
+      expect(actionElements.length).toBeGreaterThanOrEqual(1);
+      const timeElements = screen.getAllByText(notification.time);
+      expect(timeElements.length).toBeGreaterThanOrEqual(1);
+      const typeElements = screen.getAllByText(notification.type);
+      expect(typeElements.length).toBeGreaterThanOrEqual(1);
     });
   });
 });

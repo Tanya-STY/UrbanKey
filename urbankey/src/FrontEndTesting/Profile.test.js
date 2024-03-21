@@ -76,8 +76,8 @@ describe('Profile Component', () => {
     await waitFor(() => expect(axios.post).toHaveBeenCalledWith(expect.anything(), expect.objectContaining({ name: 'John Doe' }), expect.anything()));
 
     // Assert success message or behavior
-    // This depends on how your component handles the submission success
+    
   });
 
-  // Add more tests as needed, such as file upload handling, error handling, etc.
+ 
 });

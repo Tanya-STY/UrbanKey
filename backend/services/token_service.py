@@ -29,15 +29,15 @@ def verify_token(token):
         payload = jwt.decode(token, current_app.config['SECRET_KEY'], options={"verify_signature": False})
         return payload
     except jwt.ExpiredSignatureError:
-        return jsonify(message='Token has expired'), 403
+        return {'message':'Token has expired'}, 403
     except jwt.InvalidTokenError:
-        return jsonify(message='Invalid token'), 403
+        return {'message':'Invalid token'}, 403
 
 def verify_refresh_token(refreshToken):
     try:
         payload = jwt.decode(refreshToken, current_app.config['REFRESH_TOKEN_SECRET'], options={"verify_signature": False})
         return payload
     except jwt.ExpiredSignatureError:
-        return jsonify(message='Refresh Token has expired'), 403
+        return {'message': 'Token has expired'}, 403
     except jwt.InvalidTokenError:
-        return jsonify(message='Invalid refresh token'), 403
+        return {'message': 'Invalid token'}, 403

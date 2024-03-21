@@ -3,6 +3,10 @@ from model.auth import signup, signin, refreshToken, handle_logout
 
 auth_routes = Blueprint('auth_routes', __name__)
 
+@auth_routes.route('/')
+def index():
+    return 'Backend server'
+
 @auth_routes.route("/SignUp", methods=['POST'])
 def signup_route():
     

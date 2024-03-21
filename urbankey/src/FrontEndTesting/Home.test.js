@@ -8,6 +8,7 @@ describe('Home Component Tests', () => {
     render(<Home />);
     expect(screen.getByText('Your dream house is here.')).toBeInTheDocument();
   });
+  
 
   test('allows typing in the search input', () => {
     render(<Home />);

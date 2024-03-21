@@ -26,3 +26,4 @@ describe("RegistrationKey Component", () => {
     expect(houseImage.tagName).toBe("IMG");
   });
 });
+

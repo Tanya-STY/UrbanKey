@@ -50,6 +50,4 @@ describe('CondoDash Component', () => {
     expect(submitRequestLink).toHaveAttribute('href', '/Maintenance');
   });
   
-
-  // More tests can be added to cover all aspects of the component
 });

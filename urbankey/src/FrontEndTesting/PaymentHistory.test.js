@@ -36,6 +36,7 @@ describe('PaymentHistory Component', () => {
     expect(rejectedStatus).toHaveClass('rejected');
   });
 
+  
   test('renders buttons for navigation and viewing invoices', async () => {
     render(<PaymentHistory />);
     expect(await screen.findByText('Go Back')).toBeInTheDocument();

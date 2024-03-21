@@ -11,17 +11,18 @@ def getProfile(request):
         user = users.find_one({"email": email})
 
         if user:
-                return jsonify({
-                    'name': user['full_name'],
-                    'email': user['email'],
-                    'province': user.get('province', ''),
-                    'city': user.get('city', ''),
-                    'num': user.get('num', ''),
-                    'num2': user.get('num2', ''),
-                    'key': user.get('key', ''),
-                    'address': user.get('address', ''),
-                    'selectedFile': user.get('selectedFile', '')
-                }), 200
+            profile_data = {
+                'name': user['full_name'],
+                'email': user['email'],
+                'province': user.get('province', ''),
+                'city': user.get('city', ''),
+                'num': user.get('num', ''),
+                'num2': user.get('num2', ''),
+                'key': user.get('key', ''),
+                'address': user.get('address', ''),
+                'selectedFile': user.get('selectedFile', '')
+            }
+            return jsonify(profile_data), 200
         else:
             return jsonify({'error': 'User not found'}), 404
 

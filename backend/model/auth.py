@@ -18,7 +18,7 @@ def signup(request):
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
         if users.find_one({'email': email}):
-            return {'success': False, 'message': 'Email already exists'}
+            return jsonify({'error': 'Email already exists'}), 409 
         
         # Insert new user data into the database
         new_user = {

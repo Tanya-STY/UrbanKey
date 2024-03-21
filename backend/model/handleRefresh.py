@@ -1,6 +1,7 @@
 from flask import request, jsonify
 from config import users
 import jwt
+from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
 from datetime import datetime, timedelta, timezone
 
 
@@ -22,15 +23,15 @@ def handle_refresh_token(app):
         # Verify the refresh token and extract username
         decoded = jwt.decode(refresh_token, app.config['REFRESH_TOKEN_SECRET'])
         email = decoded['username']
-    except jwt.ExpiredSignatureError:
+    except ExpiredSignatureError:
         return jsonify({'error': 'Refresh token has expired'}), 403
-    except jwt.InvalidTokenError:
+    except InvalidTokenError:
         return jsonify({'error': 'Invalid refresh token'}), 403
 
     # Create new access token
-    access_token = jwt.encode({
+    token = jwt.encode({
         'email': email,
         'exp': datetime.now(timezone.utc) + timedelta(minutes=10)  # Adjust the expiration time as needed
-    }, app.config['ACCESS_TOKEN_SECRET'])
+    }, app.config['SECRET_KEY'])
 
-    return jsonify({'access_token': access_token}), 200
+    return jsonify({'token': token}), 200

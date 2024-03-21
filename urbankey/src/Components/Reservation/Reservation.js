@@ -87,7 +87,7 @@ const Reservation = () => {
     <div>
       <div className="title-rectangular">
         {/* This div spans the entire width of the page */}
-        <h1 className="title-text"> Facility Reservation System</h1>
+        <h1 className="title-text">Facility Reservation System</h1>
       </div>
 
     { /* -----------------LEFT DIV FOR FACILITY SELECTION AND TIME -----------------*/}
@@ -135,6 +135,14 @@ const Reservation = () => {
                     {date ? format(date, "MM/dd/yyyy") : ""}
                   </div>
                   <DatePickerCalendar
+                    locale={{
+                      localize: {
+                          month: () => 'Month',
+                          day: () => 'Day',
+                          weekStartsOn: 1,
+                      },
+                      formatLong: {},
+                  }}
                     date={date}
                     onDateChange={handleDateChange}
                     modifiers={{ ...modifiers, disabled: disabledDates }}

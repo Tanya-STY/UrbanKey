@@ -81,5 +81,5 @@ describe('Login Component', () => {
     expect(mockedNavigate).toHaveBeenCalledWith('/Profile', { replace: true });
   });
 
-  // Additional tests can include error handling, persist checkbox functionality, etc.
+  
 });
