@@ -1,19 +1,25 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 // import "@testing-library/jest-dom/extend-expect"; // Import Jest-DOM for additional matchers
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 import Finance from "../Components/FinanceDashboard/Finance";
 
 describe("Finance Component", () => {
   test("renders the financial management dashboard title", () => {
     render(<Finance />);
-    expect(screen.getByText("Financial Management Dashboard")).toBeInTheDocument();
+    expect(
+      screen.getByText("Financial Management Dashboard")
+    ).toBeInTheDocument();
   });
 
   test("updates condo fees correctly", () => {
     render(<Finance />);
-    const feePerSquareFootInput = screen.getByLabelText("Fee per Square Foot ($):");
-    const feePerParkingSpotInput = screen.getByLabelText("Fee per Parking Spot ($):");
+    const feePerSquareFootInput = screen.getByLabelText(
+      "Fee per Square Foot ($):"
+    );
+    const feePerParkingSpotInput = screen.getByLabelText(
+      "Fee per Parking Spot ($):"
+    );
     const updateFeesButton = screen.getByText("Update Fees");
 
     fireEvent.change(feePerSquareFootInput, { target: { value: 10 } });
@@ -49,7 +55,11 @@ describe("Finance Component", () => {
     fireEvent.click(generateButton);
 
     expect(screen.getByText("Annual Financial Reports")).toBeInTheDocument();
-    expect(screen.getByText("Name: John Doe | Date of Purchase: 2024-01-15 | Amount Paid: $1200")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Name: John Doe | Date of Purchase: 2024-01-15 | Amount Paid: $1200"
+      )
+    ).toBeInTheDocument();
     // Add more assertions for other items if needed
   });
 });
