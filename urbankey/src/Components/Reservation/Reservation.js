@@ -5,6 +5,7 @@ import { DatePickerCalendar } from "react-nice-dates";
 import "react-nice-dates/build/style.css";
 import { Container, Row, Col } from "react-bootstrap";
 import { getDay, isBefore, format } from "date-fns";
+import { enUS } from 'date-fns/locale';
 
 const Reservation = () => {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -138,6 +139,7 @@ const Reservation = () => {
                     date={date}
                     onDateChange={handleDateChange}
                     modifiers={{ ...modifiers, disabled: disabledDates }}
+                    locale={enUS} 
                   />
                 </Col>
               </Row>
