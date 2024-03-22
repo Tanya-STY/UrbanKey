@@ -30,7 +30,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:coverage": "react-scripts test --coverage",
+    "test:coverage": "react-scripts test --coverage --testMatch '**/*.test.js' && nyc report --reporter=text-summary",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -55,12 +55,18 @@
     "@babel/core": "^7.24.1",
     "@babel/preset-env": "^7.24.1",
     "@babel/preset-react": "^7.24.1",
-    "identity-obj-proxy": "^3.0.0"
+    "identity-obj-proxy": "^3.0.0",
+    "nyc": "^15.1.0"
   },
   "jest": {
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "collectCoverageFrom": [
+        "src/**/*.js",
+        "!src/**/*.test.js", 
+        "!**/node_modules/**"
+      ]
     }
   }
 }

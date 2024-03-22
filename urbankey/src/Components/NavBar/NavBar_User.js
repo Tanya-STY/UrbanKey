@@ -29,13 +29,13 @@ const NavBar_User = () => {
       <div className="sections">
         <ul>
           <li>
-            <NavLink to="/Profile" activeclassName="active" className="nav-link">Profile</NavLink>
+          <NavLink to="/Profile" activeclassname="active" className="nav-link">Profile</NavLink>
           </li>
           <li>
-            <NavLink to="/Dashboard" activeclassName="active" className="nav-link">Dashboard</NavLink>
+            <NavLink to="/Dashboard" activeclassname="active" className="nav-link">Dashboard</NavLink>
           </li>
           <li>
-            <NavLink to="/Reservation" activeclassName="active" className="nav-link">Reservation</NavLink>
+            <NavLink to="/Reservation" activeclassname="active" className="nav-link">Reservation</NavLink>
           </li>
         </ul>
       </div>
@@ -44,18 +44,20 @@ const NavBar_User = () => {
           <div
             className="bell-icon"
             onClick={toggleNotifications}
+            data-testid="bell-icon"
           >
             <Link to="/NotificationPage"><i className="fa fa-bell"></i></Link>
           </div>
           <div
             className="user-icon"
             onClick={toggleOptions}
+            data-testid="user-icon"
           >
             <i className="fa fa-user"></i>
           </div>
         </div>
         {showOptions && (
-          <div className="options" onClick={handleOptionsClick}>
+          <div className="options" onClick={handleOptionsClick} data-testid="options">
             <ul>
               <li>
                 <NavLink to="/HomePage" className="nav-link">Sign Out</NavLink>

@@ -24,7 +24,7 @@ const NavBar_HomePage = () => {
       <div className="sections">
         <ul>
           <li>
-            <NavLink to="/HomePage" activeClassName="active" className="nav-link">Home Page</NavLink>
+            <NavLink to="/HomePage" activeclassname="active" className="nav-link">Home Page</NavLink>
           </li>
         </ul>
       </div>
@@ -32,11 +32,12 @@ const NavBar_HomePage = () => {
         <div
           className="user-icon"
           onClick={toggleOptions}
+          data-testid="user-icon"
         >
           <i className="fa fa-user"></i>
         </div>
         {showOptions && (
-          <div className="options" onClick={handleOptionsClick}>
+          <div className="options" onClick={handleOptionsClick} data-testid="options">
             <ul>
               <li>
                 <NavLink to="/Login" className="nav-link">Login</NavLink>

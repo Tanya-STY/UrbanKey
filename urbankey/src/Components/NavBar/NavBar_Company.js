@@ -24,28 +24,25 @@ const NavBar_Company = () => {
       <div className="sections">
         <ul>
           <li>
-            <NavLink to="/PropertyProfile" activeClassName="active" className="nav-link">Property Profile</NavLink>
+            <NavLink to="/PropertyProfile" activeclassname="active" className="nav-link">Property Profile</NavLink>
           </li>
           <li>
-            <NavLink to="/Finance" activeClassName="active" className="nav-link">Finance</NavLink>
+            <NavLink to="/Finance" activeclassname="active" className="nav-link">Finance</NavLink>
           </li>
           <li>
-            <NavLink to="/Reservation" activeClassName="active" className="nav-link">Reservation</NavLink>
+            <NavLink to="/Reservation" activeclassname="active" className="nav-link">Reservation</NavLink>
           </li>
           <li>
-            <NavLink to="/Employees" activeClassName="active" className="nav-link">Employees</NavLink>
+            <NavLink to="/Employees" activeclassname="active" className="nav-link">Employees</NavLink>
           </li>
         </ul>
       </div>
       <div className="user">
-        <div
-          className="user-icon"
-          onClick={toggleOptions}
-        >
+      <div className="user-icon" onClick={toggleOptions} data-testid="user-icon">
           <i className="fa fa-user"></i>
         </div>
         {showOptions && (
-          <div className="options" onClick={handleOptionsClick}>
+          <div className="options" onClick={handleOptionsClick} data-testid="options">
             <ul>
               <li>
                 <NavLink to="/HomePage" className="nav-link">Sign Out</NavLink>

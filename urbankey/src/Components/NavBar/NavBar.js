@@ -42,18 +42,20 @@ const Navbar = () => {
                     <div
                         className="bell-icon"
                         onClick={toggleNotifications}
+                        data-testid="bell-icon"
                     >
                         <Link to="/NotificationPage"><i className="fa fa-bell"></i></Link>
                     </div>
                     <div
                         className="user-icon"
                         onClick={toggleOptions}
+                        data-testid="user-icon"
                     >
                         <i className="fa fa-user"></i>
                     </div>
                 </div>
                 {showOptions && (
-                    <div className="options" onClick={handleOptionsClick}>
+                    <div className="options" onClick={handleOptionsClick} data-testid="options">
                         <ul>
                             <li>
                                 <NavLink to="/HomePage" className="nav-link">Sign Out</NavLink>
@@ -69,7 +71,7 @@ const Navbar = () => {
 const AuthenticatedSections = ({auth}) => {
     const renderDashboardLink = () => {
         if (auth?.role === 3333) { // Assuming 3333 is the role for Owner
-          return <NavLink to="/CondoOwnerDashboard" activeClassName="active" className="nav-link">Dashboard</NavLink>;
+          return <NavLink to="/CondoOwnerDashboard" activeclassname="active" className="nav-link">Dashboard</NavLink>;
         } else {
           return null; // Return null if the user is not an owner
         }
@@ -77,26 +79,26 @@ const AuthenticatedSections = ({auth}) => {
     return (
         <ul>
             <li>
-                <NavLink to="/HomePage" activeclassName="active" className="nav-link">Home Page</NavLink>
+                <NavLink to="/HomePage" activeclassname="active" className="nav-link">Home Page</NavLink>
             </li>
             {/* Add additional sections based on user roles */}
             <li>
-                <NavLink to="/Profile" activeclassName="active" className="nav-link">Profile</NavLink>
+                <NavLink to="/Profile" activeclassname="active" className="nav-link">Profile</NavLink>
             </li>
             <li>
-                <NavLink to="/Dashboard" activeclassName="active" className="nav-link">Dashboard</NavLink>
+                <NavLink to="/Dashboard" activeclassname="active" className="nav-link">Dashboard</NavLink>
             </li>
             <li>
-                <NavLink to="/Reservation" activeclassName="active" className="nav-link">Reservation</NavLink>
+                <NavLink to="/Reservation" activeclassname="active" className="nav-link">Reservation</NavLink>
             </li>
             <li>
-                <NavLink to="/PropertyProfile" activeclassName="active" className="nav-link">Property Profile</NavLink>
+                <NavLink to="/PropertyProfile" activeclassname="active" className="nav-link">Property Profile</NavLink>
             </li>
             <li>
-                <NavLink to="/Finance" activeclassName="active" className="nav-link">Finance</NavLink>
+                <NavLink to="/Finance" activeclassname="active" className="nav-link">Finance</NavLink>
             </li>
             <li>
-                <NavLink to="/Employees" activeclassName="active" className="nav-link">Employees</NavLink>
+                <NavLink to="/Employees" activeclassname="active" className="nav-link">Employees</NavLink>
             </li>
         </ul>
     );
@@ -106,10 +108,10 @@ const UnauthenticatedSections = () => {
     return (
         <ul>
             <li>
-                <NavLink to="/Login" activeclassName="active" className="nav-link">Login</NavLink>
+                <NavLink to="/Login" activeclassname="active" className="nav-link">Login</NavLink>
             </li>
             <li>
-                <NavLink to="/SignUp" activeclassName="active" className="nav-link">Sign Up</NavLink>
+                <NavLink to="/SignUp" activeclassname="active" className="nav-link">Sign Up</NavLink>
             </li>
         </ul>
     );
