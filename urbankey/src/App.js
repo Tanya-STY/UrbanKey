@@ -74,7 +74,7 @@ function App() {
 }
 
 const DashboardBasedOnRole = () => {
-  const { auth } = useAuth(); // Assuming you have an auth context
+  const { auth } = useAuth(); 
 
   if (auth.role === ROLE.Owner) {
     return <CondoOwnerDashboard />;
