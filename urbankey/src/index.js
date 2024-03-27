@@ -1,21 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router } from 'react-router-dom';
-
-import '@fortawesome/fontawesome-free/css/all.css';
-
+import ReactDOM from 'react-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import './index.css';
 import App from './App';
+import { AuthProvider } from './Provider/AuthProvider';
 // import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const rootElement = document.getElementById('root');
+
+ReactDOM.render(
   <React.StrictMode>
-  <Router>
-    <App />
-  </Router>
-  </React.StrictMode>
-);
+    <BrowserRouter>
+    <AuthProvider>
+      <Routes>
+        <Route path="/*" element={<App />}/>
+      </Routes>
+    </AuthProvider>
+    </BrowserRouter>
+  </React.StrictMode>,
+  rootElement
+); 
 //ReactDOM.render(
 //  <React.StrictMode>
 //    <Router>

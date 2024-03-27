@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SignUp.css';
 import { Link } from 'react-router-dom';
 import urbankeyLogo from '../Images/urbankey_logo.png';
 import { FaLocationDot, FaHouseCircleCheck, FaMedal, FaPenRuler } from "react-icons/fa6";
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
-import { useAuth } from '../../Provider/AuthProvider';
+import useAuth from '../../CustomeHooks/useAuth.js';
+
 
 const SignUp = () => {
-    const { setToken, setTokenInStorage} = useAuth();
+    const { setAuth, persist, setPersist } = useAuth();
     const [activeButton, setActiveButton] = useState('Individual');
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
@@ -49,43 +50,28 @@ const SignUp = () => {
             alert('Please agree to the Membership Terms.');
             return;
         }
-        
-        fetch('http://127.0.0.1:5000/SignUp', {
-            method: 'POST',
-            headers: { 
-                "content-Type" : "application/json",
-             },
-            body: JSON.stringify(userInfo)
-        })
-        .then(res => {
-            if(!res.ok){
-                throw Error('could not fetch data from url'); 
-            }
-            return res.json();
-        })
-        .then(response => {
-            if ('taken' in response){
-                console.log("email already taken"); 
-                alert("email already taken, please try new email");
-              }
-              else if ('error' in response){
-                console.log("email already taken"); 
-                alert("error from backend. plase contact dev team");
-              }
-              else{
-                const { recToken } = response.token;
-                console.log(response + 'this is the response');
-                console.log(recToken + 'this is the recToken');
-                setToken(recToken);
-                setTokenInStorage(recToken);
-                navigate("/Login");
-              }
-            
-        })
-        .catch(err => {
-            console.log(err);
-            
-        })
+        try {
+            const response = await axios.post('http://localhost:5000/SignUp', {
+                fullName: fullName,
+                email: email,
+                password: password
+            }, {
+              headers: { 'Content-Type': 'application/json'},
+              withCredentials: true
+            });
+            const token = response?.data?.token;
+            const role = response?.data?.role;
+            setAuth({ role, email, password, token });
+            navigate("/Profile");
+      } catch (error) {
+          console.log(error, 'error');
+          if (error.response && error.response.status === 401) {
+              alert("Invalid credentials");
+          }
+          if (error.response && error.response.status === 400) {
+              alert("Email already exists.");
+          }
+      }
 
         // Handle form submission, e.g., send data to server
         console.log('Form submitted:', { fullName, email, password, passwordConfirm });
@@ -98,6 +84,14 @@ const SignUp = () => {
         const re = /\S+@\S+\.\S+/;
         return re.test(email);
     };
+
+    const togglePersist = () => {
+        setPersist(prev => !prev);
+      }
+      
+      useEffect(() => {
+        localStorage.setItem("persist", persist);
+      }, [persist])
 
     return (
         <div className="outer-container">
@@ -318,6 +312,15 @@ const SignUp = () => {
                         </div>
                     </form>
                     )}
+                    <div className="persistCheck">
+                    <input
+                        type="checkbox"
+                        id="persist"
+                        onChange={togglePersist}
+                        checked={persist}
+                    />
+                    <label htmlFor="persist">Trust This Device</label>
+                </div>
                     <div className="login-link">
                         Already a member? <Link to="/Login">Login Now!</Link>
                     </div>

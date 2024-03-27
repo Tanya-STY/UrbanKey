@@ -5,14 +5,16 @@ import { useId, useState, useEffect } from 'react';
 import './Profile.css';
 import { Link, useNavigate  } from 'react-router-dom';
 import {CFormSwitch} from "@coreui/react";
-import '@coreui/coreui/dist/css/coreui.min.css'
-import axios from 'axios';
-import { withRequiredAuthInfo } from "@propelauth/react";
+import '@coreui/coreui/dist/css/coreui.min.css';
+import "@fontsource/roboto/400.css"; // Specify weight
+import axios from 'axios'; // Import axios here
+import useAuth from '../../CustomeHooks/useAuth';
 
 
-function Profile({user}) {
+const Profile = () => {
+
+    const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
-    const [response, setResponse] = useState("");
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [province, setProvince] = useState('');
@@ -23,67 +25,48 @@ function Profile({user}) {
     const [address, setAddress] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(true);
-//    const token = localStorage.getItem('token');
 
-    // useEffect(() => {
+    const fetchUserData = async () => {
+        // const role = auth?.role
+        try {
+            const token = auth?.token; 
+            const response = await axios.get("http://localhost:5000/Profile", {
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                withCredentials: true
+        });
+        const userData = response.data;
+        setName(userData.name);
+        setEmail(userData.email);
+        setProvince(userData.province);
+        setCity(userData.city);
+        setNum(userData.num);
+        setNum2(userData.num2);
+        setKey(userData.key);
+        setAddress(userData.address);
+        setSelectedFile(userData.selectedFile);
+        setLoading(false);
+        // role = response?.data?.role
 
-    //     function fetchUserData(accessToken) {
-    //         return fetch("/Profile", {
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "Authorization": `Bearer ${accessToken}`
-    //             }
-    //         }).then(response => {
-    //             if (response.ok) {
-    //                 const userData = response.data;
-    //                 // setName(userData.name);
-    //                 // setEmail(userData.email);
-    //                 // setProvince(userData.province);
-    //                 // setCity(userData.city);
-    //                 // setNum(userData.num);
-    //                 // setNum2(userData.num2);
-    //                 // setKey(userData.key);
-    //                 // setAddress(userData.address);
-    //                 // setSelectedFile(userData.selectedFile);
-    //                 return userData.json()
-    //             } else {
-    //                 return {status: response.status}
-    //             }
-    //         })
-    //     }
-//    const fetchUserData = async () => {
-//        try {
-//            const response = await axios.get("http://localhost:5000/Profile", {
-//                headers: {
-//                    Authorization: 'Bearer ' + props.token
-//                }
-//            });
-//            const userData = response.data;
-//            userData.access_token && props.setToken(userData.access_token)
-//            setName(userData.name);
-//            setEmail(userData.email);
-//            setProvince(userData.province);
-//            setCity(userData.city);
-//            setNum(userData.num);
-//            setNum2(userData.num2);
-//            setKey(userData.key);
-//            setAddress(userData.address);
-//            setSelectedFile(userData.selectedFile);
-//            setLoading(false);
-//
-//        } catch(error) {
-//            console.log(error);
-//            navigate('/Login');
-//        }
-//    };
-//    fetchUserData();
-    // }, [accessToken]);
+    } catch(error) {
+        console.log(error);
+        navigate('/Login');
+        }
+    };
+
+
+useEffect(() => {
+   fetchUserData();
+}, []);
 
 const handlesubmit = async (e) => {
 e.preventDefault();
 
 try {
-    await axios.post("http://localhost:5000/user/profile/update", {
+    const token = auth?.token; 
+    const response=await axios.post("http://localhost:5000/user/profile/update", {
         name,
         email,
         province,
@@ -93,11 +76,15 @@ try {
         key,
         address,
         selectedFile
-    },
-//      headers: {
-//        Authorization: 'Bearer ' + props.token
-//      }
-    );
+    }, {
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        withCredentials: true
+    });
+    console.log(response.data);
+    // auth?.role = response?.data?.role;
     console.log("Profile updated successfully");
 }
 catch (error) {
@@ -105,25 +92,43 @@ catch (error) {
 }
 }
 
+    const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg'); // State to hold the profile picture
+    // Function to handle profile picture upload
+    const handleProfilePictureUpload = (e) => {
+        const file = e.target.files[0]; // Get the uploaded file
+        const reader = new FileReader(); // Create a file reader
+        reader.onloadend = () => {
+            // Once the file is read, set the profile picture state to the uploaded image
+            setProfilePicture(reader.result);
+        };
+        reader.readAsDataURL(file); // Read the file as a data URL
+    };
+
+
+
 
     return (
         <div className="profilePage" >
             <form className="profileForm">
                 <h1 className="membershipInfo">Membership Information</h1>
+                <div className="profile-picture">
+                    <img src={profilePicture} alt="Profile Picture" />
+                    <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} />
+                    <label htmlFor="upload">Upload Profile Picture</label>
+                </div>
 
                 <div className="field-holder-profile">
                     <label className="profileLabels" htmlFor={name}> Name / Surname</label>
-                    <input className="profileInput" value={user.firstName + " " + user.lastName} onChange={(e) => setName(e.target.value)} type="text" />
+                    <input className="profileInput" value={name} onChange={(e) => setName(e.target.value)} type="text" />
                 </div>
 
                 <div className="field-holder-profile">
                     <label className="profileLabels" htmlFor={email}> E-mail</label>
-                    <input className="profileInput" value={user.email} onChange={(e) => setEmail(e.target.value)} type="text" />
+                    <input className="profileInput" value={email} onChange={(e) => setEmail(e.target.value)} type="text" />
                 </div>
                 <div className="box-profile-page">
                     <div className="field-holder2-profile">
                         <label className="province" htmlFor={province}>Province</label>
-                        {/* update user backend  */}
                         <select className="profileSelect" value={province} onChange={(e) => setProvince(e.target.value)}>
                             <option></option>
                             <option>Alberta</option>
@@ -178,7 +183,7 @@ catch (error) {
             </form>
 
             <div className="notification">
-                <text className="notifText" >I want to be informed about all announcements and campaigns via commercial electronic mail</text>
+                <p className="notifText" >I want to be informed about all announcements and campaigns via commercial electronic mail</p>
                 <div className="profileSwitch">
                     <CFormSwitch label="E-mail" className="formSwitchCheckDefault"/>
                     <CFormSwitch label="SMS" className="formSwitchCheckDefault"/>
@@ -194,4 +199,4 @@ catch (error) {
     );
 };
 
-export default withRequiredAuthInfo(Profile);
+export default Profile;

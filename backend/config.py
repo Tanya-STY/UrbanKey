@@ -1,27 +1,12 @@
-confrom decouple import config
-import os
-from datetime import timedelta
+from pymongo import MongoClient
+from pymongo.server_api import ServerApi
 
-from dotenv import load_dotenv
+uri = "mongodb+srv://admin:urbankey1234@urbankey.nfdot4b.mongodb.net/?retryWrites=true&w=majority"
 
-load_dotenv()
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
 
-BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+db = client.get_database('UrbanKey')
 
-class Config:
-    SECRET_KEY=os.getenv("SECRET_KEY", "secret")
+users = db.get_collection('Users')
 
-class DevConfig(Config):
-    DEBUG = True
-    # MongoDB configurations
-    MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/dev_db")
-
-class ProdConfig(Config):
-    DEBUG = False
-    # MongoDB configurations
-    MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/prod_db")
-
-class TestConfig(Config):
-    DEBUG = True
-    # MongoDB configurations
-    MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/test_db")

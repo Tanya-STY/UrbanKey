@@ -53,4 +53,3 @@ const RegistrationKey = () => {
 };
 
 export default RegistrationKey;
-
