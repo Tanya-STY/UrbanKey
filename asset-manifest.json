@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/UrbanKey/static/css/main.0b0a8e9b.css",
-    "main.js": "/UrbanKey/static/js/main.7083577c.js",
+    "main.js": "/UrbanKey/static/js/main.5b9e45fe.js",
     "static/media/living-room-ex.jpg": "/UrbanKey/static/media/living-room-ex.e2ae417c3ff1380b5e81.jpg",
     "static/media/kitchen-ex.jpg": "/UrbanKey/static/media/kitchen-ex.06ba9aec20c8edef77c0.jpg",
     "static/media/bedroom-ex.jpg": "/UrbanKey/static/media/bedroom-ex.e7e3cb85b467a424475f.jpg",
@@ -57,10 +57,10 @@
     "static/media/picture_1.svg": "/UrbanKey/static/media/picture_1.42fa8684bc164aae1668295afdfd8100.svg",
     "index.html": "/UrbanKey/index.html",
     "main.0b0a8e9b.css.map": "/UrbanKey/static/css/main.0b0a8e9b.css.map",
-    "main.7083577c.js.map": "/UrbanKey/static/js/main.7083577c.js.map"
+    "main.5b9e45fe.js.map": "/UrbanKey/static/js/main.5b9e45fe.js.map"
   },
   "entrypoints": [
     "static/css/main.0b0a8e9b.css",
-    "static/js/main.7083577c.js"
+    "static/js/main.5b9e45fe.js"
   ]
 }
