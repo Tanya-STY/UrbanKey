@@ -5,5 +5,5 @@ class RegistrationKey(mongoengine.Document):
     unit = mongoengine.ReferenceField('Units')
     user = mongoengine.ReferenceField('Users')
 
-mongoengine.connect('Urbankey')
+mongoengine.connect('UrbanKey')
 

@@ -7,4 +7,4 @@ class ManagementCompany(mongoengine.Document):
     roles = mongoengine.ListField(mongoengine.StringField(choices=['manager', 'operations', 'finance'])) #different roles available at the company,
 
 # Connect to MongoDB
-mongoengine.connect('your_database_name')
+mongoengine.connect('UrbanKey')

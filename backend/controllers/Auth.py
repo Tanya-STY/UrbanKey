@@ -1,10 +1,10 @@
 from flask import jsonify, make_response, request
 from config import users  # Import the MongoDB collection and bcrypt instance
-from middleware.TokenAuth import generate_access_token, generate_refresh_token, verify_refresh_token
+from middleware.TokenAuth import generate_access_token, generate_refresh_token, verify_refresh_token # middleware functions handle authentication tokens and session management
 from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt()
-# from services.bcrypt_services import hash_password, check_password
+
 
 def signup(request):
     try:

@@ -12,4 +12,4 @@ class Units(mongoengine.Document):
     # occupant_type = mongoengine.StringField(choices=['owner', 'rental user'])
 
 # Connect to MongoDB
-mongoengine.connect('Urbankey')
+mongoengine.connect('UrbanKey')

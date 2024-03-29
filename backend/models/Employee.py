@@ -7,4 +7,4 @@ class Employee(mongoengine.Document):
     role = mongoengine.StringField(choices=['manager', 'operations', 'finance']) #single string field, only one role
 
 # Connect to MongoDB
-mongoengine.connect('your_database_name')
+mongoengine.connect('UrbanKey')
