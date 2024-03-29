@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from model.auth import signup, signin, refreshToken, handle_logout
+from controllers.Auth import signup, signin, refreshToken, handle_logout
 
 auth_routes = Blueprint('auth_routes', __name__)
 

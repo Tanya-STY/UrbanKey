@@ -3,9 +3,9 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
-from config import users, client
-from routes.auth_routes import auth_routes  # Import route blueprints
-from routes.user_routes import user_routes
+from config import client
+from routes.Auth_routes import auth_routes  # Import route blueprints
+from routes.User_routes import user_routes
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '0622d0d552f33f6309180901'
