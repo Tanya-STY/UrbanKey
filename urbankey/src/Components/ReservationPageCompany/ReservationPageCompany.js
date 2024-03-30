@@ -48,36 +48,70 @@ const ReservationPageCompany = () => {
     const [searchTerm, setSearchTerm] = useState(''); // State to store search term
     const [checkedFacilities, setCheckedFacilities] = useState([...facilities]); // State to store checked facilities
     const [selectedDate, setSelectedDate] = useState(new Date()); // State to store selected date
-
-    // Filter available time slots based on existing reservations
-    const availableTimeSlots = timeSlots.filter(timeSlot => !reservations.some(reservation =>
-        reservation.time === timeSlot &&
-        reservation.facility === newReservation.facility && // Filter by selected facility
-        reservation.fullName && // Filter out slots with assigned full name
-        reservation.contactNumber && // Filter out slots with assigned contact number
-        reservation.email && // Filter out slots with assigned email
-        reservation.date.getTime() === newReservation.date.getTime() // Filter by selected date
-    ));
+    const [filteredReservations, setFilteredReservations] = useState([]); // State to store filtered reservations
+    const [availableTimeSlots, setAvailableTimeSlots] = useState([...timeSlots]); // State to store available time slots, initialized with all time slots
 
     useEffect(() => {
-        // Reset time slot when facility changes
-        setNewReservation({ ...newReservation, time: '' });
-    }, [newReservation.facility]);
+        // Filter reservations based on search term and checked facilities
+        const filteredReservations = reservations.filter(reservation =>
+            (reservation.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            reservation.contactNumber.includes(searchTerm) ||
+            reservation.email.toLowerCase().includes(searchTerm.toLowerCase())) &&
+            checkedFacilities.includes(reservation.facility)
+        );
+
+        setFilteredReservations(filteredReservations);
+    }, [searchTerm, checkedFacilities, reservations]);
+
+    
+    useEffect(() => {
+        // Update available time slots when facility or date changes
+        if (newReservation.facility && newReservation.date) {
+            const availableTimeSlots = getAvailableTimeSlots(newReservation.facility, newReservation.date);
+            setAvailableTimeSlots(availableTimeSlots);
+            // Reset the selected time slot if it's not available anymore
+            if (!availableTimeSlots.includes(newReservation.time)) {
+                setNewReservation(prevState => ({ ...prevState, time: '' }));
+            }
+        } else {
+            // If facility or date is not chosen, set available time slots to all time slots
+            setAvailableTimeSlots([...timeSlots]);
+        }
+    }, [newReservation.facility, newReservation.date]);
+
+    // Function to filter out reserved time slots for the selected facility and date
+    const getAvailableTimeSlots = (facility, date) => {
+        const reservedTimeSlots = reservations
+            .filter(reservation => reservation.facility === facility && reservation.date.getTime() === date.getTime())
+            .map(reservation => reservation.time);
+        
+        return timeSlots.filter(timeSlot => !reservedTimeSlots.includes(timeSlot));
+    };
+
+    const handleTimeSlotChange = (e) => {
+        setNewReservation({ ...newReservation, time: e.target.value });
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Find the index of the existing row with the chosen time slot, facility, and date
+        
+        // Find the index of the existing reservation for the chosen time slot, facility, and date
         const index = reservations.findIndex(reservation =>
             reservation.time === newReservation.time &&
             reservation.facility === newReservation.facility &&
             reservation.date.getTime() === newReservation.date.getTime()
         );
+    
         if (index !== -1) {
-            // Update the existing row with new reservation data
+            // Update the existing reservation with new reservation data
             const updatedReservations = [...reservations];
             updatedReservations[index] = { ...updatedReservations[index], ...newReservation };
             setReservations(updatedReservations);
+        } else {
+            // Add the new reservation directly to the reservations state
+            setReservations([...reservations, newReservation]);
         }
+    
         // Reset the form fields
         setNewReservation({
             fullName: '',
@@ -90,15 +124,7 @@ const ReservationPageCompany = () => {
         // Hide the form after submission
         setShowForm(false);
     };
-
-    // Filter reservations based on search term and checked facilities
-    const filteredReservations = reservations.filter(reservation =>
-        (reservation.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        reservation.contactNumber.includes(searchTerm) ||
-        reservation.email.toLowerCase().includes(searchTerm.toLowerCase())) &&
-        checkedFacilities.includes(reservation.facility)
-    );
-
+    
     const handleFacilityCheckboxChange = (facility) => {
         if (checkedFacilities.includes(facility)) {
             setCheckedFacilities(checkedFacilities.filter(item => item !== facility));
@@ -166,15 +192,16 @@ const ReservationPageCompany = () => {
                                 id="time"
                                 name="time"
                                 value={newReservation.time}
-                                onChange={(e) => setNewReservation({ ...newReservation, time: e.target.value })}
+                                onChange={handleTimeSlotChange}
                                 required
-                                disabled={!newReservation.date} // Disable time slot selection if date not chosen
+                                disabled={!newReservation.date || !newReservation.facility} // Disable time slot selection if date or facility not chosen
                             >
                                 <option value="">Select Time Slot</option>
                                 {availableTimeSlots.map(timeSlot => (
                                     <option key={timeSlot} value={timeSlot}>{timeSlot}</option>
                                 ))}
                             </select>
+
                             
                             <label htmlFor="contactNumber">Contact Number:</label>
                             <input
@@ -204,22 +231,16 @@ const ReservationPageCompany = () => {
 
             {/* Add div containing facility checkboxes and date picker */}
             <div className="facility-checkboxes">
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={checkedFacilities.includes('Sky Lounge')}
-                        onChange={() => handleFacilityCheckboxChange('Sky Lounge')}
-                    />
-                    Sky Lounge
-                </label>
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={checkedFacilities.includes('Spa & Fitness')}
-                        onChange={() => handleFacilityCheckboxChange('Spa & Fitness')}
-                    />
-                    Spa & Fitness
-                </label>
+                {facilities.map(facility => (
+                    <label key={facility}>
+                        <input
+                            type="checkbox"
+                            checked={checkedFacilities.includes(facility)}
+                            onChange={() => handleFacilityCheckboxChange(facility)}
+                        />
+                        {facility}
+                    </label>
+                ))}
                 {/* Date picker */}
                 <DatePicker
                     selected={selectedDate}
@@ -243,8 +264,8 @@ const ReservationPageCompany = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* Map through all reservations array and render rows */}
-                        {reservations.map((reservation, index) => (
+                        {/* Map through filtered reservations array and render rows */}
+                        {filteredReservations.map((reservation, index) => (
                             <tr key={index}>
                                 <td>{reservation.time}</td>
                                 <td>{reservation.facility}</td>
