@@ -2,6 +2,8 @@ pymongo
 mongoengine
 bcrypt
 Flask
+flask_bcrypt
+PyJWT
 cffi
 click
 colorama
@@ -13,3 +15,5 @@ MarkupSafe
 pycparser
 Werkzeug
 zipp
+
+# pip install -r requirements.txt

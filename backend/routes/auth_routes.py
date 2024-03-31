@@ -1,12 +1,12 @@
 from flask import Blueprint, request, jsonify
-from model.auth import signup, signin, refreshToken, handle_logout
+from controllers.Auth import signup, signin, refreshToken, handle_logout #controllers handle incoming requests and they return reponses
 
-auth_routes = Blueprint('auth_routes', __name__)
+auth_routes = Blueprint('auth_routes', __name__) #create blueprint definition
 
-@auth_routes.route("/SignUp", methods=['POST'])
+@auth_routes.route("/SignUp", methods=['POST']) #auth_routes decorator defines the signup route with the HTTP request
 def signup_route():
     
-    return signup(request)
+    return signup(request) #function in controllers
      
 
 @auth_routes.route("/Login", methods=['POST'])
