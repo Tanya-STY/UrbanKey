@@ -26,7 +26,7 @@ import { AuthProvider } from "./Provider/AuthProvider.js";
 import Navbar from "./Components/NavBar/NavBar.js";
 import useAuth from "./CustomeHooks/useAuth.js";
 import ReservationPageCompany from "./Components/ReservationPageCompany/ReservationPageCompany";
-
+import CondoRenterDashboard from "./Components/CondoRenterDashboard/RenterDashboard"; // added code
 
 const ROLE = {
   'User': 2001,
@@ -68,6 +68,8 @@ function App() {
             <Route path="/Reservation" element={<Reservation />} />
 
             <Route path="/ReservationPageCompany" element={<ReservationPageCompany/>} />
+
+            <Route path="/RenterDashboard" element={<CondoRenterDashboard />} /> {/*added code*/}
             </Route>
           </Route>
           

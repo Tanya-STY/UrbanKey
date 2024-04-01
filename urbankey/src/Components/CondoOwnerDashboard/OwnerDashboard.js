@@ -14,7 +14,7 @@ import icon7 from "../Images/money-icon.png";
 import icon8 from "../Images/card-icon.png";
 import icon9 from "../Images/stock-up-icon.png";
 
-const CondoDash = () => {
+const CondoOwnerDash = () => {
   return (
     <div className="condo-dash-container">
       <div className="condo-dash-top">
@@ -258,4 +258,4 @@ const CondoDash = () => {
   );
 };
 
-export default CondoDash;
+export default CondoOwnerDash;
