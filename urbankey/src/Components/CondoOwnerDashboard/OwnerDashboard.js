@@ -229,7 +229,7 @@ const CondoOwnerDash = () => {
           </div>
 
           <div className="condo-dash-submit">
-            <Link to="/Maintenance" className="condo-dash-request-link">
+            <Link to="/MaintenanceRequest" className="condo-dash-request-link">
               Submit a New Request
             </Link>
           </div>
