@@ -15,6 +15,8 @@ import { CiGrid41 } from "react-icons/ci";
 import {CSVLink} from "react-csv";
 import { GoDotFill } from "react-icons/go";
 import {useState} from "react";
+import NewEmployeePopup from './NewEmployeePopup';
+
 
 
 
@@ -144,20 +146,27 @@ const rows = [
 export default function DataGridDemo() {
     const [searchValue, setSearchValue] = useState('');
     const [filteredRows, setFilteredRows] = useState(rows);
+    const [openPopup, setOpenPopup] = useState(false);
+
+
+    const handleAddNewEmployee = (newEmployee) => {
+        setFilteredRows([...filteredRows, newEmployee]); // Update your rows state with the new employee
+    };
+
 
     const handleSearch = (e) => {
         const keyword = e.target.value.toLowerCase();
         setSearchValue(keyword);
         const filteredData = rows.filter(row =>
-                row.name.toLowerCase().includes(keyword) ||
-                row.id.toLowerCase().includes(keyword) ||
-                row.role.toLowerCase().includes(keyword) ||
-                row.companyName.toLowerCase().includes(keyword)
+            row.name.toLowerCase().includes(keyword) ||
+            row.id.toLowerCase().includes(keyword) ||
+            row.role.toLowerCase().includes(keyword) ||
+            row.companyName.toLowerCase().includes(keyword)
         );
         setFilteredRows(filteredData);
     };
 
-    const numberOfRows = rows.length;
+    const numberOfRows = filteredRows.length; // Update the numberOfRows with the length of filteredRows
     const csvData = [
         { name: 'Name', id: 'Employee ID', role: 'Role', status: 'Status', companyName: 'Company Name' },
         ...rows
@@ -177,9 +186,16 @@ export default function DataGridDemo() {
                         <IoDownloadOutline className="download-icon" />
                         Export
                     </CSVLink>
-                    <button className="new-employee-btn">
-                    <IoIosAddCircleOutline className="add-icon"/>
-                    New Employees</button>
+                    <button className="new-employee-btn" onClick={() => setOpenPopup(true)}>
+                        <IoIosAddCircleOutline className="add-icon"/>
+                        New Employees
+                    </button>
+                    <NewEmployeePopup
+                        open={openPopup}
+                        onClose={() => setOpenPopup(false)}
+                        onAdd={handleAddNewEmployee}
+                    />
+
                 </div>
             </div>
             <div className="employee-types">

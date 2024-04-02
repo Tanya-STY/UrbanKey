@@ -100,6 +100,11 @@
     color: #FFFFFF;
 }
 
+.new-employee-btn:hover{
+    background: #0069e6;
+}
+
+
 .search-container{
     display: flex;
     flex-direction: row;
