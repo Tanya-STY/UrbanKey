@@ -1,0 +1,22 @@
+.addNewEmployee-btn{
+    margin-top: 10px;
+    background-color: #0075FF;
+    border-radius: 8px;
+    border: 1px solid #E6E7EC;
+    font-family: 'Inter';
+    font-style: normal;
+    font-size: 13px;
+    color: #FFFFFF;
+}
+
+.addNewEmployee-btn:hover{
+    background-color: #0069e6;
+    border-radius: 8px;
+    border: 1px solid #E6E7EC;
+    font-family: 'Inter';
+    font-style: normal;
+    font-size: 13px;
+    color: #FFFFFF;
+}
+
+
