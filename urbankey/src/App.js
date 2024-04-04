@@ -88,9 +88,9 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Unauthorized" element={<Unauthorized />} />
           <Route path="/HomePage" element={<HomePage />} />
-          
+
           <Route element={<PersistLogin />} >
-          <Route element={<RequireAuth allowedRoles={[ROLE.User, ROLE.Admin, ROLE.Renter, ROLE.Owner]}/>} > 
+          <Route element={<RequireAuth allowedRoles={[ROLE.User, ROLE.Admin, ROLE.Renter, ROLE.Owner]}/>} >
             {/* <Route path="/HomePage" element={<HomePage />} /> */}
             <Route path="/Profile" element={<Profile />} />
             <Route path="/MaintenanceRequest" element={<MaintenanceRequest />} />
@@ -110,8 +110,8 @@ function App() {
             <Route path="/RenterDashboard" element={<CondoRenterDashboard />} /> {/*added code*/}
             </Route>
           </Route>
-          
-          
+
+
       </Routes>
     </>
    
