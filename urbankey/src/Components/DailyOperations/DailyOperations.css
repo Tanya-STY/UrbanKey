@@ -1,0 +1,48 @@
+.operations-box {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #007bff; /* Blue outline */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .operations-top {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .operations-top h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  .operations-search {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .operations-search input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .operations-table {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .operations-table h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
