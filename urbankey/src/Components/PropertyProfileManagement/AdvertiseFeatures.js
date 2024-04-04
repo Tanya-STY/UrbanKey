@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './PropertyProfileManagement.css';
 
+import RegistrationKey from '../RegistrationKey/RegistrationKey';
+
 const interiorFeatures = [
   'ADSL', 'Alarm', 'Balcony', 'Built-in Kitchen', 'Barbecue', 
   'Furnished', 'Laundry Room', 'Air Conditioning', 'Wallpaper', 
@@ -43,6 +45,19 @@ const AdvertiseFeatures = () => {
     console.log("Selected interior features:", selectedInteriorFeatures);
     console.log("Selected exterior features:", selectedExteriorFeatures);
   };
+  
+
+//
+  const [showPopup, setShowPopup] = useState(false);
+
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
 
   return (
     <div className="advertise-features">
@@ -82,9 +97,10 @@ const AdvertiseFeatures = () => {
             ))}
           </div>
         </div>
-        <button type="submit" className="submit-button">
+        <button type="submit" className="submit-button" onClick={openPopup}>
           Send Registration Keys
         </button>
+        {showPopup && <RegistrationKey onClose={closePopup}/>}
       </form>
     </div>
   );
