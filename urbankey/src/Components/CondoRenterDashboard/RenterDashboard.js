@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Map, GoogleApiWrapper } from "google-maps-react";
-import "./OwnerDashboard.css";
+// import { Map, GoogleApiWrapper } from "google-maps-react";
+import "./RenterDashboard.css";
 import ImageGallery from "./ImageGallery";
 import icon1 from "../Images/location-icon-yellow.png";
 import face from "../Images/man-face-ex.png";
@@ -14,7 +14,7 @@ import icon7 from "../Images/money-icon.png";
 import icon8 from "../Images/card-icon.png";
 import icon9 from "../Images/stock-up-icon.png";
 
-const CondoDash = () => {
+const CondoRenterDash = () => {
   return (
     <div className="condo-dash-container">
       <div className="condo-dash-top">
@@ -99,7 +99,7 @@ const CondoDash = () => {
           </div>
           <div className="condo-dash-payment-history">
             <p>Payment History</p>
-            <Link to="" className="condo-dash-view-link">
+            <Link to="/PaymentHistory" className="condo-dash-view-link">
               View
             </Link>
           </div>
@@ -177,7 +177,7 @@ const CondoDash = () => {
           </div>
         </div>
 
-        <div
+        {/* <div
           className="condo-dash-financial-and-request-box"
           style={{ marginBottom: "11%", marginTop: "8%" }}
         >
@@ -229,11 +229,11 @@ const CondoDash = () => {
           </div>
 
           <div className="condo-dash-submit">
-            <Link to="" className="condo-dash-request-link">
+            <Link to="/Maintenance" className="condo-dash-request-link">
               Submit a New Request
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="condo-dash-sixth-row">
@@ -258,4 +258,4 @@ const CondoDash = () => {
   );
 };
 
-export default CondoDash;
+export default CondoRenterDash;
