@@ -34,20 +34,51 @@ def addReservation(email, name, facility, time_slot, date):
 @token_required
 def makeReservation(request):
     try:
-        data = request.json
         email = request.email
+        data = request.json
         user = users.find_one({"email": email})
         if user:
                 name = user.get('name')
                 facility = data.get('facility')
                 date = data.get('date')
-                time_slot = data.get('timeSlot')
+                time_slot = data.get('time_slot')
                 addReservation(email, name, facility, time_slot, date)
-        else:
-            return jsonify({'error': 'User not found'}), 404
+                
+        refreshToken = generate_refresh_token(email, 2001)
+
+        token = generate_access_token(email, 2001)
+
+        resp = make_response(jsonify({'role': 2001, 'token': token}))
+        resp.set_cookie('jwt', refreshToken, httponly=True, secure=True, samesite='None', max_age=24 * 60 * 60)
+        return resp, 200
     
     except Exception as e:
         print(e)
         return jsonify({'error': 'Internal server error'}), 500
     
+def getReservations(request):
+    try:
+        data = request.json
+        facility = data.get('facility')
+        date = data.get('date')
+        time_slot = data.get('time_slot')
+        reservations_list = list(reservations.find({
+            'facility': facility,
+            'date': date,
+            'time_slot': time_slot
+        }, {'_id': 0}))
+        return jsonify(reservations_list), 200
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'Internal server error'}), 500
+
+def getAllReservations(request):
+    try:
+        reservations_list = list(reservations.find())
+        for reservation in reservations_list:
+            reservation.pop('_id', None)
+        return jsonify(reservations_list), 200
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'Internal server error'}), 500
 
