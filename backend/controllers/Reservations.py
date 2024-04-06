@@ -31,26 +31,19 @@ def addReservation(email, name, facility, time_slot, date):
             reservations.insert_one(new_reservation)
             return True, "Reservation successfully made"
 
-@token_required
 def makeReservation(request):
     try:
         email = request.email
         data = request.json
         user = users.find_one({"email": email})
         if user:
-                name = user.get('name')
+                name = user.get('full_name')
                 facility = data.get('facility')
                 date = data.get('date')
                 time_slot = data.get('time_slot')
                 addReservation(email, name, facility, date, time_slot)
-                
-        refreshToken = generate_refresh_token(email, 2001)
 
-        token = generate_access_token(email, 2001)
-
-        resp = make_response(jsonify({'role': 2001, 'token': token}))
-        resp.set_cookie('jwt', refreshToken, httponly=True, secure=True, samesite='None', max_age=24 * 60 * 60)
-        return resp, 200
+        return jsonify({'message': 'User updated successfully'}), 200
     
     except Exception as e:
         print(e)

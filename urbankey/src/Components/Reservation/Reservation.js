@@ -22,7 +22,7 @@ const Reservation = () => {
   const [reservedTimeSlots, setReservedTimeSlots] = useState([]);
 
   // Simulated function to fetch availability data
-  const fetchReservations = async (facility, date) => {
+ /*  const fetchReservations = async (facility, date) => {
     try {
       const response = await axios.post('/GetReservations', { facility, date });
       const reservations = response.data;
@@ -42,7 +42,7 @@ const Reservation = () => {
     if (selectedFacility && selectedDate) {
       fetchReservations(selectedFacility, format(selectedDate, 'yyyy-MM-dd'));
     }
-  }, [selectedFacility, selectedDate]);
+  }, [selectedFacility, selectedDate]); */
 
 /*   useEffect(() => {
     if (selectedDate) {
@@ -77,13 +77,16 @@ const Reservation = () => {
     "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM",
     "08:00 PM", "09:00 PM", "10:00 PM", "11:00 PM"
   ];
-
+  const setSelectedFacility2 = (value)=>{
+    setSelectedFacility(value);
+  };
   // Function to handle form submission
   const handleSubmit = async (e) => {
   e.preventDefault();
 
     if (!selectedFacility) {
       setErrorMessage("Please select a facility");
+      console.log("Facility:", selectedFacility)
       setSuccessMessage("");
     } else if (!selectedDate) {
       setErrorMessage("Please select a date");
@@ -93,6 +96,7 @@ const Reservation = () => {
       setSuccessMessage("");
     } else {
       const token = auth?.token;
+      const email = auth?.email;
       // Submit the data
       setErrorMessage("");
       setSuccessMessage("Reservation successfully submitted!");
@@ -101,12 +105,13 @@ const Reservation = () => {
       console.log("Time:", selectedTimeSlot);
 
       const reservationData = {
+        email: email,
         facility: selectedFacility,
         date: format(selectedDate, "yyyy-MM-dd"),
         time_slot: selectedTimeSlot
       }
 
-      axios.post('/MakeReservation', reservationData,{
+      axios.post('http://localhost:5000/MakeReservation', reservationData,{
         headers: { 
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -142,7 +147,7 @@ const Reservation = () => {
           </div>
           <div className="selection-row2">
             {/* Added onChange handler to update selectedFacility state */}
-            <DropdownMenu onChange={(facility) => setSelectedFacility(facility)} />
+            <DropdownMenu onChange={(facility) => setSelectedFacility(facility)} setSelectedFacility2={setSelectedFacility2} />
           </div>
           <div className="selection-row3">
                 <div className="grid-container">

@@ -77,7 +77,6 @@ function App() {
 
 
       {/*</Routes>*/}
-        <ManagerEmployeePage></ManagerEmployeePage>
       <Navbar />
 
       <Routes>
