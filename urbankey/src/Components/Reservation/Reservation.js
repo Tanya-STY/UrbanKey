@@ -6,8 +6,12 @@ import "react-nice-dates/build/style.css";
 import { Container, Row, Col } from "react-bootstrap";
 import { getDay, isBefore, format } from "date-fns";
 import { enUS } from 'date-fns/locale';
+import axios from 'axios';
+import useAuth from '../../CustomeHooks/useAuth';
+
 
 const Reservation = () => {
+  const { auth, setAuth } = useAuth();
   const [selectedDate, setSelectedDate] = useState(null);
   const [date, setDate] = useState(new Date());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
@@ -15,24 +19,36 @@ const Reservation = () => {
   const [selectedFacility, setSelectedFacility] = useState(""); // Changed initial state to an empty string
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [reservedTimeSlots, setReservedTimeSlots] = useState([]);
 
   // Simulated function to fetch availability data
-  const fetchAvailability = (selectedDate) => {
-    // Simulated API call to fetch availability for selected date
-    // This is a placeholder function, replace it with your actual API call
-    // In this example, we assume that all time slots are available
+  const fetchReservations = async (facility, date) => {
+    try {
+      const response = await axios.post('/GetReservations', { facility, date });
+      const reservations = response.data;
+      const reservedSlots = reservations.map(reservation => reservation.time_slot);
+      setReservedTimeSlots(reservedSlots);
+    } catch (error) {
+      console.error('Error fetching reservations:', error);
+    }
     const availabilityData = timeSlots.reduce((acc, timeSlot) => {
-      acc[timeSlot] = true; // Available
+      acc[timeSlot] = !reservedTimeSlots.includes(timeSlot);
       return acc;
     }, {});
     setAvailability(availabilityData);
   };
 
   useEffect(() => {
+    if (selectedFacility && selectedDate) {
+      fetchReservations(selectedFacility, format(selectedDate, 'yyyy-MM-dd'));
+    }
+  }, [selectedFacility, selectedDate]);
+
+/*   useEffect(() => {
     if (selectedDate) {
       fetchAvailability(selectedDate);
     }
-  }, [selectedDate]);
+  }, [selectedDate]); */
 
   const modifiers = {
     disabled: (date) => getDay(date) === 0 || getDay(date) === 7 // Disables Saturdays
@@ -63,7 +79,9 @@ const Reservation = () => {
   ];
 
   // Function to handle form submission
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
     if (!selectedFacility) {
       setErrorMessage("Please select a facility");
       setSuccessMessage("");
@@ -74,13 +92,38 @@ const Reservation = () => {
       setErrorMessage("Please select a time");
       setSuccessMessage("");
     } else {
+      const token = auth?.token;
       // Submit the data
       setErrorMessage("");
       setSuccessMessage("Reservation successfully submitted!");
       console.log("Facility:", selectedFacility);
       console.log("Date:", selectedDate);
       console.log("Time:", selectedTimeSlot);
-    }
+
+      const reservationData = {
+        facility: selectedFacility,
+        date: format(selectedDate, "yyyy-MM-dd"),
+        time_slot: selectedTimeSlot
+      }
+
+      axios.post('/MakeReservation', reservationData,{
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        withCredentials: true
+    })
+      .then(response => {
+        // Handle success
+        console.log('Reservation made successfully:', response.data);
+        // Further actions if needed
+      })
+      .catch(error => {
+        // Handle error
+        console.error('Error making reservation:', error.response.data);
+        // Further actions if needed
+      });
+  }
   };
   
 

@@ -27,7 +27,7 @@ const Profile = () => {
     const [loading, setLoading] = useState(true);
 
     const fetchUserData = async () => {
-        // const role = auth?.role
+         const role = auth?.role
         try {
             const token = auth?.token; 
             const response = await axios.get("http://localhost:5000/Profile", {

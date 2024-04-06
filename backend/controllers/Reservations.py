@@ -25,7 +25,7 @@ def addReservation(email, name, facility, time_slot, date):
             'facility': facility,
             'date': date,
             'time_slot': time_slot,
-            'created_at': datetime.now()
+            #'created_at': datetime.now()
             }
             # Add to database
             reservations.insert_one(new_reservation)
@@ -42,7 +42,7 @@ def makeReservation(request):
                 facility = data.get('facility')
                 date = data.get('date')
                 time_slot = data.get('time_slot')
-                addReservation(email, name, facility, time_slot, date)
+                addReservation(email, name, facility, date, time_slot)
                 
         refreshToken = generate_refresh_token(email, 2001)
 
@@ -61,11 +61,9 @@ def getReservations(request):
         data = request.json
         facility = data.get('facility')
         date = data.get('date')
-        time_slot = data.get('time_slot')
         reservations_list = list(reservations.find({
             'facility': facility,
             'date': date,
-            'time_slot': time_slot
         }, {'_id': 0}))
         return jsonify(reservations_list), 200
     except Exception as e:

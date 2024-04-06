@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './ReservationPageCompany.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import axios from 'axios';
 
 const ReservationPageCompany = () => {
     // Define the time slots
