@@ -1,15 +1,17 @@
 import React from 'react';
 import './PaymentHistory.css';
 
-const PaymentHistory = () => {
+const PaymentHistory = ({ onClose }) => {
   const payments = [
-    { date: 'September 2023', amount: '$4568.00', method: 'Bank Transfer', reference: '12345', status: 'Paid' },
+    { date: 'September 2023', amount: '$0.00', method: 'Bank Transfer', reference: '12345', status: 'Paid' },
     { date: 'October 2023', amount: '$4568.00', method: 'Credit Card', reference: '65078', status: 'Pending' },
     { date: 'November 2023', amount: '$4568.00', method: 'Debit Card', reference: '78965', status: 'Rejected' },
   ];
 
   return (
     <div className="payment-history-container">
+      <div className='payment-history-overlay' onClick={onClose}></div>
+      <div className='payment-history-popup'>
       <h1 className="title">Payment History</h1>
       <table className="payment-history-table">
         <thead>
@@ -34,9 +36,10 @@ const PaymentHistory = () => {
         </tbody>
       </table>
       <div className="button-container">
-        <button className="go-back-button">Go Back</button>
-        <button className="see-invoices-button">See Invoices</button>
+        <button className="go-back-button" onClick={onClose}>Go Back</button>
+        {/* <button className="see-invoices-button">See Invoices</button> */}
       </div>
+    </div>
     </div>
   );
 };

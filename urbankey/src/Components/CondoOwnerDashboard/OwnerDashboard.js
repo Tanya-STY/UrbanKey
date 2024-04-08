@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 // import { Map, GoogleApiWrapper } from "google-maps-react";
 import "./OwnerDashboard.css";
@@ -13,8 +14,18 @@ import icon6 from "../Images/radio-button-2.png";
 import icon7 from "../Images/money-icon.png";
 import icon8 from "../Images/card-icon.png";
 import icon9 from "../Images/stock-up-icon.png";
+import PaymentHistoryOwner from "../Popups/PaymentHistoryOwner";
 
 const CondoOwnerDash = () => {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
   return (
     <div className="condo-dash-container">
       <div className="condo-dash-top">
@@ -60,7 +71,7 @@ const CondoOwnerDash = () => {
             <p style={{ marginBottom: "0" }}>Building Age</p>
           </div>
           <div className="condo-dash-info-right1">
-            <p style={{ color: "red" }}>0-0002</p>
+            <p style={{ color: "red" }}>0-0001</p>
             <p>20 November 2020</p>
             <p>Apartment</p>
             <p>1 + 1</p>
@@ -99,9 +110,13 @@ const CondoOwnerDash = () => {
           </div>
           <div className="condo-dash-payment-history">
             <p>Payment History</p>
-            <Link to="/PaymentHistory" className="condo-dash-view-link">
+            {/* <Link to="/PaymentHistory" className="condo-dash-view-link">
               View
-            </Link>
+            </Link> */}
+            <button className="condo-dash-view-link" type="submit" onClick={openPopup}>
+              View
+            </button>
+            {showPopup && <PaymentHistoryOwner onClose={closePopup}/>}
           </div>
         </div>
       </div>

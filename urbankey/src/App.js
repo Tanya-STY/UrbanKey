@@ -3,7 +3,8 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import MaintenanceRequest from "./Components/Popups/MaintenanceRequest";
 import Notification from "./Components/Popups/Notification";
-import PaymentHistory from "./Components/Popups/PaymentHistory";
+// import PaymentHistoryOwner from "./Components/Popups/PaymentHistoryOwner.js";
+// import PaymentHistoryRenter from "./Components/Popups/PaymentHistoryRenter.js";
 import ReservationSuccess from "./Components/Popups/ReservationSuccess";
 import PropertyProfileManagement from "./Components/PropertyProfileManagement/PropertyProfileManagement"; 
 import Employee from "./Components/EmployeePage/Employee.js";
@@ -77,7 +78,7 @@ function App() {
 
 
       {/*</Routes>*/}
-        <ManagerEmployeePage></ManagerEmployeePage>
+        {/* <ManagerEmployeePage></ManagerEmployeePage> */}
       <Navbar />
 
       <Routes>
@@ -95,11 +96,11 @@ function App() {
             <Route path="/Profile" element={<Profile />} />
             <Route path="/MaintenanceRequest" element={<MaintenanceRequest />} />
             <Route path="/Notification" element={<Notification />} />
-            <Route path="/PaymentHistory" element={<PaymentHistory />} />
+            {/* <Route path="/PaymentHistoryOwner" element={<PaymentHistoryOwner/>} /> */}
             <Route path="/ReservationSuccess" element={<ReservationSuccess />} />
             <Route path="/PropertyProfile" element={<PropertyProfileManagement />} />
             <Route path="/Employee" element={<Employee />} />
-            <Route path="/FinanceDashboard" element={<FinanceDashboard />} />
+            <Route path="/Finance" element={<FinanceDashboard />} />
             <Route path="/Dashboard" element={<DashboardBasedOnRole />} />
             <Route path="/RegistrationKey" element={<RegistrationKey />} />
             <Route path="/Reservation" element={<Reservation />} />
@@ -108,7 +109,8 @@ function App() {
 
             <Route path="/DailyOperations" element={<DailyOperations/>} /> {/*added code*/}
             <Route path="/RenterDashboard" element={<CondoRenterDashboard />} /> {/*added code*/}
-            </Route>
+            <Route path="/Employees" element={<ManagerEmployeePage />} /> {/*added code*/}
+            </Route> 
           </Route>
 
 
