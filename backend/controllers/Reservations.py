@@ -6,7 +6,7 @@ from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt()
 
-def addReservation(email, name, facility, time_slot, date):
+def addReservation(email, name, facility, date, time_slot):
         # Check if the time slot is already taken for that facility
         existing_reservation = reservations.find_one({
             'email': email,
@@ -39,11 +39,11 @@ def makeReservation(request):
         if user:
                 name = user.get('full_name')
                 facility = data.get('facility')
-                date = data.get('date')
                 time_slot = data.get('time_slot')
+                date = data.get('date')
                 addReservation(email, name, facility, date, time_slot)
 
-        return jsonify({'message': 'User updated successfully'}), 200
+        return jsonify({'message': 'Reservation Sent successfully'}), 200
     
     except Exception as e:
         print(e)

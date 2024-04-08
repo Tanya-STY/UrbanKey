@@ -119,6 +119,11 @@
     border-radius: 15px;
   }
   
+  .unavailable {
+    color: gray; /* Gray out the text */
+    cursor: not-allowed; /* Change cursor to indicate non-clickable */
+  }
+  
   .time-slot.selected {
     background-color: rgb(116, 221, 116);
   }

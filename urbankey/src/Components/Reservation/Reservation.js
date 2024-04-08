@@ -21,10 +21,27 @@ const Reservation = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [reservedTimeSlots, setReservedTimeSlots] = useState([]);
 
-  // Simulated function to fetch availability data
- /*  const fetchReservations = async (facility, date) => {
+  const fetchReservations = async (facility, date) => {
     try {
-      const response = await axios.post('/GetReservations', { facility, date });
+      const response = await axios.post('http://localhost:5000/GetReservations', { facility, date });
+      const reservations = response.data;
+      const reservedSlots = reservations.map(reservation => reservation.time_slot);
+      setReservedTimeSlots(reservedSlots);
+  
+      const availabilityData = timeSlots.reduce((acc, timeSlot) => {
+        acc[timeSlot] = !reservedSlots.includes(timeSlot);
+        return acc;
+      }, {});
+      setAvailability(availabilityData);
+      console.log("Availability Data:", availabilityData);
+    } catch (error) {
+      console.error('Error fetching reservations:', error);
+    }
+  };
+  // Simulated function to fetch availability data
+/*   const fetchReservations = async (facility, date) => {
+    try {
+      const response = await axios.post('http://localhost:5000/GetReservations', { facility, date });
       const reservations = response.data;
       const reservedSlots = reservations.map(reservation => reservation.time_slot);
       setReservedTimeSlots(reservedSlots);
@@ -36,13 +53,13 @@ const Reservation = () => {
       return acc;
     }, {});
     setAvailability(availabilityData);
-  };
+  }; */
 
   useEffect(() => {
     if (selectedFacility && selectedDate) {
       fetchReservations(selectedFacility, format(selectedDate, 'yyyy-MM-dd'));
     }
-  }, [selectedFacility, selectedDate]); */
+  }, [selectedFacility, selectedDate]); 
 
 /*   useEffect(() => {
     if (selectedDate) {
@@ -155,7 +172,7 @@ const Reservation = () => {
                         <div
                         key={index}
                         className={`time-slot ${!availability[timeSlot] ? 'unavailable' : ''} ${selectedTimeSlot === timeSlot ? 'selected' : ''}`}
-                        onClick={() => handleTimeSlotClick(timeSlot)}
+                        onClick={() => !availability[timeSlot] ? null : handleTimeSlotClick(timeSlot)}
                         >
                         {timeSlot}
                         </div>
