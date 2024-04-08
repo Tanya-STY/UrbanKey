@@ -1,12 +1,14 @@
 import React from 'react';
 import './PaymentHistory.css';
 
-const PaymentHistory = ({ onClose }) => {
+/*the monthPay for condo owner payer is the amount they need to pay every month taken
+from OwnerDashboard.js*/
+const PaymentHistory = ({ onClose, monthPay }) => { 
   const payments = [
-    { date: 'September 2023', amount: '$4568.00', method: 'Bank Transfer', reference: '12345', status: 'Paid' },
-    { date: 'October 2023', amount: '$4568.00', method: 'Credit Card', reference: '65078', status: 'Pending' },
-    { date: 'November 2023', amount: '$4568.00', method: 'Debit Card', reference: '78965', status: 'Pending' },
-    { date: 'December 2023', amount: '$4568.00', method: 'Credit Card', reference: '83743', status: 'Rejected'}
+    { date: 'September 2023', amount: '$' + monthPay.toFixed(2), method: 'Bank Transfer', reference: '12345', status: 'Paid' },
+    { date: 'October 2023', amount: '$' + monthPay.toFixed(2), method: 'Credit Card', reference: '65078', status: 'Pending' },
+    { date: 'November 2023', amount: '$' + monthPay.toFixed(2), method: 'Debit Card', reference: '78965', status: 'Pending' },
+    { date: 'December 2023', amount: '$' + monthPay.toFixed(2), method: 'Credit Card', reference: '83743', status: 'Rejected'}
   ];
 
   return (

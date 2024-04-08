@@ -26,6 +26,10 @@ const CondoOwnerDash = () => {
   const closePopup = () => {
     setShowPopup(false);
   };
+// the month pay is the monthly payment (which is the same every month for a condo owner), 
+// it is seen in the financial status and it is sent to the payment history as well
+  const [monthPay, setMonthPay] = useState(5534.00);
+
   return (
     <div className="condo-dash-container">
       <div className="condo-dash-top">
@@ -100,7 +104,7 @@ const CondoOwnerDash = () => {
           </div>
           <div className="condo-dash-condo-fees">
             <img src={icon5} alt="Radio Button 1" />
-            <p>Monthly Condo Fees: $4568</p>
+            <p>Monthly Condo Fees: {monthPay.toFixed(2)}</p>
             <img src={icon7} alt="Money Icon" style={{ width: "10.5%" }} />
           </div>
           <div className="condo-dash-condo-fees" style={{ border: "none" }}>
@@ -116,7 +120,7 @@ const CondoOwnerDash = () => {
             <button className="condo-dash-view-link" type="submit" onClick={openPopup}>
               View
             </button>
-            {showPopup && <PaymentHistoryOwner onClose={closePopup}/>}
+            {showPopup && <PaymentHistoryOwner monthPay={monthPay} onClose={closePopup}/>}
           </div>
         </div>
       </div>
