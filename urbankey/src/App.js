@@ -1,7 +1,7 @@
 
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import MaintenanceRequest from "./Components/Popups/MaintenanceRequest";
+// import MaintenanceRequest from "./Components/Popups/MaintenanceRequest";
 import Notification from "./Components/Popups/Notification";
 // import PaymentHistoryOwner from "./Components/Popups/PaymentHistoryOwner.js";
 // import PaymentHistoryRenter from "./Components/Popups/PaymentHistoryRenter.js";
@@ -94,7 +94,7 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[ROLE.User, ROLE.Admin, ROLE.Renter, ROLE.Owner]}/>} >
             {/* <Route path="/HomePage" element={<HomePage />} /> */}
             <Route path="/Profile" element={<Profile />} />
-            <Route path="/MaintenanceRequest" element={<MaintenanceRequest />} />
+            {/* <Route path="/MaintenanceRequest" element={<MaintenanceRequest />} /> */}
             <Route path="/Notification" element={<Notification />} />
             {/* <Route path="/PaymentHistoryOwner" element={<PaymentHistoryOwner/>} /> */}
             <Route path="/ReservationSuccess" element={<ReservationSuccess />} />

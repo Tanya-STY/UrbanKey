@@ -15,6 +15,7 @@ import icon7 from "../Images/money-icon.png";
 import icon8 from "../Images/card-icon.png";
 import icon9 from "../Images/stock-up-icon.png";
 import PaymentHistoryOwner from "../Popups/PaymentHistoryOwner";
+import MaintenanceRequestForm from "../Popups/MaintenanceRequest";
 
 const CondoOwnerDash = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -26,6 +27,18 @@ const CondoOwnerDash = () => {
   const closePopup = () => {
     setShowPopup(false);
   };
+
+
+  const [showPopup2, setShowPopup2] = useState(false);
+
+  const openPopup2 = () => {
+    setShowPopup2(true);
+  };
+
+  const closePopup2 = () => {
+    setShowPopup2(false);
+  };
+
 // the month pay is the monthly payment (which is the same every month for a condo owner), 
 // it is seen in the financial status and it is sent to the payment history as well
   const [monthPay, setMonthPay] = useState(5534.00);
@@ -248,9 +261,13 @@ const CondoOwnerDash = () => {
           </div>
 
           <div className="condo-dash-submit">
-            <Link to="/MaintenanceRequest" className="condo-dash-request-link">
+            {/* <Link to="/MaintenanceRequest" className="condo-dash-request-link">
               Submit a New Request
-            </Link>
+            </Link> */}
+            <button className="condo-dash-request-link" type="submit" onClick={openPopup2}>
+            Submit a New Request
+            </button>
+            {showPopup2 && <MaintenanceRequestForm onClose={closePopup2}/>}
           </div>
         </div>
       </div>
