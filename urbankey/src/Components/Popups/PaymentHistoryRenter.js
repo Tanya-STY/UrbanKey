@@ -1,11 +1,15 @@
 import React from 'react';
 import './PaymentHistory.css';
 
-const PaymentHistory = ({ onClose }) => {
+const PaymentHistory = ({ onClose, monthPay }) => {
+  // example values for now until the math values are created
+  const monthPay2 = monthPay-52.90;
+  const monthPay3 = monthPay+137.57;
+
   const payments = [
-    { date: 'September 2023', amount: '$0.00', method: 'Bank Transfer', reference: '12345', status: 'Paid' },
-    { date: 'October 2023', amount: '$4568.00', method: 'Credit Card', reference: '65078', status: 'Pending' },
-    { date: 'November 2023', amount: '$4568.00', method: 'Debit Card', reference: '78965', status: 'Rejected' },
+    { date: 'September 2023', amount: '$' + monthPay.toFixed(2), method: 'Bank Transfer', reference: '12345', status: 'Paid' },
+    { date: 'October 2023', amount: '$' + monthPay2.toFixed(2), method: 'Credit Card', reference: '65078', status: 'Pending' },
+    { date: 'November 2023', amount: '$' + monthPay3.toFixed(2), method: 'Debit Card', reference: '78965', status: 'Rejected' },
   ];
 
   return (
