@@ -39,8 +39,7 @@ const Profile = () => {
                 withCredentials: true
         });
         const userData = response.data;
-        
-        setSelectedFile(userData.selectedFile);
+        const profilePhoto = userData.selectedFile;
         setName(userData.name);
         setEmail(userData.email);
         setProvince(userData.province);
@@ -56,6 +55,7 @@ const Profile = () => {
             const imageUrl = URL.createObjectURL(blob);
             setSelectedFile(imageUrl);
         }
+        setSelectedFile(userData.selectedFile);
 
         setLoading(false);
         // role = response?.data?.role
