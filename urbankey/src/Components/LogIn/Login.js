@@ -40,9 +40,11 @@ const Login = () => {
       });
       const token = response?.data?.token;
       const role = response?.data?.role;
-      setAuth({ role, email, password, token });
+      const name = response?.data?.name
+      setAuth({ role, email, password, token, name });
       setEmail('');
       setPassword('');
+      // console.log(role);
       navigate(from, { replace: true });
     }
     catch (error) {

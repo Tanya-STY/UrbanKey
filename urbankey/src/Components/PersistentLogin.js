@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom"; //render nested routes
 import { useState, useEffect } from "react";
 import useRefreshToken from '../CustomeHooks/useRefreshToken';
 import useAuth from '../CustomeHooks/useAuth';
@@ -9,9 +9,9 @@ const PersistLogin = () => {
     const { auth, persist } = useAuth();
 
     useEffect(() => {
-        let isMounted = true;
+        let isMounted = true; //ensures that state updates are only made when component is still initialized and rendered
 
-        const verifyRefreshToken = async () => {
+        const verifyRefreshToken = async () => { //refresh the authentication token 
             try {
                 await refresh();
             }
@@ -19,13 +19,12 @@ const PersistLogin = () => {
                 console.error(err);
             }
             finally {
-                isMounted && setIsLoading(false);
+                isMounted && setIsLoading(false); //loading process is complete
             }
         }
 
-        // persist added here AFTER tutorial video
         // Avoids unwanted call to verifyRefreshToken
-        !auth?.token && persist ? verifyRefreshToken() : setIsLoading(false);
+        !auth?.token && persist ? verifyRefreshToken() : setIsLoading(false); //if theres no auth token, and persist is true, then verifyrefresh is called
 
         return () => isMounted = false;
     }, [])

@@ -42,6 +42,6 @@ describe('NavBar_User', () => {
     // Example: expect(screen.getByText('You have new notifications')).toBeInTheDocument();
     fireEvent.click(bellIcon);
     // Similarly, check that notifications are no longer visible
-    // Example: expect(screen.queryByText('You have new notifications')).not.toBeInTheDocument();
+    
   });
 });

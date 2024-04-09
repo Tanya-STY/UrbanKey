@@ -15,5 +15,6 @@ MarkupSafe
 pycparser
 Werkzeug
 zipp
+flask_pymongo
 
 # pip install -r requirements.txt

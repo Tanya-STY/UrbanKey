@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const AuthContext = createContext({});
+const AuthContext = createContext({}); //will hold authentication state and related functions
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => { //authprovider will provide authentiction context to its children 
   const [auth, setAuth] = useState({});
   const [persist, setPersist] = useState(JSON.parse(localStorage.getItem("persist")) || false);
 

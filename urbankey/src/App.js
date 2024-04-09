@@ -26,12 +26,18 @@ import PersistLogin from "./Components/PersistentLogin.js";
 import { AuthProvider } from "./Provider/AuthProvider.js";
 import Navbar from "./Components/NavBar/NavBar.js";
 import useAuth from "./CustomeHooks/useAuth.js";
+import ReservationPageCompany from "./Components/ReservationPageCompany/ReservationPageCompany";
+import DailyOperations from "./Components/DailyOperations/DailyOperations.js";
+import CondoRenterDashboard from "./Components/CondoRenterDashboard/RenterDashboard"; // added code
+import ManagerEmployeePage from "./Components/ManagerEmployeePage/ManagerEmployeePage"
+
 
 const ROLE = {
   'User': 2001,
   'Owner': 3333,
   'Renter': 1984,
-  'Admin': 5150
+  'Admin': 5150,
+  'Employee': 99
 }
 
 
@@ -63,6 +69,10 @@ function App() {
             <Route path="/Dashboard" element={<DashboardBasedOnRole />} />
             <Route path="/RegistrationKey" element={<RegistrationKey />} />
             <Route path="/Reservation" element={<Reservation />} />
+            <Route path="/ReservationPageCompany" element={<ReservationPageCompany/>} />
+
+            <Route path="/DailyOperations" element={<DailyOperations/>} /> {/*added code*/}
+            {/* <Route path="/RenterDashboard" element={<CondoRenterDashboard />} /> added code */}
             </Route>
           </Route>
           
@@ -74,18 +84,18 @@ function App() {
 }
 
 const DashboardBasedOnRole = () => {
-  const { auth } = useAuth(); // Assuming you have an auth context
+  const { auth } = useAuth(); 
 
   if (auth.role === ROLE.Owner) {
     return <CondoOwnerDashboard />;
   } else {
-    return <DefaultDashboard />;
+    return <CondoRenterDashboard />;
   }
 };
 
 // Component for default dashboard
 const DefaultDashboard = () => {
-  return <div>This is the default dashboard</div>;
+  return <div>Enter your registration key to see your dashboard</div>;
 };
 
 export default App;

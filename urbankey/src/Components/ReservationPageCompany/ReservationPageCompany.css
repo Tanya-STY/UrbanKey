@@ -1,0 +1,127 @@
+.reservation-box {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #007bff; /* Blue outline */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reservation-top {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .reservation-top h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .reservation-search {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .reservation-search input[type="text"] {
+    width: 87%;
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .reservation-search button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .reservation-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #007bff; /* Blue outline */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reservation-form h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .reservation-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .reservation-form input[type="text"],
+  .reservation-form input[type="email"],
+  .reservation-form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .reservation-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .reservation-table {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .reservation-table h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .facility-checkboxes {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .facility-checkboxes label {
+    margin-right: 20px;
+  }
+  
+  .facility-checkboxes input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  

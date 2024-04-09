@@ -66,6 +66,7 @@ def signin(request):
 
                 if bcrypt.check_password_hash(user.get('password'), password):
                     role = user.get('role')
+                    name = user.get('full_name')
 
                     token = generate_access_token(email,role)
 
@@ -76,7 +77,7 @@ def signin(request):
 
                     users.update_one({'email': email}, {'$set': {'refreshToken': refreshToken}})
 
-                    resp = make_response(jsonify({'role': role, 'token': token}))
+                    resp = make_response(jsonify({'role': role, 'token': token, 'name': name}))
                     resp.set_cookie('jwt', refreshToken, httponly=True, secure=True, samesite='None', max_age=24 * 60 * 60)
 
                     return resp, 200

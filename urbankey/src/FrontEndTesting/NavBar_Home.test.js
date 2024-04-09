@@ -44,6 +44,7 @@ describe('NavBar_HomePage', () => {
     fireEvent.click(screen.getByText('Login'));
     
     // Wait for the next tick to allow React to re-render
+    
     setTimeout(() => {
       // Assert that the clicked option is not in the document anymore
       expect(screen.queryByText('Login')).not.toBeInTheDocument();

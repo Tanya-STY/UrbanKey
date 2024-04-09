@@ -26,6 +26,9 @@ const Profile = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const currentAuth = auth;
+
+
     const fetchUserData = async () => {
         // const role = auth?.role
         try {
@@ -47,6 +50,8 @@ const Profile = () => {
         setKey(userData.key);
         setAddress(userData.address);
         setSelectedFile(userData.selectedFile);
+        const newAuth = {...currentAuth, num};
+        setAuth(newAuth);
         setLoading(false);
         // role = response?.data?.role
 
@@ -83,6 +88,9 @@ try {
         },
         withCredentials: true
     });
+    const unit_id = response.data.unit_id;
+    const newAuth = {...currentAuth, unit_id}
+    setAuth(newAuth);
     console.log(response.data);
     // auth?.role = response?.data?.role;
     console.log("Profile updated successfully");

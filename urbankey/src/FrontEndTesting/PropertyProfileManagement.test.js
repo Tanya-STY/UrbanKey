@@ -45,5 +45,4 @@ describe("PropertyProfileManagement Component", () => {
     ).toBeInTheDocument();
   });
 
-  // You can add more tests to cover other functionalities of the component
 });
