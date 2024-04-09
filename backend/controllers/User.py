@@ -1,14 +1,29 @@
 from flask import jsonify, make_response
-from config import users # Import the MongoDB collection and bcrypt instance
+from config import users, fs # Import the MongoDB collection and bcrypt instance
 from middleware.TokenAuth import generate_access_token, generate_refresh_token
+from bson import ObjectId
+
 
 def getProfile(request):
+    
     try: 
 
         email = request.email
         role = request.role
 
         user = users.find_one({"email": email})
+
+        if 'photo_id' in user:
+                photo_id = user['photo_id']
+                photo_file = fs.get(ObjectId(photo_id))
+                if photo_file:
+                    # Add photo data to profile_data
+                    selectedFile = photo_file.read().decode('utf-8')
+                else:
+                     selectedFile = None
+        else: 
+             selectedFile = None
+
 
         if user:
                 return jsonify({
@@ -20,7 +35,7 @@ def getProfile(request):
                     'num2': user.get('num2', ''),
                     'key': user.get('key', ''),
                     'address': user.get('address', ''),
-                    'selectedFile': user.get('selectedFile', '')
+                    'selectedFile': selectedFile
                 }), 200
         else:
             return jsonify({'error': 'User not found'}), 404
@@ -31,6 +46,7 @@ def getProfile(request):
 
 def update_user_profile(request):
     try:
+        photo_file = request.files['selectedFile'] if 'selectedFile' in request.files else None
         data = request.get_json()
         name = data.get('name')
         email = request.email
@@ -60,6 +76,12 @@ def update_user_profile(request):
 
         # Update user profile based on email
         users.update_one({"email": email}, update, upsert=False)
+
+        if photo_file:
+            photo_id = fs.put(photo_file, filename=photo_file.filename, content_type=photo_file.content_type)
+            
+            users.update_one({"email": email}, {"$set": {"photo_id": str(photo_id)}})
+
 
         return jsonify({'message': 'User updated successfully'}), 200
 

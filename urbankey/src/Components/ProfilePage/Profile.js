@@ -32,12 +32,14 @@ const Profile = () => {
             const token = auth?.token; 
             const response = await axios.get("http://localhost:5000/Profile", {
                 headers: { 
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'multipart/form-data', //change content type because the previous is not suitable for non-json type
                     'Authorization': `Bearer ${token}`
                 },
+                responseType: 'blob',
                 withCredentials: true
         });
         const userData = response.data;
+        const profilePhoto = userData.selectedFile;
         setName(userData.name);
         setEmail(userData.email);
         setProvince(userData.province);
@@ -46,7 +48,14 @@ const Profile = () => {
         setNum2(userData.num2);
         setKey(userData.key);
         setAddress(userData.address);
-        setSelectedFile(userData.selectedFile);
+        
+        if (profilePhoto) {
+            // Convert base64 string to Blob
+            const blob = new Blob([profilePhoto], { type: 'image/png' });
+            const imageUrl = URL.createObjectURL(blob);
+            setSelectedFile(imageUrl);
+        }
+
         setLoading(false);
         // role = response?.data?.role
 
