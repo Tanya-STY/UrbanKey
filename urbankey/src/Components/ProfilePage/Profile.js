@@ -39,7 +39,8 @@ const Profile = () => {
                 withCredentials: true
         });
         const userData = response.data;
-        const profilePhoto = userData.selectedFile;
+        
+        setSelectedFile(userData.selectedFile);
         setName(userData.name);
         setEmail(userData.email);
         setProvince(userData.province);
