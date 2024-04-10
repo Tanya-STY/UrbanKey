@@ -23,8 +23,25 @@ const Profile = () => {
     const [num2, setNum2] = useState('');
     const [key, setKey] = useState('');
     const [address, setAddress] = useState('');
-    const [selectedFile, setSelectedFile] = useState(null);
+    // const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg'); // State to hold the profile picture
+
+    // code needed to verify if what is received from backend is correct
+    //leave for now, will delete later when we try with everyone 
+    // const isBase64 = (str) => {
+    //     try {
+    //         // Attempt to decode the base64 string
+    //         const decodedData = atob(str);
+    //         // If decoding is successful, return true
+    //         console.log('isBased64 correctly decoded')
+    //         return true;
+    //     } catch (e) {
+    //         // If an error occurs during decoding, return false
+    //         console.log('isbased64 failed because : ' + e)
+    //         return false;
+    //     }
+    // };
 
     const fetchUserData = async () => {
         // const role = auth?.role
@@ -32,14 +49,13 @@ const Profile = () => {
             const token = auth?.token; 
             const response = await axios.get("http://localhost:5000/Profile", {
                 headers: { 
-                    'Content-Type': 'multipart/form-data', //change content type because the previous is not suitable for non-json type
+                    'Content-Type': 'application/JSON',
                     'Authorization': `Bearer ${token}`
                 },
-                responseType: 'blob',
+                // responseType: 'blob',
                 withCredentials: true
         });
         const userData = response.data;
-        const profilePhoto = userData.selectedFile;
         setName(userData.name);
         setEmail(userData.email);
         setProvince(userData.province);
@@ -49,13 +65,17 @@ const Profile = () => {
         setKey(userData.key);
         setAddress(userData.address);
         
-        if (profilePhoto) {
-            // Convert base64 string to Blob
-            const blob = new Blob([profilePhoto], { type: 'image/png' });
-            const imageUrl = URL.createObjectURL(blob);
-            setSelectedFile(imageUrl);
+        
+        if (userData.profilePicture) {
+
+            //receive the encoded in base64 code from the backend
+            const extractedPhoto = userData.profilePicture;
+            setProfilePicture(extractedPhoto);
+        } else {
+            // Set default profile picture URL if wrong
+            setProfilePicture('default-profile-picture.jpg');
         }
-        setSelectedFile(userData.selectedFile);
+        
 
         setLoading(false);
         // role = response?.data?.role
@@ -77,18 +97,19 @@ e.preventDefault();
 try {
     const token = auth?.token; 
     const response=await axios.post("http://localhost:5000/user/profile/update", {
-        name,
-        email,
-        province,
-        city,
-        num,
-        num2,
-        key,
-        address,
-        selectedFile
+        name: name,
+        email: email,
+        province: province,
+        city: city,
+        num: num,
+        num2: num2,
+        key: key,
+        address: address,
+        profilePicture: profilePicture
+        //send the string encoded base64 to the backend
     }, {
         headers: { 
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/JSON',
             'Authorization': `Bearer ${token}`
         },
         withCredentials: true
@@ -102,7 +123,7 @@ catch (error) {
 }
 }
 
-    const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg'); // State to hold the profile picture
+    
     // Function to handle profile picture upload
     const handleProfilePictureUpload = (e) => {
         const file = e.target.files[0]; // Get the uploaded file
@@ -110,8 +131,10 @@ catch (error) {
         reader.onloadend = () => {
             // Once the file is read, set the profile picture state to the uploaded image
             setProfilePicture(reader.result);
+            console.log("File reading after uploading : " + reader.result)
         };
         reader.readAsDataURL(file); // Read the file as a data URL
+
     };
 
 
@@ -187,7 +210,7 @@ catch (error) {
                     <input id={address} className="addressInput" type="text"  value={address} onChange={(e) => setAddress(e.target.value)}  />
                 </div>
                 <div>
-                <input type='file' onChange={(e) => setSelectedFile(e.target.files[0])}/>
+                {/*<input type='file' onChange={(e) => setSelectedFile(e.target.files[0])}/>*/}
                 </div>
 
             </form>
