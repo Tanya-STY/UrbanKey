@@ -1,9 +1,9 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import MaintenanceRequest from "./Components/Popups/MaintenanceRequest";
+// import MaintenanceRequest from "./Components/Popups/MaintenanceRequest";
 import Notification from "./Components/Popups/Notification";
-import PaymentHistoryOwner from "./Components/Popups/PaymentHistoryOwner.js";
-import PaymentHistoryRenter from "./Components/Popups/PaymentHistoryRenter.js";
+// import PaymentHistoryOwner from "./Components/Popups/PaymentHistoryOwner.js";
+// import PaymentHistoryRenter from "./Components/Popups/PaymentHistoryRenter.js";
 import ReservationSuccess from "./Components/Popups/ReservationSuccess";
 import PropertyProfileManagement from "./Components/PropertyProfileManagement/PropertyProfileManagement";
 import Employee from "./Components/EmployeePage/Employee.js";
@@ -109,43 +109,22 @@ function App() {
           >
             {/* <Route path="/HomePage" element={<HomePage />} /> */}
             <Route path="/Profile" element={<Profile />} />
-            <Route
-              path="/MaintenanceRequest"
-              element={<MaintenanceRequest />}
-            />
+            {/*<Route path="/MaintenanceRequest" element={<MaintenanceRequest />} />*/}
             <Route path="/Notification" element={<Notification />} />
-            <Route
-              path="/PaymentHistoryOwner"
-              element={<PaymentHistoryOwner />}
-            />
-            <Route
-              path="/ReservationSuccess"
-              element={<ReservationSuccess />}
-            />
-            <Route
-              path="/PropertyProfile"
-              element={<PropertyProfileManagement />}
-            />
+            {/*<Route path="/PaymentHistoryOwner" element={<PaymentHistoryOwner />} />*/}
+            {/*<Route path="/PaymentHistoryRenter" element={<PaymentHistoryRenter />} />*/}
+            <Route path="/ReservationSuccess" element={<ReservationSuccess />} />
+            <Route path="/PropertyProfile" element={<PropertyProfileManagement />} />
             <Route path="/Employee" element={<Employee />} />
             <Route path="/FinanceDashboard" element={<FinanceDashboard />} />
             <Route path="/Dashboard" element={<DashboardBasedOnRole />} />
             <Route path="/RegistrationKey" element={<RegistrationKey />} />
             <Route path="/Reservation" element={<Reservation />} />
-            <Route
-              path="/ReservationPageCompany"
-              element={<ReservationPageCompany />}
-            />
-            <Route path="/DailyOperations" element={<DailyOperations />} />{" "}
-            {/*added code*/}
-            <Route
-              path="/RenterDashboard"
-              element={<CondoRenterDashboard />}
-            />{" "}
-            {/*added code*/}
-            <Route
-              path="/ManagerEmployeePage"
-              element={<ManagerEmployeePage />}
-            />
+            <Route path="/ReservationPageCompany" element={<ReservationPageCompany/>} />
+
+            <Route path="/DailyOperations" element={<DailyOperations/>} /> {/*added code*/}
+            {/* <Route path="/RenterDashboard" element={<CondoRenterDashboard />} /> added code */}
+            <Route path="/ManagerEmployeePage" element={<ManagerEmployeePage />} />
           </Route>
         </Route>
       </Routes>
@@ -154,18 +133,18 @@ function App() {
 }
 
 const DashboardBasedOnRole = () => {
-  const { auth } = useAuth();
+  const { auth } = useAuth(); 
 
   if (auth.role === ROLE.Owner) {
     return <CondoOwnerDashboard />;
   } else {
-    return <DefaultDashboard />;
+    return <CondoRenterDashboard />;
   }
 };
 
 // Component for default dashboard
 const DefaultDashboard = () => {
-  return <div>This is the default dashboard</div>;
+  return <div>Enter your registration key to see your dashboard</div>;
 };
 
 export default App;

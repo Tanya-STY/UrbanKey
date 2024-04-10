@@ -17,7 +17,8 @@ import PaymentHistoryRenter from "../Popups/PaymentHistoryRenter";
 
 const CondoRenterDash = () => {
   const [showPopup, setShowPopup] = useState(false);
-
+  // const [financialStatus, setFinancialStatus] = useState(0);
+  
   const openPopup = () => {
     setShowPopup(true);
   };
@@ -103,6 +104,7 @@ const CondoRenterDash = () => {
           <div className="condo-dash-condo-fees">
             <img src={icon5} alt="Radio Button 1" />
             <p>Monthly Condo Fees: {monthPay.toFixed(2)}</p>
+            {/* <p>Monthly Condo Fees: {(financialStatus / 120).toFixed(2)}</p> */}
             <img src={icon7} alt="Money Icon" style={{ width: "10.5%" }} />
           </div>
           <div className="condo-dash-condo-fees" style={{ border: "none" }}>

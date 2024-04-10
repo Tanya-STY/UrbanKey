@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./Finance.css";
 import OverviewGraph from "./OverviewGraph";
+import axios from 'axios';
+import useAuth from '../../CustomeHooks/useAuth';
 
 const Finance = () => {
+  const { auth, setAuth } = useAuth();
   const [feePerSquareFoot, setFeePerSquareFoot] = useState(0);
   const [feePerParkingSpot, setFeePerParkingSpot] = useState(0);
   const [operationName, setOperationName] = useState("");
@@ -10,6 +13,7 @@ const Finance = () => {
   const [annualReport, setAnnualReport] = useState([]);
   const [overviewData, setOverviewData] = useState([]);
   const [isGraphVisible, setIsGraphVisible] = useState(false);
+  // const [financialStatus, setFinancialStatus] = useState("");
 
   const updateFees = () => {
     alert(
@@ -53,6 +57,34 @@ const Finance = () => {
     setOverviewData(overviewData);
     setIsGraphVisible(true);
   };
+
+  // //added for finance backend functionality
+  // useEffect(() => {
+  //   // Fetch financial status when component mounts
+  //   fetchFinancialStatus();
+  // }, []);
+
+  // const fetchFinancialStatus = async () => {
+  //   try {
+  //     const token = auth?.token;
+  //     if (!token) throw new Error("Authentication token is missing.");
+  
+  //     const response = await axios.get("http://localhost:5000/financial_status", {
+  //       headers: {
+  //         'Authorization': `Bearer ${token}`,
+  //         'Content-Type': 'application/json'
+  //       },
+  //       withCredentials: true
+  //     });
+  
+  //     // Update state with fetched financial status
+  //     // setFinancialStatus(response.data.financialStatus);
+  //   } catch (error) {
+  //     console.error("Error fetching financial status:", error);
+  //   }
+  // };
+  
+  // //done backend finance functionality
 
   return (
     <div className="finance-container">
