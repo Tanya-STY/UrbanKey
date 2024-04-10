@@ -20,7 +20,6 @@ def getProfile(request):
 
         if 'photo_id' in user:
                 photo_id = user['photo_id']
-                print(f'getProfile photo_id : {photo_id}')
                 photo_file = fs.get(ObjectId(photo_id))
                 #gets the binary data of the object from the database.
                 if photo_file:
@@ -108,5 +107,5 @@ def update_user_profile(request):
 
     except Exception as e:
         print(e)
-        traceback.print_exc()
+        # traceback.print_exc()
         return jsonify({'error': 'Internal server error'}), 500
