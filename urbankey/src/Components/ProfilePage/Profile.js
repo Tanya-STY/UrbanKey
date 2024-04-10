@@ -117,6 +117,7 @@ try {
     console.log(response.data);
     // auth?.role = response?.data?.role;
     console.log("Profile updated successfully");
+    navigate('/HomePage')
 }
 catch (error) {
     console.log(error);
@@ -131,7 +132,7 @@ catch (error) {
         reader.onloadend = () => {
             // Once the file is read, set the profile picture state to the uploaded image
             setProfilePicture(reader.result);
-            console.log("File reading after uploading : " + reader.result)
+           
         };
         reader.readAsDataURL(file); // Read the file as a data URL
 
