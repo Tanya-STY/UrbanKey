@@ -53,15 +53,39 @@ const Home = () => {
                 <div className="container">
                     <div className="box"> 
                         <img src={condo1} alt="condo1" />
+                        <div className='condoInfo'>
+                            <h5>$ 290 000</h5>
+                            Condo for Sale <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
                     </div>
                     <div className="box">
                         <img src={condo2} alt="condo2" />
+                        <div className='condoInfo'>
+                            <h5>$ 290 000</h5>
+                            Condo for Sale <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
                     </div>
                     <div className="box">
                         <img src={condo3} alt="condo3" />
+                        <div className='condoInfo'>
+                            <h5>$ 290 000</h5>
+                            Condo for Sale <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
                     </div>
                     <div className="box">
                         <img src={condo4} alt="condo4" />
+                        <div className='condoInfo'>
+                            <h5>$ 290 000</h5>
+                            Condo for Sale <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
                     </div>
                 </div>
             </div>
@@ -70,15 +94,39 @@ const Home = () => {
                 <div className="container">
                 <div className="box"> 
                         <img src={condo5} alt="condo5" />
+                        <div className='condoInfo'>
+                            <h5>$ 2 000</h5>
+                            Condo for Rent <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
                     </div>
                     <div className="box">
                         <img src={condo6} alt="condo6" />
+                        <div className='condoInfo'>
+                            <h5>$ 2 000</h5>
+                            Condo for Rent <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
                     </div>
                     <div className="box">
                         <img src={condo7} alt="condo7" />
+                        <div className='condoInfo'>
+                            <h5>$ 2 000</h5>
+                            Condo for Rent <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
                     </div>
                     <div className="box">
                         <img src={condo8} alt="condo8" />
+                        <div className='condoInfo'>
+                            <h5>$ 2 000</h5>
+                            Condo for Rent <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
                     </div>
                 </div>
             </div>

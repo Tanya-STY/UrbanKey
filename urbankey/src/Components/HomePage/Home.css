@@ -83,6 +83,11 @@ body{
     margin: 10px; /* Margin on all sides */
 }
 
+.condoInfo {
+    margin: 10px;
+    color: rgba(0, 0, 0, 0.8);
+}
+
 
 .mediumBox {
     display: grid;
