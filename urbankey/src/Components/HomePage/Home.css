@@ -71,8 +71,18 @@ body{
     height: 320px; 
     border: 1px solid rgba(0, 0, 0, 0.1); 
     margin: 10px; 
-    background-color:rgba(255, 255, 255, 1); 
+    background-color: rgba(255, 255, 255, 1); 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
+
+.box img {
+    width: auto;
+    max-height: 50%; /* Restricting the image height to half of the box */
+    margin: 10px; /* Margin on all sides */
+}
+
 
 .mediumBox {
     display: grid;
