@@ -57,10 +57,64 @@ const Finance = () => {
     alert(
       `Fees updated: Fee per Square Foot: $${feePerSquareFoot}, Fee per Parking Spot: $${feePerParkingSpot}`
     );
+
+  const updateFees = async () => {
+    try {
+      const token = auth?.token;
+      if (!token) throw new Error("Authentication token is missing.");
+
+      const response = await axios.post(
+        "http://localhost:5000/update_financial_status",
+        {
+          feePerParkingSpot,
+          feePerSquareFoot,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      console.log(response.data);
+
+      // Update financial status after updating fees
+      setCost(response.data.update_financial_status);
+    } catch (error) {
+      console.error("Error updating fees:", error);
+    }
   };
 
-  const addCost = () => {
-    alert(`Cost added: Operation Name: ${operationName}, Cost: $${cost}`);
+  const addCost = async () => {
+    try {
+      const token = auth?.token;
+      if (!token) throw new Error("Authentication token is missing.");
+
+      const response = await axios.post(
+        "http://localhost:5000/update_financial_cost",
+        {
+          operation_cost: cost,
+          operationName: operationName
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      console.log(response.data.total_cost);
+
+       // Update financial status after adding cost
+    setCost(response.data.total_cost); // Update the cost state with the updated financial status
+    
+    } catch (error) {
+      console.error("Error adding cost:", error);
+    }
   };
 
   const generateOverviewGraph = () => {
@@ -83,9 +137,7 @@ const Finance = () => {
     }));
     setOverviewData(overviewData);
     setIsGraphVisible(true);
-    
   };
-
 
   return (
     <div className="finance-container">
@@ -170,6 +222,6 @@ const Finance = () => {
       </div>
     </div>
   );
-};
+}};
 
 export default Finance;
