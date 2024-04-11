@@ -83,13 +83,13 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Layout />} />
+        <Route path="/" element={<HomePage />} />
 
         {/* Public Routes */}
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Unauthorized" element={<Unauthorized />} />
-        <Route path="/HomePage" element={<HomePage />} />
+        {/* <Route path="/HomePage" element={<HomePage />} /> */}
         <Route element={<PersistLogin />}>
           <Route
             element={
