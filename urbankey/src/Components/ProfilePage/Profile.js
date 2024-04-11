@@ -144,22 +144,35 @@ catch (error) {
     return (
         <div className="profilePage" >
             <form className="profileForm">
-                <h1 className="membershipInfo">Membership Information</h1>
-                <div className="profile-picture">
-                    <img src={profilePicture} alt="Profile Picture" />
-                    <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} />
-                    <label htmlFor="upload">Upload Profile Picture</label>
+                <div className='box-profile-page'>
+                    <div className='special-title-box'>
+                        <h1 className="membershipInfo">Membership Information</h1>
+                    </div>
                 </div>
+                
+                
+                <div className='special-top-box-profile-page'>
 
-                <div className="field-holder-profile">
-                    <label className="profileLabels" htmlFor={name}> Name / Surname</label>
-                    <input className="profileInput" value={name} onChange={(e) => setName(e.target.value)} type="text" />
-                </div>
+                    <div className='special-box-profile-page'>
+                        <div className="field-holder-profile">
+                            <label className="profileLabels" htmlFor={name}> Name / Surname</label>
+                            <input className="profileInput" value={name} onChange={(e) => setName(e.target.value)} type="text" />
+                        </div>
 
-                <div className="field-holder-profile">
-                    <label className="profileLabels" htmlFor={email}> E-mail</label>
-                    <input className="profileInput" value={email} onChange={(e) => setEmail(e.target.value)} type="text" />
+                        <div className="field-holder-profile">
+                            <label className="profileLabels" htmlFor={email}> E-mail</label>
+                            <input className="profileInput" value={email} onChange={(e) => setEmail(e.target.value)} type="text" />
+                        </div>
+                    </div>
+                    <div className="profile-picture">
+                        <img src={profilePicture} alt="Profile Picture" />
+                        <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} />
+                        <label htmlFor="upload">Upload Profile Picture</label>
+                    </div>
+
+
                 </div>
+                
                 <div className="box-profile-page">
                     <div className="field-holder2-profile">
                         <label className="province" htmlFor={province}>Province</label>
