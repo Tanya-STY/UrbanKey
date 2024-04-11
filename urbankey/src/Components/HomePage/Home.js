@@ -33,7 +33,7 @@ const Home = () => {
                 <img src={home_search_background} alt="background image" />
                 <div className='houseSlogan'>
                     Your dream house is here.
-                    <br /><br />
+                    <br />
                     <div className='searchArea'>
                         <input
                              className="inputSearch"
