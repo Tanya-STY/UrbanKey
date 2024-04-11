@@ -53,10 +53,10 @@ const Finance = () => {
     { field: "status", headerName: "Status", width: 130 },
   ];
 
-  const updateFees = () => {
-    alert(
-      `Fees updated: Fee per Square Foot: $${feePerSquareFoot}, Fee per Parking Spot: $${feePerParkingSpot}`
-    );
+  // const updateFees = () => {
+  //   alert(
+  //     `Fees updated: Fee per Square Foot: $${feePerSquareFoot}, Fee per Parking Spot: $${feePerParkingSpot}`
+  //   )};
 
   const updateFees = async () => {
     try {
@@ -222,6 +222,6 @@ const Finance = () => {
       </div>
     </div>
   );
-}};
+};
 
 export default Finance;
