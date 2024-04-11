@@ -1,62 +1,80 @@
-# from flask import jsonify, make_response, Blueprint, request
-# from config import users
-# from middleware.TokenAuth import token_required
+from flask import jsonify, make_response, Blueprint, request
+from config import users, units  # Assuming you have imported the units collection
+from middleware.TokenAuth import token_required, verify_token
 
-# financial_routes = Blueprint('financial_routes', __name__)
+financial_routes = Blueprint('financial_routes', __name__)
 
-# @financial_routes.route("/financial_status", methods=['GET'])
-# @token_required
-# def get_financial_status(current_user):
-#     try:
-#         user_email = current_user['email']
-#         fee_per_square_foot = float(request.args.get('fee_per_square_foot'))
-#         fee_per_parking_spot = float(request.args.get('fee_per_parking_spot'))
-#         operation_name = request.args.get('operation_name')
-#         cost = float(request.args.get('cost'))
+# Define global variables to store updated values
+price_size = 500
+price_parking = 1000
+operation_cost = 5000
+total = 0
 
-#         # Assuming 'users' is a collection in your database
-#         user_info = users.find_one({"email": user_email})
+# Route to get financial status
+def get_financial_status(request):
+    email = request.email
+    user = users.find_one({'email': email}) # Find user for this specific email
+    if user:
+        unit = units.find_one({"$or": [{"occupant.email": email}, {"unit_owner.email": email}]})
+        if unit:
+            total_cost = unit.get('total_cost')
+    
+    return jsonify({
+            'total_cost': total_cost,
+        }), 200
 
-#         if user_info:
-#             # Use user_info to calculate financial status
-#             financial_status = fee_per_square_foot * fee_per_parking_spot * cost
+# Route to update financial status
+def update_financial_status(request):
+    try:
 
-#             return jsonify({
-#                 'user_id': user_info['_id'],
-#                 'email': user_info['email'],
-#                 'financial_status': financial_status
-#             }), 200
-#         else:
-#             return jsonify({'error': 'User not found'}), 404
-#     except Exception as e:
-#         print(e)
-#         return jsonify({'error': 'Internal server error'}), 500
+        email = request.email
+        role = request.role
+        data = request.get_json()
+        fee_size = int(data.get('feePerSquareFoot'))
+        fee_parking = int(data.get('feePerParkingSpot'))
+        
+        # Take all units from the database
+        for unit in units.find():
+            # Get the current size of the unit
+            current_size = unit.get('size', 0)
 
-# @financial_routes.route("/update_financial_status", methods=['POST'])
-# @token_required
-# def update_financial_status(current_user):
-#     try:
-#         data = request.get_json()
-#         user_email = current_user['email']
-#         fee_per_square_foot = float(data.get('fee_per_square_foot'))
-#         fee_per_parking_spot = float(data.get('fee_per_parking_spot'))
-#         operation_name = data.get('operation_name')
-#         cost = float(data.get('cost'))
+            # Multiply the current size by the price from the frontend
+            total_size = current_size * fee_size
+            
+            current_parking = unit.get('number_parking', 0)
+            
+            total_parking = current_parking * fee_parking
+            
+            units.update_one({'_id': unit['_id']}, {"$set": {"total_size": total_size, "total_parking": total_parking}}, upsert=False)
 
-#         # Assuming 'users' is a collection in your database
-#         user_info = users.find_one({"email": user_email})
+        # Get data from request body
+        global price_size, price_parking, operation_cost
 
-#         if user_info:
-#             # Use user_info to update financial status
-#             updated_financial_status = fee_per_square_foot * fee_per_parking_spot * cost
+        # Return updated financial status
+        return jsonify({
+            'message': 'Financial status updated successfully',
+        }), 200
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'Internal server error'}), 500
 
-#             return jsonify({
-#                 'user_id': user_info['_id'],
-#                 'email': user_info['email'],
-#                 'updated_financial_status': updated_financial_status
-#             }), 200
-#         else:
-#             return jsonify({'error': 'User not found'}), 404
-#     except Exception as e:
-#         print(e)
-#         return jsonify({'error': 'Internal server error'}), 500
+def update_financial_cost(request):
+    
+    try:
+        data = request.get_json()
+        operation_cost = int(data.get('operation_cost'))
+        unit_id = data.get('operationName')
+        unit = units.find_one({'unit_id': unit_id})
+        if unit:
+            fee_size = int(unit.get('total_size'))
+            fee_parking = int(unit.get('total_parking'))
+            total_cost = int((fee_size + fee_parking + operation_cost)/240)
+            units.update_one({'_id': unit['_id']}, {"$set": {"total_cost": total_cost}}, upsert=False)
+            
+        return jsonify({
+            'total_cost': total_cost
+            }), 200
+        
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'Internal server error'}), 500

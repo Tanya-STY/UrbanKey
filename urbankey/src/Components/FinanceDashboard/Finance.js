@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Finance.css";
 import OverviewGraph from "./OverviewGraph";
-import axios from 'axios';
-import useAuth from '../../CustomeHooks/useAuth';
+import axios from "axios";
+import useAuth from "../../CustomeHooks/useAuth";
 
 const Finance = () => {
   const { auth, setAuth } = useAuth();
@@ -13,16 +13,64 @@ const Finance = () => {
   const [annualReport, setAnnualReport] = useState([]);
   const [overviewData, setOverviewData] = useState([]);
   const [isGraphVisible, setIsGraphVisible] = useState(false);
-  // const [financialStatus, setFinancialStatus] = useState("");
 
-  const updateFees = () => {
-    alert(
-      `Fees updated: Fee per Square Foot: $${feePerSquareFoot}, Fee per Parking Spot: $${feePerParkingSpot}`
-    );
+  const updateFees = async () => {
+    try {
+      const token = auth?.token;
+      if (!token) throw new Error("Authentication token is missing.");
+
+      const response = await axios.post(
+        "http://localhost:5000/update_financial_status",
+        {
+          feePerParkingSpot,
+          feePerSquareFoot,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      console.log(response.data);
+
+      // Update financial status after updating fees
+      setCost(response.data.update_financial_status);
+    } catch (error) {
+      console.error("Error updating fees:", error);
+    }
   };
 
-  const addCost = () => {
-    alert(`Cost added: Operation Name: ${operationName}, Cost: $${cost}`);
+  const addCost = async () => {
+    try {
+      const token = auth?.token;
+      if (!token) throw new Error("Authentication token is missing.");
+
+      const response = await axios.post(
+        "http://localhost:5000/update_financial_cost",
+        {
+          operation_cost: cost,
+          operationName: operationName
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      console.log(response.data.total_cost);
+
+       // Update financial status after adding cost
+    setCost(response.data.total_cost); // Update the cost state with the updated financial status
+    
+    } catch (error) {
+      console.error("Error adding cost:", error);
+    }
   };
 
   const generateOverviewGraph = () => {
@@ -58,38 +106,9 @@ const Finance = () => {
     setIsGraphVisible(true);
   };
 
-  // //added for finance backend functionality
-  // useEffect(() => {
-  //   // Fetch financial status when component mounts
-  //   fetchFinancialStatus();
-  // }, []);
-
-  // const fetchFinancialStatus = async () => {
-  //   try {
-  //     const token = auth?.token;
-  //     if (!token) throw new Error("Authentication token is missing.");
-  
-  //     const response = await axios.get("http://localhost:5000/financial_status", {
-  //       headers: {
-  //         'Authorization': `Bearer ${token}`,
-  //         'Content-Type': 'application/json'
-  //       },
-  //       withCredentials: true
-  //     });
-  
-  //     // Update state with fetched financial status
-  //     // setFinancialStatus(response.data.financialStatus);
-  //   } catch (error) {
-  //     console.error("Error fetching financial status:", error);
-  //   }
-  // };
-  
-  // //done backend finance functionality
-
   return (
     <div className="finance-container">
-      <h1>Financial Management Dashboard</h1> <br/>
-
+      <h1>Financial Management Dashboard</h1> <br />
       <div className="dashboard">
         <section className="section">
           <h2>Condo Fees</h2>
@@ -139,12 +158,10 @@ const Finance = () => {
           </button>
         </section>
       </div>
-
       <h2>Overview</h2>
       <div style={{ width: "66%", margin: "0 auto" }}>
         {isGraphVisible && <OverviewGraph overviewData={overviewData} />}
       </div>
-
       <div className="annual-report-header">
         <h2>Annual Financial Reports</h2>
         <button className="btn green" onClick={generateOverviewGraph}>
