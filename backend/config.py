@@ -19,6 +19,4 @@ units = db.get_collection('Units')
 
 reservations = db.get_collection('Reservations')
 
-mongo_img_bucket = "unitphotos" #GridFS bucket where images will be stored.
-
 print(db.list_collection_names())

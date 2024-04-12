@@ -3,8 +3,8 @@
 import React from 'react';
 import { useId, useState, useEffect } from 'react';
 import './Profile.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { CFormSwitch } from "@coreui/react";
+import { Link, useNavigate  } from 'react-router-dom';
+import {CFormSwitch} from "@coreui/react";
 import '@coreui/coreui/dist/css/coreui.min.css';
 import "@fontsource/roboto/400.css"; // Specify weight
 import axios from 'axios';
@@ -28,36 +28,53 @@ const Profile = () => {
     const [loading, setLoading] = useState(true);
     const [newRegistrationKey, setNewRegistrationKey] = useState('');
     const [showRegistrationPopup, setShowRegistrationPopup] = useState(false);
+    const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg'); // State to hold the profile picture
 
     const role = auth?.role
 
     useEffect(() => {
         notification();
     }, []);
+    
+
 
     const fetchUserData = async () => {
-        // const role = auth?.role
+         const role = auth?.role
         try {
-            const token = auth?.token;
+            const token = auth?.token; 
             const response = await axios.get("http://localhost:5000/Profile", {
+                headers: { 
+                    'Content-Type': 'application/JSON',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
                 withCredentials: true
-            });
-            const userData = response.data;
-            setName(userData.name);
-            setEmail(userData.email);
-            setProvince(userData.province);
-            setCity(userData.city);
-            setNum(userData.num);
-            setNum2(userData.num2);
-            setKey(userData.key);
-            setAddress(userData.address);
-            setSelectedFile(userData.selectedFile);
-            setLoading(false);
-            // role = response?.data?.role
+        });
+        const userData = response.data;
+        setName(userData.name);
+        setEmail(userData.email);
+        setProvince(userData.province);
+        setCity(userData.city);
+        setNum(userData.num);
+        setNum2(userData.num2);
+        setKey(userData.key);
+        setAddress(userData.address);
+        
+        
+        if (userData.profilePicture) {
+
+            //receive the encoded in base64 code from the backend
+            const extractedPhoto = userData.profilePicture;
+            setProfilePicture(extractedPhoto);
+        } else {
+            // Set default profile picture URL if wrong
+            setProfilePicture('default-profile-picture.jpg');
+        }
+        
+
+        setLoading(false);
+        // role = response?.data?.role
 
         } catch (error) {
             console.log(error);
@@ -84,7 +101,7 @@ const Profile = () => {
                 num2,
                 key,
                 address,
-                selectedFile
+                profilePicture
             }, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -155,7 +172,6 @@ const Profile = () => {
 
 
     return (
-    
         <div className="profilePage" >
              {showRegistrationPopup && <RegistrationKeyMessage newRegistrationKey={newRegistrationKey} onClose={handleClosePopup} />}
             <form className="profileForm">
@@ -165,16 +181,30 @@ const Profile = () => {
                     <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} />
                     <label htmlFor="upload">Upload Profile Picture</label>
                 </div>
+                
+                
+                <div className='special-top-box-profile-page'>
 
-                <div className="field-holder-profile">
-                    <label className="profileLabels" htmlFor={name}> Name / Surname</label>
-                    <input className="profileInput" value={name} onChange={(e) => setName(e.target.value)} type="text" />
-                </div>
+                    <div className='special-box-profile-page'>
+                        <div className="field-holder-profile">
+                            <label className="profileLabels" htmlFor={name}> Name / Surname</label>
+                            <input className="profileInput" value={name} onChange={(e) => setName(e.target.value)} type="text" />
+                        </div>
 
-                <div className="field-holder-profile">
-                    <label className="profileLabels" htmlFor={email}> E-mail</label>
-                    <input className="profileInput" value={email} onChange={(e) => setEmail(e.target.value)} type="text" />
+                        <div className="field-holder-profile">
+                            <label className="profileLabels" htmlFor={email}> E-mail</label>
+                            <input className="profileInput" value={email} onChange={(e) => setEmail(e.target.value)} type="text" />
+                        </div>
+                    </div>
+                    <div className="profile-picture">
+                        <img src={profilePicture} alt="Profile Picture" />
+                        <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} />
+                        <label htmlFor="upload">Upload Profile Picture</label>
+                    </div>
+
+
                 </div>
+                
                 <div className="box-profile-page">
                     <div className="field-holder2-profile">
                         <label className="province" htmlFor={province}>Province</label>
@@ -218,15 +248,15 @@ const Profile = () => {
 
                 <div className="field-holder-profile">
                     <label className="profileLabels" htmlFor={key}>Registration Key</label>
-                    <input className="profileInput" id={key} type="text" value={key} onChange={(e) => setKey(e.target.value)} />
+                    <input className="profileInput" id={key} type="text"  value={key} onChange={(e) => setKey(e.target.value)} />
                 </div>
 
                 <div className="field-holder-profile">
                     <label className="profileLabels" htmlFor={address}>Address</label>
-                    <input id={address} className="addressInput" type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
+                    <input id={address} className="addressInput" type="text"  value={address} onChange={(e) => setAddress(e.target.value)}  />
                 </div>
                 <div>
-                    <input type='file' onChange={(e) => setSelectedFile(e.target.files[0])} />
+                {/*<input type='file' onChange={(e) => setSelectedFile(e.target.files[0])}/>*/}
                 </div>
 
             </form>
@@ -234,8 +264,8 @@ const Profile = () => {
             <div className="notification">
                 <p className="notifText" >I want to be informed about all announcements and campaigns via commercial electronic mail</p>
                 <div className="profileSwitch">
-                    <CFormSwitch label="E-mail" className="formSwitchCheckDefault" />
-                    <CFormSwitch label="SMS" className="formSwitchCheckDefault" />
+                    <CFormSwitch label="E-mail" className="formSwitchCheckDefault"/>
+                    <CFormSwitch label="SMS" className="formSwitchCheckDefault"/>
                 </div>
             </div>
             <div className="save">

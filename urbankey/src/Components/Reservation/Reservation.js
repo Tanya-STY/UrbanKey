@@ -6,8 +6,15 @@ import "react-nice-dates/build/style.css";
 import { Container, Row, Col } from "react-bootstrap";
 import { getDay, isBefore, format } from "date-fns";
 import { enUS } from 'date-fns/locale';
+import axios from 'axios';
+import useAuth from '../../CustomeHooks/useAuth';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+
+
 
 const Reservation = () => {
+  const { auth, setAuth } = useAuth();
   const [selectedDate, setSelectedDate] = useState(null);
   const [date, setDate] = useState(new Date());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
@@ -15,24 +22,38 @@ const Reservation = () => {
   const [selectedFacility, setSelectedFacility] = useState(""); // Changed initial state to an empty string
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [reservedTimeSlots, setReservedTimeSlots] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
-  // Simulated function to fetch availability data
-  const fetchAvailability = (selectedDate) => {
-    // Simulated API call to fetch availability for selected date
-    // This is a placeholder function, replace it with your actual API call
-    // In this example, we assume that all time slots are available
-    const availabilityData = timeSlots.reduce((acc, timeSlot) => {
-      acc[timeSlot] = true; // Available
-      return acc;
-    }, {});
-    setAvailability(availabilityData);
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+
+  const fetchReservations = async (facility, date) => {
+    try {
+      const response = await axios.post('http://localhost:5000/GetReservations', { facility, date });
+      const reservations = response.data;
+      const reservedSlots = reservations.map(reservation => reservation.time_slot);
+      setReservedTimeSlots(reservedSlots);
+  
+      const availabilityData = timeSlots.reduce((acc, timeSlot) => {
+        acc[timeSlot] = !reservedSlots.includes(timeSlot);
+        return acc;
+      }, {});
+      setAvailability(availabilityData);
+      console.log("Availability Data:", availabilityData);
+    } catch (error) {
+      console.error('Error fetching reservations:', error);
+    }
   };
 
   useEffect(() => {
-    if (selectedDate) {
-      fetchAvailability(selectedDate);
+    if (selectedFacility && selectedDate) {
+      fetchReservations(selectedFacility, format(selectedDate, 'yyyy-MM-dd'));
     }
-  }, [selectedDate]);
+  }, [selectedFacility, selectedDate]); 
+
 
   const modifiers = {
     disabled: (date) => getDay(date) === 0 || getDay(date) === 7 // Disables Saturdays
@@ -61,11 +82,16 @@ const Reservation = () => {
     "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM",
     "08:00 PM", "09:00 PM", "10:00 PM", "11:00 PM"
   ];
-
+  const setSelectedFacility2 = (value)=>{
+    setSelectedFacility(value);
+  };
   // Function to handle form submission
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
     if (!selectedFacility) {
       setErrorMessage("Please select a facility");
+      console.log("Facility:", selectedFacility)
       setSuccessMessage("");
     } else if (!selectedDate) {
       setErrorMessage("Please select a date");
@@ -74,18 +100,62 @@ const Reservation = () => {
       setErrorMessage("Please select a time");
       setSuccessMessage("");
     } else {
+      const token = auth?.token;
+      const email = auth?.email;
       // Submit the data
       setErrorMessage("");
       setSuccessMessage("Reservation successfully submitted!");
       console.log("Facility:", selectedFacility);
       console.log("Date:", selectedDate);
       console.log("Time:", selectedTimeSlot);
-    }
+
+      const reservationData = {
+        email: email,
+        facility: selectedFacility,
+        date: format(selectedDate, "yyyy-MM-dd"),
+        time_slot: selectedTimeSlot
+      }
+
+      axios.post('http://localhost:5000/MakeReservation', reservationData,{
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        withCredentials: true
+    })
+      .then(response => {
+        // Handle success
+        console.log('Reservation made successfully:', response.data);
+        toggleModal();
+      })
+      .catch(error => {
+        // Handle error
+        console.error('Error making reservation:', error.response.data);
+      });
+  }
+  };
+
+  const SuccessModal = ({ show, handleClose }) => {
+    return (
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Reservation Made Successfully</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Your reservation has been successfully made.</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            OK
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
   };
   
 
   return (
-    <div>
+    <div><SuccessModal show={showModal} handleClose={toggleModal} />
       <div className="title-rectangular">
         {/* This div spans the entire width of the page */}
         <h1 className="title-text"> Facility Reservation System</h1>
@@ -99,7 +169,7 @@ const Reservation = () => {
           </div>
           <div className="selection-row2">
             {/* Added onChange handler to update selectedFacility state */}
-            <DropdownMenu onChange={(facility) => setSelectedFacility(facility)} />
+            <DropdownMenu onChange={(facility) => setSelectedFacility(facility)} setSelectedFacility2={setSelectedFacility2} />
           </div>
           <div className="selection-row3">
                 <div className="grid-container">
@@ -107,7 +177,7 @@ const Reservation = () => {
                         <div
                         key={index}
                         className={`time-slot ${!availability[timeSlot] ? 'unavailable' : ''} ${selectedTimeSlot === timeSlot ? 'selected' : ''}`}
-                        onClick={() => handleTimeSlotClick(timeSlot)}
+                        onClick={() => !availability[timeSlot] ? null : handleTimeSlotClick(timeSlot)}
                         >
                         {timeSlot}
                         </div>
@@ -155,6 +225,7 @@ const Reservation = () => {
         {successMessage && <p className="success-message">{successMessage}</p>} 
       </div>
     </div>
+    
   );
 };
 

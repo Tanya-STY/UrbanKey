@@ -4,14 +4,43 @@ from config import users, regkey, units, fs # Import the MongoDB collection and 
 from middleware.TokenAuth import generate_access_token, generate_refresh_token
 import io
 import re
+from bson import ObjectId
+import base64
+import traceback
+
+
+
 
 def getProfile(request):
+    
     try: 
         email = request.email
         role = request.role
+        #even though we do not use this line above, we have to add it or it will create an error (for me anyways)
 
         user = users.find_one({"email": email})
 
+        if 'photo_id' in user:
+                photo_id = user['photo_id']
+                photo_file = fs.get(ObjectId(photo_id))
+                #gets the binary data of the object from the database.
+                if photo_file:
+                   
+                   profilePhotoDecoded = base64.b64encode(photo_file.read()).decode('utf-8')
+                   #transform the binary data into encoded base64 because thats what we read in the frontend
+                   profilePhotoDecodedWithSpecialCharacters = profilePhotoDecoded[:4] + ':' + profilePhotoDecoded[4:14] + ';' + profilePhotoDecoded[14:20] + ',' + profilePhotoDecoded[20:]
+                    # we have to add the characters ; : and , because base64 does not have those characters, so it erases it.
+                    #we have to manually add them back or else it wont be understood correctly
+                    #hopefully all photos share the same structure at the begining, but if they do not, and if
+                    #you get an error 431 or something else, it might be because  of this manual injection. 
+                    #to debug, print the variables and check manually with the one you're sending (original encoded64)
+                else:
+                     profilePhotoDecodedWithSpecialCharacters = None
+        else: 
+             profilePhotoDecodedWithSpecialCharacters = None
+
+        # print(f'Final ProfilePhoto : {profilePhoto}')
+        
         user_data = {
             'name': user['full_name'],
             'email': user['email'],
@@ -21,7 +50,7 @@ def getProfile(request):
             'num2': user.get('num2', ''),
             'key': user.get('registration_key', ''),
             'address': user.get('address', ''),
-            'selectedFile': user.get('selectedFile', ''),
+            'profilePicture': profilePhotoDecodedWithSpecialCharacters
         }
 
         regKey = user.get('registration_key')
@@ -79,6 +108,7 @@ def getRegisteredProfile(request):
 
 def update_user_profile(request):
     try:
+        role = request.role
         data = request.get_json()
         name = data.get('name')
         email = request.email
@@ -88,12 +118,23 @@ def update_user_profile(request):
         num2 = data.get('num2', '')
         registration_key = data.get("key")
         address = data.get('address')
+        profile_picture = data['profilePicture']
 
         user_info = {
             'name': name,
             'email': email,
             'num': num
         }
+
+        if profile_picture:
+            filename = f'photo_of_{name}'
+            profile_picture_binary = base64.b64decode(profile_picture)
+            #store the object as object as binary instead of base64 because gridFS stores in binary
+            photo_id = fs.put(profile_picture_binary, filename=filename)
+            users.update_one({"email": email}, {"$set": {"photo_id": str(photo_id)}})
+
+        else:
+             print(f'Did not upload picture because profile_photo: {profile_picture}')
 
         reg_key = regkey.find_one({"key_value": registration_key})
 
@@ -131,6 +172,7 @@ def update_user_profile(request):
 
     except Exception as e:
         print(e)
+        # traceback.print_exc()
         return jsonify({'error': 'Internal server error'}), 500
     
 
