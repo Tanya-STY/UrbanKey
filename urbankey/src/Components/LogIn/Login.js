@@ -44,7 +44,6 @@ const Login = () => {
       setAuth({ role, email, password, token, name });
       setEmail('');
       setPassword('');
-      // console.log(role);
       if (role === 1010) {
         navigate('/PropertyProfile')
       }
