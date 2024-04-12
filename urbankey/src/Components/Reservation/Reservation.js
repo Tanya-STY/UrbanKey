@@ -8,6 +8,9 @@ import { getDay, isBefore, format } from "date-fns";
 import { enUS } from 'date-fns/locale';
 import axios from 'axios';
 import useAuth from '../../CustomeHooks/useAuth';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+
 
 
 const Reservation = () => {
@@ -20,6 +23,12 @@ const Reservation = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [reservedTimeSlots, setReservedTimeSlots] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
 
   const fetchReservations = async (facility, date) => {
     try {
@@ -38,22 +47,6 @@ const Reservation = () => {
       console.error('Error fetching reservations:', error);
     }
   };
-  // Simulated function to fetch availability data
-/*   const fetchReservations = async (facility, date) => {
-    try {
-      const response = await axios.post('http://localhost:5000/GetReservations', { facility, date });
-      const reservations = response.data;
-      const reservedSlots = reservations.map(reservation => reservation.time_slot);
-      setReservedTimeSlots(reservedSlots);
-    } catch (error) {
-      console.error('Error fetching reservations:', error);
-    }
-    const availabilityData = timeSlots.reduce((acc, timeSlot) => {
-      acc[timeSlot] = !reservedTimeSlots.includes(timeSlot);
-      return acc;
-    }, {});
-    setAvailability(availabilityData);
-  }; */
 
   useEffect(() => {
     if (selectedFacility && selectedDate) {
@@ -61,11 +54,6 @@ const Reservation = () => {
     }
   }, [selectedFacility, selectedDate]); 
 
-/*   useEffect(() => {
-    if (selectedDate) {
-      fetchAvailability(selectedDate);
-    }
-  }, [selectedDate]); */
 
   const modifiers = {
     disabled: (date) => getDay(date) === 0 || getDay(date) === 7 // Disables Saturdays
@@ -138,19 +126,36 @@ const Reservation = () => {
       .then(response => {
         // Handle success
         console.log('Reservation made successfully:', response.data);
-        // Further actions if needed
+        toggleModal();
       })
       .catch(error => {
         // Handle error
         console.error('Error making reservation:', error.response.data);
-        // Further actions if needed
       });
   }
+  };
+
+  const SuccessModal = ({ show, handleClose }) => {
+    return (
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Reservation Made Successfully</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Your reservation has been successfully made.</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            OK
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
   };
   
 
   return (
-    <div>
+    <div><SuccessModal show={showModal} handleClose={toggleModal} />
       <div className="title-rectangular">
         {/* This div spans the entire width of the page */}
         <h1 className="title-text"> Facility Reservation System</h1>
@@ -220,6 +225,7 @@ const Reservation = () => {
         {successMessage && <p className="success-message">{successMessage}</p>} 
       </div>
     </div>
+    
   );
 };
 
