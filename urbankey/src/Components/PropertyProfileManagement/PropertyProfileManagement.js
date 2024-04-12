@@ -17,6 +17,8 @@ const PropertyProfileManagement = () => {
   const [unitId, setUnitId] = useState();
   const [unitOwner, setUnitOwner] = useState('');
   const [unitOccupant, setUnitOccupant] = useState('');
+  const [registrationKeyRenter, setRegistrationKeyRenter] = useState('');
+  const [registrationKeyOwner, setRegistrationKeyOwner] = useState('');
   const [loading, setLoading] = useState(true);
   const [selectedInteriorFeatures, setSelectedInteriorFeatures] = useState([]);
   const [selectedExteriorFeatures, setSelectedExteriorFeatures] = useState([]);
@@ -76,6 +78,8 @@ const PropertyProfileManagement = () => {
       const userData = response.data;
       setUnitOwner(userData.owner);
       setUnitOccupant(userData.occupant);
+      setRegistrationKeyRenter(userData.registration_key_renter);
+      setRegistrationKeyOwner(userData.registration_key_owner);
       setFormData({
         category: userData.category,
         unitId: unitId,
@@ -432,7 +436,8 @@ const PropertyProfileManagement = () => {
         <button onClick={handleOpenPopup} className="submitbutton">
           Send Registration Keys
         </button>
-        {isPopupOpen && <RegistrationKey onClose={handleClosePopup} />}
+        {isPopupOpen && <RegistrationKey onClose={handleClosePopup} unitId={unitId} registrationKeyRenter={registrationKeyRenter}
+            registrationKeyOwner={registrationKeyOwner} />}
       </div>
     </div>
   );

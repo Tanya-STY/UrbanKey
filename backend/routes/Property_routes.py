@@ -1,7 +1,8 @@
 from flask import Blueprint, request, jsonify
 from werkzeug.utils import secure_filename
 from middleware.TokenAuth import token_required
-from config import units, users, fs
+from config import units, users, regkey, fs
+from bson import ObjectId
 
 property_routes = Blueprint('property_routes', __name__)
 
@@ -60,6 +61,22 @@ def unitproperty_route(unitId):
         if 'unit_owner' in unit and unit['unit_owner']:
             owner_email = unit['unit_owner'].get('email', '')
 
+        registration_key_renter_id = unit.get('registration_key_renter', '')
+        if registration_key_renter_id:
+            registration_key_renter = regkey.find_one({'_id': ObjectId(registration_key_renter_id)})
+            if registration_key_renter:
+                registration_key_renter_key = registration_key_renter.get('key_value', '')
+
+
+        registration_key_owner_id = unit.get('registration_key_owner', '')
+        if registration_key_owner_id:
+            registration_key_owner = regkey.find_one({'_id': ObjectId(registration_key_owner_id)})
+            if registration_key_owner:
+                registration_key_owner_key = registration_key_owner.get('key_value', '')
+
+
+
+
         category = unit.get('category', '')  
         title = unit.get('title', '')  
         description = unit.get('description', '')  
@@ -107,7 +124,9 @@ def unitproperty_route(unitId):
             'city': city,
             'neighborhood': neighborhood,
             'interior': interior,
-            'exterior': exterior
+            'exterior': exterior,
+            'registration_key_renter': registration_key_renter_key,
+            'registration_key_owner': registration_key_owner_key
         }), 200
     else:
         return jsonify({
