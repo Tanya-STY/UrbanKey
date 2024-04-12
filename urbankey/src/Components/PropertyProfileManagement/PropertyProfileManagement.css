@@ -2,7 +2,7 @@
   font-family: Arial, sans-serif;
   width: 100%;
   max-width: 1000px;
-  margin: 50px auto;
+  margin: 0px auto;
   padding: 20px;
   background: #fff;
   border: 1px solid #ddd;
@@ -315,7 +315,7 @@ textarea.input-field {
   margin-right: 10px;
 }
 
-.submit-button {
+.submitbutton {
   font-size: 16px;
   padding: 10px 20px;
   background-color: #cc0000;
@@ -329,8 +329,33 @@ textarea.input-field {
   margin-top: 20px;
 }
 
-.submit-button:hover {
+.submitbutton:hover {
   background-color: #a00000;
+}
+
+.containerButton{
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.upload-button {
+  margin: 0 auto;
+  display: flex;
+  /* padding: 10px; */
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #cc0000;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  width: 40%;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 768px) {

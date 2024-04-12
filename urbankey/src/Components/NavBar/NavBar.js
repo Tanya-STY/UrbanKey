@@ -32,7 +32,7 @@ const Navbar = () => {
             </div>
             <div className="sections">
                 {(auth?.token && persist) ? (
-                    <AuthenticatedSections />
+                    <AuthenticatedSections auth={auth} />
                 ) : (
                     <UnauthenticatedSections />
                 )}
@@ -68,41 +68,57 @@ const Navbar = () => {
     );
 };
 
-const AuthenticatedSections = ({auth}) => {
-    const renderDashboardLink = () => {
-        if (auth?.role === 3333) { // Assuming 3333 is the role for Owner
-          return <NavLink to="/CondoOwnerDashboard" activeclassname="active" className="nav-link">Dashboard</NavLink>;
-        } else {
-          return null; // Return null if the user is not an owner
-        }
-    };
+const AuthenticatedSections = ({ auth }) => {
+    console.log(auth?.role);
     return (
         <ul>
             <li>
-                <NavLink to="/HomePage" activeclassname="active" className="nav-link">Home Page</NavLink>
+                <NavLink to="/HomePage" activeClassName="active" className="nav-link">Home Page</NavLink>
             </li>
-            {/* Add additional sections based on user roles */}
-            <li>
-                <NavLink to="/Profile" activeclassname="active" className="nav-link">Profile</NavLink>
-            </li>
-            <li>
-                <NavLink to="/Dashboard" activeclassname="active" className="nav-link">Dashboard</NavLink>
-            </li>
-            <li>
-                <NavLink to="/Reservation" activeclassname="active" className="nav-link">Reservation</NavLink>
-            </li>
-            <li>
-                <NavLink to="/PropertyProfile" activeclassname="active" className="nav-link">Property Profile</NavLink>
-            </li>
-            <li>
-                <NavLink to="/Finance" activeclassname="active" className="nav-link">Finance</NavLink>
-            </li>
-            <li>
-                <NavLink to="/Employees" activeclassname="active" className="nav-link">Employees</NavLink>
-            </li>
+            
+            {(auth?.role === 1010) && (
+                <>
+                    <li>
+                        <NavLink to="/PropertyProfile" activeClassName="active" className="nav-link">Property Profile</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/Employees" activeClassName="active" className="nav-link">Employees</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/Finance" activeClassName="active" className="nav-link">Finance</NavLink>
+                    </li>
+                </>
+            )}
+            {(auth?.role === 3030) && (
+                <>
+                    <li>
+                        <NavLink to="/PropertyProfile" activeClassName="active" className="nav-link">Property Profile</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/Employees" activeClassName="active" className="nav-link">Employees</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/Finance" activeClassName="active" className="nav-link">Finance</NavLink>
+                    </li>
+                </>
+            )}
+            {(auth?.role === 2001 || auth?.role === 3333 || auth?.role === 1984) && (
+                <>
+                    <li>
+                        <NavLink to="/Profile" activeclassname="active" className="nav-link">Profile</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/Dashboard" activeclassname="active" className="nav-link">Dashboard</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/Reservation" activeclassname="active" className="nav-link">Reservation</NavLink>
+                    </li>
+                </>
+            )}
         </ul>
     );
 };
+
 
 const UnauthenticatedSections = () => {
     return (

@@ -37,7 +37,8 @@ const ROLE = {
   'Owner': 3333,
   'Renter': 1984,
   'Admin': 5150,
-  'Employee': 99
+  'Employee': 99,
+  'Company': 1010
 }
 
 
@@ -56,7 +57,7 @@ function App() {
           <Route path="/HomePage" element={<HomePage />} />
           
           <Route element={<PersistLogin />} >
-          <Route element={<RequireAuth allowedRoles={[ROLE.User, ROLE.Admin, ROLE.Renter, ROLE.Owner]}/>} > 
+          <Route element={<RequireAuth allowedRoles={[ROLE.User, ROLE.Admin, ROLE.Renter, ROLE.Owner, ROLE.Company]}/>} > 
             {/* <Route path="/HomePage" element={<HomePage />} /> */}
             <Route path="/Profile" element={<Profile />} />
             <Route path="/MaintenanceRequest" element={<MaintenanceRequest />} />
@@ -88,14 +89,13 @@ const DashboardBasedOnRole = () => {
 
   if (auth.role === ROLE.Owner) {
     return <CondoOwnerDashboard />;
-  } else {
+  } else if (auth.role === ROLE.Renter) {
     return <CondoRenterDashboard />;
+  }
+  else{
+    return <div>Enter your registration key to see your dashboard</div>
   }
 };
 
-// Component for default dashboard
-const DefaultDashboard = () => {
-  return <div>Enter your registration key to see your dashboard</div>;
-};
 
 export default App;

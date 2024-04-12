@@ -45,7 +45,12 @@ const Login = () => {
       setEmail('');
       setPassword('');
       // console.log(role);
-      navigate(from, { replace: true });
+      if (role === 1010) {
+        navigate('/PropertyProfile')
+      }
+      else {
+        navigate('/Profile');
+      }
     }
     catch (error) {
       console.log(error, 'error');

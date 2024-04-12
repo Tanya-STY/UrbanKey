@@ -57,7 +57,11 @@ const SignUp = () => {
             const token = response?.data?.token;
             const role = response?.data?.role;
             setAuth({ role, email, password, token });
-            navigate("/Profile");
+            if (role === 2001) {
+                navigate("/Profile");
+            } else if (role === 1010) {
+                navigate("/PropertyProfile");
+            }
       } catch (error) {
           console.log(error, 'error');
           if (error.response && error.response.status === 401) {

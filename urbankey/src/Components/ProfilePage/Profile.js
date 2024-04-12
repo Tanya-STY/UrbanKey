@@ -3,17 +3,18 @@
 import React from 'react';
 import { useId, useState, useEffect } from 'react';
 import './Profile.css';
-import { Link, useNavigate  } from 'react-router-dom';
-import {CFormSwitch} from "@coreui/react";
+import { Link, useNavigate } from 'react-router-dom';
+import { CFormSwitch } from "@coreui/react";
 import '@coreui/coreui/dist/css/coreui.min.css';
 import "@fontsource/roboto/400.css"; // Specify weight
-import axios from 'axios'; // Import axios here
+import axios from 'axios';
 import useAuth from '../../CustomeHooks/useAuth';
+import RegistrationKeyMessage from '../RegistrationKey/RegistrationKeyMessage'
 
 
 const Profile = () => {
 
-    const { auth, setAuth } = useAuth();
+    const { auth, setAuth, setUnit } = useAuth();
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -25,80 +26,118 @@ const Profile = () => {
     const [address, setAddress] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [newRegistrationKey, setNewRegistrationKey] = useState('');
+    const [showRegistrationPopup, setShowRegistrationPopup] = useState(false);
 
-    const currentAuth = auth;
+    const role = auth?.role
 
+    useEffect(() => {
+        notification();
+    }, []);
 
     const fetchUserData = async () => {
         // const role = auth?.role
         try {
-            const token = auth?.token; 
+            const token = auth?.token;
             const response = await axios.get("http://localhost:5000/Profile", {
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
                 withCredentials: true
-        });
-        const userData = response.data;
-        setName(userData.name);
-        setEmail(userData.email);
-        setProvince(userData.province);
-        setCity(userData.city);
-        setNum(userData.num);
-        setNum2(userData.num2);
-        setKey(userData.key);
-        setAddress(userData.address);
-        setSelectedFile(userData.selectedFile);
-        const newAuth = {...currentAuth, num};
-        setAuth(newAuth);
-        setLoading(false);
-        // role = response?.data?.role
+            });
+            const userData = response.data;
+            setName(userData.name);
+            setEmail(userData.email);
+            setProvince(userData.province);
+            setCity(userData.city);
+            setNum(userData.num);
+            setNum2(userData.num2);
+            setKey(userData.key);
+            setAddress(userData.address);
+            setSelectedFile(userData.selectedFile);
+            setLoading(false);
+            // role = response?.data?.role
 
-    } catch(error) {
-        console.log(error);
-        navigate('/Login');
+        } catch (error) {
+            console.log(error);
+            navigate('/Login');
         }
     };
 
 
-useEffect(() => {
-   fetchUserData();
-}, []);
+    useEffect(() => {
+        fetchUserData();
+    }, []);
 
-const handlesubmit = async (e) => {
-e.preventDefault();
+    const handlesubmit = async (e) => {
+        e.preventDefault();
 
-try {
-    const token = auth?.token; 
-    const response=await axios.post("http://localhost:5000/user/profile/update", {
-        name,
-        email,
-        province,
-        city,
-        num,
-        num2,
-        key,
-        address,
-        selectedFile
-    }, {
-        headers: { 
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        withCredentials: true
-    });
-    const unit_id = response.data.unit_id;
-    const newAuth = {...currentAuth, unit_id}
-    setAuth(newAuth);
-    console.log(response.data);
-    // auth?.role = response?.data?.role;
-    console.log("Profile updated successfully");
-}
-catch (error) {
-    console.log(error);
-}
-}
+        try {
+            const token = auth?.token;
+            const response = await axios.post("http://localhost:5000/user/profile/update", {
+                name,
+                email,
+                province,
+                city,
+                num,
+                num2,
+                key,
+                address,
+                selectedFile
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                withCredentials: true
+            });
+            const unit_id = response.data.unit_id;
+            setUnit({ num, unit_id });
+            console.log("Response role:", response.data.role);
+            const newAuth = {...auth, role: response.data.role};
+            setAuth(newAuth);
+            console.log(response.data);
+            // auth?.role = response?.data?.role;
+            console.log("Profile updated successfully");
+            console.log(auth?.role);
+            navigate('/Dashboard');
+            
+        }
+        catch (error) {
+            console.log(error);
+            alert(error);
+        }
+    }
+
+
+        const notification = async() => {
+            try {
+                const token = auth?.token;
+                const response = await axios.get("http://localhost:5000/check-new-registration-key", {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    withCredentials: true
+                });
+                const { new_registration_key } = response.data;
+                if (new_registration_key) {
+                    setNewRegistrationKey(new_registration_key);
+                    setShowRegistrationPopup(true);
+                }
+            }
+            catch (error) {
+                console.log(error);
+                alert(error);
+            }
+        }
+
+
+    const handleClosePopup = () => {
+        setShowRegistrationPopup(false);
+      };
+
 
     const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg'); // State to hold the profile picture
     // Function to handle profile picture upload
@@ -116,7 +155,9 @@ catch (error) {
 
 
     return (
+    
         <div className="profilePage" >
+             {showRegistrationPopup && <RegistrationKeyMessage newRegistrationKey={newRegistrationKey} onClose={handleClosePopup} />}
             <form className="profileForm">
                 <h1 className="membershipInfo">Membership Information</h1>
                 <div className="profile-picture">
@@ -177,15 +218,15 @@ catch (error) {
 
                 <div className="field-holder-profile">
                     <label className="profileLabels" htmlFor={key}>Registration Key</label>
-                    <input className="profileInput" id={key} type="text"  value={key} onChange={(e) => setKey(e.target.value)} />
+                    <input className="profileInput" id={key} type="text" value={key} onChange={(e) => setKey(e.target.value)} />
                 </div>
 
                 <div className="field-holder-profile">
                     <label className="profileLabels" htmlFor={address}>Address</label>
-                    <input id={address} className="addressInput" type="text"  value={address} onChange={(e) => setAddress(e.target.value)}  />
+                    <input id={address} className="addressInput" type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
                 </div>
                 <div>
-                <input type='file' onChange={(e) => setSelectedFile(e.target.files[0])}/>
+                    <input type='file' onChange={(e) => setSelectedFile(e.target.files[0])} />
                 </div>
 
             </form>
@@ -193,8 +234,8 @@ catch (error) {
             <div className="notification">
                 <p className="notifText" >I want to be informed about all announcements and campaigns via commercial electronic mail</p>
                 <div className="profileSwitch">
-                    <CFormSwitch label="E-mail" className="formSwitchCheckDefault"/>
-                    <CFormSwitch label="SMS" className="formSwitchCheckDefault"/>
+                    <CFormSwitch label="E-mail" className="formSwitchCheckDefault" />
+                    <CFormSwitch label="SMS" className="formSwitchCheckDefault" />
                 </div>
             </div>
             <div className="save">
