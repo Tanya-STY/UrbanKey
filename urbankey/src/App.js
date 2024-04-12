@@ -29,10 +29,8 @@ import ReservationPageCompany from "./Components/ReservationPageCompany/Reservat
 import DailyOperations from "./Components/DailyOperations/DailyOperations.js";
 import CondoRenterDashboard from "./Components/CondoRenterDashboard/RenterDashboard"; // added code
 import ManagerEmployeePage from "./Components/ManagerEmployeePage/ManagerEmployeePage";
-import ReservationPageCompany from "./Components/ReservationPageCompany/ReservationPageCompany";
-import DailyOperations from "./Components/DailyOperations/DailyOperations.js";
-import CondoRenterDashboard from "./Components/CondoRenterDashboard/RenterDashboard"; // added code
-import ManagerEmployeePage from "./Components/ManagerEmployeePage/ManagerEmployeePage"
+
+
 
 
 const ROLE = {
@@ -88,13 +86,14 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Layout />} />
+        <Route path="/*" element={<Layout />} />
+
 
           {/* Public Routes */}
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Unauthorized" element={<Unauthorized />} />
-          <Route path="/HomePage" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
           
           <Route element={<PersistLogin />}>
           <Route

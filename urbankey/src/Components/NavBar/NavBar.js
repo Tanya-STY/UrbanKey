@@ -58,7 +58,7 @@ const Navbar = () => {
                     <div className="options" onClick={handleOptionsClick} data-testid="options">
                         <ul>
                             <li>
-                                <NavLink to="/HomePage" className="nav-link">Sign Out</NavLink>
+                                <NavLink to="/" className="nav-link">Sign Out</NavLink>
                             </li>
                         </ul>
                     </div>
@@ -73,7 +73,7 @@ const AuthenticatedSections = ({ auth }) => {
     return (
         <ul>
             <li>
-                <NavLink to="/HomePage" activeClassName="active" className="nav-link">Home Page</NavLink>
+                <NavLink to="/" activeClassName="active" className="nav-link">Home Page</NavLink>
             </li>
             
             {(auth?.role === 1010) && (

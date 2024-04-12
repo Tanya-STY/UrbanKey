@@ -38,14 +38,8 @@ const AdvertiseFeatures = ({onSaveSelectedInteriorFeatures, onSaveSelectedExteri
       index === position ? !item : item
     );
     setCheckedExterior(updatedCheckedState);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const selectedInteriorFeatures = interiorFeatures.filter((_, index) => checkedInterior[index]);
-    const selectedExteriorFeatures = externalFeatures.filter((_, index) => checkedExterior[index]);
-    console.log("Selected interior features:", selectedInteriorFeatures);
-    console.log("Selected exterior features:", selectedExteriorFeatures);
+    const selectedExterior = externalFeatures.filter((_, index) => updatedCheckedState[index]);
+    onSaveSelectedExteriorFeatures(selectedExterior);
   };
 
   return (
@@ -86,10 +80,6 @@ const AdvertiseFeatures = ({onSaveSelectedInteriorFeatures, onSaveSelectedExteri
             ))}
           </div>
         </div>
-        <button type="submit" className="submit-button" onClick={openPopup}>
-          Send Registration Keys
-        </button>
-        {showPopup && <RegistrationKey onClose={closePopup}/>}
       {/* </form> */}
     </div>
   );

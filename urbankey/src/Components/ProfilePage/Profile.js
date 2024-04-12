@@ -43,8 +43,6 @@ const Profile = () => {
         try {
             const token = auth?.token; 
             const response = await axios.get("http://localhost:5000/Profile", {
-                headers: { 
-                    'Content-Type': 'application/JSON',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
@@ -155,8 +153,6 @@ const Profile = () => {
         setShowRegistrationPopup(false);
       };
 
-
-    const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg'); // State to hold the profile picture
     // Function to handle profile picture upload
     const handleProfilePictureUpload = (e) => {
         const file = e.target.files[0]; // Get the uploaded file
@@ -176,11 +172,11 @@ const Profile = () => {
              {showRegistrationPopup && <RegistrationKeyMessage newRegistrationKey={newRegistrationKey} onClose={handleClosePopup} />}
             <form className="profileForm">
                 <h1 className="membershipInfo">Membership Information</h1>
-                <div className="profile-picture">
-                    <img src={profilePicture} alt="Profile Picture" />
-                    <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} />
-                    <label htmlFor="upload">Upload Profile Picture</label>
-                </div>
+                {/* <div className="profile-picture"> */}
+                    {/* <img src={profilePicture} alt="Profile Picture" /> */}
+                    {/* <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} /> */}
+                    {/* <label htmlFor="upload">Upload Profile Picture</label> */}
+                {/* </div> */}
                 
                 
                 <div className='special-top-box-profile-page'>
@@ -199,7 +195,7 @@ const Profile = () => {
                     <div className="profile-picture">
                         <img src={profilePicture} alt="Profile Picture" />
                         <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} />
-                        <label htmlFor="upload">Upload Profile Picture</label>
+                        <label htmlFor="upload" style={{alignitems: 'center'}}>Upload Profile Picture</label>
                     </div>
 
 

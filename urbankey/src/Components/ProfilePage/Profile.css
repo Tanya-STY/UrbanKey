@@ -78,11 +78,11 @@
     margin: 0;
     border: 0;
     position: relative;
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     width: 40%;
     align-items: flex-end;
-    height: 15vh;
+    /* height: 15vh; */
     flex-grow:2;
 }
 .special-top-box-profile-page{
@@ -258,7 +258,7 @@
 
 .profile-picture {
     position: relative;
-    width: 150px;
+    /* width: 150px; */
     display: flex;
     align-items: center;
     justify-content: center;

@@ -46,9 +46,6 @@ const PropertyProfileManagement = () => {
 
   });
 
-  // const handleSelectedFeatures = (selectedFeaturesData) => {
-  //   setSelectedFeatures(selectedFeaturesData);
-  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
