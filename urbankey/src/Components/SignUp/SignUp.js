@@ -27,6 +27,11 @@ const SignUp = () => {
     };
 
     const handleSubmit = async(e) => {
+        const userInfo = {
+            fullName: fullName,
+            email: email,
+            password: password,
+        }
         e.preventDefault();
         setEmailError('');
         setPasswordError('');

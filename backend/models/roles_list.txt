@@ -3,6 +3,9 @@ const ROLE = {
   'Owner': 3333,
   'Renter': 1984,
   'Admin': 5150,
-  'Employee': 99
+  'Company': 1010,
+  'DailyOperator': 2020,
+  'FinanceOperator': 3030,
+  'Manager': 4040,
 }
 

@@ -5,8 +5,8 @@ from flask_cors import CORS
 from flask_pymongo import PyMongo
 from flask_bcrypt import Bcrypt
 from config import client
-from routes.Auth_routes import auth_routes  # Import route blueprints
-from routes.User_routes import user_routes
+from routes.auth_routes import auth_routes  # Import route blueprints
+from routes.user_routes import user_routes
 from routes.Company_routes import company_routes
 from routes.Financial_routes import financial_routes
 from routes.Property_routes import property_routes

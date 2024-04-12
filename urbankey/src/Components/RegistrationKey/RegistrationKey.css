@@ -80,3 +80,45 @@ body{
 .supportLink{
     color: blue;
 }
+
+.registrationKeyPage {
+    position: relative;
+  }
+  
+  .registration-key-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    /* z-index: 1000; Ensure the overlay is above other content */
+  }
+  
+  .registration-key-popup {
+    position: fixed;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    width: 500px;
+    /* z-index: 1001; Ensure the popup is above the overlay */
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .close-button:hover {
+    color: #555;
+  }
+    

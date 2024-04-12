@@ -1,0 +1,29 @@
+
+things to do: 
+** things to do independently of the front end
+- authentication (uncommenting the route) 
+- authorization (-> local storage / refreshing page)
+- make the user class (->finish it since it has been already done partially) & the database queries in the methods
+- make the registration key class methods & the database queries in the methods
+- make the unit class methods  & the database queries in the methods
+- connect the custom hooks (loadInit for everypage)
+    
+** things to do with the front end
+- merging up the backend branch into main
+- rebranch from main to use that new branch as code review and modificaiton for
+    coherent website. make sure everything works as intented together
+    - routes
+    - display the data from the backend to the page from the custom hooks into the correct html place
+- add new backend implementation for the frontend new functionalities (buttons, links routes, etc)
+
+**once the product is done
+tests
+    - pytests 
+        - generate report to show
+
+- update the diagrams
+    - domain model with new classes
+    - new class diagram following the domain
+    - component tree for the frontend
+    //we didnt change the deployement so no need to change de deployement diagram
+

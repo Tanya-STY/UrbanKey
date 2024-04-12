@@ -58,7 +58,7 @@ const RegistrationKey = ({ isOpen, onClose }) => {
                     type="text"
                     id="key"
                     value={key}
-                    //onChange={(e) => setKey(e.target.value)}
+                    onChange={(e) => setKey(e.target.value)}
                     placeholder='Enter Registration Key'
                     onChange={(e) => setKey(e.target.value)}
                     required
@@ -75,8 +75,9 @@ const RegistrationKey = ({ isOpen, onClose }) => {
                 </div>
             </div>
             </div>
-
-        </div>
+            </div>
+    
+    
     );
 };
 

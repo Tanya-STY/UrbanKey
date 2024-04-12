@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './PropertyProfileManagement.css';
 
+import RegistrationKey from '../RegistrationKey/RegistrationKey';
+
 const interiorFeatures = [
   'ADSL', 'Alarm', 'Balcony', 'Built-in Kitchen', 'Barbecue', 
   'Furnished', 'Laundry Room', 'Air Conditioning', 'Wallpaper', 
@@ -36,8 +38,14 @@ const AdvertiseFeatures = ({onSaveSelectedInteriorFeatures, onSaveSelectedExteri
       index === position ? !item : item
     );
     setCheckedExterior(updatedCheckedState);
-    const selectedExterior = externalFeatures.filter((_, index) => updatedCheckedState[index]);
-    onSaveSelectedExteriorFeatures(selectedExterior);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const selectedInteriorFeatures = interiorFeatures.filter((_, index) => checkedInterior[index]);
+    const selectedExteriorFeatures = externalFeatures.filter((_, index) => checkedExterior[index]);
+    console.log("Selected interior features:", selectedInteriorFeatures);
+    console.log("Selected exterior features:", selectedExteriorFeatures);
   };
 
   return (
@@ -78,7 +86,11 @@ const AdvertiseFeatures = ({onSaveSelectedInteriorFeatures, onSaveSelectedExteri
             ))}
           </div>
         </div>
-      {/* </form> */}
+        <button type="submit" className="submit-button" onClick={openPopup}>
+          Send Registration Keys
+        </button>
+        {showPopup && <RegistrationKey onClose={closePopup}/>}
+      </form>
     </div>
   );
 };

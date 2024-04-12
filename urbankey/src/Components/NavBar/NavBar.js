@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import logo from '../Images/urbankey_logo.png';
-import './NavBar.css';
-import useAuth from '../../CustomeHooks/useAuth';
-import useLogout from '../../CustomeHooks/useLogout';
-import CondoDash from '../CondoOwnerDashboard/OwnerDashboard';
+import React, { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
+import logo from "../Images/urbankey_logo.png";
+import "./NavBar.css";
+import useAuth from "../../CustomeHooks/useAuth";
+import useLogout from "../../CustomeHooks/useLogout";
+import CondoDash from "../CondoOwnerDashboard/OwnerDashboard";
 
 const Navbar = () => {
-    const { auth, persist } = useAuth();
-    const logout = useLogout();
-    const [showOptions, setShowOptions] = useState(false);
-    const [showNotifications, setShowNotifications] = useState(false);
+  const { auth, persist } = useAuth();
+  const logout = useLogout();
+  const [showOptions, setShowOptions] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
 
-    const toggleOptions = () => {
-        setShowOptions(prevState => !prevState);
-    };
+  const toggleOptions = () => {
+    setShowOptions((prevState) => !prevState);
+  };
 
-    const toggleNotifications = () => {
-        setShowNotifications(prevState => !prevState);
-    };
+  const toggleNotifications = () => {
+    setShowNotifications((prevState) => !prevState);
+  };
 
-    const handleOptionsClick = async (e) => {
-        await logout();
-        e.stopPropagation(); // Prevents the click event from bubbling up to the parent
-    };
+  const handleOptionsClick = async (e) => {
+    await logout();
+    e.stopPropagation(); // Prevents the click event from bubbling up to the parent
+  };
 
     return (
         <div className="navbar">
@@ -121,16 +121,20 @@ const AuthenticatedSections = ({ auth }) => {
 
 
 const UnauthenticatedSections = () => {
-    return (
-        <ul>
-            <li>
-                <NavLink to="/Login" activeclassname="active" className="nav-link">Login</NavLink>
-            </li>
-            <li>
-                <NavLink to="/SignUp" activeclassname="active" className="nav-link">Sign Up</NavLink>
-            </li>
-        </ul>
-    );
+  return (
+    <ul>
+      <li>
+        <NavLink to="/Login" activeclassname="active" className="nav-link">
+          Login
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/SignUp" activeclassname="active" className="nav-link">
+          Sign Up
+        </NavLink>
+      </li>
+    </ul>
+  );
 };
 
 export default Navbar;

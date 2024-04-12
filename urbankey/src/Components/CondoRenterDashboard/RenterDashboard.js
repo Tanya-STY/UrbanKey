@@ -17,11 +17,14 @@ import icon6 from "../Images/radio-button-2.png";
 import icon7 from "../Images/money-icon.png";
 import icon8 from "../Images/card-icon.png";
 import icon9 from "../Images/stock-up-icon.png";
+import PaymentHistoryRenter from "../Popups/PaymentHistoryRenter";
 import useAuth from '../../CustomeHooks/useAuth';
 import axios from 'axios';
 
 const CondoRenterDash = () => {
   const { auth, unit } = useAuth();
+  const [showPopup, setShowPopup] = useState(false);
+  const [monthPay, setMonthPay] = useState(2000);
   const unit_id = unit?.unit_id;
   const navigate = useNavigate();
   const [name, setName] = useState('');
@@ -56,6 +59,40 @@ const CondoRenterDash = () => {
   const [smallImages, setSmallImages] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
 
+  useEffect(() => {
+    fetchMonthPay();
+  }, []);
+
+  const fetchMonthPay = async () => {
+    try {
+      const token = auth?.token;
+      if (!token) throw new Error("Authentication token is missing.");
+
+      const response = await axios.get(
+        "http://localhost:5000/financial_status",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      console.log(response.data.total_cost);
+      setMonthPay(response.data.total_cost);
+    } catch (error) {
+      console.error("Error fetching financial status:", error);
+    }
+  };
+
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
 
   const fetchUserData = async () => {
 
@@ -338,9 +375,16 @@ const CondoRenterDash = () => {
           </div>
           <div className="condo-dash-payment-history">
             <p>Payment History</p>
-            <Link to="/PaymentHistory" className="condo-dash-view-link">
+            <button
+              className="condo-dash-view-link"
+              type="submit"
+              onClick={openPopup}
+            >
               View
-            </Link>
+            </button>
+            {showPopup && (
+              <PaymentHistoryRenter monthPay={monthPay} onClose={closePopup} />
+            )}
           </div>
         </div>
       </div>

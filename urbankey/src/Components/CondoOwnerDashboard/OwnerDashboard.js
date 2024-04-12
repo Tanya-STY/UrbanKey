@@ -19,8 +19,35 @@ import icon8 from "../Images/card-icon.png";
 import icon9 from "../Images/stock-up-icon.png";
 import useAuth from '../../CustomeHooks/useAuth';
 import axios from 'axios';
+import PaymentHistoryOwner from "../Popups/PaymentHistoryOwner";
+import MaintenanceRequestForm from "../Popups/MaintenanceRequest";
 
-const CondoDash = () => {
+const CondoOwnerDash = () => {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
+
+  const [showPopup2, setShowPopup2] = useState(false);
+
+  const openPopup2 = () => {
+    setShowPopup2(true);
+  };
+
+  const closePopup2 = () => {
+    setShowPopup2(false);
+  };
+
+// the month pay is the monthly payment (which is the same every month for a condo owner), 
+// it is seen in the financial status and it is sent to the payment history as well
+  const [monthPay, setMonthPay] = useState(5534.00);
+
   const { auth, unit } = useAuth();
   const unit_id = unit?.unit_id;
   const navigate = useNavigate();
@@ -333,7 +360,7 @@ const CondoDash = () => {
           </div>
           <div className="condo-dash-condo-fees">
             <img src={icon5} alt="Radio Button 1" />
-            <p>Monthly Condo Fees: $4568</p>
+            <p>Monthly Condo Fees: {monthPay.toFixed(2)}</p>
             <img src={icon7} alt="Money Icon" style={{ width: "10.5%" }} />
           </div>
           <div className="condo-dash-condo-fees" style={{ border: "none" }}>
@@ -343,9 +370,13 @@ const CondoDash = () => {
           </div>
           <div className="condo-dash-payment-history">
             <p>Payment History</p>
-            <Link to="/PaymentHistory" className="condo-dash-view-link">
+            {/* <Link to="/PaymentHistory" className="condo-dash-view-link">
               View
-            </Link>
+            </Link> */}
+            <button className="condo-dash-view-link" type="submit" onClick={openPopup}>
+              View
+            </button>
+            {showPopup && <PaymentHistoryOwner monthPay={monthPay} onClose={closePopup}/>}
           </div>
         </div>
       </div>
@@ -436,9 +467,13 @@ const CondoDash = () => {
           </div>
 
           <div className="condo-dash-submit">
-            <Link to="/Maintenance" className="condo-dash-request-link">
+            {/* <Link to="/MaintenanceRequest" className="condo-dash-request-link">
               Submit a New Request
-            </Link>
+            </Link> */}
+            <button className="condo-dash-request-link" type="submit" onClick={openPopup2}>
+            Submit a New Request
+            </button>
+            {showPopup2 && <MaintenanceRequestForm onClose={closePopup2}/>}
           </div>
         </div>
       </div>
@@ -465,4 +500,4 @@ const CondoDash = () => {
   );
 };
 
-export default CondoDash;
+export default CondoOwnerDash;

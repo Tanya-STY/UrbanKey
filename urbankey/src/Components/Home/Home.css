@@ -1,0 +1,107 @@
+body{
+    background-color: rgb(237, 236, 236);
+}
+
+.houseSlogan{
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 64px;
+    margin-top: 70px;
+    margin-bottom: 85px;
+    color: rgba(255, 255, 255, 1);
+}
+
+.searchArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputSearch {
+    width: 30%;
+    height: 40px;
+    border-radius: 5px;
+    margin: 10px;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.homeSection{
+    margin-left: 100px;
+    margin-right: 100px;
+    color: rgb(0, 0, 0);
+}
+
+.homeHeadings{
+    margin-left: 100px;
+    margin-top: 40px;
+    font-size: 24px;
+}
+
+.homeSubHeading {
+    margin-left: 20px;
+    font-size: 24px;
+}
+
+.homeBody {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
+    margin-left: 20px;
+}
+
+.container {
+    display: flex;
+}
+  
+.box {
+    flex: 1; /* Distribute available space equally */
+    height: 320px; 
+    border: 1px solid rgba(0, 0, 0, 0.1); 
+    margin: 10px; 
+    background-color:rgba(255, 255, 255, 1); 
+}
+
+.wideBox {
+    height: 320px;
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    background-color:rgba(255, 255, 255, 1); 
+    border: 1px solid rgba(0, 0, 0, 0.1); 
+}
+
+.homeMapButton {
+    width: 175px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: rgba(224, 40, 40, 1);
+    color: white;
+    cursor: pointer;
+    margin-top: 150px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: auto;
+}
+
+.homeMapButton:hover {
+    background-color: darkred;
+}
+
+.homeViewPropertyButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+    height: 30px;
+    border-radius: 10px;
+    border-color: rgba(224, 40, 40, 1);
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(224, 40, 40, 1);
+    margin-left: 20px;
+    margin-top: 150px;
+}
+
+.homeViewPropertyButton:hover {
+    color: white;
+    background-color: red;
+}
