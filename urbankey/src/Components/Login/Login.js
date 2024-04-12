@@ -40,7 +40,7 @@ const Login = () => {
       });
       const token = response?.data?.token;
       const role = response?.data?.role;
-      setAuth({ role, email, password, token });
+      setAuth({ role, email, password, token});
       setEmail('');
       setPassword('');
       if (role === 1010) {
