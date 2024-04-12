@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./Finance.css";
 import OverviewGraph from "./OverviewGraph";
+import axios from "axios";
+import useAuth from "../../CustomeHooks/useAuth";
+import { DataGrid } from "@mui/x-data-grid";
 
 const Finance = () => {
+  const { auth, setAuth } = useAuth();
   const [feePerSquareFoot, setFeePerSquareFoot] = useState(0);
   const [feePerParkingSpot, setFeePerParkingSpot] = useState(0);
   const [operationName, setOperationName] = useState("");
@@ -10,37 +14,119 @@ const Finance = () => {
   const [annualReport, setAnnualReport] = useState([]);
   const [overviewData, setOverviewData] = useState([]);
   const [isGraphVisible, setIsGraphVisible] = useState(false);
+  const [financeData, setFinanceData] = useState([]);
 
-  const updateFees = () => {
-    alert(
-      `Fees updated: Fee per Square Foot: $${feePerSquareFoot}, Fee per Parking Spot: $${feePerParkingSpot}`
-    );
+  const fetchUserData = async () => {
+    try {
+      const token = auth?.token;
+      const response = await axios.get(
+        "http://localhost:5000/finance/information",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
+      const financeData = response.data.filter(
+        (item) => item.condo_fee !== "" && item.occupant_name !== ""
+      );
+      setFinanceData(financeData);
+      console.log("Finance data: ", financeData);
+    } catch (error) {
+      console.log("Error fetching finance data: ", error);
+      console.log(financeData);
+    }
   };
 
-  const addCost = () => {
-    alert(`Cost added: Operation Name: ${operationName}, Cost: $${cost}`);
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const columns = [
+    { field: "id", headerName: "ID", width: 70 },
+    { field: "condo_fee", headerName: "Condo Fee", width: 130 },
+    { field: "occupant_name", headerName: "Name", width: 200 },
+    { field: "random_date", headerName: "Date", width: 200 },
+    { field: "payment_type", headerName: "Payment Type", width: 200 },
+    { field: "status", headerName: "Status", width: 130 },
+  ];
+
+  // const updateFees = () => {
+  //   alert(
+  //     `Fees updated: Fee per Square Foot: $${feePerSquareFoot}, Fee per Parking Spot: $${feePerParkingSpot}`
+  //   )};
+
+  const updateFees = async () => {
+    try {
+      const token = auth?.token;
+      if (!token) throw new Error("Authentication token is missing.");
+
+      const response = await axios.post(
+        "http://localhost:5000/update_financial_status",
+        {
+          feePerParkingSpot,
+          feePerSquareFoot,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      console.log(response.data);
+
+      // Update financial status after updating fees
+      setCost(response.data.update_financial_status);
+    } catch (error) {
+      console.error("Error updating fees:", error);
+    }
+  };
+
+  const addCost = async () => {
+    try {
+      const token = auth?.token;
+      if (!token) throw new Error("Authentication token is missing.");
+
+      const response = await axios.post(
+        "http://localhost:5000/update_financial_cost",
+        {
+          operation_cost: cost,
+          operationName: operationName
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      console.log(response.data.total_cost);
+
+       // Update financial status after adding cost
+    setCost(response.data.total_cost); // Update the cost state with the updated financial status
+    
+    } catch (error) {
+      console.error("Error adding cost:", error);
+    }
   };
 
   const generateOverviewGraph = () => {
-    const sampleData = [
-      { name: "John Doe", date: "2024-01-15", amountPaid: 1200 },
-      { name: "Jane Smith", date: "2024-02-20", amountPaid: 1500 },
-      { name: "Alice Johnson", date: "2024-02-25", amountPaid: 2000 },
-      { name: "Bob Brown", date: "2024-04-10", amountPaid: 1000 },
-      { name: "Mohammad Bachir", date: "2024-06-20", amountPaid: 4500 },
-      { name: "Rachida Sultan", date: "2024-07-25", amountPaid: 900 },
-      { name: "Bob Marley", date: "2024-10-10", amountPaid: 1000 },
-      { name: "Celine Dion", date: "2024-12-20", amountPaid: 3500 },
-    ];
 
     // Generate annual report
-    setAnnualReport(sampleData);
+    setAnnualReport(financeData); //change this - ihana
 
     // Generate overview data
     const monthData = Array.from({ length: 12 }, () => 0);
-    sampleData.forEach((item) => {
-      const month = new Date(item.date).getMonth();
-      monthData[month] += item.amountPaid;
+    financeData.forEach((item) => {
+      const month = new Date(item.random_date).getMonth();
+      monthData[month] += item.condo_fee;
     });
 
     const overviewData = monthData.map((amountCollected, index) => ({
@@ -49,15 +135,13 @@ const Finance = () => {
       }),
       amountCollected,
     }));
-
     setOverviewData(overviewData);
     setIsGraphVisible(true);
   };
 
   return (
     <div className="finance-container">
-      <h1>Financial Management Dashboard</h1> <br/>
-
+      <h1>Financial Management Dashboard</h1> <br />
       <div className="dashboard">
         <section className="section">
           <h2>Condo Fees</h2>
@@ -107,28 +191,34 @@ const Finance = () => {
           </button>
         </section>
       </div>
-
-      <h2>Overview</h2>
-      <div style={{ width: "66%", margin: "0 auto" }}>
+      <div className="another_overview-graph">
         {isGraphVisible && <OverviewGraph overviewData={overviewData} />}
       </div>
-
       <div className="annual-report-header">
         <h2>Annual Financial Reports</h2>
         <button className="btn green" onClick={generateOverviewGraph}>
           Generate
         </button>
+        
       </div>
       <div className="annual-report">
-        {annualReport.map((item, index) => (
-          <div key={index} className="report-item">
-            <p>
-              <strong>Name:</strong> {item.name} |{" "}
-              <strong>Date of Purchase:</strong> {item.date} |{" "}
-              <strong>Amount Paid:</strong> ${item.amountPaid}
-            </p>
-          </div>
-        ))}
+        <div style={{ height: 400, width: "100%" }}>
+          <DataGrid
+            rows={financeData.map((data, index) => ({
+              id: index + 1,
+              condo_fee: data.condo_fee,
+              occupant_name: data.occupant_name,
+              random_date: data.random_date,
+              payment_type: data.payment_type,
+              status: data.status,
+            }))}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5, 10, 20]}
+            checkboxSelection
+            disableSelectionOnClick
+          /> 
+        </div>
       </div>
     </div>
   );
