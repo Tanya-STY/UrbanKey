@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './MaintenanceRequest.css'; 
 
-const MaintenanceRequestForm = () => {
+const MaintenanceRequestForm = ({ onClose }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
@@ -11,9 +11,15 @@ const MaintenanceRequestForm = () => {
     console.log('Submitted:', { title, description });
   };
 
+  const isTitleValid = title.trim() !== '';
+  const isDescriptionValid = description.trim() !== '';
+
   return (
     <div className="maintenance-request-form">
-      <h1>Maintenance Requests</h1>
+      <div className='maintenance-form-overlay' onClick={onClose}></div>
+      <div className='maintenance-form-popup'>
+        <button className='maintenance-close-button' onClick={onClose}>X</button>
+      <h1 className='maintenance-title'>Maintenance Requests</h1>
       <form onSubmit={handleSubmit}>
         <div className="input-group">
           <label htmlFor="title">Title</label>
@@ -35,10 +41,11 @@ const MaintenanceRequestForm = () => {
             placeholder="You can request about moving in/out (date for reserving elevators), intercom changes, requesting access (fobs, keys), reporting a violation, reporting deficiency found in common areas, or asking a question."
           />
         </div>
-        <button type="submit" className="submit-button">
+        <button type="submit" className="submit-button" onClick={onClose} disabled={!isTitleValid || !isDescriptionValid}> 
           Submit Your Request
         </button>
       </form>
+    </div>
     </div>
   );
 };

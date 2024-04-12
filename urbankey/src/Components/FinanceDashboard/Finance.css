@@ -87,3 +87,11 @@ body, html {
     margin-bottom: 30px;
   }
   
+  .another_overview-graph{
+    width: 66%;
+     margin: 0 auto;
+  }
+
+  .another_overview-graph h2{
+    text-align: center;
+  }

@@ -4,9 +4,10 @@ body{
 
 .picture_search{
     position: relative;
-    display: inline-block;
-    width: 100%;
+    display: block;
+    width: 100vw;
     height: auto;
+    overflow: hidden;
 }
 
 .houseSlogan{
@@ -20,14 +21,14 @@ body{
 }
 
 .searchArea {
+    width: 100%; 
+    margin: 0 auto; /* Horizontally center the search area */
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 14px;
-    width: 200%; 
-    position: relative; 
-    transform: translateX(-50%); 
-    left: 50%;
+    position: relative;
+    z-index: 1; /* Ensure the search area is above the image */
 }
 
 .inputSearch {
@@ -71,8 +72,23 @@ body{
     height: 320px; 
     border: 1px solid rgba(0, 0, 0, 0.1); 
     margin: 10px; 
-    background-color:rgba(255, 255, 255, 1); 
+    background-color: rgba(255, 255, 255, 1); 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
+
+.box img {
+    width: auto;
+    max-height: 50%; /* Restricting the image height to half of the box */
+    margin: 10px; /* Margin on all sides */
+}
+
+.condoInfo {
+    margin: 10px;
+    color: rgba(0, 0, 0, 0.75);
+}
+
 
 .mediumBox {
     display: grid;
