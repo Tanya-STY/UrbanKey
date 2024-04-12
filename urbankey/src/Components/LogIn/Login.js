@@ -40,12 +40,20 @@ const Login = () => {
       });
       const token = response?.data?.token;
       const role = response?.data?.role;
-      const name = response?.data?.name
-      setAuth({ role, email, password, token, name });
+      setAuth({ role, email, password, token});
       setEmail('');
       setPassword('');
       if (role === 1010) {
         navigate('/PropertyProfile')
+      }
+      else if (role === 2020) {
+        navigate('/DailyOperations')
+      }
+      else if (role === 3030) {
+        navigate('/FinanceDashboard')
+      }
+      else if (role === 4040) {
+        navigate('/ManagerEmployeePage')
       }
       else {
         navigate('/Profile');
