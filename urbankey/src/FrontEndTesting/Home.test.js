@@ -38,6 +38,6 @@ describe('Home Component Tests', () => {
 
   test('renders home sections correctly', () => {
     render(<Home />);
-    // Verify the presence of dynamically loaded content or specific sections
+   
   });
 });

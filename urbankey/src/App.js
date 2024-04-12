@@ -29,6 +29,11 @@ import ReservationPageCompany from "./Components/ReservationPageCompany/Reservat
 import DailyOperations from "./Components/DailyOperations/DailyOperations.js";
 import CondoRenterDashboard from "./Components/CondoRenterDashboard/RenterDashboard"; // added code
 import ManagerEmployeePage from "./Components/ManagerEmployeePage/ManagerEmployeePage";
+import ReservationPageCompany from "./Components/ReservationPageCompany/ReservationPageCompany";
+import DailyOperations from "./Components/DailyOperations/DailyOperations.js";
+import CondoRenterDashboard from "./Components/CondoRenterDashboard/RenterDashboard"; // added code
+import ManagerEmployeePage from "./Components/ManagerEmployeePage/ManagerEmployeePage"
+
 
 const ROLE = {
   User: 2001,
@@ -83,14 +88,15 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Layout />} />
 
-        {/* Public Routes */}
-        <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Unauthorized" element={<Unauthorized />} />
-        {/* <Route path="/HomePage" element={<HomePage />} /> */}
-        <Route element={<PersistLogin />}>
+          {/* Public Routes */}
+          <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Unauthorized" element={<Unauthorized />} />
+          <Route path="/HomePage" element={<HomePage />} />
+          
+          <Route element={<PersistLogin />}>
           <Route
             element={
               <RequireAuth
@@ -115,14 +121,15 @@ function App() {
             {/*<Route path="/PaymentHistoryRenter" element={<PaymentHistoryRenter />} />*/}
             <Route path="/ReservationSuccess" element={<ReservationSuccess />} />
             <Route path="/PropertyProfile" element={<PropertyProfileManagement />} />
-            <Route path="/Employee" element={<Employee />} />
+            <Route path="/Employees" element={<Employee />} />
             <Route path="/FinanceDashboard" element={<FinanceDashboard />} />
             <Route path="/Dashboard" element={<DashboardBasedOnRole />} />
             <Route path="/RegistrationKey" element={<RegistrationKey />} />
             <Route path="/Reservation" element={<Reservation />} />
-            <Route path="/ReservationPageCompany" element={<ReservationPageCompany/>} />
 
             <Route path="/DailyOperations" element={<DailyOperations/>} /> {/*added code*/}
+            {/* <Route path="/RenterDashboard" element={<CondoRenterDashboard />} /> added code */}
+            <Route path="/ReservationPageCompany" element={<ReservationPageCompany/>} />
             {/* <Route path="/RenterDashboard" element={<CondoRenterDashboard />} /> added code */}
             <Route path="/ManagerEmployeePage" element={<ManagerEmployeePage />} />
           </Route>
@@ -137,15 +144,14 @@ const DashboardBasedOnRole = () => {
 
   if (auth.role === ROLE.Owner) {
     return <CondoOwnerDashboard />;
-  } else {
+  } else if (auth.role === ROLE.Renter) {
     return <CondoRenterDashboard />;
+  }
+  else{
+    return <div>Enter your registration key to see your dashboard</div>
   }
 };
 
-// Component for default dashboard
-const DefaultDashboard = () => {
-  return <div>Enter your registration key to see your dashboard</div>;
-};
 
 export default App;
 

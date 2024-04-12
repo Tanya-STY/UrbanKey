@@ -1,0 +1,249 @@
+var units_data = [
+    {
+        unit_id: "U001",
+        size: "1000 sqft",
+        condo_fee: 500,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U002",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U003",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U004",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U005",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U006",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U007",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U008",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U009",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U010",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U011",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U012",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U013",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U014",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U015",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U016",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U017",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U018",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U019",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    {
+        unit_id: "U020",
+        size: "1200 sqft",
+        condo_fee: 600,
+        registration_key_renter: null,
+        registration_key_owner: null,
+        unit_owner: null,
+        occupant: null,
+        property: null,
+        occupant_info: null
+    },
+    
+];
+
+db.Units.insertMany(units_data);
+
+// Fetch renter and owner keys
+var renterKeys = db.RegistrationKey.find({ "key_value": /^R/ }).toArray();
+var ownerKeys = db.RegistrationKey.find({ "key_value": /^O/ }).toArray();
+
+// Fetch all units
+var units = db.Units.find().toArray();
+
+// Index to track which renter and owner key to assign next
+var renterIndex = 0;
+var ownerIndex = 0;
+
+// Iterate through units and assign keys
+units.forEach(function(unit) {
+    // Assign renter key
+    db.Units.updateOne({ _id: unit._id }, { $set: { registration_key_renter
+: renterKeys[renterIndex]._id } });
+    // Assign owner key
+    db.Units.updateOne({ _id: unit._id }, { $set: { registration_key_owner: ownerKeys[ownerIndex]._id } });
+
+    // Increment index for next iteration
+    renterIndex = (renterIndex + 1) % renterKeys.length;
+    ownerIndex = (ownerIndex + 1) % ownerKeys.length;
+});

@@ -44,6 +44,6 @@ describe('Navbar', () => {
     fireEvent.click(screen.getByTestId('user-icon'));
     fireEvent.click(screen.getByText('Sign Out'));
     expect(useLogoutMock).toHaveBeenCalledTimes(1);
-    // After logout, the options menu should not be visible, but you'll need to simulate the logout effect
+   
   });
 });

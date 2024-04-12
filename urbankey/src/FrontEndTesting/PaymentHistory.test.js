@@ -35,6 +35,7 @@ describe('PaymentHistory Component', () => {
     const rejectedStatus = await screen.findByText('Rejected');
     expect(rejectedStatus).toHaveClass('rejected');
   });
+  
 
   test('renders buttons for navigation and viewing invoices', async () => {
     render(<PaymentHistory />);

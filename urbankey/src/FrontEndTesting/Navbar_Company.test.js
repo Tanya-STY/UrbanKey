@@ -34,7 +34,6 @@ describe('NavBar_Company', () => {
   });
 
   it('should hide user options when clicking on an option', () => {
-    // Show options first
     fireEvent.click(screen.getByTestId('user-icon'));
     expect(screen.getByText('Sign Out')).toBeInTheDocument();
 

@@ -7,13 +7,14 @@ import { Link, useNavigate  } from 'react-router-dom';
 import {CFormSwitch} from "@coreui/react";
 import '@coreui/coreui/dist/css/coreui.min.css';
 import "@fontsource/roboto/400.css"; // Specify weight
-import axios from 'axios'; // Import axios here
+import axios from 'axios';
 import useAuth from '../../CustomeHooks/useAuth';
+import RegistrationKeyMessage from '../RegistrationKey/RegistrationKeyMessage'
 
 
 const Profile = () => {
 
-    const { auth, setAuth } = useAuth();
+    const { auth, setAuth, setUnit } = useAuth();
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -23,25 +24,19 @@ const Profile = () => {
     const [num2, setNum2] = useState('');
     const [key, setKey] = useState('');
     const [address, setAddress] = useState('');
-    // const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [newRegistrationKey, setNewRegistrationKey] = useState('');
+    const [showRegistrationPopup, setShowRegistrationPopup] = useState(false);
     const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg'); // State to hold the profile picture
 
-    // code needed to verify if what is received from backend is correct
-    //leave for now, will delete later when we try with everyone 
-    // const isBase64 = (str) => {
-    //     try {
-    //         // Attempt to decode the base64 string
-    //         const decodedData = atob(str);
-    //         // If decoding is successful, return true
-    //         console.log('isBased64 correctly decoded')
-    //         return true;
-    //     } catch (e) {
-    //         // If an error occurs during decoding, return false
-    //         console.log('isbased64 failed because : ' + e)
-    //         return false;
-    //     }
-    // };
+    const role = auth?.role
+
+    useEffect(() => {
+        notification();
+    }, []);
+    
+
 
     const fetchUserData = async () => {
          const role = auth?.role
@@ -50,9 +45,10 @@ const Profile = () => {
             const response = await axios.get("http://localhost:5000/Profile", {
                 headers: { 
                     'Content-Type': 'application/JSON',
+                headers: {
+                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                // responseType: 'blob',
                 withCredentials: true
         });
         const userData = response.data;
@@ -80,51 +76,87 @@ const Profile = () => {
         setLoading(false);
         // role = response?.data?.role
 
-    } catch(error) {
-        console.log(error);
-        navigate('/Login');
+        } catch (error) {
+            console.log(error);
+            navigate('/Login');
         }
     };
 
 
-useEffect(() => {
-   fetchUserData();
-}, []);
+    useEffect(() => {
+        fetchUserData();
+    }, []);
 
-const handlesubmit = async (e) => {
-e.preventDefault();
+    const handlesubmit = async (e) => {
+        e.preventDefault();
 
-try {
-    const token = auth?.token; 
-    const response=await axios.post("http://localhost:5000/user/profile/update", {
-        name: name,
-        email: email,
-        province: province,
-        city: city,
-        num: num,
-        num2: num2,
-        key: key,
-        address: address,
-        profilePicture: profilePicture
-        //send the string encoded base64 to the backend
-    }, {
-        headers: { 
-            'Content-Type': 'application/JSON',
-            'Authorization': `Bearer ${token}`
-        },
-        withCredentials: true
-    });
-    console.log(response.data);
-    // auth?.role = response?.data?.role;
-    console.log("Profile updated successfully");
-    navigate('/HomePage')
-}
-catch (error) {
-    console.log(error);
-}
-}
+        try {
+            const token = auth?.token;
+            const response = await axios.post("http://localhost:5000/user/profile/update", {
+                name,
+                email,
+                province,
+                city,
+                num,
+                num2,
+                key,
+                address,
+                profilePicture
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                withCredentials: true
+            });
+            const unit_id = response.data.unit_id;
+            setUnit({ num, unit_id });
+            console.log("Response role:", response.data.role);
+            const newAuth = {...auth, role: response.data.role};
+            setAuth(newAuth);
+            console.log(response.data);
+            // auth?.role = response?.data?.role;
+            console.log("Profile updated successfully");
+            console.log(auth?.role);
+            navigate('/Dashboard');
+            
+        }
+        catch (error) {
+            console.log(error);
+            alert(error);
+        }
+    }
 
-    
+
+        const notification = async() => {
+            try {
+                const token = auth?.token;
+                const response = await axios.get("http://localhost:5000/check-new-registration-key", {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    withCredentials: true
+                });
+                const { new_registration_key } = response.data;
+                if (new_registration_key) {
+                    setNewRegistrationKey(new_registration_key);
+                    setShowRegistrationPopup(true);
+                }
+            }
+            catch (error) {
+                console.log(error);
+                alert(error);
+            }
+        }
+
+
+    const handleClosePopup = () => {
+        setShowRegistrationPopup(false);
+      };
+
+
+    const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg'); // State to hold the profile picture
     // Function to handle profile picture upload
     const handleProfilePictureUpload = (e) => {
         const file = e.target.files[0]; // Get the uploaded file
@@ -132,10 +164,8 @@ catch (error) {
         reader.onloadend = () => {
             // Once the file is read, set the profile picture state to the uploaded image
             setProfilePicture(reader.result);
-           
         };
         reader.readAsDataURL(file); // Read the file as a data URL
-
     };
 
 
@@ -143,11 +173,13 @@ catch (error) {
 
     return (
         <div className="profilePage" >
+             {showRegistrationPopup && <RegistrationKeyMessage newRegistrationKey={newRegistrationKey} onClose={handleClosePopup} />}
             <form className="profileForm">
-                <div className='box-profile-page'>
-                    <div className='special-title-box'>
-                        <h1 className="membershipInfo">Membership Information</h1>
-                    </div>
+                <h1 className="membershipInfo">Membership Information</h1>
+                <div className="profile-picture">
+                    <img src={profilePicture} alt="Profile Picture" />
+                    <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} />
+                    <label htmlFor="upload">Upload Profile Picture</label>
                 </div>
                 
                 

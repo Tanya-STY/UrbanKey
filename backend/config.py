@@ -9,6 +9,8 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 
 db = client.get_database('UrbanKey')
 
+fs = GridFS(db)
+
 users = db.get_collection('Users')
 
 regkey = db.get_collection('RegistrationKey')
@@ -16,7 +18,5 @@ regkey = db.get_collection('RegistrationKey')
 units = db.get_collection('Units')
 
 reservations = db.get_collection('Reservations')
-
-fs = GridFS(db)
 
 print(db.list_collection_names())

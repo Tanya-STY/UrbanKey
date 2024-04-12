@@ -8,3 +8,4 @@ const ROLE = {
   'FinanceOperator': 3030,
   'Manager': 4040,
 }
+

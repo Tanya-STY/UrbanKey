@@ -84,6 +84,7 @@ body {
     color: black;
     margin-bottom: 0;
   }
+
   
   .condo-dash-type {
     color: #00000080;
@@ -96,7 +97,7 @@ body {
     width: 72%;
     height: 9.5%;
     margin-bottom: 6%;
-    background-color: rgb(22, 212, 22);
+    background-color: rgb(212, 123, 22);
   
     display: flex;
     flex-direction: row;
@@ -172,10 +173,14 @@ body {
   
   .condo-dash-info-left1 p,
   .condo-dash-info-left2 p,
-  .condo-dash-explanation,
   .condo-dash-feature p {
     color: #00000080;
     font-size: 1vw;
+  }
+
+  .condo-dash-explanation{
+    color: #00000080;
+    font-size: 1.3vw;
   }
   
   .condo-dash-info-right1 {
@@ -192,7 +197,31 @@ body {
     color: black;
     font-size: 1vw;
   }
-  
+
+
+  .renter-info {
+    position: relative;
+    /* bottom: 0; */
+    /* right: 0; */
+    padding: 10px; /* Adjust padding as needed */
+    background-color: #ffffff; /* Background color for the renter info */
+    border: 1px solid #0000001a; /* Border for the renter info */
+    border-radius: 5px; /* Border radius for rounded corners */
+    margin-left: 5%;
+    
+  }
+
+  .condo-dash-renter-info {
+    text-align: center;
+    margin: 5px 0;
+    font-weight: 500;
+    font-size: 1.8vw;
+    margin-top: 3.5%;
+    color: black;
+  }
+
+
+
   .condo-dash-financial-and-request-box {
     border: 1px solid #0000001a;
     background-color: white;

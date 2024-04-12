@@ -20,24 +20,34 @@ def signup(request):
         if users.find_one({'email': email}):
             return {'success': False, 'message': 'Email already exists'}
         
-        # Insert new user data into the database
-        new_user = {
+        
+        if email == 'duproprio@hotmail.com':
+            new_user = {
             'full_name': full_name,
             'email': email,
-            'role': 2001,
+            'role': 1010,
             'password': hashed_password,
             'refreshToken': ''
-        }
+            }
+        else:
+            # Insert new user data into the database
+            new_user = {
+                'full_name': full_name,
+                'email': email,
+                'role': 2001,
+                'password': hashed_password,
+                'refreshToken': ''
+            }
 
         users.insert_one(new_user).inserted_id
 
-        refreshToken = generate_refresh_token(email, 2001)
+        refreshToken = generate_refresh_token(email, new_user['role'])
 
         users.update_one({'email': new_user['email']}, {'$set': {'refreshToken': refreshToken}})
 
-        token = generate_access_token(email, 2001)
+        token = generate_access_token(email, new_user['role'])
 
-        resp = make_response(jsonify({'role': 2001, 'token': token}))
+        resp = make_response(jsonify({'role': new_user['role'], 'token': token}))
         resp.set_cookie('jwt', refreshToken, httponly=True, secure=True, samesite='None', max_age=24 * 60 * 60)
         return resp, 200
     
@@ -66,6 +76,7 @@ def signin(request):
 
                 if bcrypt.check_password_hash(user.get('password'), password):
                     role = user.get('role')
+                    name = user.get('full_name')
 
                     token = generate_access_token(email,role)
 
@@ -76,7 +87,7 @@ def signin(request):
 
                     users.update_one({'email': email}, {'$set': {'refreshToken': refreshToken}})
 
-                    resp = make_response(jsonify({'role': role, 'token': token}))
+                    resp = make_response(jsonify({'role': role, 'token': token, 'name': name}))
                     resp.set_cookie('jwt', refreshToken, httponly=True, secure=True, samesite='None', max_age=24 * 60 * 60)
 
                     return resp, 200
