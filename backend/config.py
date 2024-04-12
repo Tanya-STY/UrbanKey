@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
+from gridfs import GridFS
 
 uri = "mongodb+srv://admin:urbankey1234@urbankey.nfdot4b.mongodb.net/?retryWrites=true&w=majority"
 
@@ -15,5 +16,7 @@ regkey = db.get_collection('RegistrationKey')
 units = db.get_collection('Units')
 
 reservations = db.get_collection('Reservations')
+
+fs = GridFS(db)
 
 print(db.list_collection_names())

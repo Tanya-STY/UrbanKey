@@ -23,8 +23,25 @@ const Profile = () => {
     const [num2, setNum2] = useState('');
     const [key, setKey] = useState('');
     const [address, setAddress] = useState('');
-    const [selectedFile, setSelectedFile] = useState(null);
+    // const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg'); // State to hold the profile picture
+
+    // code needed to verify if what is received from backend is correct
+    //leave for now, will delete later when we try with everyone 
+    // const isBase64 = (str) => {
+    //     try {
+    //         // Attempt to decode the base64 string
+    //         const decodedData = atob(str);
+    //         // If decoding is successful, return true
+    //         console.log('isBased64 correctly decoded')
+    //         return true;
+    //     } catch (e) {
+    //         // If an error occurs during decoding, return false
+    //         console.log('isbased64 failed because : ' + e)
+    //         return false;
+    //     }
+    // };
 
     const fetchUserData = async () => {
         // const role = auth?.role
@@ -32,9 +49,10 @@ const Profile = () => {
             const token = auth?.token; 
             const response = await axios.get("http://localhost:5000/Profile", {
                 headers: { 
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/JSON',
                     'Authorization': `Bearer ${token}`
                 },
+                // responseType: 'blob',
                 withCredentials: true
         });
         const userData = response.data;
@@ -46,7 +64,19 @@ const Profile = () => {
         setNum2(userData.num2);
         setKey(userData.key);
         setAddress(userData.address);
-        setSelectedFile(userData.selectedFile);
+        
+        
+        if (userData.profilePicture) {
+
+            //receive the encoded in base64 code from the backend
+            const extractedPhoto = userData.profilePicture;
+            setProfilePicture(extractedPhoto);
+        } else {
+            // Set default profile picture URL if wrong
+            setProfilePicture('default-profile-picture.jpg');
+        }
+        
+
         setLoading(false);
         // role = response?.data?.role
 
@@ -67,18 +97,19 @@ e.preventDefault();
 try {
     const token = auth?.token; 
     const response=await axios.post("http://localhost:5000/user/profile/update", {
-        name,
-        email,
-        province,
-        city,
-        num,
-        num2,
-        key,
-        address,
-        selectedFile
+        name: name,
+        email: email,
+        province: province,
+        city: city,
+        num: num,
+        num2: num2,
+        key: key,
+        address: address,
+        profilePicture: profilePicture
+        //send the string encoded base64 to the backend
     }, {
         headers: { 
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/JSON',
             'Authorization': `Bearer ${token}`
         },
         withCredentials: true
@@ -86,13 +117,14 @@ try {
     console.log(response.data);
     // auth?.role = response?.data?.role;
     console.log("Profile updated successfully");
+    navigate('/HomePage')
 }
 catch (error) {
     console.log(error);
 }
 }
 
-    const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg'); // State to hold the profile picture
+    
     // Function to handle profile picture upload
     const handleProfilePictureUpload = (e) => {
         const file = e.target.files[0]; // Get the uploaded file
@@ -100,8 +132,10 @@ catch (error) {
         reader.onloadend = () => {
             // Once the file is read, set the profile picture state to the uploaded image
             setProfilePicture(reader.result);
+           
         };
         reader.readAsDataURL(file); // Read the file as a data URL
+
     };
 
 
@@ -110,22 +144,35 @@ catch (error) {
     return (
         <div className="profilePage" >
             <form className="profileForm">
-                <h1 className="membershipInfo">Membership Information</h1>
-                <div className="profile-picture">
-                    <img src={profilePicture} alt="Profile Picture" />
-                    <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} />
-                    <label htmlFor="upload">Upload Profile Picture</label>
+                <div className='box-profile-page'>
+                    <div className='special-title-box'>
+                        <h1 className="membershipInfo">Membership Information</h1>
+                    </div>
                 </div>
+                
+                
+                <div className='special-top-box-profile-page'>
 
-                <div className="field-holder-profile">
-                    <label className="profileLabels" htmlFor={name}> Name / Surname</label>
-                    <input className="profileInput" value={name} onChange={(e) => setName(e.target.value)} type="text" />
-                </div>
+                    <div className='special-box-profile-page'>
+                        <div className="field-holder-profile">
+                            <label className="profileLabels" htmlFor={name}> Name / Surname</label>
+                            <input className="profileInput" value={name} onChange={(e) => setName(e.target.value)} type="text" />
+                        </div>
 
-                <div className="field-holder-profile">
-                    <label className="profileLabels" htmlFor={email}> E-mail</label>
-                    <input className="profileInput" value={email} onChange={(e) => setEmail(e.target.value)} type="text" />
+                        <div className="field-holder-profile">
+                            <label className="profileLabels" htmlFor={email}> E-mail</label>
+                            <input className="profileInput" value={email} onChange={(e) => setEmail(e.target.value)} type="text" />
+                        </div>
+                    </div>
+                    <div className="profile-picture">
+                        <img src={profilePicture} alt="Profile Picture" />
+                        <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} />
+                        <label htmlFor="upload">Upload Profile Picture</label>
+                    </div>
+
+
                 </div>
+                
                 <div className="box-profile-page">
                     <div className="field-holder2-profile">
                         <label className="province" htmlFor={province}>Province</label>
@@ -177,7 +224,7 @@ catch (error) {
                     <input id={address} className="addressInput" type="text"  value={address} onChange={(e) => setAddress(e.target.value)}  />
                 </div>
                 <div>
-                <input type='file' onChange={(e) => setSelectedFile(e.target.files[0])}/>
+                {/*<input type='file' onChange={(e) => setSelectedFile(e.target.files[0])}/>*/}
                 </div>
 
             </form>
