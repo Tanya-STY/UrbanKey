@@ -362,7 +362,7 @@ const CondoRenterDash = () => {
           </div>
           <div className="condo-dash-condo-fees">
             <img src={icon5} alt="Radio Button 1" />
-            <p>Monthly Condo Fees: $4568</p>
+            <p>Monthly Condo Fees: ${monthPay}</p>
             <img src={icon7} alt="Money Icon" style={{ width: "10.5%" }} />
           </div>
 
