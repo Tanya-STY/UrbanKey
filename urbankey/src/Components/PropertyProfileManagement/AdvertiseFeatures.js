@@ -90,7 +90,7 @@ const AdvertiseFeatures = ({onSaveSelectedInteriorFeatures, onSaveSelectedExteri
           Send Registration Keys
         </button>
         {showPopup && <RegistrationKey onClose={closePopup}/>}
-      </form>
+      {/* </form> */}
     </div>
   );
 };

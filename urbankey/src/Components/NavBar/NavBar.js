@@ -85,21 +85,35 @@ const AuthenticatedSections = ({ auth }) => {
                         <NavLink to="/Employees" activeClassName="active" className="nav-link">Employees</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/Finance" activeClassName="active" className="nav-link">Finance</NavLink>
+                        <NavLink to="/FinanceDashboard" activeClassName="active" className="nav-link">Finance</NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/ReservationPageCompany" activeClassName="active" className="nav-link">Reservation Company</NavLink>
+                    </li>
+
                 </>
             )}
             {(auth?.role === 3030) && (
                 <>
+                
                     <li>
-                        <NavLink to="/PropertyProfile" activeClassName="active" className="nav-link">Property Profile</NavLink>
+                        <NavLink to="/FinanceDashboard" activeClassName="active" className="nav-link">Finance Dashboard</NavLink>
                     </li>
+                </>
+            )}
+            {(auth?.role === 4040) && (
+                <>
                     <li>
-                        <NavLink to="/Employees" activeClassName="active" className="nav-link">Employees</NavLink>
+                        <NavLink to="/ManagerEmployeePage" activeClassName="active" className="nav-link">Manager Employee Page</NavLink>
                     </li>
+                </>
+            )}
+            {(auth?.role === 2020) && (
+                <>
                     <li>
-                        <NavLink to="/Finance" activeClassName="active" className="nav-link">Finance</NavLink>
+                        <NavLink to="/DailyOperations" activeClassName="active" className="nav-link">Daily Operations</NavLink>
                     </li>
+                    
                 </>
             )}
             {(auth?.role === 2001 || auth?.role === 3333 || auth?.role === 1984) && (

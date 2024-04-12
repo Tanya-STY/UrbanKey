@@ -121,7 +121,7 @@ function App() {
             {/*<Route path="/PaymentHistoryRenter" element={<PaymentHistoryRenter />} />*/}
             <Route path="/ReservationSuccess" element={<ReservationSuccess />} />
             <Route path="/PropertyProfile" element={<PropertyProfileManagement />} />
-            <Route path="/Employee" element={<Employee />} />
+            <Route path="/Employees" element={<Employee />} />
             <Route path="/FinanceDashboard" element={<FinanceDashboard />} />
             <Route path="/Dashboard" element={<DashboardBasedOnRole />} />
             <Route path="/RegistrationKey" element={<RegistrationKey />} />

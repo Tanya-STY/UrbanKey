@@ -60,7 +60,6 @@ const RegistrationKey = ({ isOpen, onClose }) => {
                     value={key}
                     onChange={(e) => setKey(e.target.value)}
                     placeholder='Enter Registration Key'
-                    onChange={(e) => setKey(e.target.value)}
                     required
                 />
                 <label htmlFor="email"></label>
@@ -76,9 +75,7 @@ const RegistrationKey = ({ isOpen, onClose }) => {
             </div>
             </div>
             </div>
-    
-    
-    );
+     );
 };
 
 export default RegistrationKey;
