@@ -73,10 +73,10 @@ form_html = '''
 
 @upload_routes.route('/unitspic')
 def index():
-    uploaded_images = fs.list()
-    filenames = [image.filename for image in uploaded_images]
-    print(filenames)
-    return render_template_string(form_html, filenames=filenames)
+    # uploaded_images = fs.list()
+    # filenames = [image.filename for image in uploaded_images]
+    # print(filenames)
+    return render_template_string(form_html)
 
 @upload_routes.route('/unitspic', methods=['POST'])
 def upload_image():
@@ -88,8 +88,8 @@ def upload_image():
     for file in files:
         if file and allowed_file(file.filename):
                 # Save image to MongoDB using GridFS
-                # unit_id = 'U001'
-            file_id = fs.put(file.stream, filename=secure_filename(file.filename))
+            unit_id = 'U002'
+            file_id = fs.put(file.stream, filename=secure_filename(file.filename), unit_id=unit_id)
             file_ids.append(str(file_id))
         else:
             flash('Allowed image types are -> png, jpg, jpeg, gif')

@@ -29,6 +29,7 @@ const CondoRenterDash = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [profilePic, setProfilePic] = useState('');
   const [num, setNum] = useState('');
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
@@ -110,6 +111,7 @@ const CondoRenterDash = () => {
       const userData = response.data;
       setName(userData.name);
       setEmail(userData.email);
+      setProfilePic(userData.profilePicture);
       setNum(userData.num);
       setUnitId(userData.unit_id);
       setProvinceUnit(userData.province_unit);
@@ -142,16 +144,28 @@ const CondoRenterDash = () => {
   };
 
   const renderInteriorFeatures = () => {
+    // Check if interiorFeatures is undefined or null before calling map
+  if (interiorFeatures) {
     return interiorFeatures.map((feature, index) => (
       <p key={index}>✓ {feature}</p>
     ));
+  } else {
+    // Return a default message or empty array if interiorFeatures is undefined or null
+    return <p>No interior features available</p>;
+  }
   };
 
   
   const renderExteriorFeatures = () => {
-    return exteriorFeatures.map((feature, index) => (
-      <p key={index}>✓ {feature}</p>
-    ));
+    // Check if exteriorFeatures is undefined or null before calling map
+    if (exteriorFeatures) {
+      return exteriorFeatures.map((feature, index) => (
+        <p key={index}>✓ {feature}</p>
+      ));
+    } else {
+      // Return a default message or empty array if exteriorFeatures is undefined or null
+      return <p>No exterior features available</p>;
+    }
   };
 
   const fetchUnitPics = async () => {
@@ -274,7 +288,7 @@ const CondoRenterDash = () => {
         </div>
         <div className="condo-dash-profile-box">
           <div className="condo-dash-face">
-            <img src={face} alt="Man Face" />
+            <img src={profilePic} alt="Man Face" />
           </div>
           <Link to="/Profile" className="condo-dash-edit-button">
             Edit profile
