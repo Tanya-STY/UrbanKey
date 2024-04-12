@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 // import { Map, GoogleApiWrapper } from "google-maps-react";
 import "./RenterDashboard.css";
@@ -12,9 +13,81 @@ import icon5 from "../Images/radio-button-1.png";
 import icon6 from "../Images/radio-button-2.png";
 import icon7 from "../Images/money-icon.png";
 import icon8 from "../Images/card-icon.png";
-import icon9 from "../Images/stock-up-icon.png";
+import PaymentHistoryRenter from "../Popups/PaymentHistoryRenter";
+import axios from "axios";
+import useAuth from "../../CustomeHooks/useAuth";
 
 const CondoRenterDash = () => {
+  const { auth, setAuth } = useAuth();
+  const [showPopup, setShowPopup] = useState(false);
+  const [monthPay, setMonthPay] = useState(2000);
+  // const [feePerSquareFoot, setFeePerSquareFoot] = useState(0);
+  // const [feePerParkingSpot, setFeePerParkingSpot] = useState(0);
+
+  useEffect(() => {
+    fetchMonthPay();
+  }, []);
+
+  const fetchMonthPay = async () => {
+    try {
+      const token = auth?.token;
+      if (!token) throw new Error("Authentication token is missing.");
+
+      const response = await axios.get(
+        "http://localhost:5000/financial_status",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      console.log(response.data.total_cost);
+      setMonthPay(response.data.total_cost);
+    } catch (error) {
+      console.error("Error fetching financial status:", error);
+    }
+  };
+
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
+  // const updateFees = async () => {
+  //   try {
+  //     const token = auth?.token;
+  //     if (!token) throw new Error("Authentication token is missing.");
+
+  //     const response = await axios.post(
+  //       "http://localhost:5000/update_financial_status",
+  //       {
+  //         price_size: feePerParkingSpot,
+  //         price_parking: feePerSquareFoot,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //         withCredentials: true,
+  //       }
+  //     );
+
+  //     console.log(response.data);
+
+  //     // Update financial status after updating fees
+  //     setMonthPay(response.data.update_financial_status);
+  //   } catch (error) {
+  //     console.error("Error updating fees:", error);
+  //   }
+  // };
+
   return (
     <div className="condo-dash-container">
       <div className="condo-dash-top">
@@ -33,7 +106,7 @@ const CondoRenterDash = () => {
             Edit profile
           </Link>
           <p className="condo-dash-name">Michael James</p>
-          <p className="condo-dash-type">Owner</p>
+          <p className="condo-dash-type">Renter</p>
           <div className="condo-dash-phone">
             <img src={icon2} alt="Phone Icon" />
             <p>+1 438 597 5809</p>
@@ -89,7 +162,7 @@ const CondoRenterDash = () => {
           </div>
           <div className="condo-dash-condo-fees">
             <img src={icon5} alt="Radio Button 1" />
-            <p>Monthly Condo Fees: $4568</p>
+            <p>Monthly Condo Fees: $ {monthPay}</p>
             <img src={icon7} alt="Money Icon" style={{ width: "10.5%" }} />
           </div>
           <div className="condo-dash-condo-fees" style={{ border: "none" }}>
@@ -99,9 +172,16 @@ const CondoRenterDash = () => {
           </div>
           <div className="condo-dash-payment-history">
             <p>Payment History</p>
-            <Link to="/PaymentHistory" className="condo-dash-view-link">
+            <button
+              className="condo-dash-view-link"
+              type="submit"
+              onClick={openPopup}
+            >
               View
-            </Link>
+            </button>
+            {showPopup && (
+              <PaymentHistoryRenter monthPay={monthPay} onClose={closePopup} />
+            )}
           </div>
         </div>
       </div>
