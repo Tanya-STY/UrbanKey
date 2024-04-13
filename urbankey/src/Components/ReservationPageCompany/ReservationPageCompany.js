@@ -55,15 +55,15 @@ const ReservationPageCompany = () => {
         // Filter reservations based on search term and checked facilities
         const filteredReservations = reservations.filter(reservation =>
             (reservation.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            reservation.contactNumber.includes(searchTerm) ||
-            reservation.email.toLowerCase().includes(searchTerm.toLowerCase())) &&
+                reservation.contactNumber.includes(searchTerm) ||
+                reservation.email.toLowerCase().includes(searchTerm.toLowerCase())) &&
             checkedFacilities.includes(reservation.facility)
         );
 
         setFilteredReservations(filteredReservations);
     }, [searchTerm, checkedFacilities, reservations]);
 
-    
+
     useEffect(() => {
         // Update available time slots when facility or date changes
         if (newReservation.facility && newReservation.date) {
@@ -84,7 +84,7 @@ const ReservationPageCompany = () => {
         const reservedTimeSlots = reservations
             .filter(reservation => reservation.facility === facility && reservation.date.getTime() === date.getTime())
             .map(reservation => reservation.time);
-        
+
         return timeSlots.filter(timeSlot => !reservedTimeSlots.includes(timeSlot));
     };
 
@@ -94,14 +94,14 @@ const ReservationPageCompany = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
+
         // Find the index of the existing reservation for the chosen time slot, facility, and date
         const index = reservations.findIndex(reservation =>
             reservation.time === newReservation.time &&
             reservation.facility === newReservation.facility &&
             reservation.date.getTime() === newReservation.date.getTime()
         );
-    
+
         if (index !== -1) {
             // Update the existing reservation with new reservation data
             const updatedReservations = [...reservations];
@@ -111,7 +111,7 @@ const ReservationPageCompany = () => {
             // Add the new reservation directly to the reservations state
             setReservations([...reservations, newReservation]);
         }
-    
+
         // Reset the form fields
         setNewReservation({
             fullName: '',
@@ -124,7 +124,7 @@ const ReservationPageCompany = () => {
         // Hide the form after submission
         setShowForm(false);
     };
-    
+
     const handleFacilityCheckboxChange = (facility) => {
         if (checkedFacilities.includes(facility)) {
             setCheckedFacilities(checkedFacilities.filter(item => item !== facility));
@@ -163,7 +163,7 @@ const ReservationPageCompany = () => {
                                 onChange={(e) => setNewReservation({ ...newReservation, fullName: e.target.value })}
                                 required
                             />
-                            
+
                             <label htmlFor="facility">Facility:</label>
                             <select
                                 id="facility"
@@ -171,13 +171,14 @@ const ReservationPageCompany = () => {
                                 value={newReservation.facility}
                                 onChange={(e) => setNewReservation({ ...newReservation, facility: e.target.value })}
                                 required
+                                data-testid="facility-select"
                             >
                                 <option value="">Select Facility</option>
                                 {facilities.map(facility => (
                                     <option key={facility} value={facility}>{facility}</option>
                                 ))}
                             </select>
-                            
+
                             <label htmlFor="date">Date:</label>
                             <DatePicker
                                 selected={newReservation.date}
@@ -185,16 +186,18 @@ const ReservationPageCompany = () => {
                                 minDate={new Date()} // Set minimum date to the current date
                                 dateFormat="MM/dd/yyyy"
                                 className="date-picker"
+                                data-testid="date-select"
                             />
 
                             <label htmlFor="time">Time Slot:</label>
                             <select
-                                id="time"
+                                id="time"  // Ensure this id matches the htmlFor in the label
                                 name="time"
                                 value={newReservation.time}
                                 onChange={handleTimeSlotChange}
                                 required
                                 disabled={!newReservation.date || !newReservation.facility} // Disable time slot selection if date or facility not chosen
+                                data-testid="time-slot-select"
                             >
                                 <option value="">Select Time Slot</option>
                                 {availableTimeSlots.map(timeSlot => (
@@ -202,7 +205,6 @@ const ReservationPageCompany = () => {
                                 ))}
                             </select>
 
-                            
                             <label htmlFor="contactNumber">Contact Number:</label>
                             <input
                                 type="text"
@@ -212,7 +214,7 @@ const ReservationPageCompany = () => {
                                 onChange={(e) => setNewReservation({ ...newReservation, contactNumber: e.target.value })}
                                 required
                             />
-                            
+
                             <label htmlFor="email">Email:</label>
                             <input
                                 type="email"
@@ -222,7 +224,7 @@ const ReservationPageCompany = () => {
                                 onChange={(e) => setNewReservation({ ...newReservation, email: e.target.value })}
                                 required
                             />
-                            
+
                             <button type="submit">Create Reservation</button>
                         </form>
                     </div>
@@ -235,7 +237,7 @@ const ReservationPageCompany = () => {
                     <label key={facility}>
                         <input
                             type="checkbox"
-                            checked={checkedFacilities.includes(facility)}
+                            checked={checkedFacilities.includes(facility)} // This will resolve to true or false
                             onChange={() => handleFacilityCheckboxChange(facility)}
                         />
                         {facility}
@@ -247,9 +249,9 @@ const ReservationPageCompany = () => {
                     onChange={date => setSelectedDate(date)}
                     dateFormat="MM/dd/yyyy"
                     className="date-picker"
+                    data-testid="date-select"
                 />
             </div>
-
             <div className='reservation-table'>
                 <h1>Reservations</h1>
                 {/* Table for displaying reservations */}

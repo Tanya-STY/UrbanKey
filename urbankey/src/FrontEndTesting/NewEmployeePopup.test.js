@@ -28,7 +28,7 @@ describe("NewEmployeePopup component", () => {
       <NewEmployeePopup open={true} onClose={mockOnClose} onAdd={mockOnAdd} />
     );
 
-    // Fill in form fields
+
     fireEvent.change(screen.getByLabelText("Name"), {
       target: { value: "John Doe" },
     });
@@ -39,10 +39,10 @@ describe("NewEmployeePopup component", () => {
       target: { value: "ABC Inc." },
     });
 
-    // Submit the form
+
     fireEvent.click(screen.getByText("Add Employee"));
 
-    // Check if onAdd function is called with correct data
+   
     expect(mockOnAdd).toHaveBeenCalledWith({
       name: "John Doe",
       id: expect.any(String),
@@ -51,7 +51,57 @@ describe("NewEmployeePopup component", () => {
       companyName: "ABC Inc.",
     });
 
-    // Check if onClose function is called
     expect(mockOnClose).toHaveBeenCalled();
   });
+
+  test("initializes form fields with correct initial values", () => {
+    render(<NewEmployeePopup open={true} onClose={() => {}} onAdd={() => {}} />);
+    expect(screen.getByLabelText("Name").value).toBe('');
+    expect(screen.getByLabelText("Role").value).toBe('');
+    expect(screen.getByLabelText("Company Name").value).toBe('');
+  });
+
+  test("resets form fields after form submission", () => {
+    const mockOnAdd = jest.fn();
+    const mockOnClose = jest.fn();
+  
+    render(<NewEmployeePopup open={true} onClose={mockOnClose} onAdd={mockOnAdd} />);
+  
+ 
+    fireEvent.change(screen.getByLabelText("Name"), { target: { value: "Jane Doe" } });
+    fireEvent.change(screen.getByLabelText("Role"), { target: { value: "Developer" } });
+    fireEvent.change(screen.getByLabelText("Company Name"), { target: { value: "XYZ Corp." } });
+  
+   
+    fireEvent.click(screen.getByText("Add Employee"));
+  
+   
+    expect(screen.getByLabelText("Name").value).toBe('');
+    expect(screen.getByLabelText("Role").value).toBe('');
+    expect(screen.getByLabelText("Company Name").value).toBe('');
+  });
+
+  test("closes the dialog after form submission", () => {
+    const mockOnClose = jest.fn();
+    render(<NewEmployeePopup open={true} onClose={mockOnClose} onAdd={() => {}} />);
+  
+    fireEvent.click(screen.getByText("Add Employee"));
+  
+    expect(mockOnClose).toHaveBeenCalled();
+  });
+
+  
+  test("updates state on form field changes", () => {
+    render(<NewEmployeePopup open={true} onClose={() => {}} onAdd={() => {}} />);
+  
+    fireEvent.change(screen.getByLabelText("Name"), { target: { value: "John Smith" } });
+    expect(screen.getByLabelText("Name").value).toBe("John Smith");
+  
+    fireEvent.change(screen.getByLabelText("Role"), { target: { value: "Lead" } });
+    expect(screen.getByLabelText("Role").value).toBe("Lead");
+  
+    fireEvent.change(screen.getByLabelText("Company Name"), { target: { value: "Tech Solutions" } });
+    expect(screen.getByLabelText("Company Name").value).toBe("Tech Solutions");
+  });
+
 });

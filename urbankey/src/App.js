@@ -10,7 +10,7 @@ import Employee from "./Components/EmployeePage/Employee.js";
 import FinanceDashboard from "./Components/FinanceDashboard/Finance";
 import CondoOwnerDashboard from "./Components/CondoOwnerDashboard/OwnerDashboard";
 import SignUp from "./Components/SignUp/SignUp";
-import Login from "./Components/LogIn/LogIn.js";
+import Login from "./Components/LogIn/Login.js";
 import HomePage from "./Components/HomePage/Home";
 import RegistrationKey from "./Components/RegistrationKey/RegistrationKey";
 import Profile from "./Components/ProfilePage/Profile";

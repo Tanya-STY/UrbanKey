@@ -125,13 +125,15 @@ export default function DataGridDemo() {
         const keyword = e.target.value.toLowerCase();
         setSearchValue(keyword);
         const filteredData = rows.filter(row =>
-            (row.name?.toLowerCase().includes(keyword) ||
-            row.id?.toString().toLowerCase().includes(keyword) ||
-            row.role?.toLowerCase().includes(keyword) ||
-            row.companyName?.toLowerCase().includes(keyword))
+            row.condoOwner.toLowerCase().includes(keyword) ||
+            row.title.toLowerCase().includes(keyword) ||
+            row.description.toLowerCase().includes(keyword) ||
+            row.contactNumber.includes(keyword) ||
+            row.userEmail.toLowerCase().includes(keyword)
         );
         setFilteredRows(filteredData);
     };
+    
     
 
     return (
@@ -155,7 +157,7 @@ export default function DataGridDemo() {
                     <button className="employee-type-btn">All Employees</button>
                     <button className="employee-type-btn">Roles</button>
                     <button className="employee-type-btn">Request</button>
-                    <button className="search-btn-managerPage" > <IoFilter className="filter-icon" />
+                    <button className="search-btn-managerPage" > <IoFilter data-testid="filter-icon" className="filter-icon" />
                         Filter</button>
                 </div>
 
