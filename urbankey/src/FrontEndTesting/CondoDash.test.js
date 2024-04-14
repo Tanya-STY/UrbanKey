@@ -47,7 +47,7 @@ describe('CondoDash Component', () => {
     // Use findByText to wait for the element to be available
     const submitRequestLink = await screen.findByText('Submit a New Request');
     expect(submitRequestLink).toBeInTheDocument();
-    expect(submitRequestLink).toHaveAttribute('href', '/Maintenance');
+    expect(submitRequestLink).toHaveAttribute('href', '/MaintenanceRequest');
   });
   
 

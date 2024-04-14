@@ -3,8 +3,9 @@ import './ReservationSuccess.css';
 
 const SuccessMessage = () => {
   const handleBackHome = () => {
-    // logic to navigate back
+    alert('Navigating home');  
   };
+
 
   return (
     <div className="success-container">

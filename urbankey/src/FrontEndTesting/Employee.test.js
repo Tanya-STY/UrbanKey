@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Employee from "../Components/Employees/Employee";
+import Employee from "../Components/EmployeePage/Employee";
 
 test("renders export button", () => {
   render(<Employee />);
@@ -17,7 +17,7 @@ test("renders new employees button", () => {
 
 test("renders search input field", () => {
   render(<Employee />);
-  const searchInput = screen.getByPlaceholderText(/Search Employee by name, role, ID or any related keywords/i);
+  const searchInput = screen.getByPlaceholderText(/Search Employee by name, role, ID, or any related keywords/i);
   expect(searchInput).toBeInTheDocument();
 });
 

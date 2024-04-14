@@ -56,27 +56,30 @@ const Finance = () => {
 
   return (
     <div className="finance-container">
-      <h1>Financial Management Dashboard</h1> <br/>
+      <h1>Financial Management Dashboard</h1> <br />
 
       <div className="dashboard">
         <section className="section">
           <h2>Condo Fees</h2>
           <div className="input-group">
-            <label>Fee per Square Foot ($):</label>
+            <label htmlFor="feePerSquareFoot">Fee per Square Foot ($):</label>
             <input
+              id="feePerSquareFoot"
               type="number"
               value={feePerSquareFoot}
               onChange={(e) => setFeePerSquareFoot(e.target.value)}
             />
           </div>
           <div className="input-group">
-            <label>Fee per Parking Spot ($):</label>
+            <label htmlFor="feePerParkingSpot">Fee per Parking Spot ($):</label>
             <input
+              id="feePerParkingSpot"
               type="number"
               value={feePerParkingSpot}
               onChange={(e) => setFeePerParkingSpot(e.target.value)}
             />
           </div>
+
           <button className="btn green" onClick={updateFees}>
             Update Fees
           </button>
@@ -87,21 +90,24 @@ const Finance = () => {
         <section className="section">
           <h2>Record Operational Costs</h2>
           <div className="input-group">
-            <label>Operation Name:</label>
+            <label htmlFor="operationName">Operation Name:</label>
             <input
+              id="operationName"
               type="text"
               value={operationName}
               onChange={(e) => setOperationName(e.target.value)}
             />
           </div>
           <div className="input-group">
-            <label>Cost ($):</label>
+            <label htmlFor="cost">Cost ($):</label>
             <input
+              id="cost"
               type="number"
               value={cost}
               onChange={(e) => setCost(e.target.value)}
             />
           </div>
+
           <button className="btn green" onClick={addCost}>
             Add Cost
           </button>

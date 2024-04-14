@@ -1,10 +1,21 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-// import '@testing-library/jest-dom/extend-expect'; // Import Jest-DOM for additional matchers
 import "@testing-library/jest-dom";
 import MaintenanceRequest from "../Components/Popups/MaintenanceRequest";
 
 describe("MaintenanceRequest Component", () => {
+  let logSpy;
+
+  beforeEach(() => {
+    // Setup a spy on console.log before each test
+    logSpy = jest.spyOn(console, 'log').mockImplementation();
+  });
+
+  afterEach(() => {
+    // Restore the original console.log after each test
+    logSpy.mockRestore();
+  });
+
   test("renders the maintenance requests title", () => {
     render(<MaintenanceRequest />);
     expect(screen.getByText("Maintenance Requests")).toBeInTheDocument();
@@ -17,7 +28,7 @@ describe("MaintenanceRequest Component", () => {
 
     fireEvent.change(titleInput, { target: { value: "Test Title" } });
     fireEvent.change(descriptionTextarea, {
-      target: { value: "Test Description" },
+      target: { value: "Test Description" }
     });
 
     expect(titleInput).toHaveValue("Test Title");
@@ -28,17 +39,18 @@ describe("MaintenanceRequest Component", () => {
     render(<MaintenanceRequest />);
     const titleInput = screen.getByLabelText("Title");
     const descriptionTextarea = screen.getByLabelText("Request Description");
-    const submitButton = screen.getByText("Submit Your Request");
+    const submitButton = screen.getByRole('button', { name: "Submit Your Request" });
 
     fireEvent.change(titleInput, { target: { value: "Test Title" } });
     fireEvent.change(descriptionTextarea, {
-      target: { value: "Test Description" },
+      target: { value: "Test Description" }
     });
     fireEvent.click(submitButton);
 
-    expect(console.log).toHaveBeenCalledWith("Submitted:", {
+    // Verify that console.log was called with the correct arguments
+    expect(logSpy).toHaveBeenCalledWith("Submitted:", {
       title: "Test Title",
-      description: "Test Description",
+      description: "Test Description"
     });
   });
 });
