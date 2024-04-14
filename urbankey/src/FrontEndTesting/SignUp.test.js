@@ -54,4 +54,5 @@ describe('SignUp Component', () => {
     // Check if the navigation to the Profile page is triggered after successful SignUp
     expect(screen.getByText('Profile Page')).toBeInTheDocument();
   });
+  
 });

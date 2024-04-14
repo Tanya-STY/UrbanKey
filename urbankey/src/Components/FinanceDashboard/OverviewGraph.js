@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Chart from 'chart.js/auto';
+import "./Finance.css";
 
 const OverviewGraph = ({ overviewData }) => {
   useEffect(() => {
@@ -49,6 +50,7 @@ const OverviewGraph = ({ overviewData }) => {
 
   return (
     <div className="overview-graph">
+      <h2>Overview</h2>
       <canvas id="overview-chart" style={{ height: "150px", width: "300px" }}></canvas>
     </div>
   );

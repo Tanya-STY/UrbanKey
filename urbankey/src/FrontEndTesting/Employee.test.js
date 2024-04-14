@@ -15,6 +15,7 @@ test("renders new employees button", () => {
   expect(newEmployeesButton).toBeInTheDocument();
 });
 
+
 test("renders search input field", () => {
   render(<Employee />);
   const searchInput = screen.getByPlaceholderText(/Search Employee by name, role, ID or any related keywords/i);

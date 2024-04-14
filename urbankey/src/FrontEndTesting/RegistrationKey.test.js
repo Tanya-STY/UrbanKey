@@ -20,7 +20,7 @@ describe("RegistrationKey Component", () => {
 
   test("renders house image correctly", () => {
     render(<RegistrationKey />);
-    // You may need to adjust the alt text based on how it's rendered in your component
+    
     const houseImage = screen.getByAltText("House Image");
     expect(houseImage).toBeInTheDocument();
     expect(houseImage.tagName).toBe("IMG");

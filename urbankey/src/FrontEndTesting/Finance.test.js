@@ -60,6 +60,6 @@ describe("Finance Component", () => {
         "Name: John Doe | Date of Purchase: 2024-01-15 | Amount Paid: $1200"
       )
     ).toBeInTheDocument();
-    // Add more assertions for other items if needed
+    
   });
 });

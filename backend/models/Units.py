@@ -13,3 +13,6 @@ class Units(mongoengine.Document):
 
 # Connect to MongoDB
 mongoengine.connect('UrbanKey')
+
+#mongosh 
+# use UrbanKey

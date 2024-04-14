@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
- const DropdownMenu = () => {
+ const DropdownMenu = ({setSelectedFacility2}) => {
    const [isOpen, setIsOpen] = useState(false);
    const [selectedOption, setSelectedOption] = useState('');
 
@@ -15,6 +15,7 @@ import React, { useState } from 'react';
 
    const handleSelect = (value) => {
      setSelectedOption(value);
+     setSelectedFacility2(value);
      setIsOpen(false);
    };
 

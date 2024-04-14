@@ -7,6 +7,14 @@ import home_phone from '../Images/home_phone.jpg';
 import home_building from '../Images/home_building.png';
 import home_building2 from '../Images/home_building2.png';
 import home_building3 from '../Images/home_building3.png';
+import condo1 from '../Images/condo1.jpg';
+import condo2 from '../Images/condo2.jpg';
+import condo3 from '../Images/condo3.jpg';
+import condo4 from '../Images/condo4.jpg';
+import condo5 from '../Images/condo5.jpg';
+import condo6 from '../Images/condo6.jpg';
+import condo7 from '../Images/condo7.jpg';
+import condo8 from '../Images/condo8.jpg';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 
@@ -25,7 +33,7 @@ const Home = () => {
                 <img src={home_search_background} alt="background image" />
                 <div className='houseSlogan'>
                     Your dream house is here.
-                    <br /><br />
+                    <br />
                     <div className='searchArea'>
                         <input
                              className="inputSearch"
@@ -43,19 +51,83 @@ const Home = () => {
             <h5 className='homeHeadings'>Featured Properties</h5>
             <div className='homeSection'>
                 <div className="container">
-                    <div className="box">import property info later</div>
-                    <div className="box">import property info later</div>
-                    <div className="box">import property info later</div>
-                    <div className="box">import property info later</div>
+                    <div className="box"> 
+                        <img src={condo1} alt="condo1" />
+                        <div className='condoInfo'>
+                            <h5>$ 290 000</h5>
+                            Condo for Sale <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
+                    </div>
+                    <div className="box">
+                        <img src={condo2} alt="condo2" />
+                        <div className='condoInfo'>
+                            <h5>$ 290 000</h5>
+                            Condo for Sale <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
+                    </div>
+                    <div className="box">
+                        <img src={condo3} alt="condo3" />
+                        <div className='condoInfo'>
+                            <h5>$ 290 000</h5>
+                            Condo for Sale <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
+                    </div>
+                    <div className="box">
+                        <img src={condo4} alt="condo4" />
+                        <div className='condoInfo'>
+                            <h5>$ 290 000</h5>
+                            Condo for Sale <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
+                    </div>
                 </div>
             </div>
             <h5 className='homeHeadings'>Featured Rental</h5>
             <div className='homeSection'>
                 <div className="container">
-                    <div className="box">import property info later</div>
-                    <div className="box">import property info later</div>
-                    <div className="box">import property info later</div>
-                    <div className="box">import property info later</div>
+                <div className="box"> 
+                        <img src={condo5} alt="condo5" />
+                        <div className='condoInfo'>
+                            <h5>$ 2 000</h5>
+                            Condo for Rent <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
+                    </div>
+                    <div className="box">
+                        <img src={condo6} alt="condo6" />
+                        <div className='condoInfo'>
+                            <h5>$ 2 000</h5>
+                            Condo for Rent <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
+                    </div>
+                    <div className="box">
+                        <img src={condo7} alt="condo7" />
+                        <div className='condoInfo'>
+                            <h5>$ 2 000</h5>
+                            Condo for Rent <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
+                    </div>
+                    <div className="box">
+                        <img src={condo8} alt="condo8" />
+                        <div className='condoInfo'>
+                            <h5>$ 2 000</h5>
+                            Condo for Rent <br/>
+                            Guy Street, Montreal <br/>
+                            3+1 rooms, 700 sqft
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className='homeSection'>

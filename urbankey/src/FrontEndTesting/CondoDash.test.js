@@ -13,7 +13,7 @@ describe('CondoDash Component', () => {
 
   test('renders the dashboard title', async () => {
     renderWithRouter(<CondoDash />);
-    // Assuming 'Single Person House' is rendered after an async operation
+   
     const title = await screen.findByText('Single Person House');
     expect(title).toBeInTheDocument();
   });

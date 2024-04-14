@@ -79,5 +79,5 @@ describe('Profile Component', () => {
     // This depends on how your component handles the submission success
   });
 
-  // Add more tests as needed, such as file upload handling, error handling, etc.
+  
 });

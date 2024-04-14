@@ -20,4 +20,5 @@ describe("SuccessMessage Component", () => {
     fireEvent.click(backButton);
     expect(mockHandleBackHome).toHaveBeenCalledTimes(1);
   });
+  
 });

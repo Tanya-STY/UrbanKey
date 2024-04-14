@@ -7,13 +7,14 @@ import { Link, useNavigate  } from 'react-router-dom';
 import {CFormSwitch} from "@coreui/react";
 import '@coreui/coreui/dist/css/coreui.min.css';
 import "@fontsource/roboto/400.css"; // Specify weight
-import axios from 'axios'; // Import axios here
+import axios from 'axios';
 import useAuth from '../../CustomeHooks/useAuth';
+import RegistrationKeyMessage from '../RegistrationKey/RegistrationKeyMessage'
 
 
 const Profile = () => {
 
-    const { auth, setAuth } = useAuth();
+    const { auth, setAuth, setUnit } = useAuth();
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -25,13 +26,24 @@ const Profile = () => {
     const [address, setAddress] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [newRegistrationKey, setNewRegistrationKey] = useState('');
+    const [showRegistrationPopup, setShowRegistrationPopup] = useState(false);
+    const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg'); // State to hold the profile picture
+
+    const role = auth?.role
+
+    useEffect(() => {
+        notification();
+    }, []);
+    
+
 
     const fetchUserData = async () => {
-        // const role = auth?.role
+         const role = auth?.role
         try {
             const token = auth?.token; 
             const response = await axios.get("http://localhost:5000/Profile", {
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
@@ -46,53 +58,101 @@ const Profile = () => {
         setNum2(userData.num2);
         setKey(userData.key);
         setAddress(userData.address);
-        setSelectedFile(userData.selectedFile);
+        
+        
+        if (userData.profilePicture) {
+
+            //receive the encoded in base64 code from the backend
+            const extractedPhoto = userData.profilePicture;
+            setProfilePicture(extractedPhoto);
+        } else {
+            // Set default profile picture URL if wrong
+            setProfilePicture('default-profile-picture.jpg');
+        }
+        
+
         setLoading(false);
         // role = response?.data?.role
 
-    } catch(error) {
-        console.log(error);
-        navigate('/Login');
+        } catch (error) {
+            console.log(error);
+            navigate('/Login');
         }
     };
 
 
-useEffect(() => {
-   fetchUserData();
-}, []);
+    useEffect(() => {
+        fetchUserData();
+    }, []);
 
-const handlesubmit = async (e) => {
-e.preventDefault();
+    const handlesubmit = async (e) => {
+        e.preventDefault();
 
-try {
-    const token = auth?.token; 
-    const response=await axios.post("http://localhost:5000/user/profile/update", {
-        name,
-        email,
-        province,
-        city,
-        num,
-        num2,
-        key,
-        address,
-        selectedFile
-    }, {
-        headers: { 
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        withCredentials: true
-    });
-    console.log(response.data);
-    // auth?.role = response?.data?.role;
-    console.log("Profile updated successfully");
-}
-catch (error) {
-    console.log(error);
-}
-}
+        try {
+            const token = auth?.token;
+            const response = await axios.post("http://localhost:5000/user/profile/update", {
+                name,
+                email,
+                province,
+                city,
+                num,
+                num2,
+                key,
+                address,
+                profilePicture
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                withCredentials: true
+            });
+            const unit_id = response.data.unit_id;
+            setUnit({ num, unit_id });
+            console.log("Response role:", response.data.role);
+            const newAuth = {...auth, role: response.data.role};
+            setAuth(newAuth);
+            console.log(response.data);
+            // auth?.role = response?.data?.role;
+            console.log("Profile updated successfully");
+            console.log(auth?.role);
+            navigate('/Dashboard');
+            
+        }
+        catch (error) {
+            console.log(error);
+            // alert(error);
+        }
+    }
 
-    const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg'); // State to hold the profile picture
+
+        const notification = async() => {
+            try {
+                const token = auth?.token;
+                const response = await axios.get("http://localhost:5000/check-new-registration-key", {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    withCredentials: true
+                });
+                const { new_registration_key } = response.data;
+                if (new_registration_key) {
+                    setNewRegistrationKey(new_registration_key);
+                    setShowRegistrationPopup(true);
+                }
+            }
+            catch (error) {
+                console.log(error);
+                alert(error);
+            }
+        }
+
+
+    const handleClosePopup = () => {
+        setShowRegistrationPopup(false);
+      };
+
     // Function to handle profile picture upload
     const handleProfilePictureUpload = (e) => {
         const file = e.target.files[0]; // Get the uploaded file
@@ -109,23 +169,38 @@ catch (error) {
 
     return (
         <div className="profilePage" >
+             {showRegistrationPopup && <RegistrationKeyMessage newRegistrationKey={newRegistrationKey} onClose={handleClosePopup} />}
             <form className="profileForm">
                 <h1 className="membershipInfo">Membership Information</h1>
-                <div className="profile-picture">
-                    <img src={profilePicture} alt="Profile Picture" />
-                    <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} />
-                    <label htmlFor="upload">Upload Profile Picture</label>
-                </div>
+                {/* <div className="profile-picture"> */}
+                    {/* <img src={profilePicture} alt="Profile Picture" /> */}
+                    {/* <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} /> */}
+                    {/* <label htmlFor="upload">Upload Profile Picture</label> */}
+                {/* </div> */}
+                
+                
+                <div className='special-top-box-profile-page'>
 
-                <div className="field-holder-profile">
-                    <label className="profileLabels" htmlFor={name}> Name / Surname</label>
-                    <input className="profileInput" value={name} onChange={(e) => setName(e.target.value)} type="text" />
-                </div>
+                    <div className='special-box-profile-page'>
+                        <div className="field-holder-profile">
+                            <label className="profileLabels" htmlFor={name}> Name / Surname</label>
+                            <input className="profileInput" value={name} onChange={(e) => setName(e.target.value)} type="text" />
+                        </div>
 
-                <div className="field-holder-profile">
-                    <label className="profileLabels" htmlFor={email}> E-mail</label>
-                    <input className="profileInput" value={email} onChange={(e) => setEmail(e.target.value)} type="text" />
+                        <div className="field-holder-profile">
+                            <label className="profileLabels" htmlFor={email}> E-mail</label>
+                            <input className="profileInput" value={email} onChange={(e) => setEmail(e.target.value)} type="text" />
+                        </div>
+                    </div>
+                    <div className="profile-picture">
+                        <img src={profilePicture} alt="Profile Picture" />
+                        <input type="file" id="upload" accept="image/*" onChange={handleProfilePictureUpload} />
+                        <label htmlFor="upload" style={{alignitems: 'center'}}>Upload Profile Picture</label>
+                    </div>
+
+
                 </div>
+                
                 <div className="box-profile-page">
                     <div className="field-holder2-profile">
                         <label className="province" htmlFor={province}>Province</label>
@@ -177,7 +252,7 @@ catch (error) {
                     <input id={address} className="addressInput" type="text"  value={address} onChange={(e) => setAddress(e.target.value)}  />
                 </div>
                 <div>
-                <input type='file' onChange={(e) => setSelectedFile(e.target.files[0])}/>
+                {/*<input type='file' onChange={(e) => setSelectedFile(e.target.files[0])}/>*/}
                 </div>
 
             </form>

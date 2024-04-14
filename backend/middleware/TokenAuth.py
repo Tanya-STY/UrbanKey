@@ -8,9 +8,10 @@ def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         token = request.headers.get('Authorization')
+        # print(token)
 
         if not token or not token.startswith('Bearer '):
-            return jsonify(message='Unauthorized'), 401
+            return jsonify(message='Unauthorized token'), 401
 
         token = token.split(' ')[1]
 

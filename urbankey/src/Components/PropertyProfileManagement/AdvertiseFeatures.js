@@ -20,7 +20,7 @@ const externalFeatures = [
   'Siding', 'Basketball Field', 'Generator', 'Water Tank', 'Market'
 ];
 
-const AdvertiseFeatures = () => {
+const AdvertiseFeatures = ({onSaveSelectedInteriorFeatures, onSaveSelectedExteriorFeatures, selectedInteriorFeatures, selectedExteriorFeatures}) => {
   const [checkedInterior, setCheckedInterior] = useState(new Array(interiorFeatures.length).fill(false));
   const [checkedExterior, setCheckedExterior] = useState(new Array(externalFeatures.length).fill(false));
 
@@ -29,6 +29,8 @@ const AdvertiseFeatures = () => {
       index === position ? !item : item
     );
     setCheckedInterior(updatedCheckedState);
+    const selectedInterior = interiorFeatures.filter((_, index) => updatedCheckedState[index]);
+    onSaveSelectedInteriorFeatures(selectedInterior);
   };
 
   const handleExteriorChange = (position) => {
@@ -36,33 +38,14 @@ const AdvertiseFeatures = () => {
       index === position ? !item : item
     );
     setCheckedExterior(updatedCheckedState);
+    const selectedExterior = externalFeatures.filter((_, index) => updatedCheckedState[index]);
+    onSaveSelectedExteriorFeatures(selectedExterior);
   };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const selectedInteriorFeatures = interiorFeatures.filter((_, index) => checkedInterior[index]);
-    const selectedExteriorFeatures = externalFeatures.filter((_, index) => checkedExterior[index]);
-    console.log("Selected interior features:", selectedInteriorFeatures);
-    console.log("Selected exterior features:", selectedExteriorFeatures);
-  };
-  
-
-//
-  const [showPopup, setShowPopup] = useState(false);
-
-  const openPopup = () => {
-    setShowPopup(true);
-  };
-
-  const closePopup = () => {
-    setShowPopup(false);
-  };
-
 
   return (
     <div className="advertise-features">
       <h2>Advertise Features</h2>
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}> */}
         <div className="feature-section">
           <h3>Interior Features</h3>
           <div className="features-grid">
@@ -97,11 +80,7 @@ const AdvertiseFeatures = () => {
             ))}
           </div>
         </div>
-        <button type="submit" className="submit-button" onClick={openPopup}>
-          Send Registration Keys
-        </button>
-        {showPopup && <RegistrationKey onClose={closePopup}/>}
-      </form>
+      {/* </form> */}
     </div>
   );
 };

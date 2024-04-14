@@ -20,6 +20,7 @@ describe("Reservation Component", () => {
     await waitFor(() => expect(timeSlot).toHaveClass("selected")); // Wait for the class to be applied
   });
 
+  
   test("displays date selection calendar", () => {
     render(<Reservation />);
     const selectDateText = screen.getByText("Select a date:");
