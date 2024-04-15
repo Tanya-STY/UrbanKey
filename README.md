@@ -43,7 +43,3 @@ The project involves developing a Condo Management website with core functionali
 ## Project Approach
 * Frontend Framework: React.js will serve as the frontend framework of choice due to its component-based architecture and ease of development. It allows for efficient UI/UX design and modular code organization. 
 * Backend Framework: Python will be utilized for building the backend infrastructure and MongoDB will be used for the creation of our database. The flask framework will be used to establish a connection and communication between frontend and backend
-
-## Sprint 3 Documentation
-
-* Link to the Sprint 3 Document: [Sprint 3 Document](https://docs.google.com/document/d/1iTuMx-RWzugRGOjyUP6QhSc1gFslfCHB/edit?usp=sharing&ouid=103185893316764877392&rtpof=true&sd=true)
