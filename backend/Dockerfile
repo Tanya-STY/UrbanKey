@@ -16,7 +16,7 @@ COPY . .
 # Expose the port that your Flask app listens on
 EXPOSE 5000
 
-# RUN chmod +x ./backend/start.sh
+RUN chmod +x ./backend/start.sh
 
 # Start the Flask app
-CMD ["gunicorn", "-b", ":5000", "run:app"]
+CMD ["python", "app.py"]

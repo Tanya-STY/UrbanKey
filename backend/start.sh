@@ -1,2 +1,2 @@
 #!/bin/bash
-exec gunicorn -b 0.0.0.0:5000 run:appbash
+exec gunicorn -b 0.0.0.0:5000 ./backend/run:appbash
