@@ -19,4 +19,4 @@ EXPOSE 5000
 # RUN chmod +x ./backend/start.sh
 
 # Start the Flask app
-CMD ["gunicorn", "-b", ":5000", "api:app"]
+CMD ["gunicorn", "-b", ":5000", "run:app"]
