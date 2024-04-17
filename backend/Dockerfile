@@ -5,7 +5,7 @@ FROM python:3.8-slim
 WORKDIR /app
 
 # Copy the requirements file into the container
-COPY requirements.txt .
+COPY ./backend/requirements.txt .
 
 # Install the required Python packages
 RUN pip install -r requirements.txt
