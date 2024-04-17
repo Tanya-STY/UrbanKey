@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import useRefreshToken from "./useRefreshToken";
 import useAuth from "./useAuth";
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'https://urbankey-backend.onrender.com/';
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL,

@@ -18,7 +18,7 @@ const RegistrationKey = ({ isOpen, onClose, unitId, registrationKeyRenter, regis
         try {
             const token = auth?.token;
             // Call backend API to send registration keys
-            const response = await axios.post('http://localhost:5000/send-registration-key', { email, key }, {
+            const response = await axios.post('https://urbankey-backend.onrender.com/send-registration-key', { email, key }, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`

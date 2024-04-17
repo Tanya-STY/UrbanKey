@@ -42,7 +42,7 @@ const Profile = () => {
          const role = auth?.role
         try {
             const token = auth?.token; 
-            const response = await axios.get("http://localhost:5000/Profile", {
+            const response = await axios.get("https://urbankey-backend.onrender.com/Profile", {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
@@ -90,7 +90,7 @@ const Profile = () => {
 
         try {
             const token = auth?.token;
-            const response = await axios.post("http://localhost:5000/user/profile/update", {
+            const response = await axios.post("https://urbankey-backend.onrender.com/user/profile/update", {
                 name,
                 email,
                 province,
@@ -129,7 +129,7 @@ const Profile = () => {
         const notification = async() => {
             try {
                 const token = auth?.token;
-                const response = await axios.get("http://localhost:5000/check-new-registration-key", {
+                const response = await axios.get("https://urbankey-backend.onrender.com/check-new-registration-key", {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
