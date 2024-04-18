@@ -38,6 +38,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "custom-build": "NODE_VERSION=18.15.0 && nvm install $NODE_VERSION && export NODE_ENV=production && npm install --production=false --legacy-peer-deps",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
