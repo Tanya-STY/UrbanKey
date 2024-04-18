@@ -59,7 +59,7 @@ function App() {
 
           {/* Public Routes */}
           <Route path="/SignUp" element={<SignUp />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/LogIn" element={<Login />} />
           <Route path="/Unauthorized" element={<Unauthorized />} />
           <Route path="/" element={<HomePage />} />
           

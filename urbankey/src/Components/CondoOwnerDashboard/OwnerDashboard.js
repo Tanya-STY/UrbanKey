@@ -44,8 +44,8 @@ const CondoOwnerDash = () => {
     setShowPopup2(false);
   };
 
-// the month pay is the monthly payment (which is the same every month for a condo owner), 
-// it is seen in the financial status and it is sent to the payment history as well
+  // the month pay is the monthly payment (which is the same every month for a condo owner), 
+  // it is seen in the financial status and it is sent to the payment history as well
   const [monthPay, setMonthPay] = useState(5534.00);
 
   const { auth, unit } = useAuth();
@@ -88,7 +88,7 @@ const CondoOwnerDash = () => {
 
     try {
       const token = auth?.token;
-      const response = await axios.get("http://localhost:5000/Profile",
+      const response = await axios.get("https://urbankey-backend.onrender.com/Profile",
         {
           headers: {
             'Content-Type': 'application/json',
@@ -149,7 +149,7 @@ const CondoOwnerDash = () => {
     try {
       const token = auth?.token;
       // console.log(token);
-      const response = await axios.get(`http://localhost:5000/api/images/${unitId}`,  //backticks for template strings
+      const response = await axios.get(`https://urbankey-backend.onrender.com/${unitId}`,  //backticks for template strings
         {
           headers: {
             'Content-Type': 'application/json',
@@ -170,7 +170,7 @@ const CondoOwnerDash = () => {
   const handleDownload = async () => {
     try {
       const token = auth?.token;
-      const response = await axios.get(`http://localhost:5000/download-file/${unitId}`, {
+      const response = await axios.get(`https://urbankey-backend.onrender.com/${unitId}`, {
         responseType: 'arraybuffer', //binary large object
         headers: {
           'Authorization': `Bearer ${token}`
@@ -339,11 +339,17 @@ const CondoOwnerDash = () => {
         </div>
 
         <div className="renter-info">
-        <p className="condo-dash-renter-info">Renter Contact Information</p>
-            <p>Name: {renter.name}</p>
-            <p>Email: {renter.email}</p> 
-            <p>Phone: {renter.num}</p>      
-          </div>
+          <p className="condo-dash-renter-info">Renter Contact Information</p>
+          {renter ? (
+            <>
+              <p>Name: {renter.name}</p>
+              <p>Email: {renter.email}</p>
+              <p>Phone: {renter.num}</p>
+            </>
+          ) : (
+            <p>No renter information available</p>
+          )}
+        </div>
       </div>
 
       <div className="condo-dash-fourth-row">
@@ -376,7 +382,7 @@ const CondoOwnerDash = () => {
             <button className="condo-dash-view-link" type="submit" onClick={openPopup}>
               View
             </button>
-            {showPopup && <PaymentHistoryOwner monthPay={monthPay} onClose={closePopup}/>}
+            {showPopup && <PaymentHistoryOwner monthPay={monthPay} onClose={closePopup} />}
           </div>
         </div>
       </div>
@@ -395,7 +401,7 @@ const CondoOwnerDash = () => {
               Interior Features
             </p>
             {renderInteriorFeatures()}
-            
+
           </div>
           <div
             className="condo-dash-feature"
@@ -411,7 +417,7 @@ const CondoOwnerDash = () => {
               Exterior Features
             </p>
             {renderExteriorFeatures()}
-            
+
           </div>
         </div>
 
@@ -471,9 +477,9 @@ const CondoOwnerDash = () => {
               Submit a New Request
             </Link> */}
             <button className="condo-dash-request-link" type="submit" onClick={openPopup2}>
-            Submit a New Request
+              Submit a New Request
             </button>
-            {showPopup2 && <MaintenanceRequestForm onClose={closePopup2}/>}
+            {showPopup2 && <MaintenanceRequestForm onClose={closePopup2} />}
           </div>
         </div>
       </div>

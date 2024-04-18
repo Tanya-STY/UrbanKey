@@ -6,7 +6,7 @@ import houseImage from '../Images/houseImage.png';
 import axios from 'axios';
 import useAuth from '../../CustomeHooks/useAuth';
 
-const RegistrationKey = ({ isOpen, onClose }) => {
+const RegistrationKey = ({ isOpen, onClose, unitId, registrationKeyRenter, registrationKeyOwner }) => {
     const { auth } = useAuth();
 
     const [email, setEmail] = useState('');
@@ -18,7 +18,7 @@ const RegistrationKey = ({ isOpen, onClose }) => {
         try {
             const token = auth?.token;
             // Call backend API to send registration keys
-            const response = await axios.post('http://localhost:5000/send-registration-key', { email, key }, {
+            const response = await axios.post('https://urbankey-backend.onrender.com/send-registration-key', { email, key }, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
@@ -49,6 +49,8 @@ const RegistrationKey = ({ isOpen, onClose }) => {
             <div className="registrationText">
                 To register a condo owner or rental user, you can provide a registration key to users.
                 <br />
+                Here are the registration keys for unit <b>{unitId}</b>: <br/>
+                <span className="registrationKeys">{registrationKeyRenter}</span>, <span className="registrationKeys">{registrationKeyOwner}</span>
                 {/* If you have not received your key or need assistance, please contact support. */}
             </div>
 

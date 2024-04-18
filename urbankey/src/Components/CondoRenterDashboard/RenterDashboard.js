@@ -29,6 +29,7 @@ const CondoRenterDash = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [profilePic, setProfilePic] = useState('');
   const [num, setNum] = useState('');
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
@@ -98,7 +99,7 @@ const CondoRenterDash = () => {
 
     try {
       const token = auth?.token;
-      const response = await axios.get("http://localhost:5000/Profile",
+      const response = await axios.get("https://urbankey-backend.onrender.com/Profile",
         {
           headers: {
             'Content-Type': 'application/json',
@@ -110,6 +111,7 @@ const CondoRenterDash = () => {
       const userData = response.data;
       setName(userData.name);
       setEmail(userData.email);
+      setProfilePic(userData.profilePicture);
       setNum(userData.num);
       setUnitId(userData.unit_id);
       setProvinceUnit(userData.province_unit);
@@ -142,16 +144,28 @@ const CondoRenterDash = () => {
   };
 
   const renderInteriorFeatures = () => {
+    // Check if interiorFeatures is undefined or null before calling map
+  if (interiorFeatures) {
     return interiorFeatures.map((feature, index) => (
       <p key={index}>✓ {feature}</p>
     ));
+  } else {
+    // Return a default message or empty array if interiorFeatures is undefined or null
+    return <p>No interior features available</p>;
+  }
   };
 
   
   const renderExteriorFeatures = () => {
-    return exteriorFeatures.map((feature, index) => (
-      <p key={index}>✓ {feature}</p>
-    ));
+    // Check if exteriorFeatures is undefined or null before calling map
+    if (exteriorFeatures) {
+      return exteriorFeatures.map((feature, index) => (
+        <p key={index}>✓ {feature}</p>
+      ));
+    } else {
+      // Return a default message or empty array if exteriorFeatures is undefined or null
+      return <p>No exterior features available</p>;
+    }
   };
 
   const fetchUnitPics = async () => {
@@ -159,7 +173,7 @@ const CondoRenterDash = () => {
     try {
       const token = auth?.token;
       // console.log(token);
-      const response = await axios.get(`http://localhost:5000/api/images/${unitId}`,  //backticks for template strings
+      const response = await axios.get(`https://urbankey-backend.onrender.com/${unitId}`,  //backticks for template strings
         {
           headers: {
             'Content-Type': 'application/json',
@@ -181,7 +195,7 @@ const CondoRenterDash = () => {
   const handleDownload = async () => {
     try {
       const token = auth?.token;
-      const response = await axios.get(`http://localhost:5000/download-file/${unitId}`, {
+      const response = await axios.get(`https://urbankey-backend.onrender.com/${unitId}`, {
         responseType: 'arraybuffer', //binary large object
         headers: {
           'Authorization': `Bearer ${token}`
@@ -274,7 +288,7 @@ const CondoRenterDash = () => {
         </div>
         <div className="condo-dash-profile-box">
           <div className="condo-dash-face">
-            <img src={face} alt="Man Face" />
+            <img src={profilePic} alt="Man Face" />
           </div>
           <Link to="/Profile" className="condo-dash-edit-button">
             Edit profile
@@ -362,7 +376,7 @@ const CondoRenterDash = () => {
           </div>
           <div className="condo-dash-condo-fees">
             <img src={icon5} alt="Radio Button 1" />
-            <p>Monthly Condo Fees: $4568</p>
+            <p>Monthly Condo Fees: ${monthPay}</p>
             <img src={icon7} alt="Money Icon" style={{ width: "10.5%" }} />
           </div>
 

@@ -110,15 +110,15 @@ def update_user_profile(request):
     try:
         role = request.role
         data = request.get_json()
-        name = data.get('name')
+        name = data.get('name', '')
         email = request.email
-        province = data.get('province')
-        city = data.get('city')
-        num = data.get('num')
+        province = data.get('province', '')
+        city = data.get('city', '')
+        num = data.get('num', '')
         num2 = data.get('num2', '')
-        registration_key = data.get("key")
-        address = data.get('address')
-        profile_picture = data['profilePicture']
+        registration_key = data.get("key", '')
+        address = data.get('address', '')
+        profile_picture = data.get('profilePicture', '')
 
         user_info = {
             'name': name,
@@ -165,10 +165,10 @@ def update_user_profile(request):
                 users.update_one({"email": email}, update, upsert=False)
 
                 return jsonify({'message': 'User updated successfully', 'unit_id': unit_id, 'role': role}), 200
-            else:
-                return jsonify({'error': 'Unit not found for the given registration key'}), 404
-        else:
-            return jsonify({'error': 'Invalid registration key'}), 400
+        #     else:
+        #         return jsonify({'error': 'Unit not found for the given registration key'}), 404
+        # else:
+        #     return jsonify({'error': 'Invalid registration key'}), 400
 
     except Exception as e:
         print(e)

@@ -17,6 +17,8 @@ const PropertyProfileManagement = () => {
   const [unitId, setUnitId] = useState();
   const [unitOwner, setUnitOwner] = useState('');
   const [unitOccupant, setUnitOccupant] = useState('');
+  const [registrationKeyRenter, setRegistrationKeyRenter] = useState('');
+  const [registrationKeyOwner, setRegistrationKeyOwner] = useState('');
   const [loading, setLoading] = useState(true);
   const [selectedInteriorFeatures, setSelectedInteriorFeatures] = useState([]);
   const [selectedExteriorFeatures, setSelectedExteriorFeatures] = useState([]);
@@ -66,7 +68,7 @@ const PropertyProfileManagement = () => {
   const fetchUnitData = async () => {
     try {
       const token = auth?.token;
-      const response = await axios.get(`http://localhost:5000/unitInfo/${unitId}`, {
+      const response = await axios.get(`https://urbankey-backend.onrender.com/unitInfo/${unitId}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -76,6 +78,8 @@ const PropertyProfileManagement = () => {
       const userData = response.data;
       setUnitOwner(userData.owner);
       setUnitOccupant(userData.occupant);
+      setRegistrationKeyRenter(userData.registration_key_renter);
+      setRegistrationKeyOwner(userData.registration_key_owner);
       setFormData({
         category: userData.category,
         unitId: unitId,
@@ -129,7 +133,7 @@ const PropertyProfileManagement = () => {
       //   interiorFeatures: selectedFeatures.interior,
       //   exteriorFeatures: selectedFeatures.exterior
       // };
-      const response = await axios.post('http://localhost:5000/propertyinfo', formData, {
+      const response = await axios.post('https://urbankey-backend.onrender.com/propertyinfo', formData, {
         headers: {
           'Content-Type': 'application/json',
           // 'Content-Type': 'multipart/form-data',
@@ -154,7 +158,7 @@ const PropertyProfileManagement = () => {
     formData.append('file', file);
 
     try {
-      const response = await axios.post('http://localhost:5000/upload', formData, {
+      const response = await axios.post('https://urbankey-backend.onrender.com/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -432,7 +436,8 @@ const PropertyProfileManagement = () => {
         <button onClick={handleOpenPopup} className="submitbutton">
           Send Registration Keys
         </button>
-        {isPopupOpen && <RegistrationKey onClose={handleClosePopup} />}
+        {isPopupOpen && <RegistrationKey onClose={handleClosePopup} unitId={unitId} registrationKeyRenter={registrationKeyRenter}
+            registrationKeyOwner={registrationKeyOwner} />}
       </div>
     </div>
   );

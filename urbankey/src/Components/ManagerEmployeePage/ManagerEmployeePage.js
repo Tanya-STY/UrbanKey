@@ -125,13 +125,14 @@ export default function DataGridDemo() {
         const keyword = e.target.value.toLowerCase();
         setSearchValue(keyword);
         const filteredData = rows.filter(row =>
-            row.name.toLowerCase().includes(keyword) ||
-            row.id.toLowerCase().includes(keyword) ||
-            row.role.toLowerCase().includes(keyword) ||
-            row.companyName.toLowerCase().includes(keyword)
+            (row.name?.toLowerCase().includes(keyword) ||
+            row.id?.toString().toLowerCase().includes(keyword) ||
+            row.role?.toLowerCase().includes(keyword) ||
+            row.companyName?.toLowerCase().includes(keyword))
         );
         setFilteredRows(filteredData);
     };
+    
 
     return (
         <div className="employee-container-managerPage">

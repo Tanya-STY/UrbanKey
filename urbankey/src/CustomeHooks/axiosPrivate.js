@@ -1,9 +1,14 @@
+// This custom hook, useAxiosPrivate, is designed to provide an Axios instance with built-in functionality for handling authentication tokens and automatic token refreshing. 
+// It utilizes the useRefreshToken and useAuth hooks to access authentication-related state and functionality. 
+// The Axios instance created here includes request and response interceptors to automatically attach the authentication token to outgoing requests and handle token refreshing in case of a 403 (Forbidden) response. 
+// By encapsulating this logic within a custom hook, components can easily access a pre-configured Axios instance for making authenticated requests while abstracting away the complexities of token management and refreshing.
+
 import axios from 'axios';
 import { useEffect } from "react";
 import useRefreshToken from "./useRefreshToken";
 import useAuth from "./useAuth";
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'https://urbankey-backend.onrender.com/';
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
