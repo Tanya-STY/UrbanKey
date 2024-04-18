@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 // import MaintenanceRequest from "./Components/Popups/MaintenanceRequest";
@@ -49,39 +50,6 @@ function App() {
 
   return (
     <>
-      {/*<Navbar />*/}
-
-      {/*<Routes>*/}
-      {/*  <Route path="/" element={<Layout/>} />*/}
-
-      {/*    /!* Public Routes *!/*/}
-      {/*    <Route path="/SignUp" element={<SignUp />} />*/}
-      {/*    <Route path="/Login" element={<Login />} />*/}
-      {/*    <Route path="/Unauthorized" element={<Unauthorized />} />*/}
-      {/*    <Route path="/HomePage" element={<HomePage />} />*/}
-
-      {/*    <Route element={<PersistLogin />} >*/}
-      {/*    <Route element={<RequireAuth allowedRoles={[ROLE.User, ROLE.Admin, ROLE.Renter, ROLE.Owner]}/>} >*/}
-      {/*      /!* <Route path="/HomePage" element={<HomePage />} /> *!/*/}
-      {/*      <Route path="/Profile" element={<Profile />} />*/}
-      {/*      <Route path="/MaintenanceRequest" element={<MaintenanceRequest />} />*/}
-      {/*      <Route path="/Notification" element={<Notification />} />*/}
-      {/*      <Route path="/PaymentHistory" element={<PaymentHistory />} />*/}
-      {/*      <Route path="/ReservationSuccess" element={<ReservationSuccess />} />*/}
-      {/*      <Route path="/PropertyProfile" element={<PropertyProfileManagement />} />*/}
-      {/*      <Route path="/Employee" element={<Employee />} />*/}
-      {/*      <Route path="/FinanceDashboard" element={<FinanceDashboard />} />*/}
-      {/*      <Route path="/Dashboard" element={<DashboardBasedOnRole />} />*/}
-      {/*      <Route path="/RegistrationKey" element={<RegistrationKey />} />*/}
-      {/*      <Route path="/Reservation" element={<Reservation />} />*/}
-
-      {/*      <Route path="/ReservationPageCompany" element={<ReservationPageCompany/>} />*/}
-
-      {/*      <Route path="/RenterDashboard" element={<CondoRenterDashboard />} /> /!*added code*!/*/}
-      {/*      </Route>*/}
-      {/*    </Route>*/}
-
-      {/*</Routes>*/}
 
       <Navbar />
 
@@ -170,3 +138,38 @@ export default App;
 // }
 
 // export default App;
+
+
+      {/*<Navbar />*/}
+
+      {/*<Routes>*/}
+      {/*  <Route path="/" element={<Layout/>} />*/}
+
+      {/*    /!* Public Routes *!/*/}
+      {/*    <Route path="/SignUp" element={<SignUp />} />*/}
+      {/*    <Route path="/Login" element={<Login />} />*/}
+      {/*    <Route path="/Unauthorized" element={<Unauthorized />} />*/}
+      {/*    <Route path="/HomePage" element={<HomePage />} />*/}
+
+      {/*    <Route element={<PersistLogin />} >*/}
+      {/*    <Route element={<RequireAuth allowedRoles={[ROLE.User, ROLE.Admin, ROLE.Renter, ROLE.Owner]}/>} >*/}
+      {/*      /!* <Route path="/HomePage" element={<HomePage />} /> *!/*/}
+      {/*      <Route path="/Profile" element={<Profile />} />*/}
+      {/*      <Route path="/MaintenanceRequest" element={<MaintenanceRequest />} />*/}
+      {/*      <Route path="/Notification" element={<Notification />} />*/}
+      {/*      <Route path="/PaymentHistory" element={<PaymentHistory />} />*/}
+      {/*      <Route path="/ReservationSuccess" element={<ReservationSuccess />} />*/}
+      {/*      <Route path="/PropertyProfile" element={<PropertyProfileManagement />} />*/}
+      {/*      <Route path="/Employee" element={<Employee />} />*/}
+      {/*      <Route path="/FinanceDashboard" element={<FinanceDashboard />} />*/}
+      {/*      <Route path="/Dashboard" element={<DashboardBasedOnRole />} />*/}
+      {/*      <Route path="/RegistrationKey" element={<RegistrationKey />} />*/}
+      {/*      <Route path="/Reservation" element={<Reservation />} />*/}
+
+      {/*      <Route path="/ReservationPageCompany" element={<ReservationPageCompany/>} />*/}
+
+      {/*      <Route path="/RenterDashboard" element={<CondoRenterDashboard />} /> /!*added code*!/*/}
+      {/*      </Route>*/}
+      {/*    </Route>*/}
+
+      {/*</Routes>*/}
