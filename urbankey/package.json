@@ -44,6 +44,9 @@
     "test:coverage": "react-scripts test --coverage --testMatch '**/*.test.js' && nyc report --reporter=text-summary",
     "eject": "react-scripts eject"
   },
+  "config": {
+    "force": true
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
