@@ -46,7 +46,7 @@ def create_app():
     #     "options_success_status": 200
     # }
     # CORS(app, **cors_options)
-    CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "supports_credentials": True}})
+    CORS(app, resources={r"/*": {"origins": "https://urbankey.onrender.com", "supports_credentials": True}})
     # CORS(app)
 
 
