@@ -27,7 +27,7 @@ const CondoOwnerDash = () => {
 
   const openPopup = () => {
     setShowPopup(true);
-  };
+  }; 
 
   const closePopup = () => {
     setShowPopup(false);
@@ -83,6 +83,7 @@ const CondoOwnerDash = () => {
   const [bigImage, setBigImage] = useState('');
   const [smallImages, setSmallImages] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
+  const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg');
 
   const fetchUserData = async () => {
 
@@ -124,6 +125,15 @@ const CondoOwnerDash = () => {
       setInteriorFeatures(userData.interior);
       setExteriorFeatures(userData.exterior);
       console.log(userData.interior);
+      if (userData.profilePicture) {
+
+        //receive the encoded in base64 code from the backend
+        const extractedPhoto = userData.profilePicture;
+        setProfilePicture(extractedPhoto);
+    } else {
+        // Set default profile picture URL if wrong
+        setProfilePicture('default-profile-picture.jpg');
+    }
       setLoading(false)
 
     } catch (error) {
@@ -262,7 +272,7 @@ const CondoOwnerDash = () => {
         </div>
         <div className="condo-dash-profile-box">
           <div className="condo-dash-face">
-            <img src={face} alt="Man Face" />
+            <img src={profilePicture} alt="Man Face" />
           </div>
           <Link to="/Profile" className="condo-dash-edit-button">
             Edit profile
