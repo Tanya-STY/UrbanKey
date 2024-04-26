@@ -1,24 +1,34 @@
 from flask import jsonify, make_response, send_file, Response
 from werkzeug.utils import secure_filename
-from config import users, regkey, units, fs # Import the MongoDB collection and bcrypt instance
+from config import users, regkey, units, fs, requests # Import the MongoDB collection and bcrypt instance
 from middleware.TokenAuth import generate_access_token, generate_refresh_token
 import io
 import re
 from bson import ObjectId
 import base64
 import traceback
+import random
 
 
 
 
 def getProfile(request):
-    
+
     try: 
         email = request.email
         role = request.role
         #even though we do not use this line above, we have to add it or it will create an error (for me anyways)
 
         user = users.find_one({"email": email})
+        
+        request_dict = {}  # Initialize an empty dictionary
+        
+        cursors = requests.find({'email': email}, {'_id':0})
+        for i, cursor in enumerate(cursors):
+            request_dict[f'request_{i}'] = dict(cursor)
+            # print(request_dict)
+            # print('\n')
+        
 
         if 'photo_id' in user:
                 photo_id = user['photo_id']
@@ -50,7 +60,8 @@ def getProfile(request):
             'num2': user.get('num2', ''),
             'key': user.get('registration_key', ''),
             'address': user.get('address', ''),
-            'profilePicture': profilePhotoDecodedWithSpecialCharacters
+            'profilePicture': profilePhotoDecodedWithSpecialCharacters,
+            'req': request_dict
         }
 
         regKey = user.get('registration_key')
@@ -193,3 +204,45 @@ def download_file(unit_id):
     else:
         return 'File not found', 404
 
+def new_request(request):
+    print('hit new_request in backend from frontend')
+    
+    try:
+        role = request.role
+        email = request.email
+        data = request.get_json()
+        title = data.get('title', '')
+        description = data.get('description', '')
+        print(f'Title: {title} || Description: {description}')
+        
+        random_number = -1
+        while(True):
+            random_number = random.randint(0, 9999)
+            
+            check_request_number_exists = requests.find_one({'number':random_number})
+            
+            
+            if check_request_number_exists:
+                continue
+            else:
+                break 
+        
+        new_request_data = {
+            'title':title,
+            'description': description,
+            'number':random_number,
+            'email':email
+        }
+        
+        request_id = requests.insert_one(new_request_data)
+        
+        if request_id:
+            print(request_id)
+            print(new_request_data)
+            return jsonify({'message':'request added'})
+        else:
+            print('did not enter request')
+            return jsonify({'message':'Could not enter request, try again.'})
+    
+    except Exception as e:
+        return jsonify({'error':e})
