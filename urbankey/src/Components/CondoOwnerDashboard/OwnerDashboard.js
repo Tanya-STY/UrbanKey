@@ -136,8 +136,7 @@ const CondoOwnerDash = () => {
       }
 
       console.log(userData.req);
-      console.log(userData.req[request_0].title)
-      console.log(userData.req[request_0].number)
+      console.log(userData.req.request_0.number)
 
 
 
