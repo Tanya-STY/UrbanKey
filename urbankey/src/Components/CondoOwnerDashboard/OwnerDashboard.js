@@ -136,6 +136,12 @@ const CondoOwnerDash = () => {
       }
 
       console.log(userData.req);
+      console.log(userData.req[request_0].title)
+      console.log(userData.req[request_0].number)
+
+
+
+
 
       setLoading(false);
     } catch (error) {
@@ -457,7 +463,7 @@ const CondoOwnerDash = () => {
             <div> {/* this is the iner div content*/}
             {Object.keys(userData.req).map(requestKey => (
               <div className="condo-dash-requests" key={requestKey} style={{ borderBottom: "none" }} >
-                <p className="condo-dash-nb-request">Request #{userData.req[requestKey].request_id}</p>
+                <p className="condo-dash-nb-request">Request #{userData.req[requestKey].number}</p>
                 <p
                   className="condo-dash-progress"
                   style={{
