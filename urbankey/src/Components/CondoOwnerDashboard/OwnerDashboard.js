@@ -132,9 +132,8 @@ const CondoOwnerDash = () => {
         // Set default profile picture URL if wrong
         setProfilePicture("default-profile-picture.jpg");
       }
-      
-      console.log(userData.req);
 
+      console.log(userData.req);
 
       setLoading(false);
     } catch (error) {
@@ -452,19 +451,24 @@ const CondoOwnerDash = () => {
               <img src={icon9} alt="Stock Up Icon" />
               <p>Maintenance Requests</p>
             </div>
-
-            <div className="condo-dash-requests">
-              <p className="condo-dash-nb-request">Request #001</p>
-              <p
-                className="condo-dash-progress"
-                style={{
-                  padding: "1% 7.5%",
-                  backgroundColor: "#FFBAFF",
-                  border: "1px solid #E100E1",
-                }}
-              >
-                In Progress
-              </p>
+            
+            <div> {/* this is the iner div content*/}
+            {Object.keys(userData.req).map(requestKey => (
+              <div className="condo-dash-requests" key={requestKey} style={{ borderBottom: "none" }} >
+                <p className="condo-dash-nb-request">Request #{userData.req[requestKey].request_id}</p>
+                <p
+                  className="condo-dash-progress"
+                  style={{
+                    padding: "1% 7.5%",
+                    backgroundColor: "#FFBAFF",
+                    border: "1px solid #E100E1",
+                  }}
+                >
+                  {userData.req[requestKey].status}
+                </p>
+              </div>
+            ))}
+              
             </div>
 
             <div className="condo-dash-requests">

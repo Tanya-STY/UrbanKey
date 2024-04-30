@@ -231,7 +231,8 @@ def new_request(request):
             'title':title,
             'description': description,
             'number':random_number,
-            'email':email
+            'email':email,
+            'status':'pending'
         }
         
         request_id = requests.insert_one(new_request_data)
