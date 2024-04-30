@@ -85,6 +85,7 @@ const CondoOwnerDash = () => {
   const [profilePicture, setProfilePicture] = useState(
     "default-profile-picture.jpg"
   );
+  const [userData, setUserData] = useState(undefined)
 
   const fetchUserData = async () => {
     try {
@@ -98,6 +99,7 @@ const CondoOwnerDash = () => {
       });
       // const response = await axiosPrivate.get("/renter");
       const userData = response.data;
+      setUserData(userData)
       setName(userData.name);
       setEmail(userData.email);
       setNum(userData.num);
