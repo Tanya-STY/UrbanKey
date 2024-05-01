@@ -466,7 +466,7 @@ const CondoOwnerDash = () => {
                 <div
                   className="condo-dash-requests"
                   key={requestKey}
-                  style={{ borderBottom: "black 1px" }}
+                  style={{ borderBottom: "solid black 1px;" }}
                 >
                     <p className="condo-dash-nb-request">
                       Request #{userData.req[requestKey].number} <br/> {userData.req[requestKey].title}
