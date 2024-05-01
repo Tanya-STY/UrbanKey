@@ -166,10 +166,11 @@ export default function DataGridDemo() {
 
     useEffect(() => {
         fetchUserData();
-        fill_rows();
-        console.log("emp_row : " + empRow)
         // fetchUnitPics();
       }, []);
+
+    fill_rows();
+    console.log("emp_row : " + empRow)
 
       
     const [searchValue, setSearchValue] = useState('');
