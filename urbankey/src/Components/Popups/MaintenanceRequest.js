@@ -30,12 +30,8 @@ const MaintenanceRequestForm = ({ onClose }) => {
       // alert(error);
   } 
 
-
-
-
-
-
     console.log('Submitted:', { title, description });
+    window.location.reload();
   };
 
   const isTitleValid = title.trim() !== '';
