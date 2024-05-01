@@ -468,24 +468,9 @@ const CondoOwnerDash = () => {
                   key={requestKey}
                   style={{ borderBottom: "none" }}
                 >
-                  <div
-                    style={{
-                      border: "0",
-                      margin: "0",
-                      padding: "0",
-                      display: "flex",
-                      position: 'relative',
-                      "flex-direction": "column",
-                    }}
-                  >
                     <p className="condo-dash-nb-request">
-                    {userData.req[requestKey].title}
-                  </p>
-                  <p className="condo-dash-nb-request">
-                    Request #{userData.req[requestKey].number}
-                  </p>
-                  </div>
-                  
+                      Request #{userData.req[requestKey].number} {userData.req[requestKey].title}
+                    </p>
                   <p
                     className="condo-dash-progress"
                     style={{
