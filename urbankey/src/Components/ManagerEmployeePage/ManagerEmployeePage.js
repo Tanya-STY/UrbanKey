@@ -18,7 +18,6 @@ import {useState, useEffect} from "react";
 import useAuth from "../../CustomeHooks/useAuth";
 import axios from "axios";
 
-const auth = useAuth();
 
 
 const columns = [
@@ -121,6 +120,7 @@ const rows = [
 ];
 
 export default function DataGridDemo() {
+    const auth = useAuth();
     const [loading, setLoading] = useState(true);
     const fetchUserData = async () => {
         try {
