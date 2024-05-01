@@ -103,7 +103,6 @@ const columns = [
         sortable: false,
     },
 ];
-const emp_row = [];
 const rows = [
     { id: '1', condoOwner: 'John Doe', title: 'Leak Repair', description: 'Leak in the bathroom ceiling', contactNumber: '123-456-7890', userEmail: 'johndoe@example.com', assignedEmployee: 'Tanner Fisher' },
     { id: '2', condoOwner: 'John Doe', title: 'Leak Repair', description: 'Leak in the bathroom ceiling', contactNumber: '123-456-7890', userEmail: 'johndoe@example.com', assignedEmployee: 'Tanner Fisher' },
@@ -121,6 +120,7 @@ const rows = [
 
 export default function DataGridDemo() {
     const auth = useAuth();
+    const [empRow, setEmpRow] = useState([]);
     const [loading, setLoading] = useState(true);
     const newdata = [];
     const fetchUserData = async () => {
@@ -149,6 +149,7 @@ export default function DataGridDemo() {
       };
 
     const fill_rows = () =>{
+        const emp_row = [];
         newdata.forEach(entry => {
             const i_emp = entry.i;
             
@@ -159,6 +160,7 @@ export default function DataGridDemo() {
             }
             emp_row.push(employee);
         })
+        setEmpRow(emp_row)
     }
 
     useEffect(() => {
