@@ -138,7 +138,7 @@ export default function DataGridDemo() {
           for (let i = 0; i < data1.employe_list.length; i++) {
             const employee = {
                 email: data1.employe_list[i].email,
-                full_name: data1.employe_list[i].full_name,
+                full_name: data.employe_list[i].full_name,
                 num: data1.employe_list[i].num
             }
             newdata.push(employee);
