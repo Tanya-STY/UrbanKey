@@ -264,7 +264,7 @@ const CondoOwnerDash = () => {
         </div>
         <div className="condo-dash-profile-box">
           <div className="condo-dash-face">
-            <img src={face} alt="Man Face" />
+            <img src={profilePic} alt="Man Face" />
           </div>
           <Link to="/Profile" className="condo-dash-edit-button">
             Edit profile
