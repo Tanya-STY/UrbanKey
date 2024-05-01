@@ -205,7 +205,6 @@ def download_file(unit_id):
         return 'File not found', 404
 
 def new_request(request):
-    print('hit new_request in backend from frontend')
     
     try:
         role = request.role
@@ -247,3 +246,21 @@ def new_request(request):
     
     except Exception as e:
         return jsonify({'error':e})
+
+def get_employee_info(request):
+    try:
+        print('inside the get_employee_info route')
+
+        role = request.role
+        email = request.email
+
+        all_employee = users.find({"role": 2020}, {'name': 1})
+        for employee in all_employee:
+            print(employee)
+
+
+
+    except Exception as e:
+        print(f'error: {e}')
+        return jsonify({'error':e})
+

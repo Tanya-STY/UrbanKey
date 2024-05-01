@@ -99,6 +99,29 @@ const columns = [
         sortable: false,
     },
 ];
+//
+const fetchUserData = async () => {
+    try {
+      const token = auth?.token;
+      const response = await axios.get("http://localhost:5000/getEmployeeInfo", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+      // const response = await axiosPrivate.get("/renter");
+
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+    // fetchUnitPics();
+  }, [auth]);
 
 const rows = [
     { id: '1', condoOwner: 'John Doe', title: 'Leak Repair', description: 'Leak in the bathroom ceiling', contactNumber: '123-456-7890', userEmail: 'johndoe@example.com', assignedEmployee: 'Tanner Fisher' },

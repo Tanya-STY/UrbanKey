@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 
-from controllers.User import getProfile, getRegisteredProfile, update_user_profile, download_file, new_request
+from controllers.User import getProfile, getRegisteredProfile, update_user_profile, download_file, new_request, get_employee_info
 from middleware.TokenAuth import token_required
 
 user_routes = Blueprint('user_routes', __name__)
@@ -38,3 +38,8 @@ def download_file_route(unit_id):
 def new_request_route():
     
     return new_request(request)
+
+@user_routes.route('/getEmployeeInfo', methods=['POST'])
+@token_required
+def get_employee_info_route():
+    return get_employee_info(request)
