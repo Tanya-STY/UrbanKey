@@ -122,6 +122,7 @@ const rows = [
 export default function DataGridDemo() {
     const auth = useAuth();
     const [loading, setLoading] = useState(true);
+    const [data, setData] = useState();
     const fetchUserData = async () => {
         const token = auth?.token;
         try {
@@ -133,7 +134,8 @@ export default function DataGridDemo() {
             withCredentials: true,
           });
           // const response = await axiosPrivate.get("/renter");
-    
+          const data = response.data;
+          setData(data);
           setLoading(false);
         } catch (error) {
           console.log(error);
@@ -144,6 +146,8 @@ export default function DataGridDemo() {
         fetchUserData();
         // fetchUnitPics();
       }, [auth]);
+
+      console.log(data);
     const [searchValue, setSearchValue] = useState('');
     const [filteredRows, setFilteredRows] = useState(rows);
 

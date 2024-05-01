@@ -251,16 +251,19 @@ def get_employee_info(request):
     try:
         print('inside the get_employee_info route')
 
+
         role = request.role
         email = request.email
 
         print(f'role: {role} || email: {email}') 
 
-        all_employee = users.find({"role": 2020}, {'_id': 0})
+        all_employee = users.find({"role": 2020}, {'_id': 0, 'password':0})
+        employee_list = [employee for employee in all_employee]
+
         for employee in all_employee:
             print(employee)
         
-        return jsonify({'message':'you did it'}), 200
+        return jsonify({'employe_list':employee_list}), 200
 
 
 
