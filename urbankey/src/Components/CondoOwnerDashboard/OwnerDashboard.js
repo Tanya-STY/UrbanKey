@@ -193,7 +193,7 @@ const CondoOwnerDash = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          withCredentials: true,
+          withCredentials: false,
         }
       );
       console.log(response.data);
