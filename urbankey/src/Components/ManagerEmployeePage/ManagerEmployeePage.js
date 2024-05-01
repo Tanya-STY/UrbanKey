@@ -125,7 +125,6 @@ export default function DataGridDemo() {
     const fetchUserData = async () => {
         const token = auth?.token;
         try {
-          const token = auth?.token;
           const response = await axios.get("http://localhost:5000/getEmployeeInfo", {
             headers: {
               "Content-Type": "application/json",
