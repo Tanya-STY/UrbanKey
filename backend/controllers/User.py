@@ -256,7 +256,7 @@ def get_employee_info(request):
 
         print(f'role: {role} || email: {email}') 
 
-        all_employee = users.find({"role": 2020}, {'name': 1, '_id': 0})
+        all_employee = users.find({"role": 2020}, {'_id': 0})
         for employee in all_employee:
             print(employee)
         
