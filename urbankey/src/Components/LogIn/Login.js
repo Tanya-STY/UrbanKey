@@ -31,7 +31,7 @@ const Login = () => {
   //setting up the function handleLogin
   const handleLogin = async (e) => {
     try{
-    const response = await axios.post("http://localhost:5000/Login", {
+    const response = await axios.post("https://urbankey-backend.onrender.com/Login", {
         email: email,
         password: password,
       }, {
@@ -157,7 +157,7 @@ export default Login;
 // //      const storedData = localStorage.getItem("email");
 // //      if (storedData) {
 // //        try {
-// //          const response = await axios.post("http://localhost:5000/user/verification", { "email": storedData })
+// //          const response = await axios.post("https://urbankey-backend.onrender.com/user/verification", { "email": storedData })
 // //
 // //              if (data.verification === "true") {
 // //                setLoginStatus("success");
@@ -184,7 +184,7 @@ export default Login;
 
 //   e.preventDefault();
 
-//   const response = await axios.post("http://localhost:5000/Login", {
+//   const response = await axios.post("https://urbankey-backend.onrender.com/Login", {
 //     email: email,
 //     password: password,
 //   });

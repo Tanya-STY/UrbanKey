@@ -20,7 +20,7 @@ const Finance = () => {
     try {
       const token = auth?.token;
       const response = await axios.get(
-        "http://localhost:5000/finance/information",
+        "https://urbankey-backend.onrender.com/finance/information",
         {
           headers: {
             "Content-Type": "application/json",
@@ -64,7 +64,7 @@ const Finance = () => {
       if (!token) throw new Error("Authentication token is missing.");
 
       const response = await axios.post(
-        "http://localhost:5000/update_financial_status",
+        "https://urbankey-backend.onrender.com/update_financial_status",
         {
           feePerParkingSpot,
           feePerSquareFoot,
@@ -93,7 +93,7 @@ const Finance = () => {
       if (!token) throw new Error("Authentication token is missing.");
 
       const response = await axios.post(
-        "http://localhost:5000/update_financial_cost",
+        "https://urbankey-backend.onrender.com/update_financial_cost",
         {
           operation_cost: cost,
           operationName: operationName

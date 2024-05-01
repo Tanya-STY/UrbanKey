@@ -32,7 +32,7 @@ const Reservation = () => {
 
   const fetchReservations = async (facility, date) => {
     try {
-      const response = await axios.post('http://localhost:5000/GetReservations', { facility, date });
+      const response = await axios.post('https://urbankey-backend.onrender.com/GetReservations', { facility, date });
       const reservations = response.data;
       const reservedSlots = reservations.map(reservation => reservation.time_slot);
       setReservedTimeSlots(reservedSlots);
@@ -116,7 +116,7 @@ const Reservation = () => {
         time_slot: selectedTimeSlot
       }
 
-      axios.post('http://localhost:5000/MakeReservation', reservationData,{
+      axios.post('https://urbankey-backend.onrender.com/MakeReservation', reservationData,{
         headers: { 
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
