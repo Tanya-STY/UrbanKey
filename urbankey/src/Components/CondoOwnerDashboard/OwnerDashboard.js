@@ -467,6 +467,7 @@ const CondoOwnerDash = () => {
             {Object.keys(userData.req).map(requestKey => (
               <div className="condo-dash-requests" key={requestKey} style={{ borderBottom: "none" }} >
                 <p className="condo-dash-nb-request">Request #{userData.req[requestKey].number}</p>
+                <p className="condo-dash-nb-request">{userData.req[requestKey].title}</p>
                 <p
                   className="condo-dash-progress"
                   style={{
