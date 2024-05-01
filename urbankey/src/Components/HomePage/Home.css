@@ -58,6 +58,11 @@ body{
     padding: 0; /* Remove default padding */
 }
 
+.picture_search img {
+    width: 100%; /* Ensure the image fills the entire width of the container */
+    height: auto; /* Maintain aspect ratio */
+}
+
 .houseSlogan{
     font-family: 'Roboto', sans-serif;
     font-size: 64px;
