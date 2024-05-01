@@ -474,6 +474,7 @@ const CondoOwnerDash = () => {
                       margin: "0",
                       padding: "0",
                       display: "flex",
+                      position: 'relative',
                       "flex-direction": "column",
                     }}
                   >
