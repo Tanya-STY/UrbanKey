@@ -122,7 +122,7 @@ const rows = [
 export default function DataGridDemo() {
     const auth = useAuth();
     const [loading, setLoading] = useState(true);
-    const data = [];
+    const newdata = [];
     const fetchUserData = async () => {
         const token = auth?.token;
         try {
@@ -135,9 +135,13 @@ export default function DataGridDemo() {
           });
           // const response = await axiosPrivate.get("/renter");
           const data1 = response.data;
-          for (let i = 0; i < data.length; i++) {
-            console.log(data1.employe_list[i]);
-            data.push(data1.employe_list[i]);
+          for (let i = 0; i < data.employe_list.length; i++) {
+            const employee = {
+                email: data1.employe_list[i].email,
+                full_name: data1.employe_list[i].full_name,
+                num: data1.employe_list[i].num
+            }
+            newdata.push(employee);
         }
           setLoading(false);
           
@@ -155,7 +159,7 @@ export default function DataGridDemo() {
     const [searchValue, setSearchValue] = useState('');
     const [filteredRows, setFilteredRows] = useState(rows);
 
-
+      console.log(newdata);
 
     const handleSearch = (e) => {
         const keyword = e.target.value.toLowerCase();
