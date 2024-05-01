@@ -166,7 +166,7 @@ export default function DataGridDemo() {
     useEffect(() => {
         fetchUserData();
         fill_rows();
-        console.log("emp_row : " + emp_row)
+        console.log("emp_row : " + empRow)
         // fetchUnitPics();
       }, []);
 
