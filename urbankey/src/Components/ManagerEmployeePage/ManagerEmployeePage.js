@@ -130,7 +130,7 @@ export default function DataGridDemo() {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
-            withCredentials: false,
+            withCredentials: true,
           });
           // const response = await axiosPrivate.get("/renter");
     
