@@ -139,7 +139,7 @@ const CondoOwnerDash = () => {
       console.log(userData.req.request_0.number)
       for (let i = 0; i < userData.req.length; i++) {
         const request = userData.req[i];
-        console.log(request.number + hello); // Assuming each request object has a 'number' property
+        console.log(request.number + 'hello'); // Assuming each request object has a 'number' property
       }
 
 
