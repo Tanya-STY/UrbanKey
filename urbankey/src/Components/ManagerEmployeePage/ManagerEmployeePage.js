@@ -124,11 +124,6 @@ const fetchUserData = async () => {
     }
   };
 
-  useEffect(() => {
-    fetchUserData();
-    // fetchUnitPics();
-  }, [auth]);
-
 const rows = [
     { id: '1', condoOwner: 'John Doe', title: 'Leak Repair', description: 'Leak in the bathroom ceiling', contactNumber: '123-456-7890', userEmail: 'johndoe@example.com', assignedEmployee: 'Tanner Fisher' },
     { id: '2', condoOwner: 'John Doe', title: 'Leak Repair', description: 'Leak in the bathroom ceiling', contactNumber: '123-456-7890', userEmail: 'johndoe@example.com', assignedEmployee: 'Tanner Fisher' },
@@ -145,6 +140,10 @@ const rows = [
 ];
 
 export default function DataGridDemo() {
+    useEffect(() => {
+        fetchUserData();
+        // fetchUnitPics();
+      }, [auth]);
     const [searchValue, setSearchValue] = useState('');
     const [filteredRows, setFilteredRows] = useState(rows);
 
