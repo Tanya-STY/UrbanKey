@@ -466,7 +466,7 @@ const CondoOwnerDash = () => {
                 <div
                   className="condo-dash-requests"
                   key={requestKey}
-                  style={{ borderBottom: "none" }}
+                  style={{ borderBottom: "black 1px" }}
                 >
                     <p className="condo-dash-nb-request">
                       Request #{userData.req[requestKey].number} <br/> {userData.req[requestKey].title}
@@ -483,37 +483,6 @@ const CondoOwnerDash = () => {
                   </p>
                 </div>
               ))}
-            </div>
-
-            <div className="condo-dash-requests">
-              <p className="condo-dash-nb-request">Request #002</p>
-              <p
-                className="condo-dash-progress"
-                style={{
-                  padding: "1% 7.5%",
-                  backgroundColor: "#BAEB9C",
-                  border: "1px solid #56E100",
-                }}
-              >
-                Completed
-              </p>
-            </div>
-
-            <div
-              className="condo-dash-requests"
-              style={{ borderBottom: "none" }}
-            >
-              <p className="condo-dash-nb-request"> Request #003</p>
-              <p
-                className="condo-dash-progress"
-                style={{
-                  padding: "1% 9%",
-                  backgroundColor: "#838FFF",
-                  border: "1px solid #0017E1",
-                }}
-              >
-                Pending
-              </p>
             </div>
           </div>
 
