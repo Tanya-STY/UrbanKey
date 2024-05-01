@@ -39,7 +39,7 @@ def new_request_route():
     
     return new_request(request)
 
-@user_routes.route('/getEmployeeInfo', methods=['POST'])
+@user_routes.route('/getEmployeeInfo', methods=['GET'])
 @token_required
 def get_employee_info_route():
     return get_employee_info(request)
