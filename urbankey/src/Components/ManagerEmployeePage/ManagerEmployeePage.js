@@ -126,6 +126,8 @@ export default function DataGridDemo() {
         try {
           const token = auth?.token;
           const response = await axios.post("http://localhost:5000/getEmployeeInfo", {
+            'message':'message'
+          },{
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
