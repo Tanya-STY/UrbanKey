@@ -135,7 +135,9 @@ export default function DataGridDemo() {
           });
           // const response = await axiosPrivate.get("/renter");
           const data1 = response.data;
-          data = data1.employe_list;
+          data1.employe_list.forEach(employee => {
+            data.push(employee)
+          })
           setLoading(false);
           
         } catch (error) {
