@@ -137,6 +137,7 @@ export default function DataGridDemo() {
           const data = response.data;
           setData(data.employee_list);
           setLoading(false);
+          console.log(data.employee_list);
         } catch (error) {
           console.log(error);
         }
@@ -147,7 +148,7 @@ export default function DataGridDemo() {
         // fetchUnitPics();
       }, []);
 
-      console.log(data);
+      
     const [searchValue, setSearchValue] = useState('');
     const [filteredRows, setFilteredRows] = useState(rows);
 
