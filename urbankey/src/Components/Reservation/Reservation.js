@@ -196,25 +196,113 @@ const Reservation = () => {
           </div>
 
           {/* -----------------------CALENDAR-------------------------- */}
-          <div className="calendar-row2">
-            <Container fluid>
-              <Row style={{ justifyContent: "center" }}>
-                <Col xs={7} md={6}>
-                  <div style={{ textAlign: "center" }}>
-                    {/* Added textAlign style */}
-                    Selected Date:{" "}
-                    {date ? format(date, "MM/dd/yyyy") : ""}
-                  </div>
-                  <DatePickerCalendar
-                    date={date}
-                    onDateChange={handleDateChange}
-                    modifiers={{ ...modifiers, disabled: disabledDates }}
-                    locale={enUS} 
-                  />
-                </Col>
-              </Row>
-            </Container>
-          </div>
+          <div class="calendar">
+  <div class="month"><a href="#" class="nav"><i class="fas fa-angle-left"></i></a><div>May <span class="year">2024</span></div><a href="#" class="nav"><i class="fas fa-angle-right"></i></a></div>
+  <div class="days">
+    <span>Mon</span>
+    <span>Tue</span>
+    <span>Wed</span>
+    <span>Thu</span>
+    <span>Fri</span>
+    <span>Sat</span>
+    <span>Sun</span>
+  </div>
+  <div class="dates">
+      <button class="today">
+        <time>1</time>
+      </button>
+      <button>
+        <time>2</time>
+      </button>
+      <button>
+        <time>3</time>
+      </button>
+      <button>
+        <time>4</time>
+      </button>
+      <button>
+        <time>5</time>
+      </button>
+      <button>
+        <time>6</time>
+      </button>
+      <button>
+        <time>7</time>
+      </button>
+      <button>
+        <time>8</time>
+      </button>
+      <button>
+        <time>9</time>
+      </button>
+      <button>
+        <time>10</time>
+      </button>
+      <button>
+        <time>11</time>
+      </button>
+      <button>
+        <time>12</time>
+      </button>
+      <button>
+        <time>13</time>
+      </button>
+      <button>
+        <time>14</time>
+      </button>
+      <button>
+        <time>15</time>
+      </button>
+      <button>
+        <time>16</time>
+      </button>
+      <button>
+        <time>17</time>
+      </button>
+      <button >
+        <time>18</time>
+      </button>
+      <button>
+        <time>19</time>
+      </button>
+      <button>
+        <time>20</time>
+      </button>
+      <button>
+        <time>21</time>
+      </button>
+      <button>
+        <time>22</time>
+      </button>
+      <button>
+        <time>23</time>
+      </button>
+      <button>
+        <time>24</time>
+      </button>
+      <button>
+        <time>25</time>
+      </button>
+      <button>
+        <time>26</time>
+      </button>
+      <button>
+        <time>27</time>
+      </button>
+      <button>
+        <time>28</time>
+      </button>
+      <button>
+        <time>29</time>
+      </button>
+      <button>
+        <time>30</time>
+      </button>
+      <button>
+        <time>31</time>
+      </button>
+  </div>
+</div>
           {/* -----------------------CALENDAR--------------------------- */}
         </div>
         </div>

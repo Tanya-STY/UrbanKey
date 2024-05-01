@@ -1,86 +1,80 @@
-body{
+body {
     background-color: rgb(237, 236, 236);
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 .outer-container {
-    margin: 50px;
-}
-  
-.container{
-    display: flex;
+    margin: 1vw;
+    width: 98vw;
 }
 
-.left-div{
-    flex: 1;
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.left-div, .right-div {
+    flex: 1 1 50%; 
     background-color: white;
-    outline: 5px lightgrey;
+    padding: 2vw;
+    border: none; 
 }
 
 .container-images-signup {
     display: grid;
     grid-template-rows: repeat(5, auto);
     gap: 10px;
-    /* border: 1px solid lightgray; */
     padding: 10px;
     border-right: 2px solid lightgrey;
-  }
-  
-  .row-signup {
+}
+
+.row-signup {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border: 1px solid black; */
     padding: 10px;
-  }
-  
-  .column-signup {
+}
+
+.column-signup, .column-signup-icon {
     flex: 1;
-    /* border: 1px solid black; */
     padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-  }
+}
 
-  .column-signup-icon{
-    flex: 1;
-    /* border: 1px solid black; */
+.column-signup-icon {
     height: 50px;
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
     padding-top: 5px;
-    
-  }
+}
 
-  .column-signup-icons{
+.column-signup-icons {
     flex: 1;
     border: 1px solid black;
     height: 50px;
     width: 50px;
-    border-radius: 100% ;
+    border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* margin-left: 40%; */
-  }
+}
 
-.right-div{
-    flex: 1;
-    background-color: white;
-    outline: 5px lightgrey;
+.right-div {
     padding: 50px;
-
-    width: 100%; /* Make right-div take the whole page width */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Align items horizontally in the center */
+    align-items: center;
     justify-content: center;
 }
 
-
-.user-input{
+.user-input {
     width: 60%;
     height: 30px;
     border-radius: 5px;
@@ -88,41 +82,12 @@ body{
     padding-left: 10px;
 }
 
-.user-form-input{
+.user-form-input {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
- 
-.membership-buttons{
-    font-family: 'Roboto', sans-serif;
-}
 
-.google-button{
-    margin-top: 25px;
-}
-
-.line-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 25px;
-    height: 20px;
-  }
-  
-.line {
-    flex-grow: 1;
-    height: 2px;
-    background-color: black;
-    margin: 0 5px;
-    width: 150px;
-}
-  
-.or {
-    margin: 0 10px;
-    font-style: italic;
-}
-  
 .membership-buttons button {
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
@@ -132,23 +97,49 @@ body{
     position: relative;
 }
 
-.underline-wrapper{
+.google-button {
+    margin-top: 25px;
+}
+
+.line-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    height: 20px;
+}
+
+.line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: black;
+    margin: 0 5px;
+    width: 150px;
+}
+
+.or {
+    margin: 0 10px;
+    font-style: italic;
+}
+
+.underline-wrapper {
     display: flex;
     width: 50%;
 }
 
-.membership-buttons-underline{
+.membership-buttons-underline {
     flex-grow: 1;
     height: 5px;
     background-color: white;
     margin: 2px 0;
 }
-  
-.form-group{
+
+.form-group {
     margin-bottom: 15px;
     width: 100%;
 }
-.form-group label{
+
+.form-group label {
     display: block;
 }
 
@@ -162,19 +153,42 @@ body{
     cursor: pointer;
     margin-top: 20px;
     margin-bottom: 10px;
-
 }
 
 .SignUp-button:hover {
-    background-color: darkblue; /* Darken the background color on hover */
+    background-color: darkblue;
 }
 
-/* .checkbox-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
+@media (max-width: 1024px) {
+    .left-div, .right-div {
+        flex-basis: 100%;
+    }
 }
 
-.checkbox-container input[type="checkbox"] {
-    margin-left: 25px;
-} */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .user-input, .SignUp-button {
+        width: 80%;
+    }
+
+    .line-container .line {
+        width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-group {
+        width: 90%;
+    }
+
+    .membership-buttons button {
+        font-size: 12px;
+    }
+
+    .SignUp-button {
+        width: 100%;
+    }
+}

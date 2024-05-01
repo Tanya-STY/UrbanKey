@@ -1,197 +1,253 @@
+/* General Styles */
 .title-rectangular {
-    width: 100%;
-    height: 100px;
-    /* background-color: rgb(174, 220, 174); */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Roboto', sans-serif;
-    color: black;
-  }
-  
-  .reservation-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    padding-left: 100px;
-    padding-right: 100px;
-    padding-bottom: 50px;
-  }
-  
-
-  
-/* ----LEFT DIV RESERVATION SECLECTION --------------- */
-.reservation-selection{
-  flex: 1;
-  padding: 20px;
-  height: 600px;
-  background-color: rgb(127, 187, 207);
-  border-radius: 15px;
-  margin-right: 25px;
-
-  /* background-color: rgb(199, 174, 220); */
-}
-
-.title-selection{
-    margin: 30px;
-}
-
-.selection-row1 {
-    text-align: center;
-}
-
-.selection-row2{
+  width: 100%;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-
+  font-family: 'Roboto', sans-serif;
+  color: black;
 }
 
-.dropdown {
-    position: relative;
-    text-align: center;
-  }
-  
-  .dropdown-header {
-    padding: 12px 180px;
-    border: 1px solid black;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: larger;
-    text-align: center;
-    background-color: white;
-
-  }
-  
-  .dropdown-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    margin-top: 4px;
-    padding: 0;
-    list-style: none;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-top: none;
-    border-radius: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: larger;
-    text-align: center;
-
-  }
-  
-  .dropdown-list li {
-    padding: 8px 16px;
-    border-radius: 15px;
-    cursor: pointer;
-    text-align: center;
-  }
-  
-  .dropdown-list li:hover {
-    background-color: rgb(30, 153, 194);  
+/* Container Layout */
+.reservation-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 100px;
 }
-  
-  .selection-row3{
-    margin-top: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
+@media (max-width: 768px) {
+  .reservation-container {
+    flex-direction: column;
+    padding: 20px;
   }
+}
 
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    gap: 10px; /* Adjust the gap between grid items */
-
-  }
-  
-  .time-slot {
-    cursor: pointer;
-    padding: 10px;
-    margin: 5px;
-    background-color: rgb(189, 228, 241);
-    border: solid black;
-    border-radius: 15px;
-  }
-  
-  .unavailable {
-    color: gray; /* Gray out the text */
-    cursor: not-allowed; /* Change cursor to indicate non-clickable */
-  }
-  
-  .time-slot.selected {
-    background-color: rgb(116, 221, 116);
-  }
-  
-
-
-/* ----RIGHT DIV CALENDAR/DATE SECLECTION --------------- */
-.reservation-calendar {
+/* Left and Right Divs */
+.reservation-selection, .reservation-calendar {
   flex: 1;
   padding: 20px;
-  height: 600px;
-  background-color: rgb(127, 187, 207);
+  min-height: 600px; /* Uniform minimum height */
+  background-color: #7fbbcf;
   border-radius: 15px;
-  margin-left: 25px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column; /* Organizes internal content in a column */
 }
 
-.title-calendar {
-    margin: 30px;
+/* Dropdown Menu */
+.dropdown {
+  position: relative;
+  text-align: center;
 }
 
-.calendar-row1 {
-    text-align: center;
+.dropdown-header {
+  padding: 12px 20px;
+  border: 1px solid black;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: larger;
+  background-color: white;
 }
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin-top: 4px;
+  padding: 0;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: larger;
+}
+
+.dropdown-list li {
+  padding: 8px 16px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.dropdown-list li:hover {
+  background-color: rgb(30, 153, 194);
+}
+
+/* Time Slot Grid */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  align-self: center; /* Centers the grid within its container */
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* Adjust for smaller screens */
+  }
+}
+
+.time-slot {
+  cursor: pointer;
+  padding: 10px;
+  margin: 5px;
+  background-color: #ffffff;
+  border: solid black;
+  border-radius: 15px;
+}
+
+.unavailable {
+  color: gray;
+  cursor: not-allowed;
+}
+
+.time-slot.selected {
+  background-color: rgb(116, 221, 116);
+}
+
+/* Calendar Styles */
+
+@import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+
+body{
+  background:#ffffff;
+  font-family: 'Questrial', sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+.calendar{
+  display:inline-grid;
+  justify-content:center;
+  align-items:center;
+  background:#fff;
+  padding:20px;
+  border-radius:5px;
+  box-shadow:0px 40px 30px -20px rgba(0,0,0,0.3);
   
-.calendar-row2 {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    /* background-color: rgb(114, 193, 220); */
-}
-
-.calendarPick{
-    background-color: rgb(127, 187, 207);
-    border-radius: 15px;
-    padding: 10px;
-}
+  .month{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:20px;
+    margin-bottom:20px;
+    font-weight:300;
+    
+    .year{
+      font-weight:600;
+      margin-left:10px;
+    }
+    
+    .nav{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-decoration:none;
+      color:#0a3d62;
+      width:40px;
+      height:40px;
+      border-radius:40px;
+      transition-duration:.2s;
+      position:relative;
+      
+      &:hover{
+        background:#eee;
+      }
+    }
+  }
   
+  .days{
+    display: grid;
+    justify-content:center;
+    align-items:center;
+    grid-template-columns: repeat(7, 1fr);
+    color:#999;
+    font-weight:600;
+    margin-bottom:15px;
+    
+    span{
+      width:50px;
+      justify-self:center;
+      align-self:center;
+      text-align:center;
+    }
+  }
+  
+  .dates{
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    
+    button{
+      cursor:pointer;
+      outline:0;
+      border:0;
+      background:transparent;
+      font-family: 'Montserrat', sans-serif;
+      font-size:16px;
+      justify-self:center;
+      align-self:center;
+      width:50px;
+      height:50px;
+      border-radius:50px;
+      margin:2px;
+      transition-duration:.2s;
+      
+      &.today{
+        box-shadow:inset 0px 0px 0px 2px #0a3d62;
+      }
+      
+      &:first-child{
+        grid-column:3;
+      }
+      
+      &:hover{
+        background:#eee;
+      }
+      
+      &:focus{
+        background:#0a3d62;
+        color:#fff;
+        font-weight:600;
+      }
+    }
+  }
+}
 
-/* ----SUBMIT BUTTON --------------- */
-
-
+/* Submit Button */
 .submit-rectangular {
-    width: 100%;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Roboto', sans-serif;
-    color: white;
+  width: 100%;
+  height: auto; /* Adjusted for dynamic content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  padding: 10px 0; /* Added padding for better spacing */
 }
 
-.error-message {
-    color: red;
-  }
-  
-  .submit-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .submit-button:hover {
-    background-color: #0056b3;
-  }
-  
-  
-  
+.error-message, .success-message {
+  color: red;
+  text-align: center;
+}
+
+.success-message {
+  color: green;
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
