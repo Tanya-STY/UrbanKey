@@ -460,7 +460,7 @@ const CondoOwnerDash = () => {
             </div>
 
             <div>
-              {" "}
+              
               {/* this is the iner div content*/}
               {Object.keys(userData.req).map((requestKey) => (
                 <div
