@@ -170,7 +170,7 @@ export default function DataGridDemo() {
         // fetchUnitPics();
       }, [auth]);
 
-    console.log(newdata)
+    console.log(newdata.employe_list[0])
 
       
     const [searchValue, setSearchValue] = useState('');
