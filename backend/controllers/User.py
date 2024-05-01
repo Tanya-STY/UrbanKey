@@ -254,6 +254,8 @@ def get_employee_info(request):
         role = request.role
         email = request.email
 
+        print(f'role: {role} || email: {email}') 
+
         all_employee = users.find({"role": 2020}, {'name': 1})
         for employee in all_employee:
             print(employee)
