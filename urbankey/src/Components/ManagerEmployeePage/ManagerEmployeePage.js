@@ -122,7 +122,7 @@ export default function DataGridDemo() {
     const auth = useAuth();
     const [empRow, setEmpRow] = useState([]);
     const [loading, setLoading] = useState(true);
-    const newdata = [];
+    const [newdata, setNewData] = useState(undefined)
     const fetchUserData = async () => {
         const token = auth?.token;
         try {
@@ -133,14 +133,15 @@ export default function DataGridDemo() {
             },
             withCredentials: true,
           });
+          setNewData(response.data)
           // const response = await axiosPrivate.get("/renter");
-          const data1 = response.data;
-          for (let i = 0; i < data1.employe_list.length; i++) {
-            const employee = {i:data1.employe_list[i]};
+        //   const data1 = response.data;
+        //   for (let i = 0; i < data1.employe_list.length; i++) {
+        //     const employee = {i:data1.employe_list[i]};
 
             
-            newdata.push(employee);
-        }
+        //     newdata.push(employee);
+        // }
           setLoading(false);
           
         } catch (error) {
@@ -148,29 +149,28 @@ export default function DataGridDemo() {
         }
       };
 
-    const fill_rows = () =>{
-        const emp_row = [];
-        newdata.forEach(entry => {
-            const i_emp = entry.i;
+    // const fill_rows = () =>{
+    //     const emp_row = [];
+    //     newdata.forEach(entry => {
+    //         const i_emp = entry.i;
             
-            const employee = {
-                name: i_emp.full_name,
-                num: i_emp.num,
-                email: i_emp.email
-            }
-            console.log('this is employee: ' + employee)
-            emp_row.push(employee);
-        })
-        setEmpRow(emp_row)
-    }
+    //         const employee = {
+    //             name: i_emp.full_name,
+    //             num: i_emp.num,
+    //             email: i_emp.email
+    //         }
+    //         console.log('this is employee: ' + employee)
+    //         emp_row.push(employee);
+    //     })
+    //     setEmpRow(emp_row)
+    // }
 
     useEffect(() => {
         fetchUserData();
         // fetchUnitPics();
-      }, []);
+      }, [auth]);
 
-    fill_rows();
-    console.log("emp_row : " + empRow)
+    console.log(newdata)
 
       
     const [searchValue, setSearchValue] = useState('');
