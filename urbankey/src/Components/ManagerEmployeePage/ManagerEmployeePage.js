@@ -135,7 +135,7 @@ export default function DataGridDemo() {
           });
           // const response = await axiosPrivate.get("/renter");
           const data = response.data;
-          setData(data);
+          setData(data.employee_list);
           setLoading(false);
         } catch (error) {
           console.log(error);
@@ -145,7 +145,7 @@ export default function DataGridDemo() {
     useEffect(() => {
         fetchUserData();
         // fetchUnitPics();
-      }, [auth]);
+      }, []);
 
       console.log(data);
     const [searchValue, setSearchValue] = useState('');
