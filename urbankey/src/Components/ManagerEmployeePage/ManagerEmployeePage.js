@@ -135,18 +135,16 @@ export default function DataGridDemo() {
           });
           // const response = await axiosPrivate.get("/renter");
           const data1 = response.data;
-          data1.employe_list.forEach(employee => {
-            data.push(employee)
-          })
+          for (let i = 0; i < data.length; i++) {
+            console.log(data1.employe_list[i]);
+            data.push(data1.employe_list[i]);
+        }
           setLoading(false);
           
         } catch (error) {
           console.log(error);
         }
       };
-      data.forEach(item => {
-        console.log(item.email);
-    });
 
     useEffect(() => {
         fetchUserData();
