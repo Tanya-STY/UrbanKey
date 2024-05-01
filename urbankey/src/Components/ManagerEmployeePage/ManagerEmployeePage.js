@@ -121,8 +121,8 @@ const rows = [
 ];
 
 export default function DataGridDemo() {
+    const [loading, setLoading] = useState(true);
     const fetchUserData = async () => {
-        const [loading, setLoading] = useState(true);
         try {
           const token = auth?.token;
           const response = await axios.get("http://localhost:5000/getEmployeeInfo", {
@@ -139,7 +139,7 @@ export default function DataGridDemo() {
           console.log(error);
         }
       };
-      
+
     useEffect(() => {
         fetchUserData();
         // fetchUnitPics();
