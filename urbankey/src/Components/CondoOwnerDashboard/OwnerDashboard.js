@@ -53,6 +53,7 @@ const CondoOwnerDash = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [profilePic, setProfilePic] = useState('');
   const [num, setNum] = useState('');
   const [renter, setRenter] = useState('');
   const [description, setDescription] = useState('');
@@ -100,6 +101,7 @@ const CondoOwnerDash = () => {
       const userData = response.data;
       setName(userData.name);
       setEmail(userData.email);
+      setProfilePic(userData.profilePicture);
       setNum(userData.num);
       setRenter(userData.renter);
       setUnitId(userData.unit_id);
