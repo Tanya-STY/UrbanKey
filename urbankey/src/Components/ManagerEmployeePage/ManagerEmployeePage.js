@@ -135,7 +135,7 @@ export default function DataGridDemo() {
           });
           // const response = await axiosPrivate.get("/renter");
           const data1 = response.data;
-          for (let i = 0; i < data.employe_list.length; i++) {
+          for (let i = 0; i < data1.employe_list.length; i++) {
             const employee = {
                 email: data1.employe_list[i].email,
                 full_name: data1.employe_list[i].full_name,
