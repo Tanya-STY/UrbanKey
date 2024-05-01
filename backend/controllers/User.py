@@ -259,10 +259,12 @@ def get_employee_info(request):
         all_employee = users.find({"role": 2020}, {'name': 1})
         for employee in all_employee:
             print(employee)
+        
+        return jsonify({'message':'you did it'}), 200
 
 
 
     except Exception as e:
         print(f'error: {e}')
-        return jsonify({'error':e})
+        return jsonify({'error':e}), 500
 
