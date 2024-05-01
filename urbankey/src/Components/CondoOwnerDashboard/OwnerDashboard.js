@@ -469,7 +469,7 @@ const CondoOwnerDash = () => {
                   style={{ borderBottom: "none" }}
                 >
                     <p className="condo-dash-nb-request">
-                      Request #{userData.req[requestKey].number} {userData.req[requestKey].title}
+                      Request #{userData.req[requestKey].number} <br/> {userData.req[requestKey].title}
                     </p>
                   <p
                     className="condo-dash-progress"
