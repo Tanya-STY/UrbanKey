@@ -140,10 +140,8 @@ export default function DataGridDemo() {
 
             
             newdata.push(employee);
-            console.log(newdata)
         }
           setLoading(false);
-          console.log('after the for loop newdata: ' + newdata[0].i.email);
           
         } catch (error) {
           console.log(error);
@@ -166,7 +164,7 @@ export default function DataGridDemo() {
     useEffect(() => {
         fetchUserData();
         fill_rows();
-        console.log(emp_row)
+        console.log("emp_row : " + emp_row)
         // fetchUnitPics();
       }, []);
 
