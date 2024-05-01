@@ -142,7 +142,9 @@ export default function DataGridDemo() {
           console.log(error);
         }
       };
-      console.log(data[0]);
+      data.forEach(item => {
+        console.log(item.email);
+    });
 
     useEffect(() => {
         fetchUserData();
