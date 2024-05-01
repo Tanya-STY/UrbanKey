@@ -136,14 +136,14 @@ export default function DataGridDemo() {
           // const response = await axiosPrivate.get("/renter");
           const data1 = response.data;
           for (let i = 0; i < data1.employe_list.length; i++) {
-            const employee = {
-                email: data1.employe_list[i].email,
-                full_name: data1.employe_list[i].full_name,
-                num: data1.employe_list[i].num
-            }
+            const employee = {i:data1.employe_list[i]};
+
+            
             newdata.push(employee);
+            console.log(newdata)
         }
           setLoading(false);
+          console.log('after the for loop newdata: ' + newdata[0].i.email);
           
         } catch (error) {
           console.log(error);
@@ -159,7 +159,6 @@ export default function DataGridDemo() {
     const [searchValue, setSearchValue] = useState('');
     const [filteredRows, setFilteredRows] = useState(rows);
 
-      console.log(newdata);
 
     const handleSearch = (e) => {
         const keyword = e.target.value.toLowerCase();
@@ -172,7 +171,7 @@ export default function DataGridDemo() {
         );
         setFilteredRows(filteredData);
     };
-
+    
     return (
         <div className="employee-container-managerPage">
             <div className="employee-top-btns-managerPage">
