@@ -51,9 +51,11 @@ body{
 .picture_search{
     position: relative;
     display: block;
-    width: 100%;
+    width: 100vw;
     height: auto;
     overflow: hidden;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
 }
 
 .houseSlogan{
