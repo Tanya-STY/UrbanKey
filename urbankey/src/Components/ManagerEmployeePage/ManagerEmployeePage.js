@@ -158,6 +158,7 @@ export default function DataGridDemo() {
                 num: i_emp.num,
                 email: i_emp.email
             }
+            console.log('this is employee: ' + employee)
             emp_row.push(employee);
         })
         setEmpRow(emp_row)
