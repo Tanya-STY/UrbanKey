@@ -103,7 +103,7 @@ const columns = [
         sortable: false,
     },
 ];
-
+const emp_row = [];
 const rows = [
     { id: '1', condoOwner: 'John Doe', title: 'Leak Repair', description: 'Leak in the bathroom ceiling', contactNumber: '123-456-7890', userEmail: 'johndoe@example.com', assignedEmployee: 'Tanner Fisher' },
     { id: '2', condoOwner: 'John Doe', title: 'Leak Repair', description: 'Leak in the bathroom ceiling', contactNumber: '123-456-7890', userEmail: 'johndoe@example.com', assignedEmployee: 'Tanner Fisher' },
@@ -150,8 +150,23 @@ export default function DataGridDemo() {
         }
       };
 
+    const fill_rows = () =>{
+        newdata.forEach(entry => {
+            const i_emp = entry.i;
+            
+            const employee = {
+                name: i_emp.full_name,
+                num: i_emp.num,
+                email: i_emp.email
+            }
+            emp_row.push(employee);
+        })
+    }
+
     useEffect(() => {
         fetchUserData();
+        fill_rows();
+        console.log(emp_row)
         // fetchUnitPics();
       }, []);
 
