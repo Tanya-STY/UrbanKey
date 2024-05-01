@@ -14,7 +14,10 @@ import { IoIosList } from "react-icons/io";
 import { CiGrid41 } from "react-icons/ci";
 import {CSVLink} from "react-csv";
 import { GoDotFill } from "react-icons/go";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import useAuth from "../../CustomeHooks/useAuth";
+import axios from "axios";
+
 
 const columns = [
     {
@@ -101,6 +104,7 @@ const columns = [
 ];
 //
 const fetchUserData = async () => {
+    const [loading, setLoading] = useState(true);
     try {
       const token = auth?.token;
       const response = await axios.get("http://localhost:5000/getEmployeeInfo", {
