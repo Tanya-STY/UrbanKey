@@ -119,59 +119,6 @@ const rows = [
 ];
 
 export default function DataGridDemo() {
-    const auth = useAuth();
-    const [empRow, setEmpRow] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [newdata, setNewData] = useState(undefined)
-    const fetchUserData = async () => {
-        const token = auth?.token;
-        try {
-          const response = await axios.get("http://localhost:5000/getEmployeeInfo", {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            withCredentials: true,
-          });
-          setNewData(response.data)
-          // const response = await axiosPrivate.get("/renter");
-        //   const data1 = response.data;
-        //   for (let i = 0; i < data1.employe_list.length; i++) {
-        //     const employee = {i:data1.employe_list[i]};
-
-            
-        //     newdata.push(employee);
-        // }
-          setLoading(false);
-          
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-    // const fill_rows = () =>{
-    //     const emp_row = [];
-    //     newdata.forEach(entry => {
-    //         const i_emp = entry.i;
-            
-    //         const employee = {
-    //             name: i_emp.full_name,
-    //             num: i_emp.num,
-    //             email: i_emp.email
-    //         }
-    //         console.log('this is employee: ' + employee)
-    //         emp_row.push(employee);
-    //     })
-    //     setEmpRow(emp_row)
-    // }
-
-    useEffect(() => {
-        fetchUserData();
-        // fetchUnitPics();
-      }, [auth]);
-
-    console.log(newdata.employe_list[0])
-
       
     const [searchValue, setSearchValue] = useState('');
     const [filteredRows, setFilteredRows] = useState(rows);
