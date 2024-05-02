@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Document, Page } from 'react-pdf';
-import { saveAs } from 'file-saver';
+import { Document, Page } from "react-pdf";
+import { saveAs } from "file-saver";
 // import { Map, GoogleApiWrapper } from "google-maps-react";
 import "./OwnerDashboard.css";
 import ImageGallery from "./ImageGallery";
@@ -17,8 +17,8 @@ import icon6 from "../Images/radio-button-2.png";
 import icon7 from "../Images/money-icon.png";
 import icon8 from "../Images/card-icon.png";
 import icon9 from "../Images/stock-up-icon.png";
-import useAuth from '../../CustomeHooks/useAuth';
-import axios from 'axios';
+import useAuth from "../../CustomeHooks/useAuth";
+import axios from "axios";
 import PaymentHistoryOwner from "../Popups/PaymentHistoryOwner";
 import MaintenanceRequestForm from "../Popups/MaintenanceRequest";
 
@@ -33,7 +33,6 @@ const CondoOwnerDash = () => {
     setShowPopup(false);
   };
 
-
   const [showPopup2, setShowPopup2] = useState(false);
 
   const openPopup2 = () => {
@@ -44,9 +43,9 @@ const CondoOwnerDash = () => {
     setShowPopup2(false);
   };
 
-  // the month pay is the monthly payment (which is the same every month for a condo owner), 
+  // the month pay is the monthly payment (which is the same every month for a condo owner),
   // it is seen in the financial status and it is sent to the payment history as well
-  const [monthPay, setMonthPay] = useState(5534.00);
+  const [monthPay, setMonthPay] = useState(5534.0);
 
   const { auth, unit } = useAuth();
   const unit_id = unit?.unit_id;
@@ -77,28 +76,32 @@ const CondoOwnerDash = () => {
   const [interiorFeatures, setInteriorFeatures] = useState([]);
   const [exteriorFeatures, setExteriorFeatures] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
-  const [fileUrl, setFileUrl] = useState('');
+  const [fileUrl, setFileUrl] = useState("");
   const [loading, setLoading] = useState(true);
-  const [unitId, setUnitId] = useState('');
+  const [unitId, setUnitId] = useState("");
   const [isZoomed, setIsZoomed] = useState(false);
-  const [bigImage, setBigImage] = useState('');
+  const [bigImage, setBigImage] = useState("");
   const [smallImages, setSmallImages] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
+  const [profilePicture, setProfilePicture] = useState(
+    "default-profile-picture.jpg"
+  );
+  const [userData, setUserData] = useState(undefined);
 
   const fetchUserData = async () => {
-
     try {
       const token = auth?.token;
-      const response = await axios.get("https://urbankey-backend.onrender.com/Profile",
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          withCredentials: true
-        });
+      const response = await axios.get("http://localhost:5000/Profile", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+
       // const response = await axiosPrivate.get("/renter");
       const userData = response.data;
+      setUserData(userData);
       setName(userData.name);
       setEmail(userData.email);
       setProfilePic(userData.profilePicture);
@@ -126,11 +129,25 @@ const CondoOwnerDash = () => {
       setInteriorFeatures(userData.interior);
       setExteriorFeatures(userData.exterior);
       console.log(userData.interior);
-      setLoading(false)
+      if (userData.profilePicture) {
+        //receive the encoded in base64 code from the backend
+        const extractedPhoto = userData.profilePicture;
+        setProfilePicture(extractedPhoto);
+      } else {
+        // Set default profile picture URL if wrong
+        setProfilePicture("default-profile-picture.jpg");
+      }
 
+      console.log(userData.req);
+      console.log(userData.req.request_0.number);
+      for (let i = 0; i < userData.req.length; i++) {
+        const request = userData.req[i];
+        console.log(request.number + "hello"); // Assuming each request object has a 'number' property
+      }
+
+      setLoading(false);
     } catch (error) {
       console.log(error);
-
     }
   };
 
@@ -147,23 +164,23 @@ const CondoOwnerDash = () => {
   };
 
   const fetchUnitPics = async () => {
-
     try {
       const token = auth?.token;
       // console.log(token);
       const response = await axios.get(`https://urbankey-backend.onrender.com/api/images/${unitId}`,  //backticks for template strings
+
         {
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
-          withCredentials: true
-        });
+          withCredentials: true,
+        }
+      );
       setImageUrls(response.data);
       setBigImage(response.data[0]); // Set bigImage to the first image URL from imageUrls
       setSmallImages(response.data.slice(1));
-      setLoading(false)
-
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -172,22 +189,23 @@ const CondoOwnerDash = () => {
   const handleDownload = async () => {
     try {
       const token = auth?.token;
-      const response = await axios.get(`https://urbankey-backend.onrender.com/download-file/${unitId}`, {
-        responseType: 'arraybuffer', //binary large object
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-        withCredentials: true
-      });
+      const response = await axios.get(
+        `http://localhost:5000/download-file/${unitId}`,
+        {
+          responseType: "arraybuffer", //binary large object
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: false,
+        }
+      );
       console.log(response.data);
-      const blob = new Blob([response.data], { type: 'application/pdf' });
+      const blob = new Blob([response.data], { type: "application/pdf" });
       saveAs(blob, "unit_details.pdf");
-
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
-
 
   useEffect(() => {
     fetchUserData();
@@ -224,13 +242,14 @@ const CondoOwnerDash = () => {
     return <div>Loading...</div>;
   }
 
-
   return (
     <div className="condo-dash-container">
       <div className="condo-dash-top">
         <h1>{title}</h1>
         <img src={icon1} alt="Location Icon" className="condo-dash-icon" />
-        <p className="condo-dash-location-name">{city_unit}, {province_unit}</p>
+        <p className="condo-dash-location-name">
+          {city_unit}, {province_unit}
+        </p>
       </div>
 
       <div className="condo-dash-second-row">
@@ -247,14 +266,16 @@ const CondoOwnerDash = () => {
                 &lt;
               </button>
             )}
-            {smallImages.slice(startIndex, startIndex + 4).map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt={`Small ${index + startIndex + 1}`}
-                onClick={() => handleClick(image)}
-              />
-            ))}
+            {smallImages
+              .slice(startIndex, startIndex + 4)
+              .map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Small ${index + startIndex + 1}`}
+                  onClick={() => handleClick(image)}
+                />
+              ))}
             {startIndex + 4 < smallImages.length && (
               <button className="gallery-right-arrow" onClick={handleNext}>
                 &gt;
@@ -264,7 +285,7 @@ const CondoOwnerDash = () => {
         </div>
         <div className="condo-dash-profile-box">
           <div className="condo-dash-face">
-            <img src={profilePic} alt="Man Face" />
+            <img src={profilePicture} alt="Man Face" />
           </div>
           <Link to="/Profile" className="condo-dash-edit-button">
             Edit profile
@@ -279,25 +300,31 @@ const CondoOwnerDash = () => {
             <img src={icon3} alt="Email Icon" />
             <p>{email}</p>
           </div>
-          <div classname="conatainer" style={{ paddingTop: '20px' }}>
+          <div className="conatainer" style={{ paddingTop: "20px" }}>
             {fileUrl && (
               <Document file={fileUrl}>
                 <Page pageNumber={1} />
               </Document>
             )}
 
-            <button onClick={handleDownload} style={{
-              backgroundColor: '#008CBA', /* Green */ border: 'none', color: 'white', padding: '15px 32px',
-              textAlign: 'center',
-              textDecoration: 'none',
-              display: 'inline-block',
-              fontSize: '16px',
-              margin: '4px 2px',
-              cursor: 'pointer',
-              borderRadius: '8px',
-              boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
-              transition: '0.3s'
-            }}>
+            <button
+              onClick={handleDownload}
+              style={{
+                backgroundColor: "#008CBA",
+                /* Green */ border: "none",
+                color: "white",
+                padding: "15px 32px",
+                textAlign: "center",
+                textDecoration: "none",
+                display: "inline-block",
+                fontSize: "16px",
+                margin: "4px 2px",
+                cursor: "pointer",
+                borderRadius: "8px",
+                boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
+                transition: "0.3s",
+              }}
+            >
               Download File
             </button>
           </div>
@@ -323,7 +350,9 @@ const CondoOwnerDash = () => {
             <p>20 November 2020</p>
             <p>{category}</p>
             <p>{numberOfRoom}</p>
-            <p>{grossM2} M<sup>2</sup> / {netM2} M<sup>2</sup></p>
+            <p>
+              {grossM2} M<sup>2</sup> / {netM2} M<sup>2</sup>
+            </p>
             <p>{warmingType}</p>
             <p style={{ marginBottom: "0" }}>{buildingAge}</p>
           </div>
@@ -357,9 +386,7 @@ const CondoOwnerDash = () => {
       <div className="condo-dash-fourth-row">
         <div className="condo-dash-info-box">
           <p className="condo-dash-headertwo">Explanation</p>
-          <p className="condo-dash-explanation">
-            {description}
-          </p>
+          <p className="condo-dash-explanation">{description}</p>
         </div>
         <div className="condo-dash-financial-and-request-box">
           <div className="condo-dash-financial-status">
@@ -381,10 +408,16 @@ const CondoOwnerDash = () => {
             {/* <Link to="/PaymentHistory" className="condo-dash-view-link">
               View
             </Link> */}
-            <button className="condo-dash-view-link" type="submit" onClick={openPopup}>
+            <button
+              className="condo-dash-view-link"
+              type="submit"
+              onClick={openPopup}
+            >
               View
             </button>
-            {showPopup && <PaymentHistoryOwner monthPay={monthPay} onClose={closePopup} />}
+            {showPopup && (
+              <PaymentHistoryOwner monthPay={monthPay} onClose={closePopup} />
+            )}
           </div>
         </div>
       </div>
@@ -403,11 +436,8 @@ const CondoOwnerDash = () => {
               Interior Features
             </p>
             {renderInteriorFeatures()}
-
           </div>
-          <div
-            className="condo-dash-feature"
-          >
+          <div className="condo-dash-feature">
             <p
               style={{
                 color: "black",
@@ -419,7 +449,6 @@ const CondoOwnerDash = () => {
               Exterior Features
             </p>
             {renderExteriorFeatures()}
-
           </div>
         </div>
 
@@ -427,58 +456,48 @@ const CondoOwnerDash = () => {
           className="condo-dash-financial-and-request-box"
           style={{ marginBottom: "11%", marginTop: "8%" }}
         >
-          <div className="condo-dash-maintenance">
-            <img src={icon9} alt="Stock Up Icon" />
-            <p>Maintenance Requests</p>
-          </div>
+          <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+            <div className="condo-dash-maintenance">
+              <img src={icon9} alt="Stock Up Icon" />
+              <p>Maintenance Requests</p>
+            </div>
 
-          <div className="condo-dash-requests">
-            <p className="condo-dash-nb-request">Request #001</p>
-            <p
-              className="condo-dash-progress"
-              style={{
-                padding: "1% 7.5%",
-                backgroundColor: "#FFBAFF",
-                border: "1px solid #E100E1",
-              }}
-            >
-              In Progress
-            </p>
-          </div>
-
-          <div className="condo-dash-requests">
-            <p className="condo-dash-nb-request">Request #002</p>
-            <p
-              className="condo-dash-progress"
-              style={{
-                padding: "1% 7.5%",
-                backgroundColor: "#BAEB9C",
-                border: "1px solid #56E100",
-              }}
-            >
-              Completed
-            </p>
-          </div>
-
-          <div className="condo-dash-requests" style={{ borderBottom: "none" }}>
-            <p className="condo-dash-nb-request"> Request #003</p>
-            <p
-              className="condo-dash-progress"
-              style={{
-                padding: "1% 9%",
-                backgroundColor: "#838FFF",
-                border: "1px solid #0017E1",
-              }}
-            >
-              Pending
-            </p>
+            <div>
+              
+              {/* this is the iner div content*/}
+              {Object.keys(userData.req).map((requestKey) => (
+                <div
+                  className="condo-dash-requests"
+                  key={requestKey}
+                  style={{ borderBottom: "solid black 1px;" }}
+                >
+                    <p className="condo-dash-nb-request">
+                      Request #{userData.req[requestKey].number} <br/> {userData.req[requestKey].title}
+                    </p>
+                  <p
+                    className="condo-dash-progress"
+                    style={{
+                      padding: "1% 7.5%",
+                      backgroundColor: "#FFBAFF",
+                      border: "1px solid #E100E1",
+                    }}
+                  >
+                    {userData.req[requestKey].status}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="condo-dash-submit">
             {/* <Link to="/MaintenanceRequest" className="condo-dash-request-link">
               Submit a New Request
             </Link> */}
-            <button className="condo-dash-request-link" type="submit" onClick={openPopup2}>
+            <button
+              className="condo-dash-request-link"
+              type="submit"
+              onClick={openPopup2}
+            >
               Submit a New Request
             </button>
             {showPopup2 && <MaintenanceRequestForm onClose={closePopup2} />}

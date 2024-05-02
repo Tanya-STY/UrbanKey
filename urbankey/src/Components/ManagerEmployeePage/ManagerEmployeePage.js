@@ -13,8 +13,9 @@ import { IoFilter } from "react-icons/io5";
 import { IoIosList } from "react-icons/io";
 import { CiGrid41 } from "react-icons/ci";
 import {CSVLink} from "react-csv";
-import { GoDotFill } from "react-icons/go";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import useAuth from "../../CustomeHooks/useAuth";
+import axios from "axios";
 
 const columns = [
     {
@@ -99,7 +100,6 @@ const columns = [
         sortable: false,
     },
 ];
-
 const rows = [
     { id: '1', condoOwner: 'John Doe', title: 'Leak Repair', description: 'Leak in the bathroom ceiling', contactNumber: '123-456-7890', userEmail: 'johndoe@example.com', assignedEmployee: 'Tanner Fisher' },
     { id: '2', condoOwner: 'John Doe', title: 'Leak Repair', description: 'Leak in the bathroom ceiling', contactNumber: '123-456-7890', userEmail: 'johndoe@example.com', assignedEmployee: 'Tanner Fisher' },
@@ -116,6 +116,7 @@ const rows = [
 ];
 
 export default function DataGridDemo() {
+      
     const [searchValue, setSearchValue] = useState('');
     const [filteredRows, setFilteredRows] = useState(rows);
 
@@ -133,7 +134,6 @@ export default function DataGridDemo() {
         setFilteredRows(filteredData);
     };
     
-
     return (
         <div className="employee-container-managerPage">
             <div className="employee-top-btns-managerPage">
