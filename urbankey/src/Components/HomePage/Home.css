@@ -2,12 +2,65 @@ body{
     background-color: rgb(237, 236, 236);
 }
 
+@media screen and (max-width: 768px) {
+    .homeSection {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .homeHeadings {
+        margin-left: 20px;
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .homeSubHeading {
+        margin-left: 10px;
+        font-size: 20px;
+    }
+
+    .homeBody {
+        margin-left: 10px;
+    }
+
+    .inputSearch {
+        width: 80%;
+    }
+
+    .wideBox {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .homeMapButton {
+        margin-top: 50px;
+    }
+}
+
+/* Adjustments for extra small screens */
+@media screen and (max-width: 576px) {
+    .inputSearch {
+        width: 90%;
+    }
+
+    .homeMapButton {
+        margin-top: 100px;
+    }
+}
+
 .picture_search{
     position: relative;
     display: block;
     width: 100vw;
     height: auto;
     overflow: hidden;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+.picture_search img {
+    width: 100%; /* Ensure the image fills the entire width of the container */
+    height: auto; /* Maintain aspect ratio */
 }
 
 .houseSlogan{

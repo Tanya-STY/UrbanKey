@@ -43,3 +43,7 @@ The project involves developing a Condo Management website with core functionali
 ## Project Approach
 * Frontend Framework: React.js will serve as the frontend framework of choice due to its component-based architecture and ease of development. It allows for efficient UI/UX design and modular code organization. 
 * Backend Framework: Python will be utilized for building the backend infrastructure and MongoDB will be used for the creation of our database. The flask framework will be used to establish a connection and communication between frontend and backend
+
+## Website
+
+* Link to the Website: [UrbanKey](https://main--urbankey.netlify.app/)
