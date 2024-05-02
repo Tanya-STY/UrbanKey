@@ -31,7 +31,7 @@ const Profile = () => {
     const [profilePicture, setProfilePicture] = useState('default-profile-picture.jpg'); // State to hold the profile picture
 
     const role = auth?.role
- 
+
     useEffect(() => {
         notification();
     }, []);
@@ -69,7 +69,7 @@ const Profile = () => {
             // Set default profile picture URL if wrong
             setProfilePicture('default-profile-picture.jpg');
         }
-        console.log(userData.req);
+        
 
         setLoading(false);
         // role = response?.data?.role

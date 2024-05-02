@@ -1,37 +1,14 @@
 import React, { useState } from 'react';
 import './MaintenanceRequest.css'; 
-import axios from 'axios';
-import useAuth from '../../CustomeHooks/useAuth';
 
 const MaintenanceRequestForm = ({ onClose }) => {
-  const { auth, setAuth, setUnit } = useAuth();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
- 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Handle submit action
-    try {
-      const token = auth?.token;
-      const response = await axios.post("http://localhost:5000/user/dashboard/newRequest", {
-          title, 
-          description
-      }, {
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-          },
-          withCredentials: true
-      });
-      //set the variables as added in the user requests
-  }
-  catch (error) {
-      console.log(error);
-      // alert(error);
-  } 
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle submit action 
     console.log('Submitted:', { title, description });
-    window.location.reload();
   };
 
   const isTitleValid = title.trim() !== '';
@@ -64,7 +41,7 @@ const MaintenanceRequestForm = ({ onClose }) => {
             placeholder="You can request about moving in/out (date for reserving elevators), intercom changes, requesting access (fobs, keys), reporting a violation, reporting deficiency found in common areas, or asking a question."
           />
         </div>
-        <button type="submit" className="submit-button" disabled={!isTitleValid || !isDescriptionValid}> 
+        <button type="submit" className="submit-button" onClick={onClose} disabled={!isTitleValid || !isDescriptionValid}> 
           Submit Your Request
         </button>
       </form>
