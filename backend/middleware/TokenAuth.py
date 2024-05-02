@@ -47,8 +47,8 @@ def token_required_prime(f):
         print(decoded_token)
 
         # Attach token payload to request object for easy access in route functions
-        request.email = decoded_token[0]
-        request.role = decoded_token[1]
+        request.email = decoded_token['email']
+        request.role = decoded_token['role']
 
         return f(*args, **kwargs)
 
