@@ -20,7 +20,7 @@ const Finance = () => {
     try {
       const token = auth?.token;
       const response = await axios.get(
-        "https://urbankey-backend.onrender.com/information",
+        "https://urbankey-backend.onrender.com/finance/information",
         {
           headers: {
             "Content-Type": "application/json",

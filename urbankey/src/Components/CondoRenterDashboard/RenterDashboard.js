@@ -70,7 +70,7 @@ const CondoRenterDash = () => {
       if (!token) throw new Error("Authentication token is missing.");
 
       const response = await axios.get(
-        "http://localhost:5000/financial_status",
+        "https://urbankey-backend.onrender.com/financial_status",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -99,6 +99,7 @@ const CondoRenterDash = () => {
 
     try {
       const token = auth?.token;
+      const response = await axios.get("https://urbankey-backend.onrender.com/Profile",
       const response = await axios.get("https://urbankey-backend.onrender.com/Profile",
         {
           headers: {

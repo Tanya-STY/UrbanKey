@@ -116,7 +116,7 @@ const Reservation = () => {
         time_slot: selectedTimeSlot
       }
 
-      axios.post('http://localhost:5000/MakeReservation', reservationData,{
+      axios.post('https://urbankey-backend.onrender.com/MakeReservation', reservationData,{
         headers: { 
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
