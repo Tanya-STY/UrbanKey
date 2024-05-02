@@ -50,28 +50,29 @@ const CondoOwnerDash = () => {
   const { auth, unit } = useAuth();
   const unit_id = unit?.unit_id;
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [num, setNum] = useState("");
-  const [renter, setRenter] = useState("");
-  const [description, setDescription] = useState("");
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
-  const [numberOfRoom, setNumberOfRoom] = useState("");
-  const [grossM2, setGrossM2] = useState("");
-  const [netM2, setNetM2] = useState("");
-  const [warmingType, setWarmingType] = useState("");
-  const [buildingAge, setBuildingAge] = useState("");
-  const [floorLocation, setFloorLocation] = useState("");
-  const [availableForLoan, setAvailableForLoan] = useState("");
-  const [furnished, setFurnished] = useState("");
-  const [parking, setParking] = useState("");
-  const [parkingID, setParkingID] = useState("");
-  const [locker, setLocker] = useState("");
-  const [rentalIncome, setRentalIncome] = useState("");
-  const [province_unit, setProvinceUnit] = useState("");
-  const [city_unit, setCityUnit] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [profilePic, setProfilePic] = useState('');
+  const [num, setNum] = useState('');
+  const [renter, setRenter] = useState('');
+  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
+  const [price, setPrice] = useState('');
+  const [numberOfRoom, setNumberOfRoom] = useState('');
+  const [grossM2, setGrossM2] = useState('');
+  const [netM2, setNetM2] = useState('');
+  const [warmingType, setWarmingType] = useState('');
+  const [buildingAge, setBuildingAge] = useState('');
+  const [floorLocation, setFloorLocation] = useState('');
+  const [availableForLoan, setAvailableForLoan] = useState('');
+  const [furnished, setFurnished] = useState('');
+  const [parking, setParking] = useState('');
+  const [parkingID, setParkingID] = useState('');
+  const [locker, setLocker] = useState('');
+  const [rentalIncome, setRentalIncome] = useState('');
+  const [province_unit, setProvinceUnit] = useState('');
+  const [city_unit, setCityUnit] = useState('');
   const [interiorFeatures, setInteriorFeatures] = useState([]);
   const [exteriorFeatures, setExteriorFeatures] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
@@ -97,11 +98,13 @@ const CondoOwnerDash = () => {
         },
         withCredentials: true,
       });
+
       // const response = await axiosPrivate.get("/renter");
       const userData = response.data;
       setUserData(userData);
       setName(userData.name);
       setEmail(userData.email);
+      setProfilePic(userData.profilePicture);
       setNum(userData.num);
       setRenter(userData.renter);
       setUnitId(userData.unit_id);
@@ -164,8 +167,8 @@ const CondoOwnerDash = () => {
     try {
       const token = auth?.token;
       // console.log(token);
-      const response = await axios.get(
-        `http://localhost:5000/api/images/${unitId}`, //backticks for template strings
+      const response = await axios.get(`https://urbankey-backend.onrender.com/api/images/${unitId}`,  //backticks for template strings
+
         {
           headers: {
             "Content-Type": "application/json",
