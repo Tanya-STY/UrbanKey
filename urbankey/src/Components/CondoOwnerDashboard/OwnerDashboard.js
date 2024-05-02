@@ -130,6 +130,8 @@ const CondoOwnerDash = () => {
       setInteriorFeatures(userData.interior);
       setExteriorFeatures(userData.exterior);
       console.log(userData.interior);
+      setLoading(false) 
+
       if (userData.profilePicture) {
         //receive the encoded in base64 code from the backend
         const extractedPhoto = userData.profilePicture;
