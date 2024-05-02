@@ -8,7 +8,7 @@ import ReservationSuccess from "./Components/Popups/ReservationSuccess";
 import PropertyProfileManagement from "./Components/PropertyProfileManagement/PropertyProfileManagement";
 import Employee from "./Components/EmployeePage/Employee.js";
 import FinanceDashboard from "./Components/FinanceDashboard/Finance";
-import CondoOwnerDashboard from "./Components/CondoOwnerDashboard/OwnerDashboard";
+import CondoOwnerDashboard from "./Components/CondoOwnerDashboard/OwnerDashboard.js";
 import SignUp from "./Components/SignUp/SignUp";
 import Login from "./Components/LogIn/Login.js";
 import HomePage from "./Components/HomePage/Home";
@@ -96,7 +96,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           
           <Route element={<PersistLogin />}>
-          <Route
+          {/* <Route
             element={
               <RequireAuth
                 allowedRoles={[
@@ -111,7 +111,7 @@ function App() {
                 ]}
               />
             }
-          >
+          > */}
             {/* <Route path="/HomePage" element={<HomePage />} /> */}
             <Route path="/Profile" element={<Profile />} />
             {/*<Route path="/MaintenanceRequest" element={<MaintenanceRequest />} />*/}
@@ -131,7 +131,7 @@ function App() {
             <Route path="/ReservationPageCompany" element={<ReservationPageCompany/>} />
             {/* <Route path="/RenterDashboard" element={<CondoRenterDashboard />} /> added code */}
             <Route path="/ManagerEmployeePage" element={<ManagerEmployeePage />} />
-          </Route>
+          {/* </Route> */}
         </Route>
       </Routes>
     </>
