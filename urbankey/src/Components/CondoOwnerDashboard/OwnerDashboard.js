@@ -88,7 +88,9 @@ const CondoOwnerDash = () => {
 
     try {
       const token = auth?.token;
-      const response = await axios.get("http://localhost:5000/Profile",
+
+      const response = await axios.get("https://urbankey-backend.onrender.com/Profile",
+
         {
           headers: {
             'Content-Type': 'application/json',
@@ -124,7 +126,27 @@ const CondoOwnerDash = () => {
       setInteriorFeatures(userData.interior);
       setExteriorFeatures(userData.exterior);
       console.log(userData.interior);
-      setLoading(false)
+
+
+      setLoading(false) 
+
+      if (userData.profilePicture) {
+        //receive the encoded in base64 code from the backend
+        const extractedPhoto = userData.profilePicture;
+        setProfilePicture(extractedPhoto);
+      } else {
+        // Set default profile picture URL if wrong
+        setProfilePicture("default-profile-picture.jpg");
+      }
+
+      console.log(userData.req);
+      console.log(userData.req.request_0.number);
+      for (let i = 0; i < userData.req.length; i++) {
+        const request = userData.req[i];
+        console.log(request.number + "hello"); // Assuming each request object has a 'number' property
+      }
+
+      setLoading(false);
 
     } catch (error) {
       console.log(error);
@@ -149,7 +171,9 @@ const CondoOwnerDash = () => {
     try {
       const token = auth?.token;
       // console.log(token);
-      const response = await axios.get(`http://localhost:5000/api/images/${unitId}`,  //backticks for template strings
+
+      const response = await axios.get(`https://urbankey-backend.onrender.com/api/images/${unitId}`,  //backticks for template strings
+
         {
           headers: {
             'Content-Type': 'application/json',
@@ -170,7 +194,9 @@ const CondoOwnerDash = () => {
   const handleDownload = async () => {
     try {
       const token = auth?.token;
-      const response = await axios.get(`http://localhost:5000/download-file/${unitId}`, {
+
+      const response = await axios.get(`https://urbankey-backend.onrender.com/download-file/${unitId}`, {
+
         responseType: 'arraybuffer', //binary large object
         headers: {
           'Authorization': `Bearer ${token}`

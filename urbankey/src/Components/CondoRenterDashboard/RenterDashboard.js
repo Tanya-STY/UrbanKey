@@ -99,7 +99,9 @@ const CondoRenterDash = () => {
 
     try {
       const token = auth?.token;
-      const response = await axios.get("http://localhost:5000/Profile",
+
+      const response = await axios.get("https://urbankey-backend.onrender.com/Profile",
+
         {
           headers: {
             'Content-Type': 'application/json',
@@ -173,7 +175,9 @@ const CondoRenterDash = () => {
     try {
       const token = auth?.token;
       // console.log(token);
-      const response = await axios.get(`http://localhost:5000/api/images/${unitId}`,  //backticks for template strings
+
+      const response = await axios.get(`https://urbankey-backend.onrender.com/api/images/${unitId}`,  //backticks for template strings
+
         {
           headers: {
             'Content-Type': 'application/json',
@@ -195,7 +199,9 @@ const CondoRenterDash = () => {
   const handleDownload = async () => {
     try {
       const token = auth?.token;
-      const response = await axios.get(`http://localhost:5000/download-file/${unitId}`, {
+
+      const response = await axios.get(`https://urbankey-backend.onrender.com/download-file/${unitId}`, {
+
         responseType: 'arraybuffer', //binary large object
         headers: {
           'Authorization': `Bearer ${token}`
