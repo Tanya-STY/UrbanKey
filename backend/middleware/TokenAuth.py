@@ -18,6 +18,8 @@ def token_required(f):
         decoded_token = verify_token(token)
         if not decoded_token:
             return jsonify(message='Invalid or expired token'), 403
+        
+        print(decoded_token)
 
         # Attach token payload to request object for easy access in route functions
         request.email = decoded_token.get('email')
@@ -26,7 +28,6 @@ def token_required(f):
         return f(*args, **kwargs)
 
     return decorated
-
 
 def token_required_prime(f):
     @wraps(f)
@@ -52,7 +53,6 @@ def token_required_prime(f):
         return f(*args, **kwargs)
 
     return decorated
-
 
 def generate_access_token(email, role):
     """Generate an access token for the given user."""
