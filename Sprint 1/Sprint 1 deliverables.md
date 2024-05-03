@@ -1,0 +1,12 @@
+- Product vision statement (2 points)
+- Requirements and User Stories Backlog (USB) (4 points) 
+- Software Architecture Document (SAD) (4 points) 
+- Risk assessment and Risk Management Plan (RMP) (2 points) Robayth
+- Running prototype (Login, sign up, user profile) (2 points) 
+- Live presentation/Demo to the Product Owner
+- Testing (1 point) 
+- Short sprint #1 retrospective (1 point) 
+- Release Plan (Sprint #2 planning) (1 point) 
+- UI prototypes for Sprint #2 user stories (2 points)
+- Testing Plan for Sprint #2 (1 point) 
+ + Figma

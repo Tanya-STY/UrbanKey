@@ -19,6 +19,4 @@ units = db.get_collection('Units')
 
 reservations = db.get_collection('Reservations')
 
-requests = db.get_collection('Requests')
-
 print(db.list_collection_names())

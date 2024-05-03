@@ -5,11 +5,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import './index.css';
 import App from './App';
 import { AuthProvider } from './Provider/AuthProvider';
-import { disableReactDevTools } from "@fvilers/disable-react-devtools"
 // import reportWebVitals from './reportWebVitals';
 
-
-if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
 const rootElement = document.getElementById('root');
 

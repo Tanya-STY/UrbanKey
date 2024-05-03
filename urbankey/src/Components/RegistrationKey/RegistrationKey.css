@@ -1,65 +1,41 @@
-body{
+body {
     background-color: rgb(237, 236, 236);
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
-
-  
 .registrationKeyPage {
-    position: fixed !important;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 9999;
     background-color: white;
     padding: 20px;
     border: 1px solid #ccc;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+    width: 90%;
+    max-width: 500px;
 }
 
-
-
 .welcomeTitle {
-    font-family: 'Roboto', sans-serif;
-    font-size: 32px;
-    position: relative;
     text-align: center;
+    font-size: 5vw;
     color: black;
 }
 
 .houseImage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.houseImage img {
-    width: 15%;
-    height: 15%;
-    object-fit: cover;
+    width: 80%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
 }
 
 .registrationText {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
     text-align: center;
-}
-
-.registrationButton {
-    width: 300px;
-    height: 35px;
-    border-radius: 5px;
-    background-color: rgba(224, 40, 40, 1);
-    color: white;
-    cursor: pointer;
+    font-size: 4vw;
     margin-top: 20px;
-    margin-bottom: 10px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.registrationButton:hover {
-    background-color: darkred;
 }
 
 .inputKeyArea {
@@ -68,57 +44,70 @@ body{
     align-items: center;
 }
 
-.inputKey {
-    width: 25%;
-    height: 40px;
-    border-radius: 5px;
-    margin: 10px;
-    padding-left: 10px;
+.inputKey, #email {
+    width: 80%;
+    padding: 10px;
     margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box;
 }
 
-.supportLink{
-    color: blue;
+.registrationButton {
+    width: 50%;
+    padding: 10px;
+    background-color: rgba(224, 40, 40, 1);
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
 }
 
-.registrationKeyPage {
-    position: relative;
-  }
-  
-  .registration-key-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-    /* z-index: 1000; Ensure the overlay is above other content */
-  }
-  
-  .registration-key-popup {
-    position: fixed;
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border-radius: 8px;
-    padding: 30px;
-    width: 500px;
-    /* z-index: 1001; Ensure the popup is above the overlay */
-  }
-  
-  .close-button {
+.registrationButton:hover {
+    background-color: darkred;
+}
+
+.closeButton {
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    border: none;
+    background: none;
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #333;
-  }
-  
-  .close-button:hover {
-    color: #555;
-  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .welcomeTitle {
+        font-size: 24px;
+    }
+
+    .registrationText, .inputKey, #email {
+        font-size: 18px;
+    }
+
+    .registrationButton {
+        width: 60%;
+    }
     
+    .houseImage {
+        width: 50%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .welcomeTitle {
+        font-size: 32px;
+    }
+
+    .registrationText {
+        font-size: 16px;
+    }
+
+    .registrationButton, .inputKey, #email {
+        width: 40%;
+    }
+}

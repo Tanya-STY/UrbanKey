@@ -1,21 +1,13 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import './ManagerEmployeePage.css';
 import "@fontsource/space-grotesk/500.css";
-import "@fontsource/inter"; // Defaults to weight 400
-import "@fontsource/inter/500.css"; // Defaults to weight 400
-import { IoDownloadOutline } from "react-icons/io5";
-import { IoIosAddCircleOutline } from "react-icons/io";
-import { IoIosHelpCircleOutline } from "react-icons/io";
+import "@fontsource/inter";
+import "@fontsource/inter/500.css";
 import { CiSearch } from "react-icons/ci";
 import { IoFilter } from "react-icons/io5";
-import { IoIosList } from "react-icons/io";
-import { CiGrid41 } from "react-icons/ci";
-import {CSVLink} from "react-csv";
-import {useState, useEffect} from "react";
-import useAuth from "../../CustomeHooks/useAuth";
-import axios from "axios";
 
 const columns = [
     {
@@ -100,6 +92,7 @@ const columns = [
         sortable: false,
     },
 ];
+
 const rows = [
     { id: '1', condoOwner: 'John Doe', title: 'Leak Repair', description: 'Leak in the bathroom ceiling', contactNumber: '123-456-7890', userEmail: 'johndoe@example.com', assignedEmployee: 'Tanner Fisher' },
     { id: '2', condoOwner: 'John Doe', title: 'Leak Repair', description: 'Leak in the bathroom ceiling', contactNumber: '123-456-7890', userEmail: 'johndoe@example.com', assignedEmployee: 'Tanner Fisher' },
@@ -115,32 +108,43 @@ const rows = [
     { id: '12', condoOwner: 'John Doe', title: 'Leak Repair', description: 'Leak in the bathroom ceiling', contactNumber: '123-456-7890', userEmail: 'johndoe@example.com', assignedEmployee: 'Tanner Fisher' },
 ];
 
+function useResponsivePageSize() {
+    const [pageSize, setPageSize] = useState(8);
+    useEffect(() => {
+        const handleResize = () => {
+            setPageSize(window.innerWidth < 768 ? 5 : 8);
+        };
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    return pageSize;
+}
+
 export default function DataGridDemo() {
-      
     const [searchValue, setSearchValue] = useState('');
     const [filteredRows, setFilteredRows] = useState(rows);
-
-
+    const pageSize = useResponsivePageSize();
 
     const handleSearch = (e) => {
         const keyword = e.target.value.toLowerCase();
         setSearchValue(keyword);
         const filteredData = rows.filter(row =>
-            (row.name?.toLowerCase().includes(keyword) ||
-            row.id?.toString().toLowerCase().includes(keyword) ||
-            row.role?.toLowerCase().includes(keyword) ||
-            row.companyName?.toLowerCase().includes(keyword))
+            row.condoOwner.toLowerCase().includes(keyword) ||
+            row.title.toLowerCase().includes(keyword) ||
+            row.description.toLowerCase().includes(keyword) ||
+            row.contactNumber.toLowerCase().includes(keyword) ||
+            row.userEmail.toLowerCase().includes(keyword) ||
+            row.assignedEmployee.toLowerCase().includes(keyword)
         );
         setFilteredRows(filteredData);
     };
-    
+
     return (
         <div className="employee-container-managerPage">
             <div className="employee-top-btns-managerPage">
                 <div className="employee-heading-managerPage">
-                    <h1 className="employee-header-managerPage">
-                        Hello manager,
-                    </h1>
+                    <h1 className="employee-header-managerPage">Hello manager,</h1>
                     <div className="search-container-managerPage">
                         <CiSearch className="search-icon-managerPage" />
                         <input
@@ -155,24 +159,15 @@ export default function DataGridDemo() {
                     <button className="employee-type-btn">All Employees</button>
                     <button className="employee-type-btn">Roles</button>
                     <button className="employee-type-btn">Request</button>
-                    <button className="search-btn-managerPage" > <IoFilter className="filter-icon" />
-                        Filter</button>
+                    <button className="search-btn-managerPage"><IoFilter className="filter-icon"/> Filter</button>
                 </div>
-
             </div>
             <Box className="employee-box-managerPage">
                 <DataGrid
                     className="employee-data-grid"
                     rows={filteredRows}
                     columns={columns}
-                    initialState={{
-                        pagination: {
-                            paginationModel: {
-                                pageSize: 8,
-                            },
-                        },
-                    }}
-                    pageSizeOptions={[8]}
+                    pageSize={pageSize}
                     checkboxSelection
                     disableRowSelectionOnClick
                 />

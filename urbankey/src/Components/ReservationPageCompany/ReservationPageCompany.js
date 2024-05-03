@@ -11,7 +11,7 @@ const ReservationPageCompany = () => {
     const [checkedFacilities, setCheckedFacilities] = useState([...facilities]); // State to store checked facilities
 
     useEffect(() => {
-        axios.get('https://urbankey-backend.onrender.com/GetAllReservations')
+        axios.get('http://localhost:5000/GetAllReservations')
             .then(response => {
                 setReservations(response.data); 
                 const uniqueFacilities = [...new Set(response.data.map(reservation => reservation.facility))];

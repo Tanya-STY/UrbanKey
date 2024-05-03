@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet } from "react-router-dom"; //render nested routes
 import { useState, useEffect } from "react";
 import useRefreshToken from '../CustomeHooks/useRefreshToken';

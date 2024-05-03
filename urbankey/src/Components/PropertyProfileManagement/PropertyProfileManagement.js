@@ -68,7 +68,7 @@ const PropertyProfileManagement = () => {
   const fetchUnitData = async () => {
     try {
       const token = auth?.token;
-      const response = await axios.get(`https://urbankey-backend.onrender.com/unitInfo/${unitId}`, {
+      const response = await axios.get(`http://localhost:5000/unitInfo/${unitId}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -133,7 +133,7 @@ const PropertyProfileManagement = () => {
       //   interiorFeatures: selectedFeatures.interior,
       //   exteriorFeatures: selectedFeatures.exterior
       // };
-      const response = await axios.post('https://urbankey-backend.onrender.com/propertyinfo', formData, {
+      const response = await axios.post('http://localhost:5000/propertyinfo', formData, {
         headers: {
           'Content-Type': 'application/json',
           // 'Content-Type': 'multipart/form-data',
@@ -158,7 +158,7 @@ const PropertyProfileManagement = () => {
     formData.append('file', file);
 
     try {
-      const response = await axios.post('https://urbankey-backend.onrender.com/upload', formData, {
+      const response = await axios.post('http://localhost:5000/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
